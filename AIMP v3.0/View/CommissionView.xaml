@@ -1,0 +1,71 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIMP_v3._0.View"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CommissionView"
+        mc:Ignorable="d"
+        Title="ДОГОВОР КОМИССИИ" Height="424.044" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Name="Window">
+    <Grid>
+
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label" Content="НОМЕР" HorizontalAlignment="Left" Margin="11,11,0,0" VerticalAlignment="Top"/>
+        <CheckBox IsTabStop="False" x:Name="chbProxy" Content="ПО ДОВЕРЕНОСТИ" HorizontalAlignment="Left" Margin="16,72,0,0" VerticalAlignment="Top" TabIndex="102" IsChecked="{Binding IsProxy}"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy" Content="ПРОДАВЕЦ" HorizontalAlignment="Left" Margin="11,39,0,0" VerticalAlignment="Top"/>
+        <User_Control:ContractorControl IsTabStop="False" Height="22"  HorizontalAlignment="Left" Margin="109,41,0,0" VerticalAlignment="Top" Width="570" Contractor="{Binding Commission.Seller, Mode=TwoWay}" TabIndex="101"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="22" Text="{Binding Commission.Number}" Margin="67,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" IsEnabled="False" TabIndex="100"/>
+        <Label Grid.Column="0" Grid.Row="0" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" x:Name="label_Copy1" Content="НОМЕР" HorizontalAlignment="Left" Margin="170,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy" Height="22"  IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Text="{Binding Commission.NumberProxy}" HorizontalAlignment="Left" Margin="287,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" TabIndex="2"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy2" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="ДАТА" HorizontalAlignment="Left" Margin="520,66,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" x:Name="label_Copy3" Content="СОБСТВЕННИК" HorizontalAlignment="Left" Margin="11,122,0,0" VerticalAlignment="Top"/>
+        <User_Control:ContractorControl IsTabStop="False" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" HorizontalAlignment="Left" Margin="109,125,0,0" VerticalAlignment="Top" Width="570" Contractor="{Binding Commission.Owner, Mode=TwoWay}" TabIndex="101"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy4" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="НОМЕР В РЕЕСТРЕ" HorizontalAlignment="Left" Margin="170,94,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy1" Height="22"  Text="{Binding Commission.NumberRegistry}" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" HorizontalAlignment="Left" Margin="287,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" TabIndex="3"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy6" Content="ТC" HorizontalAlignment="Left" Margin="11,154,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy7" Content="СТОИМОСТЬ ТC" HorizontalAlignment="Left" Margin="11,184,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy8" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="ДАТА ДКП" HorizontalAlignment="Left" Margin="487,11,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Commission.Price}" Height="22"  HorizontalAlignment="Left" Margin="135,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <User_Control:DateControl TabIndex="1" Date="{Binding Commission.Date, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,14,0,0" VerticalAlignment="Top"/>
+        <User_Control:DateControl TabIndex="2" Date="{Binding Commission.DateProxy, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,68,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=chbProxy}"/>
+        <User_Control:TrancportControl IsTabStop="False" Trancport="{Binding Commission.Trancport, Mode=TwoWay}" HorizontalAlignment="Left" Margin="109,156,0,0" VerticalAlignment="Top" Width="570" TabIndex="101"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy5" Content="КОММИССИЯ" HorizontalAlignment="Left" Margin="11,213,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Commission.Commission}" Height="22"  HorizontalAlignment="Left" Margin="135,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy9" Content="СТОЯНКА" HorizontalAlignment="Left" Margin="323,183,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Commission.Parking}" Height="22"  HorizontalAlignment="Left" Margin="447,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <CheckBox x:Name="checkBox" Content="СО ВТОРОГО МЕСЯЦА" IsChecked="{Binding Commission.IsTwoMounth}" HorizontalAlignment="Left" Margin="16,314,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="600,352,0,0" VerticalAlignment="Top" Width="75" TabIndex="5"/>
+        <Button x:Name="button1" Content="СОХРАНИТЬ" Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="508,352,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
+        <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="366,352,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
+        <User_Control:PrintControl HorizontalAlignment="Left" Margin="16,352,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy10" Content="СТОИМОСТЬ В ДКП" HorizontalAlignment="Left" Margin="323,214,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Commission.PriceDkp}" HorizontalAlignment="Left" Height="22"  Margin="447,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label x:Name="label1" Content="УСЛОВИЯ ПОСТАНОВКИ" HorizontalAlignment="Left" Margin="269,278,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding SourcesTrancport}" DisplayMemberPath="Name" SelectedItem="{Binding Commission.SourceTrancport,Mode=TwoWay}"  HorizontalAlignment="Left" Margin="439,280,0,0" VerticalAlignment="Top" Width="232"/>
+        <Label x:Name="label2" Content="КОЛ-ВО КЛЮЧЕЙ" HorizontalAlignment="Left" Margin="11,246,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left"  Height="22"  Margin="135,248,0,0" TextWrapping="Wrap" Text="{Binding Commission.CountKey}" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label2_Copy" Content="КОМПЛЕКТНОСТЬ ДОКУМЕНТОВ" HorizontalAlignment="Left" Margin="267,247,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left"  Height="22"  Margin="469,249,0,0" TextWrapping="Wrap" Text="{Binding Commission.ComplectDoc}" VerticalAlignment="Top" Width="202"/>
+        <Label x:Name="label2_Copy1" Content="ПРОБЕГ" HorizontalAlignment="Left" Margin="11,276,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left"  Height="22"  Margin="135,278,0,0" TextWrapping="Wrap" Text="{Binding Commission.Mileage}" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="checkBox_Copy" Content="ДОБАВИТЬ В СПИСОК" IsChecked="{Binding Commission.IsUseCardTrancport}" HorizontalAlignment="Left" Margin="178,314,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2_Copy2" Content="МЕНЕДЖЕР" HorizontalAlignment="Left" Margin="339,308,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left"  Height="22"  Margin="417,310,0,0" TextWrapping="Wrap" Text="{Binding Commission.Manager}" VerticalAlignment="Top" Width="254"/>
+
+    </Grid>
+</Window>

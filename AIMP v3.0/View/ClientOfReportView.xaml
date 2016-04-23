@@ -1,0 +1,88 @@
+﻿<Window x:Class="AIMP_v3._0.View.ReportOfClientView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d" Name="Window"
+        Title="ОТЧЕТЫ ПО КЛИЕНТАМ" Height="411" Width="980.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary Source="../Style/CommonStyle.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="WhiteSmoke" User_Control:EnterKeyTraversal.IsEnabled="True">
+        <Label x:Name="label" Content="СТАТУС КЛИЕНТА" HorizontalAlignment="Left" Margin="175,6,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" TabIndex="1" ItemsSource="{Binding ClientStatuses}" DisplayMemberPath="Name" SelectedItem="{Binding ClientReport.ClientStatus,Mode=TwoWay}" HorizontalAlignment="Left" Margin="283,8,0,0" VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy1" Content="ФИО ЗАЕМЩИКА" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy" TabIndex="2" Text="{Binding ClientReport.FullName}" HorizontalAlignment="Left" Height="22" Margin="118,37,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="360"/>
+        <Label x:Name="label_Copy2" Content="ТЕЛЕФОН +7" HorizontalAlignment="Left" Margin="483,36,0,0" VerticalAlignment="Top" Width="84"/>
+        <Label x:Name="label_Copy3" Content="МАРКА, МОДЕЛЬ ТС, ГОД" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy1" TabIndex="4" Text="{Binding ClientReport.Trancport}" HorizontalAlignment="Left" Height="22" Margin="166,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="484"/>
+        <Label x:Name="label_Copy4" Content="СТОИМОСТЬ ТС" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy2" TabIndex="5" Text="{Binding ClientReport.Price}" HorizontalAlignment="Left" Height="22" Margin="118,95,0,0" VerticalAlignment="Top" Width="100">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label x:Name="label_Copy5" Content="ИСТОЧНИК" HorizontalAlignment="Left" Margin="233,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy3" TabIndex="6" Text="{Binding ClientReport.Source}" HorizontalAlignment="Left" Height="22" Margin="312,95,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="338"/>
+        <Label x:Name="label_Copy6" Content="ПРОГРАММА КРЕДИТОВАНИЯ" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_Copy" TabIndex="7" ItemsSource="{Binding CreditProgramms}" DisplayMemberPath="Name" SelectedItem="{Binding ClientReport.CreditProgramm, Mode=TwoWay}" HorizontalAlignment="Left" Margin="195,124,0,0" VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy7" Content="ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="label_Copy8" Content="СУММА КРЕДИТА" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy4" TabIndex="8" Text="{Binding ClientReport.CreditSum}" HorizontalAlignment="Left" Height="22" Margin="116,188,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label x:Name="label_Copy9" Content="КОММИССИЯ САЛОНА" HorizontalAlignment="Left" Margin="227,186,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy5" Height="22" TabIndex="9" Text="{Binding ClientReport.CommissionSalon}" HorizontalAlignment="Left" Margin="368,188,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2"/>
+        <CheckBox x:Name="checkBox" Content="КОМИССИИ ЗНАЕТ" IsChecked="{Binding ClientReport.CommissionKnow}" HorizontalAlignment="Left" Margin="15,220,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy10" Content="КОММИССИЯ ЗА СНЯТИЕ" HorizontalAlignment="Left" Margin="214,215,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy6" TabIndex="10" Text="{Binding ClientReport.CommissionRemoval}" HorizontalAlignment="Left" Height="22" Margin="368,216,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <CheckBox x:Name="checkBox_Copy" IsChecked="{Binding ClientReport.CommissionCredit}" Content="КОМИССИИ В КРЕДИТЕ" HorizontalAlignment="Left" Margin="15,248,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy11" Content="АКТ ОЦЕНКИ" HorizontalAlignment="Left" Margin="284,243,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy7" TabIndex="11" Text="{Binding ClientReport.ActAssessment}" HorizontalAlignment="Left" Height="22" Margin="368,244,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" Grid.ColumnSpan="2">
+            <i:Interaction.Behaviors>
+                <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <Label x:Name="label_Copy12" Content="ДКП+ДК" HorizontalAlignment="Left" Margin="478,243,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.561,0.462"/>
+        <TextBox x:Name="textBox_Copy8" TabIndex="12" Text="{Binding ClientReport.DKP_DK}" HorizontalAlignment="Left" Height="22" Margin="540,244,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="label_Copy13" Content="КОММЕНТАРИИ МЕНЕДЖЕРА" HorizontalAlignment="Left" Margin="10,269,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy9" TabIndex="13" Text="{Binding ClientReport.Comment}" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Left" Height="67" Margin="15,295,0,0" VerticalAlignment="Top" Width="635"/>
+        <Label x:Name="label1" Content="СПИСОК БАНКОВ" HorizontalAlignment="Left" Margin="663,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" ItemsSource="{Binding ClientBankStatus}" Height="259" Margin="663,36,0,0" VerticalAlignment="Top" Width="287">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Width="30" IsChecked="{Binding Enable}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="БАНК" Width="100" DisplayMemberBinding="{Binding Bank.Name}"/>
+                    <GridViewColumn Header="СТУТУС" Width="135">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Width="120" ItemsSource="{Binding BankStatuses}" DisplayMemberPath="Name" 
+                                          SelectedItem="{Binding SelectedBankStatus,Mode=TwoWay}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="button" TabIndex="14" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="874,329,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Visibility="{Binding Add}"  Command="{Binding SaveChangesCommand}" HorizontalAlignment="Left" Margin="784,329,0,0" VerticalAlignment="Top" Width="85"/>
+        <User_Control:DateControl TabIndex="0" Date="{Binding ClientReport.Date, Mode=TwoWay}" HorizontalAlignment="Left" Margin="56,8,0,0" VerticalAlignment="Top"/>
+        <User_Control:NumberTextBox x:Name="numberTextBox" TabIndex="3" Text="{Binding ClientReport.Telefon}" HorizontalAlignment="Left" Margin="572,37,0,0" TextWrapping="Wrap" Height="22" MaxLength="10" VerticalAlignment="Top" Width="78"/>
+        <Label x:Name="label_Copy14" Content="ДАТА" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+        <Button Content="УДАЛИТЬ" Visibility="{Binding Delete}" Command="{Binding DeleteChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="663,329,0,0" VerticalAlignment="Top" Width="85"/>
+    </Grid>
+</Window>

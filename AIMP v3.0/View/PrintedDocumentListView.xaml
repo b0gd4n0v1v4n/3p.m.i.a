@@ -1,0 +1,32 @@
+﻿<Window x:Class="AIMP_v3._0.View.PrintedDocumentListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIMP_v3._0.View"
+                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="Печатные формы" Height="314.662" Width="525.564" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ListView x:Name="listBox" HorizontalAlignment="Left" Height="223" ItemsSource="{Binding ListItems}"  SelectedItem="{Binding CurrentItem}" VerticalAlignment="Top" Width="507">
+            <ListView.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding OpenCurrentItem}"/>
+            </ListView.InputBindings>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenCurrentItemCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="0" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Наименование" Width="300" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Тип" Width="100" DisplayMemberBinding="{Binding Type}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="button" Content="Новый" Command="{Binding NewCommand}" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button1" Content="Закрыть" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="422,238,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

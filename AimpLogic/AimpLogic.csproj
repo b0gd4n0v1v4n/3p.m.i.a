@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3025FFD4-C417-4248-8EDD-5E599377A63D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AimpLogic</RootNamespace>
+    <AssemblyName>AimpLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TinyMapper, Version=2.0.0.40, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TinyMapper.2.0.8\lib\net45\TinyMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CardTrancports\CardTrancportService.cs" />
+    <Compile Include="CardTrancports\ICardTrancportService.cs" />
+    <Compile Include="Commission\CommissionService.cs" />
+    <Compile Include="Commission\ICommissionService.cs" />
+    <Compile Include="CreditTransactions\ICreditTransactionService.cs" />
+    <Compile Include="DispatcherDocuments\DispatcherDocument.cs" />
+    <Compile Include="DispatcherDocuments\IDispatcherDocument.cs" />
+    <Compile Include="Helpres\UserFileCheck.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logic\Aimp.cs" />
+    <Compile Include="CashTransactions\CashTransactionService.cs" />
+    <Compile Include="CashTransactions\ICashTransactionService.cs" />
+    <Compile Include="CreditTransactions\CreditTransactionService.cs" />
+    <Compile Include="PrintedDocument\IPrintedDocumentService.cs" />
+    <Compile Include="PrintedDocument\PrintedDocumentService.cs" />
+    <Compile Include="ReportOfClients\IReportOfClientService.cs" />
+    <Compile Include="ReportOfClients\ReportOfClientService.cs" />
+    <Compile Include="Transactions\ITransactionService.cs" />
+    <Compile Include="Transactions\TransactionService.cs" />
+    <Compile Include="UserRights\IUserRightsService.cs" />
+    <Compile Include="UserRights\UserRightsService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserRights\AccessDeniedException.cs" />
+    <Compile Include="UserRights\AuthorizationException.cs" />
+    <Compile Include="UserRights\SystemUser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AimpDataAccess\AimpDataAccess.csproj">
+      <Project>{8db90126-ba9d-4678-8e87-6f65da7d3aff}</Project>
+      <Name>AimpDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AimpReports\AimpReports.csproj">
+      <Project>{e31fb020-1b6a-48e4-b17f-c4bd77ec294d}</Project>
+      <Name>AimpReports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

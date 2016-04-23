@@ -1,0 +1,80 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
+        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        x:Class="AIMP_v3._0.View.LegalPersonInfoView"
+        mc:Ignorable="d"
+        Title="КОНТРАГЕНТ" Height="377" Width="918.775" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Name="Window">
+    <Window.Resources>
+        <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
+    </Window.Resources>
+    <Grid Margin="0,1,0,-1" User_Control:EnterKeyTraversal.IsEnabled="True">
+        <Label x:Name="label" Content="ФАМИЛИЯ" Margin="4,37,825,0" VerticalAlignment="Top"/>
+        <User_Control:FullNameTextBox  Focusable="True"  TabIndex="1" Height="22" Text="{Binding EditableContractor.LastName}" x:Name="LastNameTextBox" HorizontalAlignment="Left"  Margin="93,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy" Content="ИМЯ" HorizontalAlignment="Left" Margin="315,37,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.297,0.731"/>
+        <User_Control:FullNameTextBox  TabIndex="2"  Text="{Binding EditableContractor.FirstName}" Height="22" x:Name="textBox_Copy" HorizontalAlignment="Left"  Margin="368,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217" RenderTransformOrigin="0.224,0.578"/>
+        <Label x:Name="label_Copy1" Content="ОТЧЕСТВО" HorizontalAlignment="Left" Margin="592,36,0,0" VerticalAlignment="Top"/>
+        <User_Control:FullNameTextBox  TabIndex="3" Text="{Binding EditableContractor.MiddleName}" Height="22" x:Name="textBox_Copy1" HorizontalAlignment="Left"  Margin="676,38,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy2" Content="ФАМИЛИЯ[Р]" HorizontalAlignment="Left" Margin="4,63,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.524,0.038"/>
+        <User_Control:FullNameTextBox  TabIndex="4" Height="22"  Text="{Binding EditableContractor.LastNameGenitive}" x:Name="LastNameGenTextBox" HorizontalAlignment="Left"  Margin="93,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy3" Content="ИМЯ[Р]" HorizontalAlignment="Left" Margin="315,63,0,0" VerticalAlignment="Top"/>
+        <User_Control:FullNameTextBox   TabIndex="5" Text="{Binding EditableContractor.FirstNameGenitive}" Height="22" x:Name="textBox_Copy3" HorizontalAlignment="Left"  Margin="368,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217" RenderTransformOrigin="0.224,0.578"/>
+        <Label x:Name="label_Copy4" Content="ОТЧЕСТВО[Р]" HorizontalAlignment="Left" Margin="592,63,0,0" VerticalAlignment="Top"/>
+        <User_Control:FullNameTextBox  TabIndex="6" Text="{Binding EditableContractor.MiddleNameGenitive}" Height="22" x:Name="textBox_Copy4" HorizontalAlignment="Left"  Margin="676,65,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label_Copy5" Content="ДАТА РОЖДЕНИЯ" HorizontalAlignment="Left" Margin="4,91,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="РЕГИОН" HorizontalAlignment="Left" Margin="4,120,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy" Content="ГОРОД" HorizontalAlignment="Left" Margin="317,120,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy1" Content="РАЙОН" HorizontalAlignment="Left" Margin="4,147,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="10" Text="{Binding EditableContractor.Raion}" x:Name="textBox_Copy5" HorizontalAlignment="Left" Height="22" Margin="93,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label1_Copy2" Content="УЛИЦА" HorizontalAlignment="Left" Margin="317,146,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="11"  Text="{Binding EditableContractor.Street}" x:Name="textBox_Copy6" HorizontalAlignment="Left" Height="22" Margin="368,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label1_Copy3" Content="ДОМ" HorizontalAlignment="Left" Margin="592,120,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="12" Text="{Binding EditableContractor.House}" x:Name="textBox_Copy7" HorizontalAlignment="Left" Height="22"  Margin="635,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50"/>
+        <Label x:Name="label1_Copy4" Content="КОРП." HorizontalAlignment="Left" Margin="698,120,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="13"  Text="{Binding EditableContractor.Housing}" x:Name="textBox_Copy8" HorizontalAlignment="Left" Height="22" Margin="747,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50"/>
+        <Label x:Name="label1_Copy5" Content="КВ." HorizontalAlignment="Left" Margin="812,120,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="14" Text="{Binding EditableContractor.Apartment}" x:Name="textBox_Copy9" HorizontalAlignment="Left" Height="22" Margin="843,122,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="50"/>
+        <Label x:Name="label1_Copy6" Content="ТЕЛЕФОН +7" HorizontalAlignment="Left" Margin="592,147,0,0" VerticalAlignment="Top"/>
+        <User_Control:NumberTextBox MaxLength="15"  TabIndex="15" Text="{Binding EditableContractor.Telefon}" x:Name="textBox_Copy10" HorizontalAlignment="Left"  Margin="676,149,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="217" Height="22"/>
+        <Label x:Name="label_Copy9" Content="В БАНКЕ" HorizontalAlignment="Left" Margin="4,231,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="22" Text="{Binding EditableContractor.LegalPerson.Bank}" Height="22" x:Name="textBox_Copy13" HorizontalAlignment="Left"  Margin="94,234,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="800"/>
+        <Button x:Name="button" TabIndex="18" Content="ЗАКРЫТЬ" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="818,299,0,-15" VerticalAlignment="Top" Width="75"/>
+        <Button TabIndex="23" Content="СОХРАНИТЬ" Command="{Binding SaveChanges}" CommandParameter="{Binding ElementName=Window}"  HorizontalAlignment="Left" Margin="728,299,0,-15" VerticalAlignment="Top" Width="85"/>
+        <controls:AutoCompleteBox TabIndex="8" ItemsSource="{Binding Regions}" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsTextCompletionEnabled="True" Text="{Binding Region,Mode=TwoWay}" ValueMemberPath="Name"  Margin="93,121,593,194">
+            <controls:AutoCompleteBox.TextBoxStyle>
+                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+                    <Setter Property="TabIndex" Value="8" />
+                </Style>
+            </controls:AutoCompleteBox.TextBoxStyle>
+        </controls:AutoCompleteBox>
+        <controls:AutoCompleteBox TabIndex="9"  ItemsSource="{Binding Cities}" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsTextCompletionEnabled="True" Text="{Binding City,Mode=TwoWay}" ValueMemberPath="Name" Margin="368,121,318,196">
+            <controls:AutoCompleteBox.TextBoxStyle>
+                <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+                    <Setter Property="TabIndex" Value="9" />
+                </Style>
+            </controls:AutoCompleteBox.TextBoxStyle>
+        </controls:AutoCompleteBox>
+        <User_Control:UserFileControl TabIndex="100" Text="ФОТО" UserFileId="{Binding EditableContractor.PhotoId,Mode=TwoWay}" UserFile="{Binding EditableContractor.Photo,Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,281,0,0" VerticalAlignment="Top"/>
+        <User_Control:UserFileControl TabIndex="200" Text="ДОКУМЕНТ" UserFileId="{Binding EditableContractor.DocumentId,Mode=TwoWay}" UserFile="{Binding EditableContractor.Document,Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,311,0,-19" VerticalAlignment="Top"/>
+        <User_Control:DateControl TabIndexControl="7" Date="{Binding EditableContractor.DateBirth,Mode=TwoWay}" HorizontalAlignment="Left" Margin="118,93,0,0" VerticalAlignment="Top"/>
+        <CheckBox TabIndex="300" x:Name="checkBox" Content="ФИЗ. ЛИЦО" FontWeight="Bold" HorizontalAlignment="Left" Margin="804,268,0,0" VerticalAlignment="Top" Visibility="{Binding IsNew}" IsChecked="{Binding IsPhisicalPerson}" Command="{Binding SetPhisicalPerson}" CommandParameter="{Binding ElementName=Window}"></CheckBox>
+        <Label x:Name="label1_Copy7" Content="ИНН" HorizontalAlignment="Left" Margin="4,174,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="16" x:Name="textBox" HorizontalAlignment="Left" Height="22" Margin="93,176,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Inn}" VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label1_Copy8" Content="НАИМЕНОВАНИЕ" HorizontalAlignment="Left" Margin="4,8,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="0" x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="22" Margin="118,10,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Name}" VerticalAlignment="Top" Width="775"/>
+        <Label x:Name="label1_Copy9" Content="ОГРН" HorizontalAlignment="Left" Margin="4,203,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="19" x:Name="textBox_Copy11" HorizontalAlignment="Left" Height="22" Margin="93,204,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Ogrn}" VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label1_Copy10" Content="КПП" HorizontalAlignment="Left" Margin="317,174,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="17" x:Name="textBox_Copy12" HorizontalAlignment="Left" Height="22" Margin="368,176,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Kpp}" VerticalAlignment="Top" Width="217"/>
+        <Label x:Name="label1_Copy11" Content="Р\СЧЕТ" HorizontalAlignment="Left" Margin="592,174,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="18" x:Name="textBox_Copy14" HorizontalAlignment="Left" Height="22" Margin="676,176,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Ras_schet}" VerticalAlignment="Top" Width="217" RenderTransformOrigin="1.35,-1.13"/>
+        <Label x:Name="label1_Copy12" Content="К\СЧЕТ" HorizontalAlignment="Left" Margin="317,203,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy13" Content="БИК" HorizontalAlignment="Left" Margin="592,203,0,0" VerticalAlignment="Top"/>
+        <TextBox TabIndex="21" x:Name="textBox_Copy16" HorizontalAlignment="Left" Height="22" Margin="677,204,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Bik}" VerticalAlignment="Top" Width="216"/>
+        <TextBox TabIndex="20" x:Name="textBox1" HorizontalAlignment="Left" Height="22" Margin="368,204,0,0" TextWrapping="Wrap" Text="{Binding EditableContractor.LegalPerson.Kor_schet}" VerticalAlignment="Top" Width="217"/>
+    </Grid>
+</Window>
+

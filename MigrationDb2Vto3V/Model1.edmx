@@ -1,0 +1,1631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="aimpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="спр_банки_отчёты_клиентов" Type="int" />
+          <Property Name="спр_статусы_банка" Type="int" />
+          <Property Name="используется" Type="tinyint" />
+          <Property Name="отчёты_клиентов" Type="int" />
+        </EntityType>
+        <EntityType Name="ВИДЫ_ТРАНСПОРТА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ГОРОДА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="регионы" Type="int" />
+        </EntityType>
+        <EntityType Name="КАТЕГОРИИ_ТРАНСПОРТА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="КОНТРАГЕНТЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="фамилия" Type="nvarchar(max)" />
+          <Property Name="имя" Type="nvarchar(max)" />
+          <Property Name="отчество" Type="nvarchar(max)" />
+          <Property Name="фамилия_р" Type="nvarchar(max)" />
+          <Property Name="имя_р" Type="nvarchar(max)" />
+          <Property Name="отчество_р" Type="nvarchar(max)" />
+          <Property Name="дата" Type="date" />
+          <Property Name="регионы" Type="int" />
+          <Property Name="города" Type="int" />
+          <Property Name="район" Type="nvarchar(max)" />
+          <Property Name="улица" Type="nvarchar(max)" />
+          <Property Name="дом" Type="nvarchar(max)" />
+          <Property Name="корпус" Type="nvarchar(max)" />
+          <Property Name="квартира" Type="nvarchar(max)" />
+          <Property Name="телефон" Type="nvarchar(max)" />
+          <Property Name="номер_док" Type="nvarchar(max)" />
+          <Property Name="серия_док" Type="nvarchar(max)" />
+          <Property Name="кем_док" Type="nvarchar(max)" />
+          <Property Name="дата_док" Type="date" />
+          <Property Name="документ" Type="varbinary(max)" />
+          <Property Name="фото" Type="varbinary(max)" />
+          <Property Name="юр" Type="tinyint" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="инн" Type="nvarchar(max)" />
+          <Property Name="огрн" Type="nvarchar(max)" />
+          <Property Name="кпп" Type="nvarchar(max)" />
+          <Property Name="рас_счет" Type="nvarchar(max)" />
+          <Property Name="кор_счет" Type="nvarchar(max)" />
+          <Property Name="бик" Type="nvarchar(max)" />
+          <Property Name="банк" Type="nvarchar(max)" />
+          <Property Name="документ_наим" Type="nvarchar(max)" />
+          <Property Name="фото_наим" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="КРЕДИТОРЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="МАРКИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="МОДЕЛИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="марки" Type="int" />
+        </EntityType>
+        <EntityType Name="ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="дата" Type="date" />
+          <Property Name="источник" Type="nvarchar(max)" />
+          <Property Name="фио" Type="nvarchar(max)" />
+          <Property Name="тс" Type="nvarchar(max)" />
+          <Property Name="стоимость" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="общий_взнос" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="спр_статусы_клиентов" Type="int" />
+          <Property Name="телефон" Type="nvarchar(max)" />
+          <Property Name="спр_программы_кредитования" Type="int" />
+          <Property Name="сумма_кредита" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="комиссии_знает" Type="tinyint" />
+          <Property Name="комиссия_за_снятие" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="комиссии_в_кредите" Type="tinyint" />
+          <Property Name="акт_оценки" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="дкп_дк" Type="nvarchar(max)" />
+          <Property Name="комментарий" Type="nvarchar(max)" />
+          <Property Name="комиссия_салона" Type="varchar" MaxLength="50" />
+          <Property Name="пользователи" Type="int" />
+        </EntityType>
+        <EntityType Name="ПОЛЬЗОВАТЕЛИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="имя" Type="nvarchar(max)" />
+          <Property Name="фамилия" Type="nvarchar(max)" />
+          <Property Name="отчёство" Type="nvarchar(max)" />
+          <Property Name="имя_р" Type="nvarchar(max)" />
+          <Property Name="фамилия_р" Type="nvarchar(max)" />
+          <Property Name="отчество_р" Type="nvarchar(max)" />
+          <Property Name="номер" Type="nvarchar(max)" />
+          <Property Name="дата" Type="nvarchar(max)" />
+          <Property Name="логин" Type="nvarchar(max)" />
+          <Property Name="пароль" Type="nvarchar(max)" />
+          <Property Name="админ" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="РЕГИОНЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="РЕКВИЗИТЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="рос_счет" Type="nvarchar(max)" />
+          <Property Name="кор_счет" Type="nvarchar(max)" />
+          <Property Name="в_банке" Type="nvarchar(max)" />
+          <Property Name="бик" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="СДЕЛКИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="дата" Type="date" />
+          <Property Name="дата_доверенность" Type="date" />
+          <Property Name="номер_доверенность" Type="nvarchar(max)" />
+          <Property Name="номер_реестр" Type="nvarchar(max)" />
+          <Property Name="продавец" Type="int" />
+          <Property Name="покупатель" Type="int" />
+          <Property Name="собственник" Type="int" />
+          <Property Name="транспорт" Type="int" />
+          <Property Name="стоимость" Type="nvarchar(max)" />
+          <Property Name="дкп" Type="varbinary(max)" />
+          <Property Name="агенский" Type="varbinary(max)" />
+          <Property Name="пользователи" Type="int" />
+          <Property Name="доверенность" Type="tinyint" />
+          <Property Name="стоимость_банк" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="первый_взнос" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="сумма_кредит" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="стоимость_реальная" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="первый_взнос_касса" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="кредиторы" Type="int" />
+          <Property Name="реквизиты" Type="int" />
+          <Property Name="отчёт_по_страховым" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="откат" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="источник" Type="nvarchar(max)" />
+          <Property Name="дкп_наим" Type="nvarchar(max)" />
+          <Property Name="агенский_наим" Type="nvarchar(max)" />
+          <Property Name="кредит" Type="tinyint" Nullable="false" />
+          <Property Name="номер" Type="nvarchar(max)" />
+          <Property Name="комиссия_Касса" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="дата_ад" Type="date" />
+          <Property Name="комиссия" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="стоянка" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="второй_месяц" Type="tinyint" />
+          <Property Name="тип" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="спр_СТАТУСЫ_БАНКА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="наименование2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="спр_СТАТУСЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="фильтр" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="ТИПЫ_ДВИГАТЕЛЕЙ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ТИПЫ_ШАБЛОНОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="запрос" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ТРАНСПОРТ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="гос_номер" Type="nvarchar(max)" />
+          <Property Name="марки" Type="int" />
+          <Property Name="модели" Type="int" />
+          <Property Name="категории_транспорта" Type="int" />
+          <Property Name="изготовитель" Type="nvarchar(max)" />
+          <Property Name="год" Type="nvarchar(max)" />
+          <Property Name="цвет" Type="nvarchar(max)" />
+          <Property Name="вин" Type="nvarchar(max)" />
+          <Property Name="кузов" Type="nvarchar(max)" />
+          <Property Name="шасси" Type="nvarchar(max)" />
+          <Property Name="масса" Type="nvarchar(max)" />
+          <Property Name="макс_масса" Type="nvarchar(max)" />
+          <Property Name="серия_птс" Type="nvarchar(max)" />
+          <Property Name="номер_птс" Type="nvarchar(max)" />
+          <Property Name="дата_птс" Type="date" />
+          <Property Name="кем_птс" Type="nvarchar(max)" />
+          <Property Name="копия_птс" Type="varbinary(max)" />
+          <Property Name="серия_стс" Type="nvarchar(max)" />
+          <Property Name="номер_стс" Type="nvarchar(max)" />
+          <Property Name="кем_стс" Type="nvarchar(max)" />
+          <Property Name="дата_стс" Type="date" />
+          <Property Name="копия_стс" Type="varbinary(max)" />
+          <Property Name="марка_двиг" Type="nvarchar(max)" />
+          <Property Name="типы_двигателей" Type="int" />
+          <Property Name="мощность" Type="nvarchar(max)" />
+          <Property Name="па" Type="nvarchar(max)" />
+          <Property Name="объем" Type="nvarchar(max)" />
+          <Property Name="виды_транспорта" Type="int" />
+          <Property Name="копия_птс_наим" Type="nvarchar(max)" />
+          <Property Name="копия_стс_наим" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ШАБЛОНЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="файл" Type="varbinary(max)" />
+          <Property Name="наименование" Type="nvarchar(max)" />
+          <Property Name="типы_шаблонов" Type="int" />
+          <Property Name="файл_наим" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+          <End Role="ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="отчёты_клиентов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+          <End Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="спр_банки_отчёты_клиентов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код">
+          <End Role="спр_СТАТУСЫ_БАНКА" Type="Self.спр_СТАТУСЫ_БАНКА" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="спр_СТАТУСЫ_БАНКА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="спр_статусы_банка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ГОРОДА_РЕГИОНЫ_код">
+          <End Role="РЕГИОНЫ" Type="Self.РЕГИОНЫ" Multiplicity="0..1" />
+          <End Role="ГОРОДА" Type="Self.ГОРОДА" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="РЕГИОНЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ГОРОДА">
+              <PropertyRef Name="регионы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_КОНТРАГЕНТЫ_ГОРОДА_код">
+          <End Role="ГОРОДА" Type="Self.ГОРОДА" Multiplicity="0..1" />
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ГОРОДА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="города" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код">
+          <End Role="РЕГИОНЫ" Type="Self.РЕГИОНЫ" Multiplicity="0..1" />
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="РЕГИОНЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="регионы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_МОДЕЛИ_МАРКИ_код">
+          <End Role="МАРКИ" Type="Self.МАРКИ" Multiplicity="0..1" />
+          <End Role="МОДЕЛИ" Type="Self.МОДЕЛИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МАРКИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="МОДЕЛИ">
+              <PropertyRef Name="марки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код">
+          <End Role="ПОЛЬЗОВАТЕЛИ" Type="Self.ПОЛЬЗОВАТЕЛИ" Multiplicity="0..1" />
+          <End Role="ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ПОЛЬЗОВАТЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="пользователи" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="продавец" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="покупатель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="собственник" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код">
+          <End Role="ПОЛЬЗОВАТЕЛИ" Type="Self.ПОЛЬЗОВАТЕЛИ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ПОЛЬЗОВАТЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="пользователи" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_ТРАНСПОРТ_код">
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТРАНСПОРТ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="транспорт" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код">
+          <End Role="ВИДЫ_ТРАНСПОРТА" Type="Self.ВИДЫ_ТРАНСПОРТА" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВИДЫ_ТРАНСПОРТА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="виды_транспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код">
+          <End Role="КАТЕГОРИИ_ТРАНСПОРТА" Type="Self.КАТЕГОРИИ_ТРАНСПОРТА" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КАТЕГОРИИ_ТРАНСПОРТА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="категории_транспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_МАРКИ_код">
+          <End Role="МАРКИ" Type="Self.МАРКИ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МАРКИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="марки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_МОДЕЛИ_код">
+          <End Role="МОДЕЛИ" Type="Self.МОДЕЛИ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МОДЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="модели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код">
+          <End Role="ТИПЫ_ДВИГАТЕЛЕЙ" Type="Self.ТИПЫ_ДВИГАТЕЛЕЙ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТИПЫ_ДВИГАТЕЛЕЙ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="типы_двигателей" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код">
+          <End Role="ТИПЫ_ШАБЛОНОВ" Type="Self.ТИПЫ_ШАБЛОНОВ" Multiplicity="0..1" />
+          <End Role="ШАБЛОНЫ" Type="Self.ШАБЛОНЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТИПЫ_ШАБЛОНОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ШАБЛОНЫ">
+              <PropertyRef Name="типы_шаблонов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="aimpModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ВИДЫ_ТРАНСПОРТА" EntityType="Self.ВИДЫ_ТРАНСПОРТА" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ГОРОДА" EntityType="Self.ГОРОДА" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КАТЕГОРИИ_ТРАНСПОРТА" EntityType="Self.КАТЕГОРИИ_ТРАНСПОРТА" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КОНТРАГЕНТЫ" EntityType="Self.КОНТРАГЕНТЫ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КРЕДИТОРЫ" EntityType="Self.КРЕДИТОРЫ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="МАРКИ" EntityType="Self.МАРКИ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="МОДЕЛИ" EntityType="Self.МОДЕЛИ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.ОТЧЁТЫ_КЛИЕНТОВ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ПОЛЬЗОВАТЕЛИ" EntityType="Self.ПОЛЬЗОВАТЕЛИ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="РЕГИОНЫ" EntityType="Self.РЕГИОНЫ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="РЕКВИЗИТЫ" EntityType="Self.РЕКВИЗИТЫ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СДЕЛКИ" EntityType="Self.СДЕЛКИ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ" EntityType="Self.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="спр_СТАТУСЫ_БАНКА" EntityType="Self.спр_СТАТУСЫ_БАНКА" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="спр_СТАТУСЫ_КЛИЕНТОВ" EntityType="Self.спр_СТАТУСЫ_КЛИЕНТОВ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТИПЫ_ДВИГАТЕЛЕЙ" EntityType="Self.ТИПЫ_ДВИГАТЕЛЕЙ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТИПЫ_ШАБЛОНОВ" EntityType="Self.ТИПЫ_ШАБЛОНОВ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТРАНСПОРТ" EntityType="Self.ТРАНСПОРТ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ШАБЛОНЫ" EntityType="Self.ШАБЛОНЫ" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+            <End Role="ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="ОТЧЁТЫ_КЛИЕНТОВ" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+            <End Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код">
+            <End Role="спр_СТАТУСЫ_БАНКА" EntitySet="спр_СТАТУСЫ_БАНКА" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ГОРОДА_РЕГИОНЫ_код" Association="Self.FK_ГОРОДА_РЕГИОНЫ_код">
+            <End Role="РЕГИОНЫ" EntitySet="РЕГИОНЫ" />
+            <End Role="ГОРОДА" EntitySet="ГОРОДА" />
+          </AssociationSet>
+          <AssociationSet Name="FK_КОНТРАГЕНТЫ_ГОРОДА_код" Association="Self.FK_КОНТРАГЕНТЫ_ГОРОДА_код">
+            <End Role="ГОРОДА" EntitySet="ГОРОДА" />
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код" Association="Self.FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код">
+            <End Role="РЕГИОНЫ" EntitySet="РЕГИОНЫ" />
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_МОДЕЛИ_МАРКИ_код" Association="Self.FK_МОДЕЛИ_МАРКИ_код">
+            <End Role="МАРКИ" EntitySet="МАРКИ" />
+            <End Role="МОДЕЛИ" EntitySet="МОДЕЛИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код" Association="Self.FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код">
+            <End Role="ПОЛЬЗОВАТЕЛИ" EntitySet="ПОЛЬЗОВАТЕЛИ" />
+            <End Role="ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код" Association="Self.FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код">
+            <End Role="ПОЛЬЗОВАТЕЛИ" EntitySet="ПОЛЬЗОВАТЕЛИ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_ТРАНСПОРТ_код" Association="Self.FK_СДЕЛКИ_ТРАНСПОРТ_код">
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код" Association="Self.FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код">
+            <End Role="ВИДЫ_ТРАНСПОРТА" EntitySet="ВИДЫ_ТРАНСПОРТА" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код" Association="Self.FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код">
+            <End Role="КАТЕГОРИИ_ТРАНСПОРТА" EntitySet="КАТЕГОРИИ_ТРАНСПОРТА" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_МАРКИ_код" Association="Self.FK_ТРАНСПОРТ_МАРКИ_код">
+            <End Role="МАРКИ" EntitySet="МАРКИ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_МОДЕЛИ_код" Association="Self.FK_ТРАНСПОРТ_МОДЕЛИ_код">
+            <End Role="МОДЕЛИ" EntitySet="МОДЕЛИ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код" Association="Self.FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код">
+            <End Role="ТИПЫ_ДВИГАТЕЛЕЙ" EntitySet="ТИПЫ_ДВИГАТЕЛЕЙ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код" Association="Self.FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код">
+            <End Role="ТИПЫ_ШАБЛОНОВ" EntitySet="ТИПЫ_ШАБЛОНОВ" />
+            <End Role="ШАБЛОНЫ" EntitySet="ШАБЛОНЫ" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="aimpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="спр_банки_отчёты_клиентов" Type="Int32" />
+          <Property Name="спр_статусы_банка" Type="Int32" />
+          <Property Name="используется" Type="Byte" />
+          <Property Name="отчёты_клиентов" Type="Int32" />
+          <NavigationProperty Name="ОТЧЁТЫ_КЛИЕНТОВ1" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код" FromRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" ToRole="ОТЧЁТЫ_КЛИЕНТОВ" />
+          <NavigationProperty Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код" FromRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" ToRole="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          <NavigationProperty Name="спр_СТАТУСЫ_БАНКА1" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код" FromRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" ToRole="спр_СТАТУСЫ_БАНКА" />
+        </EntityType>
+        <EntityType Name="ВИДЫ_ТРАНСПОРТА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ТРАНСПОРТ" Relationship="Self.FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код" FromRole="ВИДЫ_ТРАНСПОРТА" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="ГОРОДА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="регионы" Type="Int32" />
+          <NavigationProperty Name="РЕГИОНЫ1" Relationship="Self.FK_ГОРОДА_РЕГИОНЫ_код" FromRole="ГОРОДА" ToRole="РЕГИОНЫ" />
+          <NavigationProperty Name="КОНТРАГЕНТЫ" Relationship="Self.FK_КОНТРАГЕНТЫ_ГОРОДА_код" FromRole="ГОРОДА" ToRole="КОНТРАГЕНТЫ" />
+        </EntityType>
+        <EntityType Name="КАТЕГОРИИ_ТРАНСПОРТА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ТРАНСПОРТ" Relationship="Self.FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код" FromRole="КАТЕГОРИИ_ТРАНСПОРТА" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="КОНТРАГЕНТЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="фамилия" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="имя" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="отчество" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фамилия_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="имя_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="отчество_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дата" Type="DateTime" Precision="0" />
+          <Property Name="регионы" Type="Int32" />
+          <Property Name="города" Type="Int32" />
+          <Property Name="район" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="улица" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дом" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="корпус" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="квартира" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="телефон" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="номер_док" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="серия_док" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кем_док" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дата_док" Type="DateTime" Precision="0" />
+          <Property Name="документ" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="фото" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="юр" Type="Byte" Nullable="false" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="инн" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="огрн" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кпп" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="рас_счет" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кор_счет" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="бик" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="банк" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="документ_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фото_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ГОРОДА1" Relationship="Self.FK_КОНТРАГЕНТЫ_ГОРОДА_код" FromRole="КОНТРАГЕНТЫ" ToRole="ГОРОДА" />
+          <NavigationProperty Name="РЕГИОНЫ1" Relationship="Self.FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код" FromRole="КОНТРАГЕНТЫ" ToRole="РЕГИОНЫ" />
+          <NavigationProperty Name="СДЕЛКИ" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ_код" FromRole="КОНТРАГЕНТЫ" ToRole="СДЕЛКИ" />
+          <NavigationProperty Name="СДЕЛКИ1" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код" FromRole="КОНТРАГЕНТЫ" ToRole="СДЕЛКИ" />
+          <NavigationProperty Name="СДЕЛКИ2" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код" FromRole="КОНТРАГЕНТЫ" ToRole="СДЕЛКИ" />
+        </EntityType>
+        <EntityType Name="КРЕДИТОРЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="МАРКИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="МОДЕЛИ" Relationship="Self.FK_МОДЕЛИ_МАРКИ_код" FromRole="МАРКИ" ToRole="МОДЕЛИ" />
+          <NavigationProperty Name="ТРАНСПОРТ" Relationship="Self.FK_ТРАНСПОРТ_МАРКИ_код" FromRole="МАРКИ" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="МОДЕЛИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="марки" Type="Int32" />
+          <NavigationProperty Name="МАРКИ1" Relationship="Self.FK_МОДЕЛИ_МАРКИ_код" FromRole="МОДЕЛИ" ToRole="МАРКИ" />
+          <NavigationProperty Name="ТРАНСПОРТ" Relationship="Self.FK_ТРАНСПОРТ_МОДЕЛИ_код" FromRole="МОДЕЛИ" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="дата" Type="DateTime" Precision="0" />
+          <Property Name="источник" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фио" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="тс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="стоимость" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="общий_взнос" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="спр_статусы_клиентов" Type="Int32" />
+          <Property Name="телефон" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="спр_программы_кредитования" Type="Int32" />
+          <Property Name="сумма_кредита" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="комиссии_знает" Type="Byte" />
+          <Property Name="комиссия_за_снятие" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="комиссии_в_кредите" Type="Byte" />
+          <Property Name="акт_оценки" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="дкп_дк" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="комментарий" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="комиссия_салона" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="пользователи" Type="Int32" />
+          <NavigationProperty Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код" FromRole="ОТЧЁТЫ_КЛИЕНТОВ" ToRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          <NavigationProperty Name="ПОЛЬЗОВАТЕЛИ1" Relationship="Self.FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код" FromRole="ОТЧЁТЫ_КЛИЕНТОВ" ToRole="ПОЛЬЗОВАТЕЛИ" />
+        </EntityType>
+        <EntityType Name="ПОЛЬЗОВАТЕЛИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="имя" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фамилия" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="отчёство" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="имя_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фамилия_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="отчество_р" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="номер" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дата" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="логин" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="пароль" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="админ" Type="Byte" />
+          <NavigationProperty Name="ОТЧЁТЫ_КЛИЕНТОВ" Relationship="Self.FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код" FromRole="ПОЛЬЗОВАТЕЛИ" ToRole="ОТЧЁТЫ_КЛИЕНТОВ" />
+          <NavigationProperty Name="СДЕЛКИ" Relationship="Self.FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код" FromRole="ПОЛЬЗОВАТЕЛИ" ToRole="СДЕЛКИ" />
+        </EntityType>
+        <EntityType Name="РЕГИОНЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ГОРОДА" Relationship="Self.FK_ГОРОДА_РЕГИОНЫ_код" FromRole="РЕГИОНЫ" ToRole="ГОРОДА" />
+          <NavigationProperty Name="КОНТРАГЕНТЫ" Relationship="Self.FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код" FromRole="РЕГИОНЫ" ToRole="КОНТРАГЕНТЫ" />
+        </EntityType>
+        <EntityType Name="РЕКВИЗИТЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="рос_счет" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кор_счет" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="в_банке" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="бик" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="СДЕЛКИ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="дата" Type="DateTime" Precision="0" />
+          <Property Name="дата_доверенность" Type="DateTime" Precision="0" />
+          <Property Name="номер_доверенность" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="номер_реестр" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="продавец" Type="Int32" />
+          <Property Name="покупатель" Type="Int32" />
+          <Property Name="собственник" Type="Int32" />
+          <Property Name="транспорт" Type="Int32" />
+          <Property Name="стоимость" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дкп" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="агенский" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="пользователи" Type="Int32" />
+          <Property Name="доверенность" Type="Byte" />
+          <Property Name="стоимость_банк" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="первый_взнос" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="сумма_кредит" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="стоимость_реальная" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="первый_взнос_касса" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="кредиторы" Type="Int32" />
+          <Property Name="реквизиты" Type="Int32" />
+          <Property Name="отчёт_по_страховым" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="откат" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="источник" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дкп_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="агенский_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кредит" Type="Byte" Nullable="false" />
+          <Property Name="номер" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="комиссия_Касса" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="дата_ад" Type="DateTime" Precision="0" />
+          <Property Name="комиссия" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="стоянка" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="второй_месяц" Type="Byte" />
+          <Property Name="тип" Type="Byte" />
+          <NavigationProperty Name="КОНТРАГЕНТЫ" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ_код" FromRole="СДЕЛКИ" ToRole="КОНТРАГЕНТЫ" />
+          <NavigationProperty Name="КОНТРАГЕНТЫ1" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код" FromRole="СДЕЛКИ" ToRole="КОНТРАГЕНТЫ" />
+          <NavigationProperty Name="КОНТРАГЕНТЫ2" Relationship="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код" FromRole="СДЕЛКИ" ToRole="КОНТРАГЕНТЫ" />
+          <NavigationProperty Name="ПОЛЬЗОВАТЕЛИ1" Relationship="Self.FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код" FromRole="СДЕЛКИ" ToRole="ПОЛЬЗОВАТЕЛИ" />
+          <NavigationProperty Name="ТРАНСПОРТ1" Relationship="Self.FK_СДЕЛКИ_ТРАНСПОРТ_код" FromRole="СДЕЛКИ" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код" FromRole="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" ToRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+        </EntityType>
+        <EntityType Name="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="спр_СТАТУСЫ_БАНКА">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="наименование2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Relationship="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код" FromRole="спр_СТАТУСЫ_БАНКА" ToRole="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+        </EntityType>
+        <EntityType Name="спр_СТАТУСЫ_КЛИЕНТОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="фильтр" Type="Byte" />
+        </EntityType>
+        <EntityType Name="ТИПЫ_ДВИГАТЕЛЕЙ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ТРАНСПОРТ" Relationship="Self.FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код" FromRole="ТИПЫ_ДВИГАТЕЛЕЙ" ToRole="ТРАНСПОРТ" />
+        </EntityType>
+        <EntityType Name="ТИПЫ_ШАБЛОНОВ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="запрос" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ШАБЛОНЫ" Relationship="Self.FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код" FromRole="ТИПЫ_ШАБЛОНОВ" ToRole="ШАБЛОНЫ" />
+        </EntityType>
+        <EntityType Name="ТРАНСПОРТ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="гос_номер" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="марки" Type="Int32" />
+          <Property Name="модели" Type="Int32" />
+          <Property Name="категории_транспорта" Type="Int32" />
+          <Property Name="изготовитель" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="год" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="цвет" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="вин" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кузов" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="шасси" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="масса" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="макс_масса" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="серия_птс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="номер_птс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дата_птс" Type="DateTime" Precision="0" />
+          <Property Name="кем_птс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="копия_птс" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="серия_стс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="номер_стс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="кем_стс" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="дата_стс" Type="DateTime" Precision="0" />
+          <Property Name="копия_стс" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="марка_двиг" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="типы_двигателей" Type="Int32" />
+          <Property Name="мощность" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="па" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="объем" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="виды_транспорта" Type="Int32" />
+          <Property Name="копия_птс_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="копия_стс_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ВИДЫ_ТРАНСПОРТА1" Relationship="Self.FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код" FromRole="ТРАНСПОРТ" ToRole="ВИДЫ_ТРАНСПОРТА" />
+          <NavigationProperty Name="КАТЕГОРИИ_ТРАНСПОРТА1" Relationship="Self.FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код" FromRole="ТРАНСПОРТ" ToRole="КАТЕГОРИИ_ТРАНСПОРТА" />
+          <NavigationProperty Name="МАРКИ1" Relationship="Self.FK_ТРАНСПОРТ_МАРКИ_код" FromRole="ТРАНСПОРТ" ToRole="МАРКИ" />
+          <NavigationProperty Name="МОДЕЛИ1" Relationship="Self.FK_ТРАНСПОРТ_МОДЕЛИ_код" FromRole="ТРАНСПОРТ" ToRole="МОДЕЛИ" />
+          <NavigationProperty Name="СДЕЛКИ" Relationship="Self.FK_СДЕЛКИ_ТРАНСПОРТ_код" FromRole="ТРАНСПОРТ" ToRole="СДЕЛКИ" />
+          <NavigationProperty Name="ТИПЫ_ДВИГАТЕЛЕЙ1" Relationship="Self.FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код" FromRole="ТРАНСПОРТ" ToRole="ТИПЫ_ДВИГАТЕЛЕЙ" />
+        </EntityType>
+        <EntityType Name="ШАБЛОНЫ">
+          <Key>
+            <PropertyRef Name="код" />
+          </Key>
+          <Property Name="код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="файл" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="наименование" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="типы_шаблонов" Type="Int32" />
+          <Property Name="файл_наим" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ТИПЫ_ШАБЛОНОВ1" Relationship="Self.FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код" FromRole="ШАБЛОНЫ" ToRole="ТИПЫ_ШАБЛОНОВ" />
+        </EntityType>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+          <End Role="ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="отчёты_клиентов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+          <End Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="спр_банки_отчёты_клиентов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код">
+          <End Role="спр_СТАТУСЫ_БАНКА" Type="Self.спр_СТАТУСЫ_БАНКА" Multiplicity="0..1" />
+          <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="спр_СТАТУСЫ_БАНКА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="спр_статусы_банка" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код">
+          <End Role="ВИДЫ_ТРАНСПОРТА" Type="Self.ВИДЫ_ТРАНСПОРТА" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВИДЫ_ТРАНСПОРТА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="виды_транспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ГОРОДА_РЕГИОНЫ_код">
+          <End Role="РЕГИОНЫ" Type="Self.РЕГИОНЫ" Multiplicity="0..1" />
+          <End Role="ГОРОДА" Type="Self.ГОРОДА" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="РЕГИОНЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ГОРОДА">
+              <PropertyRef Name="регионы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_КОНТРАГЕНТЫ_ГОРОДА_код">
+          <End Role="ГОРОДА" Type="Self.ГОРОДА" Multiplicity="0..1" />
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ГОРОДА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="города" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код">
+          <End Role="КАТЕГОРИИ_ТРАНСПОРТА" Type="Self.КАТЕГОРИИ_ТРАНСПОРТА" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КАТЕГОРИИ_ТРАНСПОРТА">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="категории_транспорта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код">
+          <End Role="РЕГИОНЫ" Type="Self.РЕГИОНЫ" Multiplicity="0..1" />
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="РЕГИОНЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="регионы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="продавец" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="покупатель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код">
+          <End Role="КОНТРАГЕНТЫ" Type="Self.КОНТРАГЕНТЫ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="КОНТРАГЕНТЫ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="собственник" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_МОДЕЛИ_МАРКИ_код">
+          <End Role="МАРКИ" Type="Self.МАРКИ" Multiplicity="0..1" />
+          <End Role="МОДЕЛИ" Type="Self.МОДЕЛИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МАРКИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="МОДЕЛИ">
+              <PropertyRef Name="марки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_МАРКИ_код">
+          <End Role="МАРКИ" Type="Self.МАРКИ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МАРКИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="марки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_МОДЕЛИ_код">
+          <End Role="МОДЕЛИ" Type="Self.МОДЕЛИ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="МОДЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="модели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код">
+          <End Role="ПОЛЬЗОВАТЕЛИ" Type="Self.ПОЛЬЗОВАТЕЛИ" Multiplicity="0..1" />
+          <End Role="ОТЧЁТЫ_КЛИЕНТОВ" Type="Self.ОТЧЁТЫ_КЛИЕНТОВ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ПОЛЬЗОВАТЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ОТЧЁТЫ_КЛИЕНТОВ">
+              <PropertyRef Name="пользователи" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код">
+          <End Role="ПОЛЬЗОВАТЕЛИ" Type="Self.ПОЛЬЗОВАТЕЛИ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ПОЛЬЗОВАТЕЛИ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="пользователи" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СДЕЛКИ_ТРАНСПОРТ_код">
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="0..1" />
+          <End Role="СДЕЛКИ" Type="Self.СДЕЛКИ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТРАНСПОРТ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="СДЕЛКИ">
+              <PropertyRef Name="транспорт" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код">
+          <End Role="ТИПЫ_ДВИГАТЕЛЕЙ" Type="Self.ТИПЫ_ДВИГАТЕЛЕЙ" Multiplicity="0..1" />
+          <End Role="ТРАНСПОРТ" Type="Self.ТРАНСПОРТ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТИПЫ_ДВИГАТЕЛЕЙ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ТРАНСПОРТ">
+              <PropertyRef Name="типы_двигателей" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код">
+          <End Role="ТИПЫ_ШАБЛОНОВ" Type="Self.ТИПЫ_ШАБЛОНОВ" Multiplicity="0..1" />
+          <End Role="ШАБЛОНЫ" Type="Self.ШАБЛОНЫ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТИПЫ_ШАБЛОНОВ">
+              <PropertyRef Name="код" />
+            </Principal>
+            <Dependent Role="ШАБЛОНЫ">
+              <PropertyRef Name="типы_шаблонов" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="aimpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          <EntitySet Name="ВИДЫ_ТРАНСПОРТА" EntityType="Self.ВИДЫ_ТРАНСПОРТА" />
+          <EntitySet Name="ГОРОДА" EntityType="Self.ГОРОДА" />
+          <EntitySet Name="КАТЕГОРИИ_ТРАНСПОРТА" EntityType="Self.КАТЕГОРИИ_ТРАНСПОРТА" />
+          <EntitySet Name="КОНТРАГЕНТЫ" EntityType="Self.КОНТРАГЕНТЫ" />
+          <EntitySet Name="КРЕДИТОРЫ" EntityType="Self.КРЕДИТОРЫ" />
+          <EntitySet Name="МАРКИ" EntityType="Self.МАРКИ" />
+          <EntitySet Name="МОДЕЛИ" EntityType="Self.МОДЕЛИ" />
+          <EntitySet Name="ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.ОТЧЁТЫ_КЛИЕНТОВ" />
+          <EntitySet Name="ПОЛЬЗОВАТЕЛИ" EntityType="Self.ПОЛЬЗОВАТЕЛИ" />
+          <EntitySet Name="РЕГИОНЫ" EntityType="Self.РЕГИОНЫ" />
+          <EntitySet Name="РЕКВИЗИТЫ" EntityType="Self.РЕКВИЗИТЫ" />
+          <EntitySet Name="СДЕЛКИ" EntityType="Self.СДЕЛКИ" />
+          <EntitySet Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" EntityType="Self.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          <EntitySet Name="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ" EntityType="Self.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ" />
+          <EntitySet Name="спр_СТАТУСЫ_БАНКА" EntityType="Self.спр_СТАТУСЫ_БАНКА" />
+          <EntitySet Name="спр_СТАТУСЫ_КЛИЕНТОВ" EntityType="Self.спр_СТАТУСЫ_КЛИЕНТОВ" />
+          <EntitySet Name="ТИПЫ_ДВИГАТЕЛЕЙ" EntityType="Self.ТИПЫ_ДВИГАТЕЛЕЙ" />
+          <EntitySet Name="ТИПЫ_ШАБЛОНОВ" EntityType="Self.ТИПЫ_ШАБЛОНОВ" />
+          <EntitySet Name="ТРАНСПОРТ" EntityType="Self.ТРАНСПОРТ" />
+          <EntitySet Name="ШАБЛОНЫ" EntityType="Self.ШАБЛОНЫ" />
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+            <End Role="ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="ОТЧЁТЫ_КЛИЕНТОВ" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код">
+            <End Role="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код" Association="Self.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код">
+            <End Role="спр_СТАТУСЫ_БАНКА" EntitySet="спр_СТАТУСЫ_БАНКА" />
+            <End Role="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код" Association="Self.FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код">
+            <End Role="ВИДЫ_ТРАНСПОРТА" EntitySet="ВИДЫ_ТРАНСПОРТА" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ГОРОДА_РЕГИОНЫ_код" Association="Self.FK_ГОРОДА_РЕГИОНЫ_код">
+            <End Role="РЕГИОНЫ" EntitySet="РЕГИОНЫ" />
+            <End Role="ГОРОДА" EntitySet="ГОРОДА" />
+          </AssociationSet>
+          <AssociationSet Name="FK_КОНТРАГЕНТЫ_ГОРОДА_код" Association="Self.FK_КОНТРАГЕНТЫ_ГОРОДА_код">
+            <End Role="ГОРОДА" EntitySet="ГОРОДА" />
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код" Association="Self.FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код">
+            <End Role="КАТЕГОРИИ_ТРАНСПОРТА" EntitySet="КАТЕГОРИИ_ТРАНСПОРТА" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код" Association="Self.FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код">
+            <End Role="РЕГИОНЫ" EntitySet="РЕГИОНЫ" />
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код" Association="Self.FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код">
+            <End Role="КОНТРАГЕНТЫ" EntitySet="КОНТРАГЕНТЫ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_МОДЕЛИ_МАРКИ_код" Association="Self.FK_МОДЕЛИ_МАРКИ_код">
+            <End Role="МАРКИ" EntitySet="МАРКИ" />
+            <End Role="МОДЕЛИ" EntitySet="МОДЕЛИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_МАРКИ_код" Association="Self.FK_ТРАНСПОРТ_МАРКИ_код">
+            <End Role="МАРКИ" EntitySet="МАРКИ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_МОДЕЛИ_код" Association="Self.FK_ТРАНСПОРТ_МОДЕЛИ_код">
+            <End Role="МОДЕЛИ" EntitySet="МОДЕЛИ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код" Association="Self.FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код">
+            <End Role="ПОЛЬЗОВАТЕЛИ" EntitySet="ПОЛЬЗОВАТЕЛИ" />
+            <End Role="ОТЧЁТЫ_КЛИЕНТОВ" EntitySet="ОТЧЁТЫ_КЛИЕНТОВ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код" Association="Self.FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код">
+            <End Role="ПОЛЬЗОВАТЕЛИ" EntitySet="ПОЛЬЗОВАТЕЛИ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СДЕЛКИ_ТРАНСПОРТ_код" Association="Self.FK_СДЕЛКИ_ТРАНСПОРТ_код">
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+            <End Role="СДЕЛКИ" EntitySet="СДЕЛКИ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код" Association="Self.FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код">
+            <End Role="ТИПЫ_ДВИГАТЕЛЕЙ" EntitySet="ТИПЫ_ДВИГАТЕЛЕЙ" />
+            <End Role="ТРАНСПОРТ" EntitySet="ТРАНСПОРТ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код" Association="Self.FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код">
+            <End Role="ТИПЫ_ШАБЛОНОВ" EntitySet="ТИПЫ_ШАБЛОНОВ" />
+            <End Role="ШАБЛОНЫ" EntitySet="ШАБЛОНЫ" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="aimpModelStoreContainer" CdmEntityContainer="aimpEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="aimpModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+            <EntityTypeMapping TypeName="aimpModel.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <MappingFragment StoreEntitySet="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="спр_банки_отчёты_клиентов" ColumnName="спр_банки_отчёты_клиентов" />
+                <ScalarProperty Name="спр_статусы_банка" ColumnName="спр_статусы_банка" />
+                <ScalarProperty Name="используется" ColumnName="используется" />
+                <ScalarProperty Name="отчёты_клиентов" ColumnName="отчёты_клиентов" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ВИДЫ_ТРАНСПОРТА">
+            <EntityTypeMapping TypeName="aimpModel.ВИДЫ_ТРАНСПОРТА">
+              <MappingFragment StoreEntitySet="ВИДЫ_ТРАНСПОРТА">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ГОРОДА">
+            <EntityTypeMapping TypeName="aimpModel.ГОРОДА">
+              <MappingFragment StoreEntitySet="ГОРОДА">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="регионы" ColumnName="регионы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="КАТЕГОРИИ_ТРАНСПОРТА">
+            <EntityTypeMapping TypeName="aimpModel.КАТЕГОРИИ_ТРАНСПОРТА">
+              <MappingFragment StoreEntitySet="КАТЕГОРИИ_ТРАНСПОРТА">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="КОНТРАГЕНТЫ">
+            <EntityTypeMapping TypeName="aimpModel.КОНТРАГЕНТЫ">
+              <MappingFragment StoreEntitySet="КОНТРАГЕНТЫ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="фамилия" ColumnName="фамилия" />
+                <ScalarProperty Name="имя" ColumnName="имя" />
+                <ScalarProperty Name="отчество" ColumnName="отчество" />
+                <ScalarProperty Name="фамилия_р" ColumnName="фамилия_р" />
+                <ScalarProperty Name="имя_р" ColumnName="имя_р" />
+                <ScalarProperty Name="отчество_р" ColumnName="отчество_р" />
+                <ScalarProperty Name="дата" ColumnName="дата" />
+                <ScalarProperty Name="регионы" ColumnName="регионы" />
+                <ScalarProperty Name="города" ColumnName="города" />
+                <ScalarProperty Name="район" ColumnName="район" />
+                <ScalarProperty Name="улица" ColumnName="улица" />
+                <ScalarProperty Name="дом" ColumnName="дом" />
+                <ScalarProperty Name="корпус" ColumnName="корпус" />
+                <ScalarProperty Name="квартира" ColumnName="квартира" />
+                <ScalarProperty Name="телефон" ColumnName="телефон" />
+                <ScalarProperty Name="номер_док" ColumnName="номер_док" />
+                <ScalarProperty Name="серия_док" ColumnName="серия_док" />
+                <ScalarProperty Name="кем_док" ColumnName="кем_док" />
+                <ScalarProperty Name="дата_док" ColumnName="дата_док" />
+                <ScalarProperty Name="документ" ColumnName="документ" />
+                <ScalarProperty Name="фото" ColumnName="фото" />
+                <ScalarProperty Name="юр" ColumnName="юр" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="инн" ColumnName="инн" />
+                <ScalarProperty Name="огрн" ColumnName="огрн" />
+                <ScalarProperty Name="кпп" ColumnName="кпп" />
+                <ScalarProperty Name="рас_счет" ColumnName="рас_счет" />
+                <ScalarProperty Name="кор_счет" ColumnName="кор_счет" />
+                <ScalarProperty Name="бик" ColumnName="бик" />
+                <ScalarProperty Name="банк" ColumnName="банк" />
+                <ScalarProperty Name="документ_наим" ColumnName="документ_наим" />
+                <ScalarProperty Name="фото_наим" ColumnName="фото_наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="КРЕДИТОРЫ">
+            <EntityTypeMapping TypeName="aimpModel.КРЕДИТОРЫ">
+              <MappingFragment StoreEntitySet="КРЕДИТОРЫ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="МАРКИ">
+            <EntityTypeMapping TypeName="aimpModel.МАРКИ">
+              <MappingFragment StoreEntitySet="МАРКИ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="МОДЕЛИ">
+            <EntityTypeMapping TypeName="aimpModel.МОДЕЛИ">
+              <MappingFragment StoreEntitySet="МОДЕЛИ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="марки" ColumnName="марки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ОТЧЁТЫ_КЛИЕНТОВ">
+            <EntityTypeMapping TypeName="aimpModel.ОТЧЁТЫ_КЛИЕНТОВ">
+              <MappingFragment StoreEntitySet="ОТЧЁТЫ_КЛИЕНТОВ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="дата" ColumnName="дата" />
+                <ScalarProperty Name="источник" ColumnName="источник" />
+                <ScalarProperty Name="фио" ColumnName="фио" />
+                <ScalarProperty Name="тс" ColumnName="тс" />
+                <ScalarProperty Name="стоимость" ColumnName="стоимость" />
+                <ScalarProperty Name="общий_взнос" ColumnName="общий_взнос" />
+                <ScalarProperty Name="спр_статусы_клиентов" ColumnName="спр_статусы_клиентов" />
+                <ScalarProperty Name="телефон" ColumnName="телефон" />
+                <ScalarProperty Name="спр_программы_кредитования" ColumnName="спр_программы_кредитования" />
+                <ScalarProperty Name="сумма_кредита" ColumnName="сумма_кредита" />
+                <ScalarProperty Name="комиссии_знает" ColumnName="комиссии_знает" />
+                <ScalarProperty Name="комиссия_за_снятие" ColumnName="комиссия_за_снятие" />
+                <ScalarProperty Name="комиссии_в_кредите" ColumnName="комиссии_в_кредите" />
+                <ScalarProperty Name="акт_оценки" ColumnName="акт_оценки" />
+                <ScalarProperty Name="дкп_дк" ColumnName="дкп_дк" />
+                <ScalarProperty Name="комментарий" ColumnName="комментарий" />
+                <ScalarProperty Name="комиссия_салона" ColumnName="комиссия_салона" />
+                <ScalarProperty Name="пользователи" ColumnName="пользователи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ПОЛЬЗОВАТЕЛИ">
+            <EntityTypeMapping TypeName="aimpModel.ПОЛЬЗОВАТЕЛИ">
+              <MappingFragment StoreEntitySet="ПОЛЬЗОВАТЕЛИ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="имя" ColumnName="имя" />
+                <ScalarProperty Name="фамилия" ColumnName="фамилия" />
+                <ScalarProperty Name="отчёство" ColumnName="отчёство" />
+                <ScalarProperty Name="имя_р" ColumnName="имя_р" />
+                <ScalarProperty Name="фамилия_р" ColumnName="фамилия_р" />
+                <ScalarProperty Name="отчество_р" ColumnName="отчество_р" />
+                <ScalarProperty Name="номер" ColumnName="номер" />
+                <ScalarProperty Name="дата" ColumnName="дата" />
+                <ScalarProperty Name="логин" ColumnName="логин" />
+                <ScalarProperty Name="пароль" ColumnName="пароль" />
+                <ScalarProperty Name="админ" ColumnName="админ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="РЕГИОНЫ">
+            <EntityTypeMapping TypeName="aimpModel.РЕГИОНЫ">
+              <MappingFragment StoreEntitySet="РЕГИОНЫ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="РЕКВИЗИТЫ">
+            <EntityTypeMapping TypeName="aimpModel.РЕКВИЗИТЫ">
+              <MappingFragment StoreEntitySet="РЕКВИЗИТЫ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="рос_счет" ColumnName="рос_счет" />
+                <ScalarProperty Name="кор_счет" ColumnName="кор_счет" />
+                <ScalarProperty Name="в_банке" ColumnName="в_банке" />
+                <ScalarProperty Name="бик" ColumnName="бик" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СДЕЛКИ">
+            <EntityTypeMapping TypeName="aimpModel.СДЕЛКИ">
+              <MappingFragment StoreEntitySet="СДЕЛКИ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="дата" ColumnName="дата" />
+                <ScalarProperty Name="дата_доверенность" ColumnName="дата_доверенность" />
+                <ScalarProperty Name="номер_доверенность" ColumnName="номер_доверенность" />
+                <ScalarProperty Name="номер_реестр" ColumnName="номер_реестр" />
+                <ScalarProperty Name="продавец" ColumnName="продавец" />
+                <ScalarProperty Name="покупатель" ColumnName="покупатель" />
+                <ScalarProperty Name="собственник" ColumnName="собственник" />
+                <ScalarProperty Name="транспорт" ColumnName="транспорт" />
+                <ScalarProperty Name="стоимость" ColumnName="стоимость" />
+                <ScalarProperty Name="дкп" ColumnName="дкп" />
+                <ScalarProperty Name="агенский" ColumnName="агенский" />
+                <ScalarProperty Name="пользователи" ColumnName="пользователи" />
+                <ScalarProperty Name="доверенность" ColumnName="доверенность" />
+                <ScalarProperty Name="стоимость_банк" ColumnName="стоимость_банк" />
+                <ScalarProperty Name="первый_взнос" ColumnName="первый_взнос" />
+                <ScalarProperty Name="сумма_кредит" ColumnName="сумма_кредит" />
+                <ScalarProperty Name="стоимость_реальная" ColumnName="стоимость_реальная" />
+                <ScalarProperty Name="первый_взнос_касса" ColumnName="первый_взнос_касса" />
+                <ScalarProperty Name="кредиторы" ColumnName="кредиторы" />
+                <ScalarProperty Name="реквизиты" ColumnName="реквизиты" />
+                <ScalarProperty Name="отчёт_по_страховым" ColumnName="отчёт_по_страховым" />
+                <ScalarProperty Name="откат" ColumnName="откат" />
+                <ScalarProperty Name="источник" ColumnName="источник" />
+                <ScalarProperty Name="дкп_наим" ColumnName="дкп_наим" />
+                <ScalarProperty Name="агенский_наим" ColumnName="агенский_наим" />
+                <ScalarProperty Name="кредит" ColumnName="кредит" />
+                <ScalarProperty Name="номер" ColumnName="номер" />
+                <ScalarProperty Name="комиссия_Касса" ColumnName="комиссия_Касса" />
+                <ScalarProperty Name="дата_ад" ColumnName="дата_ад" />
+                <ScalarProperty Name="комиссия" ColumnName="комиссия" />
+                <ScalarProperty Name="стоянка" ColumnName="стоянка" />
+                <ScalarProperty Name="второй_месяц" ColumnName="второй_месяц" />
+                <ScalarProperty Name="тип" ColumnName="тип" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+            <EntityTypeMapping TypeName="aimpModel.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+              <MappingFragment StoreEntitySet="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ">
+            <EntityTypeMapping TypeName="aimpModel.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ">
+              <MappingFragment StoreEntitySet="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="спр_СТАТУСЫ_БАНКА">
+            <EntityTypeMapping TypeName="aimpModel.спр_СТАТУСЫ_БАНКА">
+              <MappingFragment StoreEntitySet="спр_СТАТУСЫ_БАНКА">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="наименование2" ColumnName="наименование2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="спр_СТАТУСЫ_КЛИЕНТОВ">
+            <EntityTypeMapping TypeName="aimpModel.спр_СТАТУСЫ_КЛИЕНТОВ">
+              <MappingFragment StoreEntitySet="спр_СТАТУСЫ_КЛИЕНТОВ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="фильтр" ColumnName="фильтр" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТИПЫ_ДВИГАТЕЛЕЙ">
+            <EntityTypeMapping TypeName="aimpModel.ТИПЫ_ДВИГАТЕЛЕЙ">
+              <MappingFragment StoreEntitySet="ТИПЫ_ДВИГАТЕЛЕЙ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТИПЫ_ШАБЛОНОВ">
+            <EntityTypeMapping TypeName="aimpModel.ТИПЫ_ШАБЛОНОВ">
+              <MappingFragment StoreEntitySet="ТИПЫ_ШАБЛОНОВ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="запрос" ColumnName="запрос" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТРАНСПОРТ">
+            <EntityTypeMapping TypeName="aimpModel.ТРАНСПОРТ">
+              <MappingFragment StoreEntitySet="ТРАНСПОРТ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="гос_номер" ColumnName="гос_номер" />
+                <ScalarProperty Name="марки" ColumnName="марки" />
+                <ScalarProperty Name="модели" ColumnName="модели" />
+                <ScalarProperty Name="категории_транспорта" ColumnName="категории_транспорта" />
+                <ScalarProperty Name="изготовитель" ColumnName="изготовитель" />
+                <ScalarProperty Name="год" ColumnName="год" />
+                <ScalarProperty Name="цвет" ColumnName="цвет" />
+                <ScalarProperty Name="вин" ColumnName="вин" />
+                <ScalarProperty Name="кузов" ColumnName="кузов" />
+                <ScalarProperty Name="шасси" ColumnName="шасси" />
+                <ScalarProperty Name="масса" ColumnName="масса" />
+                <ScalarProperty Name="макс_масса" ColumnName="макс_масса" />
+                <ScalarProperty Name="серия_птс" ColumnName="серия_птс" />
+                <ScalarProperty Name="номер_птс" ColumnName="номер_птс" />
+                <ScalarProperty Name="дата_птс" ColumnName="дата_птс" />
+                <ScalarProperty Name="кем_птс" ColumnName="кем_птс" />
+                <ScalarProperty Name="копия_птс" ColumnName="копия_птс" />
+                <ScalarProperty Name="серия_стс" ColumnName="серия_стс" />
+                <ScalarProperty Name="номер_стс" ColumnName="номер_стс" />
+                <ScalarProperty Name="кем_стс" ColumnName="кем_стс" />
+                <ScalarProperty Name="дата_стс" ColumnName="дата_стс" />
+                <ScalarProperty Name="копия_стс" ColumnName="копия_стс" />
+                <ScalarProperty Name="марка_двиг" ColumnName="марка_двиг" />
+                <ScalarProperty Name="типы_двигателей" ColumnName="типы_двигателей" />
+                <ScalarProperty Name="мощность" ColumnName="мощность" />
+                <ScalarProperty Name="па" ColumnName="па" />
+                <ScalarProperty Name="объем" ColumnName="объем" />
+                <ScalarProperty Name="виды_транспорта" ColumnName="виды_транспорта" />
+                <ScalarProperty Name="копия_птс_наим" ColumnName="копия_птс_наим" />
+                <ScalarProperty Name="копия_стс_наим" ColumnName="копия_стс_наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ШАБЛОНЫ">
+            <EntityTypeMapping TypeName="aimpModel.ШАБЛОНЫ">
+              <MappingFragment StoreEntitySet="ШАБЛОНЫ">
+                <ScalarProperty Name="код" ColumnName="код" />
+                <ScalarProperty Name="файл" ColumnName="файл" />
+                <ScalarProperty Name="наименование" ColumnName="наименование" />
+                <ScalarProperty Name="типы_шаблонов" ColumnName="типы_шаблонов" />
+                <ScalarProperty Name="файл_наим" ColumnName="файл_наим" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,32 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIMP_v3._0.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.DictionaryListView"
+        mc:Ignorable="d"
+        Title="{Binding Name}" Height="330.451" Width="368.797" x:Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="264,254,0,0" VerticalAlignment="Top" Width="75"/>
+
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="357" ItemsSource="{Binding Rows}" SelectedItem="{Binding CurrentItem}">
+            <ListView.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding OpenCurrentItem}"/>
+            </ListView.InputBindings>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenCurrentItemCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="0" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Наименование" Width="300" DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="ДОБАВИТЬ" Command="{Binding NewCommand}" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="140"/>
+
+    </Grid>
+</Window>

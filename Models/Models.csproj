@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7BB3B2EC-2513-4FCC-8524-ACCD4E95214F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Models</RootNamespace>
+    <AssemblyName>Models</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AimpUserDto.cs" />
+    <Compile Include="CardTrancports\CardTrancportDto.cs" />
+    <Compile Include="CardTrancports\CardTrancportListItemDto.cs" />
+    <Compile Include="CardTrancports\CardTrancportsDto.cs" />
+    <Compile Include="CardTrancports\StatusesCardTrancportDto.cs" />
+    <Compile Include="CashTransact\CashTransactionDto.cs" />
+    <Compile Include="Commission\CommissionDto.cs" />
+    <Compile Include="Commission\CommissionListItem.cs" />
+    <Compile Include="Commission\CommissionsDto.cs" />
+    <Compile Include="Commission\SourcesTrancportDto.cs" />
+    <Compile Include="ContractorInfo\ContractorInfo.cs" />
+    <Compile Include="CreditTransact\CreditTransactionInfoDto.cs" />
+    <Compile Include="DataFormats.cs" />
+    <Compile Include="DictionaryDto.cs" />
+    <Compile Include="Documents\CardTrancportDocument.cs" />
+    <Compile Include="Documents\CommissionDocument.cs" />
+    <Compile Include="Entities\CardTrancport.cs" />
+    <Compile Include="Entities\PreCheckCardTrancport.cs" />
+    <Compile Include="Entities\SourceTrancport.cs" />
+    <Compile Include="Entities\StatusCardTrancport.cs" />
+    <Compile Include="Entities\StatusTrancport.cs" />
+    <Compile Include="EntityName.cs" />
+    <Compile Include="PrintDocumentTemplate\PrinDocTempListItem.cs" />
+    <Compile Include="PrintDocumentTemplate\PrintedDocumentTemplatesListDto.cs" />
+    <Compile Include="PrintDocumentTemplate\PrintedDocumentTemplateDto.cs" />
+    <Compile Include="PrintedDocument\ExcelPrintedDocument.cs" />
+    <Compile Include="PrintedDocument\ExcelPrintedDocumentDto.cs" />
+    <Compile Include="PrintedDocument\ILabelValue.cs" />
+    <Compile Include="PrintedDocument\IPrintedDocument.cs" />
+    <Compile Include="PrintedDocument\WordPrintedDocumentDto.cs" />
+    <Compile Include="PrintedDocument\PrintedDocumentsListDto.cs" />
+    <Compile Include="PrintedDocument\Templates\IPrintedDocumentTemplate.cs" />
+    <Compile Include="PrintedDocument\Templates\PrintedDocumentTemplateType.cs" />
+    <Compile Include="PrintedDocument\WordPrintedDocument.cs" />
+    <Compile Include="SaveEntityResult.cs" />
+    <Compile Include="ContractorInfo\TypeSearchContractor.cs" />
+    <Compile Include="CreditTransact\CreditTransactionListItem.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="CreditTransact\CreditTransactionDto.cs" />
+    <Compile Include="CreditTransact\CreditTransactions.cs" />
+    <Compile Include="Documents\CashTransactionDocument.cs" />
+    <Compile Include="Documents\ClientReportDocument.cs" />
+    <Compile Include="Documents\CreditTransactionDocument.cs" />
+    <Compile Include="Documents\DocumentType.cs" />
+    <Compile Include="Documents\IDocument.cs" />
+    <Compile Include="CashTransact\CashTransactionsDto.cs" />
+    <Compile Include="CashTransact\CashTransactionListItem.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\UserRight.cs" />
+    <Compile Include="ReportOfClient\ClientReport.cs" />
+    <Compile Include="ReportOfClient\ClientReports.cs" />
+    <Compile Include="ReportOfClient\ClientReportListItem.cs" />
+    <Compile Include="ContractorInfo\SearchContractorResult.cs" />
+    <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\BankReportClient.cs" />
+    <Compile Include="Entities\BankStatus.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\CashTransaction.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\ClientReport.cs" />
+    <Compile Include="Entities\ClientStatus.cs" />
+    <Compile Include="Entities\CommissionTransaction.cs" />
+    <Compile Include="Entities\Contractor.cs" />
+    <Compile Include="Entities\Creditor.cs" />
+    <Compile Include="Entities\CreditProgramm.cs" />
+    <Compile Include="Entities\CreditTransaction.cs" />
+    <Compile Include="Entities\EngineType.cs" />
+    <Compile Include="Entities\LegalPerson.cs" />
+    <Compile Include="Entities\MakeTrancport.cs" />
+    <Compile Include="Entities\ModelTrancport.cs" />
+    <Compile Include="Entities\Region.cs" />
+    <Compile Include="Entities\PrintedDocumentTemplate.cs" />
+    <Compile Include="Entities\Requisit.cs" />
+    <Compile Include="Entities\Trancport.cs" />
+    <Compile Include="Entities\TrancportCategory.cs" />
+    <Compile Include="Entities\TrancportType.cs" />
+    <Compile Include="Entities\Transaction.cs" />
+    <Compile Include="Entities\TransactionProxy.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserFile.cs" />
+    <Compile Include="Identity.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IResponse.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="SecurityRigths\AdminRight.cs" />
+    <Compile Include="SecurityRigths\IRight.cs" />
+    <Compile Include="SecurityRigths\Operations\AddOperation.cs" />
+    <Compile Include="SecurityRigths\Operations\DeleteOperation.cs" />
+    <Compile Include="SecurityRigths\Operations\ViewOperation.cs" />
+    <Compile Include="SecurityRigths\UserRightsCollection.cs" />
+    <Compile Include="SecurityRigths\UserRightsDto.cs" />
+    <Compile Include="SecurityRigths\UsersDto.cs" />
+    <Compile Include="TrancportInfo\SearchTrancportResult.cs" />
+    <Compile Include="TrancportInfo\TrancportDto.cs" />
+    <Compile Include="TrancportInfo\TrancportInfo.cs" />
+    <Compile Include="TrancportInfo\TypeSearchTrancport.cs" />
+    <Compile Include="UserFiles\UserFileDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

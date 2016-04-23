@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24d05c1ed6f94a719efb058f488e3106" Name="Diagram1">
+        <EntityTypeShape EntityType="aimp3Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.BankReportClients" Width="1.5" PointX="10.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Banks" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.BankStatus" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.CashTransactions" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Cities" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.ClientReports" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.ClientStatus" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.CommissionTransactions" Width="1.5" PointX="11.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Contractors" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Creditors" Width="1.5" PointX="12" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.CreditProgramms" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.CreditTransactions" Width="1.5" PointX="14.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.EngineTypes" Width="1.5" PointX="3.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.LegalPersons" Width="1.5" PointX="0.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.MakeTrancports" Width="1.5" PointX="3.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.ModelTrancports" Width="1.5" PointX="3.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Regions" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.ReportTemplates" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Requisits" Width="1.5" PointX="12" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.TrancportCategories" Width="1.5" PointX="3.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Trancports" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.TrancportTypes" Width="1.5" PointX="3.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.UserFiles" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="aimp3Model.Users" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_BankReportClients_dbo_Banks_Bank_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CashTransactions_dbo_Contractors_BuyerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CashTransactions_dbo_Contractors_OwnerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CashTransactions_dbo_Contractors_SellerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CashTransactions_dbo_Trancports_TrancportId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CashTransactions_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Cities_dbo_Regions_RegionId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Contractors_dbo_Cities_CityId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_ClientReports_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CommissionTransactions_dbo_Contractors_SellerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CommissionTransactions_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Contractors_dbo_Regions_RegionId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Contractors_dbo_UserFiles_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Contractors_dbo_UserFiles_PhotoId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Contractors_BuyerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Contractors_OwnerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Contractors_SellerId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Creditors_CreditorId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Requisits_RequisitId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Trancports_TrancportId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_CreditTransactions_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_MakeTrancports_MakeId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_ModelTrancports_ModelId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_TrancportCategories_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_TrancportTypes_TypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_UserFiles_CopyPtsId" ManuallyRouted="false" />
+        <AssociationConnector Association="aimp3Model.FK_dbo_Trancports_dbo_UserFiles_CopyStsId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

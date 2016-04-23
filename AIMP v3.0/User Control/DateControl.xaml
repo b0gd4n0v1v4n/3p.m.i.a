@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="AIMP_v3._0.User_Control.DateControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AIMP_v3._0.User_Control"
+             mc:Ignorable="d" 
+             d:DesignHeight="23" d:DesignWidth="110" Name="DateUserControl">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Style/CommonStyle.xaml"></ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+       <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="45"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <local:NumberTextBox TabIndex="{Binding ElementName=DateUserControl,Path=TabIndex}" x:Name="Day" Height="23" Grid.Column="0" MaxLength="2"  KeyDown="Day_OnKeyDown" KeyUp="Day_OnKeyUp" PreviewLostKeyboardFocus="Day_OnPreviewLostKeyboardFocus" GotFocus="Day_OnGotFocus"></local:NumberTextBox>
+        <local:NumberTextBox TabIndex="{Binding ElementName=DateUserControl,Path=TabIndex}" x:Name="Month" Height="23" Grid.Column="1" MaxLength="2" PreviewMouseDown="Month_PreviewMouseDown" PreviewKeyDown="Month_OnPreviewKeyDown" KeyDown="Month_OnKeyDown" KeyUp="Month_OnKeyUp" PreviewLostKeyboardFocus="Month_OnPreviewLostKeyboardFocus" GotFocus="Month_OnGotFocus"></local:NumberTextBox>
+        <local:NumberTextBox TabIndex="{Binding ElementName=DateUserControl,Path=TabIndex}" x:Name="Year" Height="23" Grid.Column="2" MaxLength="4" PreviewMouseDown="Year_PreviewMouseDown"  KeyUp="Year_OnKeyUp" PreviewKeyDown="Year_OnPreviewKeyDown" PreviewLostKeyboardFocus="Year_OnPreviewLostKeyboardFocus" GotFocus="Year_OnGotFocus"></local:NumberTextBox>
+    </Grid>
+</UserControl>

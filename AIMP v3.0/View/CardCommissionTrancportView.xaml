@@ -1,0 +1,186 @@
+﻿<Window x:Class="AIMP_v3._0.View.CardCommissionTrancportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIMP_v3._0.View"
+                xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
+        mc:Ignorable="d"
+           Title="КАРТОЧКА КОМИССИОНОГО ТС" Height="673.906" Width="963.157" WindowStartupLocation="Manual" Name="Window">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="920*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <Grid Grid.Row="0" Height="1093">
+                <User_Control:DateControl Date="{Binding CardTrancport.CommissionTransaction.Date}" IsEnabled="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label" Content="СТАТУС А/М" HorizontalAlignment="Left" Margin="10,44,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="comboBox" ItemsSource="{Binding StatusesCardTrancport,Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding CardTrancport.StatusCardTrancport}" HorizontalAlignment="Left" Margin="96,46,0,0" VerticalAlignment="Top" Width="211"/>
+                <Label x:Name="label_Copy" Content="ИСТОЧНИК" HorizontalAlignment="Left" Margin="325,44,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox" Text="{Binding CardTrancport.CommissionTransaction.SourceTrancport.Name,Mode=TwoWay}" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="406,46,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy1" Content="МЕНЕДЖЕР" HorizontalAlignment="Left" Margin="575,44,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy" Text="{Binding CardTrancport.CommissionTransaction.Manager,Mode=TwoWay}" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="656,46,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy2" Content="ПРОДОВЕЦ" HorizontalAlignment="Left" Margin="9,83,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy1" Text="{Binding SellerFullName,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="90,86,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy3" Content="ТЕЛЕФОН" HorizontalAlignment="Left" Margin="267,83,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy2" Text="{Binding CardTrancport.CommissionTransaction.Seller.Telefon,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="337,86,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy4" Content="МАРКА, МОДЕЛЬ ТС" HorizontalAlignment="Left" Margin="9,118,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy3" Text="{Binding TrancportFullName,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="135,119,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="259"/>
+                <Label x:Name="label_Copy5" Content="ГОД" HorizontalAlignment="Left" Margin="413,118,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy4" Text="{Binding CardTrancport.CommissionTransaction.Trancport.Year,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="452,121,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="52"/>
+                <Label x:Name="label_Copy6" Content="VIN" HorizontalAlignment="Left" Margin="516,118,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy5" Text="{Binding CardTrancport.CommissionTransaction.Trancport.Vin,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="548,121,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy7" Content="ЦВЕТ" HorizontalAlignment="Left" Margin="723,118,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy6" Text="{Binding CardTrancport.CommissionTransaction.Trancport.Color,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="768,121,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy8" Content="СТОИМОСТЬ ТС" HorizontalAlignment="Left" Margin="9,153,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy7" Text="{Binding CardTrancport.CommissionTransaction.Price,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="112,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy9" Content="СТОИМОСТЬ В ДКП" HorizontalAlignment="Left" Margin="290,153,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy8" Text="{Binding CardTrancport.CommissionTransaction.PriceDkp,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="415,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy10" Content="ПРОБЕГ" HorizontalAlignment="Left" Margin="596,153,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy9" Text="{Binding CardTrancport.CommissionTransaction.Mileage,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="658,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy11" Content="ДОКУМЕНТЫ" HorizontalAlignment="Left" Margin="9,189,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy10" Text="{Binding CardTrancport.CommissionTransaction.ComplectDoc,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="112,192,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy12" Content="КЛЮЧИ" HorizontalAlignment="Left" Margin="293,189,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy11" Text="{Binding CardTrancport.CommissionTransaction.CountKey,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="352,192,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68"/>
+                <Label x:Name="label_Copy13" Content="КОМИССИЯ" HorizontalAlignment="Left" Margin="434,189,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy12" Text="{Binding CardTrancport.CommissionTransaction.Commission,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="518,192,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label_Copy14" Content="СТОЯНКА" HorizontalAlignment="Left" Margin="695,189,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy13" Text="{Binding CardTrancport.CommissionTransaction.Parking,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="768,192,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157"/>
+                <Label x:Name="label1" Content="КОМЕНТАРИИ ПО КОМПЛЕКТАЦИИ И ОБСЛУЖИВАНИЮ" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy15" Content="КОМПЛЕКТ РЕЗИНЫ" HorizontalAlignment="Left" Margin="9,261,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy14" Text="{Binding CardTrancport.Rubber,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="139,263,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="382"/>
+                <Label x:Name="label_Copy16" Content="СЕРВИСНАЯ КНИЖКА" HorizontalAlignment="Left" Margin="546,261,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy15" Text="{Binding CardTrancport.ServiceBook,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="680,263,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="159"/>
+                <TextBox x:Name="textBox1" Text="{Binding CardTrancport.ServiceComment,Mode=TwoWay}"  HorizontalAlignment="Left" Height="66" Margin="11,292,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="914"/>
+                <Label x:Name="label1_Copy" Content="ПРОЗВОН КЛИЕНТА" FontWeight="Bold" HorizontalAlignment="Left" Margin="11,378,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy17" Content="1 КОНТАКТ" HorizontalAlignment="Left" Margin="14,411,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy16" Text="{Binding CardTrancport.ContactOne,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="100,413,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label_Copy18" Content="2 КОНТАКТ" HorizontalAlignment="Left" Margin="14,440,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy17" Text="{Binding CardTrancport.ContactTwo,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="100,442,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label_Copy19" Content="3 КОНТАКТ" HorizontalAlignment="Left" Margin="14,469,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy18" Text="{Binding CardTrancport.ContactThree,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="100,471,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label_Copy20" Content="4 КОНТАКТ" HorizontalAlignment="Left" Margin="14,499,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy19" Text="{Binding CardTrancport.ContactFour,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="100,501,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label_Copy21" Content="5 КОНТАКТ" HorizontalAlignment="Left" Margin="14,528,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy20"  Text="{Binding CardTrancport.ContactFive,Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="100,530,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label_Copy22" Content="ПРОЧИЕ" HorizontalAlignment="Left" Margin="14,557,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy21" Text="{Binding CardTrancport.ContactOther,Mode=TwoWay}"  HorizontalAlignment="Left" Height="23" Margin="100,559,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="825"/>
+                <Label x:Name="label1_Copy1" Content="ДАННЫЕ ДЛЯ ПРОДАЖИ ТС (для продавца)" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,598,0,0" VerticalAlignment="Top"/>
+
+                <Label x:Name="label_Copy23" VerticalAlignment="Top" Grid.Row="0" Margin="15,626,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="СТОИМОСТЬ ТC"/>
+                <TextBox Text="{Binding CardTrancport.PriceTrancportForSeller,Mode=TwoWay}" HorizontalAlignment="Left" Margin="139,628,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy24" VerticalAlignment="Top" Grid.Row="0" Margin="329,626,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="КОМИССИЯ"/>
+                <TextBox Text="{Binding CardTrancport.CommissionForSeller,Mode=TwoWay}" HorizontalAlignment="Left" Margin="425,628,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy25" VerticalAlignment="Top" Grid.Row="0" Margin="625,626,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="В РУКИ ПРОДАВЦУ"/>
+                <TextBox Text="{Binding CardTrancport.HandsForSeller,Mode=TwoWay}" HorizontalAlignment="Left" Margin="759,627,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <TextBox Text="{Binding CardTrancport.NumberT,Mode=TwoWay}" HorizontalAlignment="Left" Margin="478,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <ListView x:Name="listView" HorizontalAlignment="Left" ItemsSource="{Binding PreCheks,Mode=TwoWay}" SelectedItem="{Binding CurrentPreCheck}" Height="151" Margin="15,693,0,0" VerticalAlignment="Top" Width="915">
+                    <ListView.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding OpenPrecheck,Mode=TwoWay}"/>
+                    </ListView.InputBindings>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding OpenPreCheckCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="30">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Width="30" IsChecked="{Binding Enable}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="ДАТА" Width="50" DisplayMemberBinding="{Binding DateString}"/>
+                            <GridViewColumn Header="НАИМЕНОВАНИЕ РАБОТ" Width="320" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="ПОТРАЧЕНАЯ СУММА" Width="150" DisplayMemberBinding="{Binding Summ}"/>
+                            <GridViewColumn Header="СТ-ТЬ ДЛЯ КЛИЕНТА" Width="150" DisplayMemberBinding="{Binding PriceForClient}"/>
+                            <GridViewColumn Width="100" Header="ОПЛАЧЕН">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Width="30" IsChecked="{Binding Paid}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="100" Header="КАРТОЧКА">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Width="30" IsChecked="{Binding Card}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label x:Name="label1_Copy2" Content="ПРЕДПРОДАЖНАЯ ПОДГОТОВКА ТС" FontWeight="Bold" HorizontalAlignment="Left" Margin="14,662,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1_Copy3" Content="ПРОДАЖА ТС" FontWeight="Bold" HorizontalAlignment="Left" Margin="20,865,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy26" VerticalAlignment="Top" Grid.Row="0" Margin="15,902,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="СТОИМОСТЬ ПРОДАЖИ"/>
+                <TextBox Text="{Binding CardTrancport.Sale,Mode=TwoWay}" HorizontalAlignment="Left" Margin="165,905,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy27" VerticalAlignment="Top" Grid.Row="0" Margin="354,902,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="ЗАДАТОК"/>
+                <TextBox Text="{Binding CardTrancport.Deposit,Mode=TwoWay}" HorizontalAlignment="Left" Margin="420,905,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy28" VerticalAlignment="Top" Grid.Row="0" Margin="607,902,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="ПОСТАНОВКА В МРЭО"/>
+                <TextBox Text="{Binding CardTrancport.MREO,Mode=TwoWay}" HorizontalAlignment="Left" Margin="753,904,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <TextBox x:Name="textBox2" Text="{Binding CardTrancport.CommissionTransaction.SourceTrancport.Name,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="20,934,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+                <Label x:Name="label_Copy29" Content="МАРКА, МОДЕЛЬ ТС" HorizontalAlignment="Left" Margin="164,933,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy22" Text="{Binding CardTrancport.MakeModel,Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="290,934,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="358"/>
+                <Label x:Name="label_Copy30" VerticalAlignment="Top" Grid.Row="0" Margin="653,933,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="СТОИМОСТЬ"/>
+                <TextBox Text="{Binding CardTrancport.Price,Mode=TwoWay}" HorizontalAlignment="Left" Margin="752,934,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy31" VerticalAlignment="Top" Grid.Row="0" Margin="15,961,0,0" HorizontalAlignment="Left" Grid.Column="0" Content="ИТОГО ПРИНЯТЬ С ПОКУПАТЕЛЯ"/>
+                <TextBox Text="{Binding CardTrancport.TotalInSeller,Mode=TwoWay}" HorizontalAlignment="Left" Margin="229,964,0,-21" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
+                    <i:Interaction.Behaviors>
+                        <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Label x:Name="label_Copy32" Content="МЕНЕДЖЕР-ПРОДОВЕЦ" HorizontalAlignment="Left" Margin="422,963,0,-24" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Copy23" Text="{Binding CardTrancport.ManagerSeller,Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="568,964,0,-22" TextWrapping="Wrap"  VerticalAlignment="Top" Width="338"/>
+                <Button x:Name="button2" Content="+" Command="{Binding NewPreCheckCommand}" HorizontalAlignment="Left" Margin="909,668,0,0" VerticalAlignment="Top" Width="20"/>
+                <Label x:Name="label2" Content="НОМЕР" HorizontalAlignment="Left" Margin="164,7,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox3" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="229,8,0,0" TextWrapping="Wrap" Text="{Binding CardTrancport.Number}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.429,-0.565"/>
+                <Label x:Name="label3" Content="НОМЕР Т" HorizontalAlignment="Left" Margin="406,8,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="checkBox" Content="КОМИССИОННЫЙ ТС" IsChecked="{Binding CardTrancport.Commission}"  Command="{Binding SetCommissionTrancportCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="781,13,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label4" Content="КОММЕНТАРИИ" HorizontalAlignment="Left" Margin="15,1022,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6.276,-0.116"/>
+                <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="69" Margin="149,1002,0,0" TextWrapping="Wrap" Text="{Binding CardTrancport.Comment}" VerticalAlignment="Top" Width="774"/>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" TabIndex="5" Margin="872,10,0,0"/>
+            <Button x:Name="button1" Content="СОХРАНИТЬ" Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="84" TabIndex="6" Margin="769,10,0,0"/>
+        </Grid>
+    </Grid>
+</Window>
+

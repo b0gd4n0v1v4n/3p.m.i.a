@@ -1,0 +1,51 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AIMP_v3._0.View"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" x:Class="AIMP_v3._0.View.UserView"
+        mc:Ignorable="d"
+        Title="РЕДАКТИРОВАНИЕ ПОЛЬЗОВАТЕЛЯ" Height="336.544" Width="613.597" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Name="Window">
+    <Grid>
+        <Label x:Name="label" Content="ФАМИЛИЯ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="ИМЯ" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy" Content="ОТЧЕСТВО" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="93,13,0,0" TextWrapping="Wrap" Text="{Binding User.FirstName}" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="93,43,0,0" TextWrapping="Wrap" Text="{Binding User.LastName}" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Height="23" Margin="93,72,0,0" TextWrapping="Wrap" Text="{Binding User.MiddleName}" VerticalAlignment="Top" Width="189"/>
+        <Label x:Name="label_Copy" Content="ФАМИЛИЯ[Р]" HorizontalAlignment="Left" Margin="301,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy1" Content="ИМЯ[Р]" HorizontalAlignment="Left" Margin="301,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy2" Content="ОТЧЕСТВО[Р]" HorizontalAlignment="Left" Margin="301,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="406,13,0,0" TextWrapping="Wrap" Text="{Binding User.FirstName}" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Height="23" Margin="406,43,0,0" TextWrapping="Wrap" Text="{Binding User.LastNameGenitive}" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Height="23" Margin="406,72,0,0" TextWrapping="Wrap" Text="{Binding User.MiddleNameGenitive}" VerticalAlignment="Top" Width="189"/>
+        <Label x:Name="label1_Copy3" Content="ДАТА" HorizontalAlignment="Left" Margin="11,107,0,0" VerticalAlignment="Top"/>
+
+        <User_Control:DateControl HorizontalAlignment="Left" Margin="93,107,0,0" VerticalAlignment="Top" Date="{Binding User.Date, Mode=TwoWay}"/>
+        <Label x:Name="label1_Copy4" Content="НОМЕР" HorizontalAlignment="Left" Margin="11,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy3" HorizontalAlignment="Left" Height="23" Margin="93,143,0,0" TextWrapping="Wrap" Text="{Binding User.Number}" VerticalAlignment="Top" Width="105"/>
+        <Label x:Name="label1_Copy5" Content="ЛОГИН" HorizontalAlignment="Left" Margin="11,175,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy4" HorizontalAlignment="Left" Height="23" Margin="93,177,0,0" TextWrapping="Wrap" Text="{Binding User.Login}" VerticalAlignment="Top" Width="105"/>
+        <Label x:Name="label1_Copy6" Content="ПАРОЛЬ" HorizontalAlignment="Left" Margin="11,203,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1_Copy5" HorizontalAlignment="Left" Height="23" Margin="93,205,0,0" TextWrapping="Wrap" Text="{Binding User.Password}" VerticalAlignment="Top" Width="105"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="131" Margin="406,109,0,0" VerticalAlignment="Top" Width="189" ItemsSource="{Binding Rights}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Операция" DisplayMemberBinding="{Binding Name}" Width="130"/>
+                    <GridViewColumn Width="30">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox Width="30" IsChecked="{Binding Enable}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="520,269,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Command="{Binding SaveCommand}" HorizontalAlignment="Left" Margin="440,269,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button1" Content="УДАЛИТЬ" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}"  HorizontalAlignment="Left" Margin="11,269,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

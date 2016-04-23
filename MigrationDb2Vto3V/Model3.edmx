@@ -1,0 +1,2427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="aimp3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankReportClients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Used" Type="bit" Nullable="false" />
+          <Property Name="ClientReportId" Type="int" Nullable="false" />
+          <Property Name="Bank_Id" Type="int" />
+          <Property Name="BankStatus_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BankStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CashTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateProxy" Type="datetime" />
+          <Property Name="NumberProxy" Type="nvarchar(max)" />
+          <Property Name="NumberRegistry" Type="nvarchar(max)" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+          <Property Name="BuyerId" Type="int" Nullable="false" />
+          <Property Name="TrancportId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientReports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="Trancport" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalContribution" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ClientStatusId" Type="int" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="CreditProgrammId" Type="int" Nullable="false" />
+          <Property Name="CreditSum" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CommissionKnow" Type="bit" Nullable="false" />
+          <Property Name="CommissionRemoval" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CommissionCredit" Type="bit" />
+          <Property Name="ActAssessment" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DKP_DK" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="CommissionSalon" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="UsedFilter" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommissionTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Commission" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Parking" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsTwoMounth" Type="bit" Nullable="false" />
+          <Property Name="DateProxy" Type="datetime" />
+          <Property Name="NumberProxy" Type="nvarchar(max)" />
+          <Property Name="NumberRegistry" Type="nvarchar(max)" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+          <Property Name="BuyerId" Type="int" Nullable="false" />
+          <Property Name="TrancportId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contractors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="FirstNameGenitive" Type="nvarchar(max)" />
+          <Property Name="LastNameGenitive" Type="nvarchar(max)" />
+          <Property Name="MiddleNameGenitive" Type="nvarchar(max)" />
+          <Property Name="DateBirth" Type="datetime" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="Raion" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="House" Type="nvarchar(max)" />
+          <Property Name="Housing" Type="nvarchar(max)" />
+          <Property Name="Apartment" Type="nvarchar(max)" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="NumberDocument" Type="nvarchar(max)" />
+          <Property Name="SerialDocument" Type="nvarchar(max)" />
+          <Property Name="ByDocument" Type="nvarchar(max)" />
+          <Property Name="DateDocument" Type="datetime" />
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="PhotoId" Type="int" Nullable="false" />
+          <Property Name="LegalPersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Creditors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CreditProgramms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CreditTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentDocumentId" Type="int" Nullable="false" />
+          <Property Name="DkpDocumentId" Type="int" Nullable="false" />
+          <Property Name="DateAgent" Type="datetime" Nullable="false" />
+          <Property Name="DateDkp" Type="datetime" Nullable="false" />
+          <Property Name="PriceBank" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DownPayment" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreditSumm" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RealPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DownPaymentCashbox" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreditorId" Type="int" Nullable="false" />
+          <Property Name="RequisitId" Type="int" Nullable="false" />
+          <Property Name="ReportInsurance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rollback" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="IsCredit" Type="bit" Nullable="false" />
+          <Property Name="CommissionCashbox" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DateProxy" Type="datetime" />
+          <Property Name="NumberProxy" Type="nvarchar(max)" />
+          <Property Name="NumberRegistry" Type="nvarchar(max)" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="SellerId" Type="int" Nullable="false" />
+          <Property Name="BuyerId" Type="int" Nullable="false" />
+          <Property Name="TrancportId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EngineTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LegalPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Inn" Type="nvarchar(max)" />
+          <Property Name="Ogrn" Type="nvarchar(max)" />
+          <Property Name="Kpp" Type="nvarchar(max)" />
+          <Property Name="Ras_schet" Type="nvarchar(max)" />
+          <Property Name="Kor_schet" Type="nvarchar(max)" />
+          <Property Name="Bik" Type="nvarchar(max)" />
+          <Property Name="Bank" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MakeTrancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ModelTrancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="MakeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ReportTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="File" Type="varbinary(max)" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Requisits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Ros_schet" Type="nvarchar(max)" />
+          <Property Name="Kor_schet" Type="nvarchar(max)" />
+          <Property Name="InBank" Type="nvarchar(max)" />
+          <Property Name="Bik" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TrancportCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Trancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" />
+          <Property Name="MakeId" Type="int" Nullable="false" />
+          <Property Name="ModelId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Maker" Type="nvarchar(max)" />
+          <Property Name="Year" Type="smallint" Nullable="false" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="Vin" Type="nvarchar(max)" />
+          <Property Name="BodyNumber" Type="nvarchar(max)" />
+          <Property Name="ChassisNumber" Type="nvarchar(max)" />
+          <Property Name="Mass" Type="nvarchar(max)" />
+          <Property Name="MaxMass" Type="nvarchar(max)" />
+          <Property Name="SerialPts" Type="nvarchar(max)" />
+          <Property Name="NumberPts" Type="nvarchar(max)" />
+          <Property Name="DatePts" Type="datetime" />
+          <Property Name="ByPts" Type="nvarchar(max)" />
+          <Property Name="CopyPtsId" Type="int" Nullable="false" />
+          <Property Name="SerialSts" Type="nvarchar(max)" />
+          <Property Name="NumberSts" Type="nvarchar(max)" />
+          <Property Name="DateSts" Type="datetime" />
+          <Property Name="BySts" Type="nvarchar(max)" />
+          <Property Name="CopyStsId" Type="int" Nullable="false" />
+          <Property Name="EngineTypeId" Type="int" Nullable="false" />
+          <Property Name="EngineMake" Type="nvarchar(max)" />
+          <Property Name="Strong" Type="nvarchar(max)" />
+          <Property Name="Pa" Type="nvarchar(max)" />
+          <Property Name="Volume" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TrancportTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="File" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="FirstNameGenitive" Type="nvarchar(max)" />
+          <Property Name="LastNameGenitive" Type="nvarchar(max)" />
+          <Property Name="MiddleNameGenitive" Type="nvarchar(max)" />
+          <Property Name="Number" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Add" Type="bit" Nullable="false" />
+          <Property Name="Delete" Type="bit" Nullable="false" />
+          <Property Name="View" Type="bit" Nullable="false" />
+          <Property Name="Admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_BankReportClients_dbo_Banks_Bank_Id">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="Bank_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id">
+          <End Role="BankStatus" Type="Self.BankStatus" Multiplicity="0..1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="BankStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId">
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientReports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="ClientReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Cities_dbo_Regions_RegionId">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId">
+          <End Role="ClientStatus" Type="Self.ClientStatus" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="ClientStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId">
+          <End Role="CreditProgramms" Type="Self.CreditProgramms" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditProgramms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="CreditProgrammId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_Cities_CityId">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId">
+          <End Role="LegalPersons" Type="Self.LegalPersons" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LegalPersons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="LegalPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_Regions_RegionId">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_UserFiles_DocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_UserFiles_PhotoId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Creditors_CreditorId">
+          <End Role="Creditors" Type="Self.Creditors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creditors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="CreditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Requisits_RequisitId">
+          <End Role="Requisits" Type="Self.Requisits" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="RequisitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="AgentDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="DkpDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId">
+          <End Role="MakeTrancports" Type="Self.MakeTrancports" Multiplicity="1" />
+          <End Role="ModelTrancports" Type="Self.ModelTrancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MakeTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelTrancports">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId">
+          <End Role="EngineTypes" Type="Self.EngineTypes" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="EngineTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_MakeTrancports_MakeId">
+          <End Role="MakeTrancports" Type="Self.MakeTrancports" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MakeTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_ModelTrancports_ModelId">
+          <End Role="ModelTrancports" Type="Self.ModelTrancports" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_TrancportCategories_CategoryId">
+          <End Role="TrancportCategories" Type="Self.TrancportCategories" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrancportCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_TrancportTypes_TypeId">
+          <End Role="TrancportTypes" Type="Self.TrancportTypes" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrancportTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_UserFiles_CopyPtsId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CopyPtsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_UserFiles_CopyStsId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CopyStsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="aimp3ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankReportClients" EntityType="Self.BankReportClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankStatus" EntityType="Self.BankStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CashTransactions" EntityType="Self.CashTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientReports" EntityType="Self.ClientReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientStatus" EntityType="Self.ClientStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommissionTransactions" EntityType="Self.CommissionTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Creditors" EntityType="Self.Creditors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditProgramms" EntityType="Self.CreditProgramms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditTransactions" EntityType="Self.CreditTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EngineTypes" EntityType="Self.EngineTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LegalPersons" EntityType="Self.LegalPersons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MakeTrancports" EntityType="Self.MakeTrancports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelTrancports" EntityType="Self.ModelTrancports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportTemplates" EntityType="Self.ReportTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requisits" EntityType="Self.Requisits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrancportCategories" EntityType="Self.TrancportCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trancports" EntityType="Self.Trancports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrancportTypes" EntityType="Self.TrancportTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFiles" EntityType="Self.UserFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_Banks_Bank_Id" Association="Self.FK_dbo_BankReportClients_dbo_Banks_Bank_Id">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id" Association="Self.FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id">
+            <End Role="BankStatus" EntitySet="BankStatus" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId" Association="Self.FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId">
+            <End Role="ClientReports" EntitySet="ClientReports" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CashTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CashTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Cities_dbo_Regions_RegionId" Association="Self.FK_dbo_Cities_dbo_Regions_RegionId">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId" Association="Self.FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId">
+            <End Role="ClientStatus" EntitySet="ClientStatus" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId" Association="Self.FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId">
+            <End Role="CreditProgramms" EntitySet="CreditProgramms" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_Users_UserId" Association="Self.FK_dbo_ClientReports_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CommissionTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_Cities_CityId" Association="Self.FK_dbo_Contractors_dbo_Cities_CityId">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId" Association="Self.FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId">
+            <End Role="LegalPersons" EntitySet="LegalPersons" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_Regions_RegionId" Association="Self.FK_dbo_Contractors_dbo_Regions_RegionId">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_UserFiles_DocumentId" Association="Self.FK_dbo_Contractors_dbo_UserFiles_DocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_UserFiles_PhotoId" Association="Self.FK_dbo_Contractors_dbo_UserFiles_PhotoId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Creditors_CreditorId" Association="Self.FK_dbo_CreditTransactions_dbo_Creditors_CreditorId">
+            <End Role="Creditors" EntitySet="Creditors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Requisits_RequisitId" Association="Self.FK_dbo_CreditTransactions_dbo_Requisits_RequisitId">
+            <End Role="Requisits" EntitySet="Requisits" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CreditTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId" Association="Self.FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId" Association="Self.FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CreditTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId" Association="Self.FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId">
+            <End Role="MakeTrancports" EntitySet="MakeTrancports" />
+            <End Role="ModelTrancports" EntitySet="ModelTrancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId" Association="Self.FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId">
+            <End Role="EngineTypes" EntitySet="EngineTypes" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_MakeTrancports_MakeId" Association="Self.FK_dbo_Trancports_dbo_MakeTrancports_MakeId">
+            <End Role="MakeTrancports" EntitySet="MakeTrancports" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_ModelTrancports_ModelId" Association="Self.FK_dbo_Trancports_dbo_ModelTrancports_ModelId">
+            <End Role="ModelTrancports" EntitySet="ModelTrancports" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_TrancportCategories_CategoryId" Association="Self.FK_dbo_Trancports_dbo_TrancportCategories_CategoryId">
+            <End Role="TrancportCategories" EntitySet="TrancportCategories" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_TrancportTypes_TypeId" Association="Self.FK_dbo_Trancports_dbo_TrancportTypes_TypeId">
+            <End Role="TrancportTypes" EntitySet="TrancportTypes" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_UserFiles_CopyPtsId" Association="Self.FK_dbo_Trancports_dbo_UserFiles_CopyPtsId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_UserFiles_CopyStsId" Association="Self.FK_dbo_Trancports_dbo_UserFiles_CopyStsId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="aimp3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankReportClients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Used" Type="Boolean" Nullable="false" />
+          <Property Name="ClientReportId" Type="Int32" Nullable="false" />
+          <Property Name="Bank_Id" Type="Int32" />
+          <Property Name="BankStatus_Id" Type="Int32" />
+          <NavigationProperty Name="Banks" Relationship="Self.FK_dbo_BankReportClients_dbo_Banks_Bank_Id" FromRole="BankReportClients" ToRole="Banks" />
+          <NavigationProperty Name="BankStatus" Relationship="Self.FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id" FromRole="BankReportClients" ToRole="BankStatus" />
+          <NavigationProperty Name="ClientReports" Relationship="Self.FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId" FromRole="BankReportClients" ToRole="ClientReports" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BankReportClients" Relationship="Self.FK_dbo_BankReportClients_dbo_Banks_Bank_Id" FromRole="Banks" ToRole="BankReportClients" />
+        </EntityType>
+        <EntityType Name="BankStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BankReportClients" Relationship="Self.FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id" FromRole="BankStatus" ToRole="BankReportClients" />
+        </EntityType>
+        <EntityType Name="CashTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateProxy" Type="DateTime" Precision="3" />
+          <Property Name="NumberProxy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberRegistry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <Property Name="BuyerId" Type="Int32" Nullable="false" />
+          <Property Name="TrancportId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_BuyerId" FromRole="CashTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors1" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_OwnerId" FromRole="CashTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors2" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_SellerId" FromRole="CashTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_CashTransactions_dbo_Trancports_TrancportId" FromRole="CashTransactions" ToRole="Trancports" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_CashTransactions_dbo_Users_UserId" FromRole="CashTransactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Regions" Relationship="Self.FK_dbo_Cities_dbo_Regions_RegionId" FromRole="Cities" ToRole="Regions" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_Contractors_dbo_Cities_CityId" FromRole="Cities" ToRole="Contractors" />
+        </EntityType>
+        <EntityType Name="ClientReports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Trancport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalContribution" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ClientStatusId" Type="Int32" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreditProgrammId" Type="Int32" Nullable="false" />
+          <Property Name="CreditSum" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CommissionKnow" Type="Boolean" Nullable="false" />
+          <Property Name="CommissionRemoval" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CommissionCredit" Type="Boolean" />
+          <Property Name="ActAssessment" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DKP_DK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommissionSalon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankReportClients" Relationship="Self.FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId" FromRole="ClientReports" ToRole="BankReportClients" />
+          <NavigationProperty Name="ClientStatus" Relationship="Self.FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId" FromRole="ClientReports" ToRole="ClientStatus" />
+          <NavigationProperty Name="CreditProgramms" Relationship="Self.FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId" FromRole="ClientReports" ToRole="CreditProgramms" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_ClientReports_dbo_Users_UserId" FromRole="ClientReports" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ClientStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UsedFilter" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClientReports" Relationship="Self.FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId" FromRole="ClientStatus" ToRole="ClientReports" />
+        </EntityType>
+        <EntityType Name="CommissionTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Commission" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Parking" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IsTwoMounth" Type="Boolean" Nullable="false" />
+          <Property Name="DateProxy" Type="DateTime" Precision="3" />
+          <Property Name="NumberProxy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberRegistry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <Property Name="BuyerId" Type="Int32" Nullable="false" />
+          <Property Name="TrancportId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId" FromRole="CommissionTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors1" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId" FromRole="CommissionTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors2" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_SellerId" FromRole="CommissionTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId" FromRole="CommissionTransactions" ToRole="Trancports" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Users_UserId" FromRole="CommissionTransactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Contractors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Raion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="House" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Housing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apartment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SerialDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ByDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateDocument" Type="DateTime" Precision="3" />
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" />
+          <Property Name="LegalPersonId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_BuyerId" FromRole="Contractors" ToRole="CashTransactions" />
+          <NavigationProperty Name="CashTransactions1" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_OwnerId" FromRole="Contractors" ToRole="CashTransactions" />
+          <NavigationProperty Name="CashTransactions2" Relationship="Self.FK_dbo_CashTransactions_dbo_Contractors_SellerId" FromRole="Contractors" ToRole="CashTransactions" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_dbo_Contractors_dbo_Cities_CityId" FromRole="Contractors" ToRole="Cities" />
+          <NavigationProperty Name="CommissionTransactions" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId" FromRole="Contractors" ToRole="CommissionTransactions" />
+          <NavigationProperty Name="CommissionTransactions1" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId" FromRole="Contractors" ToRole="CommissionTransactions" />
+          <NavigationProperty Name="CommissionTransactions2" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Contractors_SellerId" FromRole="Contractors" ToRole="CommissionTransactions" />
+          <NavigationProperty Name="LegalPersons" Relationship="Self.FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId" FromRole="Contractors" ToRole="LegalPersons" />
+          <NavigationProperty Name="Regions" Relationship="Self.FK_dbo_Contractors_dbo_Regions_RegionId" FromRole="Contractors" ToRole="Regions" />
+          <NavigationProperty Name="UserFiles" Relationship="Self.FK_dbo_Contractors_dbo_UserFiles_DocumentId" FromRole="Contractors" ToRole="UserFiles" />
+          <NavigationProperty Name="UserFiles1" Relationship="Self.FK_dbo_Contractors_dbo_UserFiles_PhotoId" FromRole="Contractors" ToRole="UserFiles" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_BuyerId" FromRole="Contractors" ToRole="CreditTransactions" />
+          <NavigationProperty Name="CreditTransactions1" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_OwnerId" FromRole="Contractors" ToRole="CreditTransactions" />
+          <NavigationProperty Name="CreditTransactions2" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_SellerId" FromRole="Contractors" ToRole="CreditTransactions" />
+        </EntityType>
+        <EntityType Name="Creditors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_Creditors_CreditorId" FromRole="Creditors" ToRole="CreditTransactions" />
+        </EntityType>
+        <EntityType Name="CreditProgramms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientReports" Relationship="Self.FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId" FromRole="CreditProgramms" ToRole="ClientReports" />
+        </EntityType>
+        <EntityType Name="CreditTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentDocumentId" Type="Int32" Nullable="false" />
+          <Property Name="DkpDocumentId" Type="Int32" Nullable="false" />
+          <Property Name="DateAgent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateDkp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PriceBank" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DownPayment" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreditSumm" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="RealPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DownPaymentCashbox" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreditorId" Type="Int32" Nullable="false" />
+          <Property Name="RequisitId" Type="Int32" Nullable="false" />
+          <Property Name="ReportInsurance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Rollback" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCredit" Type="Boolean" Nullable="false" />
+          <Property Name="CommissionCashbox" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DateProxy" Type="DateTime" Precision="3" />
+          <Property Name="NumberProxy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberRegistry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="SellerId" Type="Int32" Nullable="false" />
+          <Property Name="BuyerId" Type="Int32" Nullable="false" />
+          <Property Name="TrancportId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_BuyerId" FromRole="CreditTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors1" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_OwnerId" FromRole="CreditTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors2" Relationship="Self.FK_dbo_CreditTransactions_dbo_Contractors_SellerId" FromRole="CreditTransactions" ToRole="Contractors" />
+          <NavigationProperty Name="Creditors" Relationship="Self.FK_dbo_CreditTransactions_dbo_Creditors_CreditorId" FromRole="CreditTransactions" ToRole="Creditors" />
+          <NavigationProperty Name="Requisits" Relationship="Self.FK_dbo_CreditTransactions_dbo_Requisits_RequisitId" FromRole="CreditTransactions" ToRole="Requisits" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_CreditTransactions_dbo_Trancports_TrancportId" FromRole="CreditTransactions" ToRole="Trancports" />
+          <NavigationProperty Name="UserFiles" Relationship="Self.FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId" FromRole="CreditTransactions" ToRole="UserFiles" />
+          <NavigationProperty Name="UserFiles1" Relationship="Self.FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId" FromRole="CreditTransactions" ToRole="UserFiles" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_CreditTransactions_dbo_Users_UserId" FromRole="CreditTransactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="EngineTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId" FromRole="EngineTypes" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="LegalPersons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Inn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ogrn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kpp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ras_schet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kor_schet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId" FromRole="LegalPersons" ToRole="Contractors" />
+        </EntityType>
+        <EntityType Name="MakeTrancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ModelTrancports" Relationship="Self.FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId" FromRole="MakeTrancports" ToRole="ModelTrancports" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_MakeTrancports_MakeId" FromRole="MakeTrancports" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="ModelTrancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MakeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MakeTrancports" Relationship="Self.FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId" FromRole="ModelTrancports" ToRole="MakeTrancports" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_ModelTrancports_ModelId" FromRole="ModelTrancports" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_dbo_Cities_dbo_Regions_RegionId" FromRole="Regions" ToRole="Cities" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_Contractors_dbo_Regions_RegionId" FromRole="Regions" ToRole="Contractors" />
+        </EntityType>
+        <EntityType Name="ReportTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Requisits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ros_schet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Kor_schet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_Requisits_RequisitId" FromRole="Requisits" ToRole="CreditTransactions" />
+        </EntityType>
+        <EntityType Name="TrancportCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_TrancportCategories_CategoryId" FromRole="TrancportCategories" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="Trancports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MakeId" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Maker" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int16" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChassisNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaxMass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SerialPts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberPts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatePts" Type="DateTime" Precision="3" />
+          <Property Name="ByPts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CopyPtsId" Type="Int32" Nullable="false" />
+          <Property Name="SerialSts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberSts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateSts" Type="DateTime" Precision="3" />
+          <Property Name="BySts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CopyStsId" Type="Int32" Nullable="false" />
+          <Property Name="EngineTypeId" Type="Int32" Nullable="false" />
+          <Property Name="EngineMake" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Strong" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Volume" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_Trancports_TrancportId" FromRole="Trancports" ToRole="CashTransactions" />
+          <NavigationProperty Name="CommissionTransactions" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId" FromRole="Trancports" ToRole="CommissionTransactions" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_Trancports_TrancportId" FromRole="Trancports" ToRole="CreditTransactions" />
+          <NavigationProperty Name="EngineTypes" Relationship="Self.FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId" FromRole="Trancports" ToRole="EngineTypes" />
+          <NavigationProperty Name="MakeTrancports" Relationship="Self.FK_dbo_Trancports_dbo_MakeTrancports_MakeId" FromRole="Trancports" ToRole="MakeTrancports" />
+          <NavigationProperty Name="ModelTrancports" Relationship="Self.FK_dbo_Trancports_dbo_ModelTrancports_ModelId" FromRole="Trancports" ToRole="ModelTrancports" />
+          <NavigationProperty Name="TrancportCategories" Relationship="Self.FK_dbo_Trancports_dbo_TrancportCategories_CategoryId" FromRole="Trancports" ToRole="TrancportCategories" />
+          <NavigationProperty Name="TrancportTypes" Relationship="Self.FK_dbo_Trancports_dbo_TrancportTypes_TypeId" FromRole="Trancports" ToRole="TrancportTypes" />
+          <NavigationProperty Name="UserFiles" Relationship="Self.FK_dbo_Trancports_dbo_UserFiles_CopyPtsId" FromRole="Trancports" ToRole="UserFiles" />
+          <NavigationProperty Name="UserFiles1" Relationship="Self.FK_dbo_Trancports_dbo_UserFiles_CopyStsId" FromRole="Trancports" ToRole="UserFiles" />
+        </EntityType>
+        <EntityType Name="TrancportTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_TrancportTypes_TypeId" FromRole="TrancportTypes" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="UserFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Contractors" Relationship="Self.FK_dbo_Contractors_dbo_UserFiles_DocumentId" FromRole="UserFiles" ToRole="Contractors" />
+          <NavigationProperty Name="Contractors1" Relationship="Self.FK_dbo_Contractors_dbo_UserFiles_PhotoId" FromRole="UserFiles" ToRole="Contractors" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId" FromRole="UserFiles" ToRole="CreditTransactions" />
+          <NavigationProperty Name="CreditTransactions1" Relationship="Self.FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId" FromRole="UserFiles" ToRole="CreditTransactions" />
+          <NavigationProperty Name="Trancports" Relationship="Self.FK_dbo_Trancports_dbo_UserFiles_CopyPtsId" FromRole="UserFiles" ToRole="Trancports" />
+          <NavigationProperty Name="Trancports1" Relationship="Self.FK_dbo_Trancports_dbo_UserFiles_CopyStsId" FromRole="UserFiles" ToRole="Trancports" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleNameGenitive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Add" Type="Boolean" Nullable="false" />
+          <Property Name="Delete" Type="Boolean" Nullable="false" />
+          <Property Name="View" Type="Boolean" Nullable="false" />
+          <Property Name="Admin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CashTransactions" Relationship="Self.FK_dbo_CashTransactions_dbo_Users_UserId" FromRole="Users" ToRole="CashTransactions" />
+          <NavigationProperty Name="ClientReports" Relationship="Self.FK_dbo_ClientReports_dbo_Users_UserId" FromRole="Users" ToRole="ClientReports" />
+          <NavigationProperty Name="CommissionTransactions" Relationship="Self.FK_dbo_CommissionTransactions_dbo_Users_UserId" FromRole="Users" ToRole="CommissionTransactions" />
+          <NavigationProperty Name="CreditTransactions" Relationship="Self.FK_dbo_CreditTransactions_dbo_Users_UserId" FromRole="Users" ToRole="CreditTransactions" />
+        </EntityType>
+        <Association Name="FK_dbo_BankReportClients_dbo_Banks_Bank_Id">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="Bank_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id">
+          <End Role="BankStatus" Type="Self.BankStatus" Multiplicity="0..1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="BankStatus_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId">
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="1" />
+          <End Role="BankReportClients" Type="Self.BankReportClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientReports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankReportClients">
+              <PropertyRef Name="ClientReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CashTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CashTransactions" Type="Self.CashTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CashTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Cities_dbo_Regions_RegionId">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_Cities_CityId">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId">
+          <End Role="ClientStatus" Type="Self.ClientStatus" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="ClientStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId">
+          <End Role="CreditProgramms" Type="Self.CreditProgramms" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditProgramms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="CreditProgrammId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ClientReports_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ClientReports" Type="Self.ClientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientReports">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CommissionTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CommissionTransactions" Type="Self.CommissionTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommissionTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId">
+          <End Role="LegalPersons" Type="Self.LegalPersons" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LegalPersons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="LegalPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_Regions_RegionId">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_UserFiles_DocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Contractors_dbo_UserFiles_PhotoId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contractors">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_BuyerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_OwnerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Contractors_SellerId">
+          <End Role="Contractors" Type="Self.Contractors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contractors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="SellerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Creditors_CreditorId">
+          <End Role="Creditors" Type="Self.Creditors" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creditors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="CreditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Requisits_RequisitId">
+          <End Role="Requisits" Type="Self.Requisits" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="RequisitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Trancports_TrancportId">
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="TrancportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="AgentDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="DkpDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CreditTransactions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="CreditTransactions" Type="Self.CreditTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditTransactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId">
+          <End Role="EngineTypes" Type="Self.EngineTypes" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EngineTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="EngineTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId">
+          <End Role="MakeTrancports" Type="Self.MakeTrancports" Multiplicity="1" />
+          <End Role="ModelTrancports" Type="Self.ModelTrancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MakeTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelTrancports">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_MakeTrancports_MakeId">
+          <End Role="MakeTrancports" Type="Self.MakeTrancports" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MakeTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_ModelTrancports_ModelId">
+          <End Role="ModelTrancports" Type="Self.ModelTrancports" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModelTrancports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_TrancportCategories_CategoryId">
+          <End Role="TrancportCategories" Type="Self.TrancportCategories" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrancportCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_TrancportTypes_TypeId">
+          <End Role="TrancportTypes" Type="Self.TrancportTypes" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrancportTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_UserFiles_CopyPtsId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CopyPtsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Trancports_dbo_UserFiles_CopyStsId">
+          <End Role="UserFiles" Type="Self.UserFiles" Multiplicity="1" />
+          <End Role="Trancports" Type="Self.Trancports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserFiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trancports">
+              <PropertyRef Name="CopyStsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="aimp3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="BankReportClients" EntityType="Self.BankReportClients" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" />
+          <EntitySet Name="BankStatus" EntityType="Self.BankStatus" />
+          <EntitySet Name="CashTransactions" EntityType="Self.CashTransactions" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="ClientReports" EntityType="Self.ClientReports" />
+          <EntitySet Name="ClientStatus" EntityType="Self.ClientStatus" />
+          <EntitySet Name="CommissionTransactions" EntityType="Self.CommissionTransactions" />
+          <EntitySet Name="Contractors" EntityType="Self.Contractors" />
+          <EntitySet Name="Creditors" EntityType="Self.Creditors" />
+          <EntitySet Name="CreditProgramms" EntityType="Self.CreditProgramms" />
+          <EntitySet Name="CreditTransactions" EntityType="Self.CreditTransactions" />
+          <EntitySet Name="EngineTypes" EntityType="Self.EngineTypes" />
+          <EntitySet Name="LegalPersons" EntityType="Self.LegalPersons" />
+          <EntitySet Name="MakeTrancports" EntityType="Self.MakeTrancports" />
+          <EntitySet Name="ModelTrancports" EntityType="Self.ModelTrancports" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" />
+          <EntitySet Name="ReportTemplates" EntityType="Self.ReportTemplates" />
+          <EntitySet Name="Requisits" EntityType="Self.Requisits" />
+          <EntitySet Name="TrancportCategories" EntityType="Self.TrancportCategories" />
+          <EntitySet Name="Trancports" EntityType="Self.Trancports" />
+          <EntitySet Name="TrancportTypes" EntityType="Self.TrancportTypes" />
+          <EntitySet Name="UserFiles" EntityType="Self.UserFiles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_Banks_Bank_Id" Association="Self.FK_dbo_BankReportClients_dbo_Banks_Bank_Id">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id" Association="Self.FK_dbo_BankReportClients_dbo_BankStatus_BankStatus_Id">
+            <End Role="BankStatus" EntitySet="BankStatus" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId" Association="Self.FK_dbo_BankReportClients_dbo_ClientReports_ClientReportId">
+            <End Role="ClientReports" EntitySet="ClientReports" />
+            <End Role="BankReportClients" EntitySet="BankReportClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CashTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CashTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CashTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CashTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CashTransactions" EntitySet="CashTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Cities_dbo_Regions_RegionId" Association="Self.FK_dbo_Cities_dbo_Regions_RegionId">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_Cities_CityId" Association="Self.FK_dbo_Contractors_dbo_Cities_CityId">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId" Association="Self.FK_dbo_ClientReports_dbo_ClientStatus_ClientStatusId">
+            <End Role="ClientStatus" EntitySet="ClientStatus" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId" Association="Self.FK_dbo_ClientReports_dbo_CreditProgramms_CreditProgrammId">
+            <End Role="CreditProgramms" EntitySet="CreditProgramms" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ClientReports_dbo_Users_UserId" Association="Self.FK_dbo_ClientReports_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ClientReports" EntitySet="ClientReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CommissionTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CommissionTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CommissionTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CommissionTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CommissionTransactions" EntitySet="CommissionTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId" Association="Self.FK_dbo_Contractors_dbo_LegalPersons_LegalPersonId">
+            <End Role="LegalPersons" EntitySet="LegalPersons" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_Regions_RegionId" Association="Self.FK_dbo_Contractors_dbo_Regions_RegionId">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_UserFiles_DocumentId" Association="Self.FK_dbo_Contractors_dbo_UserFiles_DocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Contractors_dbo_UserFiles_PhotoId" Association="Self.FK_dbo_Contractors_dbo_UserFiles_PhotoId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Contractors" EntitySet="Contractors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_BuyerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_BuyerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_OwnerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_OwnerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Contractors_SellerId" Association="Self.FK_dbo_CreditTransactions_dbo_Contractors_SellerId">
+            <End Role="Contractors" EntitySet="Contractors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Creditors_CreditorId" Association="Self.FK_dbo_CreditTransactions_dbo_Creditors_CreditorId">
+            <End Role="Creditors" EntitySet="Creditors" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Requisits_RequisitId" Association="Self.FK_dbo_CreditTransactions_dbo_Requisits_RequisitId">
+            <End Role="Requisits" EntitySet="Requisits" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Trancports_TrancportId" Association="Self.FK_dbo_CreditTransactions_dbo_Trancports_TrancportId">
+            <End Role="Trancports" EntitySet="Trancports" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId" Association="Self.FK_dbo_CreditTransactions_dbo_UserFiles_AgentDocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId" Association="Self.FK_dbo_CreditTransactions_dbo_UserFiles_DkpDocumentId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CreditTransactions_dbo_Users_UserId" Association="Self.FK_dbo_CreditTransactions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CreditTransactions" EntitySet="CreditTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId" Association="Self.FK_dbo_Trancports_dbo_EngineTypes_EngineTypeId">
+            <End Role="EngineTypes" EntitySet="EngineTypes" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId" Association="Self.FK_dbo_ModelTrancports_dbo_MakeTrancports_MakeId">
+            <End Role="MakeTrancports" EntitySet="MakeTrancports" />
+            <End Role="ModelTrancports" EntitySet="ModelTrancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_MakeTrancports_MakeId" Association="Self.FK_dbo_Trancports_dbo_MakeTrancports_MakeId">
+            <End Role="MakeTrancports" EntitySet="MakeTrancports" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_ModelTrancports_ModelId" Association="Self.FK_dbo_Trancports_dbo_ModelTrancports_ModelId">
+            <End Role="ModelTrancports" EntitySet="ModelTrancports" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_TrancportCategories_CategoryId" Association="Self.FK_dbo_Trancports_dbo_TrancportCategories_CategoryId">
+            <End Role="TrancportCategories" EntitySet="TrancportCategories" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_TrancportTypes_TypeId" Association="Self.FK_dbo_Trancports_dbo_TrancportTypes_TypeId">
+            <End Role="TrancportTypes" EntitySet="TrancportTypes" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_UserFiles_CopyPtsId" Association="Self.FK_dbo_Trancports_dbo_UserFiles_CopyPtsId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Trancports_dbo_UserFiles_CopyStsId" Association="Self.FK_dbo_Trancports_dbo_UserFiles_CopyStsId">
+            <End Role="UserFiles" EntitySet="UserFiles" />
+            <End Role="Trancports" EntitySet="Trancports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="aimp3ModelStoreContainer" CdmEntityContainer="aimp3Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="aimp3Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankReportClients">
+            <EntityTypeMapping TypeName="aimp3Model.BankReportClients">
+              <MappingFragment StoreEntitySet="BankReportClients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Used" ColumnName="Used" />
+                <ScalarProperty Name="ClientReportId" ColumnName="ClientReportId" />
+                <ScalarProperty Name="Bank_Id" ColumnName="Bank_Id" />
+                <ScalarProperty Name="BankStatus_Id" ColumnName="BankStatus_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="aimp3Model.Banks">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankStatus">
+            <EntityTypeMapping TypeName="aimp3Model.BankStatus">
+              <MappingFragment StoreEntitySet="BankStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CashTransactions">
+            <EntityTypeMapping TypeName="aimp3Model.CashTransactions">
+              <MappingFragment StoreEntitySet="CashTransactions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateProxy" ColumnName="DateProxy" />
+                <ScalarProperty Name="NumberProxy" ColumnName="NumberProxy" />
+                <ScalarProperty Name="NumberRegistry" ColumnName="NumberRegistry" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="TrancportId" ColumnName="TrancportId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="aimp3Model.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientReports">
+            <EntityTypeMapping TypeName="aimp3Model.ClientReports">
+              <MappingFragment StoreEntitySet="ClientReports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Trancport" ColumnName="Trancport" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TotalContribution" ColumnName="TotalContribution" />
+                <ScalarProperty Name="ClientStatusId" ColumnName="ClientStatusId" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="CreditProgrammId" ColumnName="CreditProgrammId" />
+                <ScalarProperty Name="CreditSum" ColumnName="CreditSum" />
+                <ScalarProperty Name="CommissionKnow" ColumnName="CommissionKnow" />
+                <ScalarProperty Name="CommissionRemoval" ColumnName="CommissionRemoval" />
+                <ScalarProperty Name="CommissionCredit" ColumnName="CommissionCredit" />
+                <ScalarProperty Name="ActAssessment" ColumnName="ActAssessment" />
+                <ScalarProperty Name="DKP_DK" ColumnName="DKP_DK" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommissionSalon" ColumnName="CommissionSalon" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientStatus">
+            <EntityTypeMapping TypeName="aimp3Model.ClientStatus">
+              <MappingFragment StoreEntitySet="ClientStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UsedFilter" ColumnName="UsedFilter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommissionTransactions">
+            <EntityTypeMapping TypeName="aimp3Model.CommissionTransactions">
+              <MappingFragment StoreEntitySet="CommissionTransactions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="Parking" ColumnName="Parking" />
+                <ScalarProperty Name="IsTwoMounth" ColumnName="IsTwoMounth" />
+                <ScalarProperty Name="DateProxy" ColumnName="DateProxy" />
+                <ScalarProperty Name="NumberProxy" ColumnName="NumberProxy" />
+                <ScalarProperty Name="NumberRegistry" ColumnName="NumberRegistry" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="TrancportId" ColumnName="TrancportId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contractors">
+            <EntityTypeMapping TypeName="aimp3Model.Contractors">
+              <MappingFragment StoreEntitySet="Contractors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstNameGenitive" ColumnName="FirstNameGenitive" />
+                <ScalarProperty Name="LastNameGenitive" ColumnName="LastNameGenitive" />
+                <ScalarProperty Name="MiddleNameGenitive" ColumnName="MiddleNameGenitive" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Raion" ColumnName="Raion" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Housing" ColumnName="Housing" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="NumberDocument" ColumnName="NumberDocument" />
+                <ScalarProperty Name="SerialDocument" ColumnName="SerialDocument" />
+                <ScalarProperty Name="ByDocument" ColumnName="ByDocument" />
+                <ScalarProperty Name="DateDocument" ColumnName="DateDocument" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+                <ScalarProperty Name="LegalPersonId" ColumnName="LegalPersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Creditors">
+            <EntityTypeMapping TypeName="aimp3Model.Creditors">
+              <MappingFragment StoreEntitySet="Creditors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditProgramms">
+            <EntityTypeMapping TypeName="aimp3Model.CreditProgramms">
+              <MappingFragment StoreEntitySet="CreditProgramms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditTransactions">
+            <EntityTypeMapping TypeName="aimp3Model.CreditTransactions">
+              <MappingFragment StoreEntitySet="CreditTransactions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AgentDocumentId" ColumnName="AgentDocumentId" />
+                <ScalarProperty Name="DkpDocumentId" ColumnName="DkpDocumentId" />
+                <ScalarProperty Name="DateAgent" ColumnName="DateAgent" />
+                <ScalarProperty Name="DateDkp" ColumnName="DateDkp" />
+                <ScalarProperty Name="PriceBank" ColumnName="PriceBank" />
+                <ScalarProperty Name="DownPayment" ColumnName="DownPayment" />
+                <ScalarProperty Name="CreditSumm" ColumnName="CreditSumm" />
+                <ScalarProperty Name="RealPrice" ColumnName="RealPrice" />
+                <ScalarProperty Name="DownPaymentCashbox" ColumnName="DownPaymentCashbox" />
+                <ScalarProperty Name="CreditorId" ColumnName="CreditorId" />
+                <ScalarProperty Name="RequisitId" ColumnName="RequisitId" />
+                <ScalarProperty Name="ReportInsurance" ColumnName="ReportInsurance" />
+                <ScalarProperty Name="Rollback" ColumnName="Rollback" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="IsCredit" ColumnName="IsCredit" />
+                <ScalarProperty Name="CommissionCashbox" ColumnName="CommissionCashbox" />
+                <ScalarProperty Name="DateProxy" ColumnName="DateProxy" />
+                <ScalarProperty Name="NumberProxy" ColumnName="NumberProxy" />
+                <ScalarProperty Name="NumberRegistry" ColumnName="NumberRegistry" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="TrancportId" ColumnName="TrancportId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EngineTypes">
+            <EntityTypeMapping TypeName="aimp3Model.EngineTypes">
+              <MappingFragment StoreEntitySet="EngineTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LegalPersons">
+            <EntityTypeMapping TypeName="aimp3Model.LegalPersons">
+              <MappingFragment StoreEntitySet="LegalPersons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Inn" ColumnName="Inn" />
+                <ScalarProperty Name="Ogrn" ColumnName="Ogrn" />
+                <ScalarProperty Name="Kpp" ColumnName="Kpp" />
+                <ScalarProperty Name="Ras_schet" ColumnName="Ras_schet" />
+                <ScalarProperty Name="Kor_schet" ColumnName="Kor_schet" />
+                <ScalarProperty Name="Bik" ColumnName="Bik" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MakeTrancports">
+            <EntityTypeMapping TypeName="aimp3Model.MakeTrancports">
+              <MappingFragment StoreEntitySet="MakeTrancports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelTrancports">
+            <EntityTypeMapping TypeName="aimp3Model.ModelTrancports">
+              <MappingFragment StoreEntitySet="ModelTrancports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="aimp3Model.Regions">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTemplates">
+            <EntityTypeMapping TypeName="aimp3Model.ReportTemplates">
+              <MappingFragment StoreEntitySet="ReportTemplates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requisits">
+            <EntityTypeMapping TypeName="aimp3Model.Requisits">
+              <MappingFragment StoreEntitySet="Requisits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Ros_schet" ColumnName="Ros_schet" />
+                <ScalarProperty Name="Kor_schet" ColumnName="Kor_schet" />
+                <ScalarProperty Name="InBank" ColumnName="InBank" />
+                <ScalarProperty Name="Bik" ColumnName="Bik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrancportCategories">
+            <EntityTypeMapping TypeName="aimp3Model.TrancportCategories">
+              <MappingFragment StoreEntitySet="TrancportCategories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trancports">
+            <EntityTypeMapping TypeName="aimp3Model.Trancports">
+              <MappingFragment StoreEntitySet="Trancports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Maker" ColumnName="Maker" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Vin" ColumnName="Vin" />
+                <ScalarProperty Name="BodyNumber" ColumnName="BodyNumber" />
+                <ScalarProperty Name="ChassisNumber" ColumnName="ChassisNumber" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="MaxMass" ColumnName="MaxMass" />
+                <ScalarProperty Name="SerialPts" ColumnName="SerialPts" />
+                <ScalarProperty Name="NumberPts" ColumnName="NumberPts" />
+                <ScalarProperty Name="DatePts" ColumnName="DatePts" />
+                <ScalarProperty Name="ByPts" ColumnName="ByPts" />
+                <ScalarProperty Name="CopyPtsId" ColumnName="CopyPtsId" />
+                <ScalarProperty Name="SerialSts" ColumnName="SerialSts" />
+                <ScalarProperty Name="NumberSts" ColumnName="NumberSts" />
+                <ScalarProperty Name="DateSts" ColumnName="DateSts" />
+                <ScalarProperty Name="BySts" ColumnName="BySts" />
+                <ScalarProperty Name="CopyStsId" ColumnName="CopyStsId" />
+                <ScalarProperty Name="EngineTypeId" ColumnName="EngineTypeId" />
+                <ScalarProperty Name="EngineMake" ColumnName="EngineMake" />
+                <ScalarProperty Name="Strong" ColumnName="Strong" />
+                <ScalarProperty Name="Pa" ColumnName="Pa" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrancportTypes">
+            <EntityTypeMapping TypeName="aimp3Model.TrancportTypes">
+              <MappingFragment StoreEntitySet="TrancportTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFiles">
+            <EntityTypeMapping TypeName="aimp3Model.UserFiles">
+              <MappingFragment StoreEntitySet="UserFiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="File" ColumnName="File" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="aimp3Model.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstNameGenitive" ColumnName="FirstNameGenitive" />
+                <ScalarProperty Name="LastNameGenitive" ColumnName="LastNameGenitive" />
+                <ScalarProperty Name="MiddleNameGenitive" ColumnName="MiddleNameGenitive" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Add" ColumnName="Add" />
+                <ScalarProperty Name="Delete" ColumnName="Delete" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
