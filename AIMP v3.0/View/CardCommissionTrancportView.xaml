@@ -110,7 +110,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="ДАТА" Width="50" DisplayMemberBinding="{Binding DateString}"/>
+                            <GridViewColumn Header="ДАТА" Width="70" DisplayMemberBinding="{Binding DateString}"/>
                             <GridViewColumn Header="НАИМЕНОВАНИЕ РАБОТ" Width="320" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="ПОТРАЧЕНАЯ СУММА" Width="150" DisplayMemberBinding="{Binding Summ}"/>
                             <GridViewColumn Header="СТ-ТЬ ДЛЯ КЛИЕНТА" Width="150" DisplayMemberBinding="{Binding PriceForClient}"/>

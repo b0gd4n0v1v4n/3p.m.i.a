@@ -28,7 +28,7 @@ namespace AimpConsole.Helpers
             {
                 Id = x.Id,
                 SellerFullName = x.Seller.LegalPerson != null ? x.Seller.LegalPerson.Name : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                Date = x.Date.ToString(),
+                Date = x.Date,
                 DocumentSellerId = x.Seller.Document.Id,
                 Number = x.Number.ToString(),
                 NumberProxy = x.NumberProxy,

@@ -24,8 +24,8 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                     {
                         Id = x.Id,
                         ColorTrancport = x.ColorTrancport,
-                        DateSale = x.DateSale,
-                        DateStart = x.DateStart,
+                        DateSale = x.DateSale?.ToString(Models.DataFormats.DateFormat),
+                        DateStart = x.DateStart.ToString(Models.DataFormats.DateFormat),
                         Keys = x.Keys,
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,

@@ -1,10 +1,11 @@
 ﻿using AIMP_v3._0.Model;
+using System;
 
 namespace Models.CreditTransact
 {
     public class CreditTransactionListItem : Identity
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Number { get; set; }
         public string NumberProxy { get; set; }
         public string SellerFullName { get; set; }

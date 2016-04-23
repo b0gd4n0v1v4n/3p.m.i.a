@@ -1,11 +1,25 @@
 ﻿using System.Windows;
 using AIMP_v3._0.Helpers;
 using Models.CreditTransact;
+using AIMP_v3._0.Model;
 
 namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
-    public class CreditTransactionListItemViewModel : CreditTransactionListItem
+    public class CreditTransactionListItemViewModel : Identity
     {
+        public string Date { get; set; }
+        public string Number { get; set; }
+        public string NumberProxy { get; set; }
+        public string SellerFullName { get; set; }
+        public string BuyerFullName { get; set; }
+        public string TrancportFullName { get; set; }
+        public int? DocumentSellerId { get; set; }
+        public int? DocumentBuyerId { get; set; }
+        public int? PtsId { get; set; }
+        public int? DkpId { get; set; }
+        public int? AdId { get; set; }
+        public int? PhotoSellerId { get; set; }
+        public int? PhotoBuyerId { get; set; }
         public Visibility VisibilityOpenDocumentSeller => DocumentSellerId != null ? Visibility.Visible : Visibility.Hidden;
 
         public Visibility VisibilityOpenDocumentBuyer => DocumentBuyerId != null ? Visibility.Visible : Visibility.Hidden;

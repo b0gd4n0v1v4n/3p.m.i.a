@@ -37,7 +37,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date,
+                                Date = x.Date.ToString(Models.DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,

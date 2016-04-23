@@ -11,8 +11,8 @@ namespace Models.CardTrancports
         public string Status { get; set; }
         public string Number {get;set;}
         public string NumberT {get;set;}
-        public string DateStart { get; set; }
-        public string DateSale {get;set;}
+        public DateTime DateStart { get; set; }
+        public DateTime? DateSale {get;set;}
         public string MakeModelTrancport {get;set;}
         public string YearTrancport {get;set;}
         public string ColorTrancport { get; set; }

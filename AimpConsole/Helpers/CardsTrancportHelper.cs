@@ -25,8 +25,8 @@ namespace AimpConsole.Helpers
             var items = _logic.GetCardTrancports().Select(x => new CardTrancportListItemDto()
             {
                 Id = x.Id,
-                DateSale = x.DateSale.ToString(),
-                DateStart =x.CommissionTransaction.Date.ToString(),
+                DateSale = x.DateSale,
+                DateStart =x.CommissionTransaction.Date,
                 Status = x.StatusCardTrancport.Name,
                 Number = x.Number.ToString(),
                 NumberT = x.NumberT.ToString(),
