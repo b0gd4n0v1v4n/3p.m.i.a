@@ -79,10 +79,10 @@
             </ListView.View>
         </ListView>
         <Button x:Name="button" TabIndex="14" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="874,329,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Visibility="{Binding Add}"  Command="{Binding SaveChangesCommand}" HorizontalAlignment="Left" Margin="784,329,0,0" VerticalAlignment="Top" Width="85"/>
+        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChangesCommand}" HorizontalAlignment="Left" Margin="784,329,0,0" VerticalAlignment="Top" Width="85"/>
         <User_Control:DateControl TabIndex="0" Date="{Binding ClientReport.Date, Mode=TwoWay}" HorizontalAlignment="Left" Margin="56,8,0,0" VerticalAlignment="Top"/>
         <User_Control:NumberTextBox x:Name="numberTextBox" TabIndex="3" Text="{Binding ClientReport.Telefon}" HorizontalAlignment="Left" Margin="572,37,0,0" TextWrapping="Wrap" Height="22" MaxLength="10" VerticalAlignment="Top" Width="78"/>
         <Label x:Name="label_Copy14" Content="ДАТА" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
-        <Button Content="УДАЛИТЬ" Visibility="{Binding Delete}" Command="{Binding DeleteChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="663,329,0,0" VerticalAlignment="Top" Width="85"/>
+        <Button Content="УДАЛИТЬ" Visibility="{Binding VisibleDelete}" Command="{Binding DeleteChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="663,329,0,0" VerticalAlignment="Top" Width="85"/>
     </Grid>
 </Window>

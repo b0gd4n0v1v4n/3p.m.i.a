@@ -21,6 +21,7 @@ namespace AIMP_v3._0.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        public Visibility VisibleAdmin { get { if (CurrentUser.IsAdmin) return Visibility.Visible; else return Visibility.Hidden; } }
         public List<IPageViewModel> Tabs { get; set; }
         public IPageViewModel CurrentPage { get; set; }
         public ObservableCollection<DictionaryMenuItemViewModel> DictionaryList { get; }

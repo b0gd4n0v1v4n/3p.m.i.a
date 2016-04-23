@@ -179,7 +179,7 @@
         </ScrollViewer>
         <Grid Grid.Row="1">
             <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" TabIndex="5" Margin="872,10,0,0"/>
-            <Button x:Name="button1" Content="СОХРАНИТЬ" Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="84" TabIndex="6" Margin="769,10,0,0"/>
+            <Button x:Name="button1" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}" Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="84" TabIndex="6" Margin="769,10,0,0"/>
         </Grid>
     </Grid>
 </Window>

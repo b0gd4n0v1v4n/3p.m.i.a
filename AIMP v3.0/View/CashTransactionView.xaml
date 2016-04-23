@@ -32,7 +32,7 @@
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy5" Content="ПОКУПАТЕЛЬ" HorizontalAlignment="Left" Margin="11,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.541,-0.808"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy6" Content="ТC" HorizontalAlignment="Left" Margin="11,181,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="600,240,0,0" VerticalAlignment="Top" Width="75" TabIndex="5"/>
-        <Button x:Name="button1" Content="СОХРАНИТЬ" Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="508,240,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
+        <Button x:Name="button1" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="508,240,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy7" Content="СТОИМОСТЬ ТC" HorizontalAlignment="Left" Margin="11,211,0,0" VerticalAlignment="Top"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy8" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="ДАТА ДКП" HorizontalAlignment="Left" Margin="487,11,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding CashTransaction.Price}" Height="22" HorizontalAlignment="Left" Margin="109,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="255" TabIndex="4">
@@ -43,7 +43,7 @@
         <userControl:DateControl TabIndex="1" Date="{Binding CashTransaction.Date,Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,14,0,0" VerticalAlignment="Top"/>
         <userControl:DateControl TabIndex="2" Date="{Binding CashTransaction.DateProxy, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,68,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chbProxy,Path=IsChecked}"/>
         <userControl:TrancportControl IsTabStop="False" Trancport="{Binding CashTransaction.Trancport,Mode=TwoWay}" HorizontalAlignment="Left" Margin="109,183,0,0" VerticalAlignment="Top" Width="570" TabIndex="101"></userControl:TrancportControl>
-        <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="366,240,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
+        <Button x:Name="button1_Copy" Content="УДАЛИТЬ"  Visibility="{Binding VisibleDelete}" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="366,240,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
         <User_Control:PrintControl HorizontalAlignment="Left" Margin="16,240,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

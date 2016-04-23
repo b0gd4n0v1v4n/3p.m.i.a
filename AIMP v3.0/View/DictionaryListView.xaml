@@ -26,7 +26,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="ДОБАВИТЬ" Command="{Binding NewCommand}" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button Content="ДОБАВИТЬ" Command="{Binding NewCommand}"  Visibility="{Binding VisibleSave}"  HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="140"/>
 
     </Grid>
 </Window>

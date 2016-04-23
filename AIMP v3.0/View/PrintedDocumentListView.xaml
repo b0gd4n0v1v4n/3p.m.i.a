@@ -25,7 +25,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="button" Content="Новый" Command="{Binding NewCommand}" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button" Content="Новый"  Visibility="{Binding VisibleDelete}" Command="{Binding NewCommand}" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button1" Content="Закрыть" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="422,238,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>

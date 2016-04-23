@@ -36,7 +36,7 @@
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
-            <MenuItem Header="АДМИНИСТРИРОВАНИЕ">
+            <MenuItem Visibility="{Binding VisibleAdmin}" Header="АДМИНИСТРИРОВАНИЕ">
                 <MenuItem Header="ПОЛЬЗОВАТЕЛИ" Command="{Binding EditUserRightsCommand}"></MenuItem>
                 <MenuItem Header="ПЕЧАТНЫЕ ФОРМЫ" Command="{Binding EditPrintedDocTemplateCommand}"></MenuItem>
                 </MenuItem>
@@ -45,7 +45,7 @@
             </MenuItem>
         </Menu>
         <Menu Grid.Row="1">
-            <MenuItem Style="{StaticResource NewMenuItem}" IsEnabled="{Binding CurrentPage.NewIsEnabled}" Command="{Binding CurrentPage.New}"></MenuItem>
+            <MenuItem Style="{StaticResource NewMenuItem}" Visibility="{Binding VisibleAdd}" IsEnabled="{Binding CurrentPage.NewIsEnabled}" Command="{Binding CurrentPage.New}"></MenuItem>
             <MenuItem Style="{StaticResource RefreshMenuItem}" IsEnabled="{Binding CurrentPage.RefreshIsEnabled}" Command="{Binding CurrentPage.Refresh}"></MenuItem>
             <MenuItem Style="{StaticResource PrintListItem}" Command="{Binding CurrentPage.PrintList}" Visibility="{Binding CurrentPage.PrintButtonVisible}"></MenuItem>
         </Menu>

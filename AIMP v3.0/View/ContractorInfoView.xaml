@@ -48,7 +48,7 @@
         <Label x:Name="label_Copy9" Content="КЕМ ВЫДАН" HorizontalAlignment="Left" Margin="4,171,0,0" VerticalAlignment="Top"/>
         <TextBox TabIndex="19" Text="{Binding EditableContractor.ByDocument}" x:Name="textBox_Copy13" HorizontalAlignment="Left" Height="22" Margin="93,173,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="800"/>
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=WindowPhisicalPerson}" HorizontalAlignment="Left" Margin="818,239,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button TabIndex="20" Content="СОХРАНИТЬ" Command="{Binding SaveChanges}" CommandParameter="{Binding ElementName=WindowPhisicalPerson}"  HorizontalAlignment="Left" Margin="728,239,0,0" VerticalAlignment="Top" Width="85"/>
+        <Button TabIndex="20" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChanges}" CommandParameter="{Binding ElementName=WindowPhisicalPerson}"  HorizontalAlignment="Left" Margin="728,239,0,0" VerticalAlignment="Top" Width="85"/>
         <controls:AutoCompleteBox TabIndex="8" ItemsSource="{Binding Regions}" ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" FilterMode="Contains" IsTextCompletionEnabled="True" Text="{Binding Region,Mode=TwoWay}" ValueMemberPath="Name"  Margin="93,90,593,169">
             <controls:AutoCompleteBox.TextBoxStyle>
                 <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">

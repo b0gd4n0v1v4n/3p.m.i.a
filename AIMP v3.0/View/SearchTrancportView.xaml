@@ -28,7 +28,7 @@
         </ListView>
         <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="10,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="473" Text="{Binding SearchText}"/>
         <Button x:Name="btnOk_Copy" Content="ПОИСК" HorizontalAlignment="Left" Margin="509,37,0,0" VerticalAlignment="Top" Width="75" Command="{Binding SearchCommand}"/>
-        <Label x:Name="label_Copy4" Content="РЕЗУЛЬТАТ ПОИСКА:" HorizontalAlignment="Left" Margin="11,56,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.921,0"/>
+        <Label x:Name="label_Copy4"  Visibility="{Binding VisibleView}" Content="РЕЗУЛЬТАТ ПОИСКА:" HorizontalAlignment="Left" Margin="11,56,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.921,0"/>
         <RadioButton Content="Марка" Command="{Binding SetSearchTypeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" IsChecked="True"  GroupName="search" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <RadioButton Content="Модель" Command="{Binding SetSearchTypeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" GroupName="search" HorizontalAlignment="Left" Margin="83,10,0,0" VerticalAlignment="Top"/>
         <RadioButton Content="VIN" Command="{Binding SetSearchTypeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" GroupName="search" HorizontalAlignment="Left" Margin="166,10,0,0" VerticalAlignment="Top"/>
