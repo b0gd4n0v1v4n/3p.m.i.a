@@ -169,7 +169,6 @@
     <Compile Include="User Control\UserFileControl.xaml.cs">
       <DependentUpon>UserFileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\AuthorizationViewModel.cs" />
     <Compile Include="ViewModel\ClientOfReport\ClientBankStatusViewModel.cs" />
     <Compile Include="ViewModel\CreditTransactionViewModel.cs" />
     <Compile Include="ViewModel\DictionaryListViewModel.cs" />

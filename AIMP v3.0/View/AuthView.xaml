@@ -12,17 +12,17 @@
         <Label x:Name="label1" Content="ЛОГИН" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="ПАРОЛЬ" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="69,83,0,0" TextWrapping="Wrap" Text="{Binding Login}" VerticalAlignment="Top" Width="216"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="69,111,0,0"  VerticalAlignment="Top" Width="216"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="68,13,0,0" TextWrapping="Wrap" Text="{Binding Ip}" VerticalAlignment="Top" Width="216"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="68,13,0,0" TextWrapping="Wrap" Text="{Binding Address}" VerticalAlignment="Top" Width="216"/>
         <Label x:Name="label3" Content="ПОРТ" HorizontalAlignment="Right" Margin="0,0,77,236" VerticalAlignment="Bottom" RenderTransformOrigin="0.295,1.539"/>
 
         <User_Control:NumberTextBox x:Name="numberTextBox" HorizontalAlignment="Left" Margin="349,13,0,0" TextWrapping="Wrap" Text="{Binding Port}" VerticalAlignment="Top" Width="50"/>
         <Label x:Name="label4" Content="СЕРВИС" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="69,43,0,0" TextWrapping="Wrap" Text="{Binding SeviceName}" VerticalAlignment="Top" Width="216"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="69,43,0,0" TextWrapping="Wrap" Text="{Binding ServiceName}" VerticalAlignment="Top" Width="216"/>
         <CheckBox x:Name="checkBox" Content="СОХРАНИТЬ" IsChecked="{Binding IsSavePassword}" HorizontalAlignment="Left" Margin="313,114,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="ВЫХОД" Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=Window}"  HorizontalAlignment="Left" Margin="324,155,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button1" Content="ПОДКЛЮЧИТЬСЯ" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="183,155,0,0" VerticalAlignment="Top" Width="115"/>
         <Label x:Name="label5" Content="ПОРТ" HorizontalAlignment="Left" Margin="303,13,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="69,112,0,0" TextWrapping="Wrap" Text="{Binding Password}" VerticalAlignment="Top" Width="216" RenderTransformOrigin="0.142,0.348"/>
 
     </Grid>
 </Window>

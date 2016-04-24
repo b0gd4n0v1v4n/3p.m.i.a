@@ -3,10 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="hostname" Type="System.String" Scope="User">
-      <Value Profile="(Default)">localhost</Value>
+      <Value Profile="(Default)">strh-srvpk</Value>
     </Setting>
-    <Setting Name="port" Type="System.Int16" Scope="User">
-      <Value Profile="(Default)">8888</Value>
+    <Setting Name="port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1234</Value>
+    </Setting>
+    <Setting Name="login" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IsSave" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="service" Type="System.String" Scope="User">
+      <Value Profile="(Default)">test</Value>
     </Setting>
   </Settings>
 </SettingsFile>

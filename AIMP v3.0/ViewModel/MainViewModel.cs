@@ -30,7 +30,7 @@ namespace AIMP_v3._0.ViewModel
         {
             try
             {
-                CurrentUser.Auth("admin", "admin");
+                
                 DictionaryList = new ObservableCollection<DictionaryMenuItemViewModel>()
                 {
                     new DictionaryMenuItemViewModel
