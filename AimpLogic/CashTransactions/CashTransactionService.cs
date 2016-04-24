@@ -69,7 +69,7 @@ namespace AimpLogic.CashTransactions
                 Context.CashTransactions.AddOrUpdate(cashTransaction);
                 Context.SaveChanges();
                 document.Id = cashTransaction.Id;
-                document.Number = cashTransaction.Number;
+                //document.Number = Context.CashTransactions.Get(cashTransaction.Id).Number;
             }
             catch (AccessDeniedException)
             {

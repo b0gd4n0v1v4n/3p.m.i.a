@@ -203,7 +203,7 @@ namespace AimpConsole.Wcf
                 using (var helper = new CashTransactionsHelper())
                     helper.SaveCashTransaction(document);
 
-                return new SaveEntityResult() { Message = "Данные успешно сохраненны", Id = document.Id, Number = 3 };
+                return new SaveEntityResult() { Message = "Данные успешно сохраненны", Id = document.Id, Number = document.Number };
             }
             catch (Exception ex)
             {

@@ -106,6 +106,7 @@ namespace AimpLogic.CreditTransactions
                 Context.CreditTransactions.AddOrUpdate(creditTransaction);
                 Context.SaveChanges();
                 document.Id = creditTransaction.Id;
+                //document.Number = Context.CreditTransactions.Get(creditTransaction.Id).Number;
             }
             catch (AccessDeniedException)
             {

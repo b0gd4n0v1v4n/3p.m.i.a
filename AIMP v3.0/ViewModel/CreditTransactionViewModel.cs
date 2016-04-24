@@ -49,7 +49,16 @@ namespace AIMP_v3._0.ViewModel
                 MessageBox.Show("Поле 'стоимость ТС' не заполнено");
                 return false;
             }
-
+            if (!CheckValue.Check(CreditTransaction.Creditor))
+            {
+                MessageBox.Show("Поле ' кредитор' не заполнено");
+                return false;
+            }
+            if (!CheckValue.Check(CreditTransaction.Requisit))
+            {
+                MessageBox.Show("Поле 'реквезиты' не заполнено");
+                return false;
+            }
             if (IsProxy)
             {
                 if (!CheckValue.Check(CreditTransaction.NumberProxy))
@@ -123,7 +132,7 @@ namespace AIMP_v3._0.ViewModel
                                 if (response.Error)
                                     throw new Exception(response.Message);
                                 CreditTransaction.Id = response.Id;
-                                CreditTransaction.Number = response.Id;
+                                CreditTransaction.Number = response.Number;
                                 _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
                                 OnPropertyChanged("CreditTransaction");
                             }

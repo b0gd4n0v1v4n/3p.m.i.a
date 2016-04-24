@@ -73,7 +73,7 @@ namespace AimpLogic.Commission
                 Context.CommissionTransactions.AddOrUpdate(commission);
                 Context.SaveChanges();
                 document.Id = commission.Id;
-                document.Number = commission.Number;
+                //document.Number = Context.CommissionTransactions.Get(commission.Id).Number;
             }
             catch (AccessDeniedException)
             {
