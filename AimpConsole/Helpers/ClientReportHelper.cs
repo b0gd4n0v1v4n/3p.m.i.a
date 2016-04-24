@@ -32,6 +32,7 @@ namespace AimpConsole.Helpers
 
             result.Items = _logic.GetBankReportClients().ToList()
                 .GroupBy(g => g.ClientReport)
+                .OrderByDescending(x => x.Key.Date)
                 .Select(x => new ClientReportListItem()
                 {
                     Id = x.Key.Id,

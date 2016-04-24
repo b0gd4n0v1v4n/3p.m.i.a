@@ -37,7 +37,7 @@ namespace AimpConsole.Helpers
                 Parking = x.Parking.ToString(),
                 Commission = x.Commission.ToString()
 
-            }).ToList(); ;
+            }).OrderByDescending(x => new { x.Date, x.Number }).ToList(); ;
 
             return new CommissionsDto()
             {

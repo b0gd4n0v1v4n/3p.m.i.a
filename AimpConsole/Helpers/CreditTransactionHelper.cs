@@ -37,7 +37,7 @@ namespace AimpConsole.Helpers
                 DkpId = x.DkpDocument.Id,
                 PhotoBuyerId = x.Buyer.PhotoId,
                 PhotoSellerId = x.SellerId
-            }).ToList();
+            }).OrderByDescending(x=>new { x.Date,x.Number}).ToList();
 
             return new CreditTransactions()
             {

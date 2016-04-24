@@ -23,7 +23,8 @@ namespace AIMP_v3._0.ViewModel
     {
         public Visibility VisibleAdmin { get { if (CurrentUser.IsAdmin) return Visibility.Visible; else return Visibility.Hidden; } }
         public List<IPageViewModel> Tabs { get; set; }
-        public IPageViewModel CurrentPage { get; set; }
+        private IPageViewModel _currentPage;
+        public IPageViewModel CurrentPage { get { return _currentPage; } set { _currentPage = value; OnPropertyChanged("CurrentPage"); } }
         public ObservableCollection<DictionaryMenuItemViewModel> DictionaryList { get; }
         public MainViewModel()
         {
@@ -100,7 +101,7 @@ namespace AIMP_v3._0.ViewModel
 
                 Tabs.Add(new CardsTrancportPageViewModel());
 
-                CurrentPage = Tabs[1];
+                CurrentPage = Tabs[0];
             }
         }
         public Command EditPrintedDocTemplateCommand
@@ -111,6 +112,7 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
+                        var r = CurrentPage;
                         PrintedDocumentListView view = new PrintedDocumentListView(new PrintedDocument.PrintedDocumentsListViewModel());
                         view.ShowDialog();
                     }

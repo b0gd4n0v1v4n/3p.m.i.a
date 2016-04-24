@@ -35,7 +35,7 @@ namespace AimpConsole.Helpers
                 NumberProxy = x.NumberProxy,
                 TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
                 PtsId = x.Trancport.CopyPts.Id
-            }).ToList(); ;
+            }).OrderByDescending(x=>new {x.Date,x.Number }).ToList(); ;
 
             return new CashTransactionsDto()
             {

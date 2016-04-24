@@ -22,7 +22,9 @@ namespace AimpConsole.Helpers
         }
         public CardTrancportsDto GetCards()
         {
-            var items = _logic.GetCardTrancports().Select(x => new CardTrancportListItemDto()
+            var items = _logic.GetCardTrancports()
+                .OrderByDescending(x => new { x.DateStart, x.Number })
+                .Select(x => new CardTrancportListItemDto()
             {
                 Id = x.Id,
                 DateSale = x.DateSale,

@@ -53,7 +53,7 @@
         </TabControl>
         <StatusBar Grid.Row="3">
             <StatusBarItem>
-                <Label>dsgasgasd</Label>
+                <Label></Label>
             </StatusBarItem>
         </StatusBar>
     </Grid>
