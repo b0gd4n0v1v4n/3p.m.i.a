@@ -99,7 +99,7 @@
         <Button TabIndex="27" Command="{Binding SaveChanges}" Visibility="{Binding VisibleSave}"  CommandParameter="{Binding ElementName=Window}" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="707,361,0,0" VerticalAlignment="Top" Width="85"/>
         <User_Control:DateControl Date="{Binding EditableTrancport.DatePts,Mode=TwoWay}" TabIndex="16" HorizontalAlignment="Left" Margin="530,179,0,0" VerticalAlignment="Top"/>
         <User_Control:DateControl Date="{Binding EditableTrancport.DateSts,Mode=TwoWay}" TabIndex="20" HorizontalAlignment="Left" Margin="530,235,0,0" VerticalAlignment="Top"/>
-        <User_Control:UserFileControl UserFile="{Binding EditableTrancport.CopyPts,Mode=TwoWay}" UserFileId="{Binding EditableContractor.CopyPtsId,Mode=TwoWay}" Text="ПТС" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top"/>
+        <User_Control:UserFileControl UserFile="{Binding EditableTrancport.CopyPts,Mode=TwoWay}" UserFileId="{Binding EditableTrancport.CopyPtsId,Mode=TwoWay}" Text="ПТС" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy8" Content="МАРКА" HorizontalAlignment="Left" Margin="4,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.921,0.769" Width="51"/>
     </Grid>
 </Window>

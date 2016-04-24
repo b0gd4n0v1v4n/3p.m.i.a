@@ -114,6 +114,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\CardTrancportViewModel.cs" />
     <Compile Include="ViewModel\Pages\CardsTrancport\CardsTrancportPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\CardsTrancport\CardTrancportListItemViewModel.cs" />
@@ -204,6 +205,9 @@
     <Compile Include="ViewModel\UserRight\UserListItem.cs" />
     <Compile Include="ViewModel\UserRight\UserRightViewModel.cs" />
     <Compile Include="ViewModel\UserRight\UsersViewModel.cs" />
+    <Compile Include="View\AuthView.xaml.cs">
+      <DependentUpon>AuthView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CardCommissionTrancportView.xaml.cs">
       <DependentUpon>CardCommissionTrancportView.xaml</DependentUpon>
     </Compile>
@@ -294,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Control\UserFileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AuthView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

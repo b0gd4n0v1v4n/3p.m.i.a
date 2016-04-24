@@ -1,10 +1,12 @@
-﻿using AimpLogic.Logging;
+﻿using AimpLogic.Helpres;
+using AimpLogic.Logging;
 using AimpLogic.Logic;
 using AimpLogic.UserRights;
 using Models.ContractorInfo;
 using Models.Entities;
 using Models.TrancportInfo;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AimpLogic.Transactions
@@ -20,50 +22,32 @@ namespace AimpLogic.Transactions
             {
                 CheckAddRight();
 
-                var sRegion = Context.Regions.All().FirstOrDefault(x => x.Name == contractor.Region.Name);
-                if (sRegion == null)
+                if(contractor.Region.Id == 0)
                 {
-                    Context.Regions.AddOrUpdate(contractor.Region);
-                    Context.SaveChanges();
-                    contractor.City.RegionId = contractor.Region.Id;
-                    Context.Cities.AddOrUpdate(contractor.City);
-                    Context.SaveChanges();
+                    var values = new Dictionary<string, string>() {
+                        {"Name",contractor.Region.Name }
+                    };
+                    contractor.RegionId = Context.Regions.GetOrAdd(values).Id;
+                    contractor.Region = null;
                 }
-                else
+                if(contractor.City.Id == 0)
                 {
-                    contractor.Region = sRegion;
-                    var sCity = Context.Cities.All().FirstOrDefault(x => x.RegionId == sRegion.Id && x.Name == contractor.City.Name);                    
-                    if(sCity == null)
-                    {
-                        contractor.City.RegionId = sRegion.Id;
-                        Context.Cities.AddOrUpdate(contractor.City);
-                        Context.SaveChanges();
-                    }
-                    else
-                    {
-                        contractor.City = sCity;
-                    }
+                    var values = new Dictionary<string, string>() {
+                        {"Name",contractor.City.Name }, {"RegionId",contractor.RegionId.ToString() }
+                    };
+                    contractor.CityId = Context.Cities.GetOrAdd(values).Id;
+                    contractor.City = null;
                 }
-                //if (contractor.Region.Id == 0)
-                //{
-                //    Context.Cities.AddOrUpdate(contractor.City);
-                //    contractor.Region = contractor.City.Region;
-                //}
-                //if (contractor.City.Id == 0 && contractor.Region.Id > 0)
-                //{
-                //    Context.Cities.AddOrUpdate(contractor.City);
-                //}
-                //if (contractor.Photo?.Id == 0)
-                //{
-                //    Context.UserFiles.AddOrUpdate(contractor.Photo);
-                //}
-                //if (contractor.Document?.Id == 0)
-                //{
-                //    Context.UserFiles.AddOrUpdate(contractor.Document);
-                //}
+                Contractor dbContractor = null;
+
+                if(contractor.Id != 0)
+                    dbContractor = Context.Contractors.Get(contractor.Id, x => x.Document, x => x.Photo);
+
+                UserFileCheck.AddOrUpdate(Context, contractor, contractor.Document, dbContractor?.Document);
+                UserFileCheck.AddOrUpdate(Context, contractor, contractor.Photo, dbContractor?.Photo);
                 if (contractor.LegalPerson != null)
                     Context.LegalPersons.AddOrUpdate(contractor.LegalPerson);
-                //Context.SaveChanges();
+                
                 Context.Contractors.AddOrUpdate(contractor);
                 Context.SaveChanges();
             }
@@ -85,29 +69,42 @@ namespace AimpLogic.Transactions
                 CheckAddRight();
 
                 if (trancport.Category?.Id == 0)
-                    Context.TrancportCategories.AddOrUpdate(trancport.Category);
-                if (trancport.EngineType?.Id == 0)
-                    Context.EngineTypes.AddOrUpdate(trancport.EngineType);
-                if (trancport.Make?.Id == 0)
-                    Context.MakesTrancport.AddOrUpdate(trancport.Make);
-                if (trancport.Model?.Id == 0 && trancport.Make?.Id != 0)
                 {
-                    Context.ModelsTrancport.AddOrUpdate(trancport.Model);
-                    trancport.Make = trancport.Model.Make;
+                    trancport.Category = Context.TrancportCategories.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.Category.Name } });
                 }
-                if (trancport.Make?.Id == null)
+                if(trancport.EngineType?.Id == 0)
                 {
-                    Context.ModelsTrancport.AddOrUpdate(trancport.Model);
-                    trancport.Make = trancport.Model.Make;
+                    trancport.EngineType = Context.EngineTypes.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.EngineType.Name } });
                 }
-                if (trancport.Type?.Id == null)
-                    Context.TrancportTypes.AddOrUpdate(trancport.Type);
-                if (trancport.CopyPts?.Id == 0)
+
+                if (trancport.Type?.Id == 0)
                 {
-                    Context.UserFiles.AddOrUpdate(trancport.CopyPts);
+                    trancport.Type = Context.TrancportTypes.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.Type.Name } });
                 }
-                Context.SaveChanges();
+                if (trancport.Make.Id == 0)
+                {
+                    var values = new Dictionary<string, string>() {
+                        {"Name",trancport.Make.Name }
+                    };
+                    trancport.MakeId = Context.Regions.GetOrAdd(values).Id;
+                    trancport.Make = null;
+                }
+                if (trancport.Model.Id == 0)
+                {
+                    var values = new Dictionary<string, string>() {
+                        {"Name",trancport.Model.Name }, {"MakeId",trancport.MakeId.ToString() }
+                    };
+                    trancport.ModelId = Context.Cities.GetOrAdd(values).Id;
+                    trancport.Model = null;
+                }
+                Trancport dbTrancport = null;
+
+                if (trancport.Id != 0)
+                    dbTrancport = Context.Trancports.Get(trancport.Id, x => x.CopyPts);
+
+                UserFileCheck.AddOrUpdate(Context, trancport, trancport.CopyPts, dbTrancport?.CopyPts);
                 Context.Trancports.AddOrUpdate(trancport);
+   
                 Context.SaveChanges();
             }
             catch (AccessDeniedException)

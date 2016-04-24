@@ -13,6 +13,7 @@ using System.Data.SqlTypes;
 using AimpReports.Templates;
 using AimpReports.Services.Word;
 using Models;
+using AimpLogic.Helpres;
 
 namespace AimpLogic.CreditTransactions
 {
@@ -91,56 +92,17 @@ namespace AimpLogic.CreditTransactions
                 var creditTransaction = TinyMapper.Map<CreditTransaction>(document);
                 if (creditTransaction.Id == 0)
                     creditTransaction.UserId = User.Id;
-                //else
-                //{
-                    
-                //    if (document.DkpDocument != null)
-                //    {
-                //        CreditTransaction transaction = Context.CreditTransactions.Get(creditTransaction.Id,x=>x.DkpDocument);
-                //        if (transaction.DkpDocumentId != document.DkpDocument.Id)
-                //        {
-                //            if (document.DkpDocument.Name != transaction.DkpDocument.Name)
-                //            {
-                //                Context.UserFiles.AddOrUpdate(document.DkpDocument);
-                //                Context.SaveChanges();
-                //                creditTransaction.DkpDocument = document.DkpDocument;
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        CreditTransaction transaction = Context.CreditTransactions.Get(creditTransaction.Id);
-                //        creditTransaction.DkpDocument = null;
-                //        creditTransaction.DkpDocumentId = null;
-                //        if(transaction.DkpDocumentId != null)
-                //        {
-                //            Context.UserFiles.DeleteRange(new[] { (int)transaction.DkpDocumentId });
-                //        }
-                //    }
-                //    if (document.AgentDocument != null)
-                //    {
-                //        CreditTransaction transaction = Context.CreditTransactions.Get(creditTransaction.Id,x=>x.AgentDocument);
-                //        if (transaction.AgentDocumentId != document.AgentDocument.Id)
-                //        {
-                //            if (document.AgentDocument.Name != transaction.AgentDocument.Name)
-                //            {
-                //                Context.UserFiles.AddOrUpdate(document.AgentDocument);
-                //                Context.SaveChanges();
-                //                creditTransaction.AgentDocument = document.AgentDocument;
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        CreditTransaction transaction = Context.CreditTransactions.Get(creditTransaction.Id);
-                //        creditTransaction.AgentDocument = null;
-                //        creditTransaction.AgentDocumentId = null;
-                //        if (transaction.AgentDocumentId != null)
-                //        {
-                //            Context.UserFiles.DeleteRange(new[] { (int)transaction.AgentDocumentId });
-                //        }
-                //    }
-                //}
+               else
+                {
+
+                    CreditTransaction dbTransaction = null;
+
+                    if (creditTransaction.Id != 0)
+                        dbTransaction = Context.CreditTransactions.Get(creditTransaction.Id, x => x.DkpDocument,x=>x.AgentDocument);
+
+                    UserFileCheck.AddOrUpdate(Context, creditTransaction, creditTransaction.DkpDocument, dbTransaction?.DkpDocument);
+                    UserFileCheck.AddOrUpdate(Context, creditTransaction, creditTransaction.AgentDocument, dbTransaction?.AgentDocument);
+                }
                 Context.CreditTransactions.AddOrUpdate(creditTransaction);
                 Context.SaveChanges();
                 document.Id = creditTransaction.Id;

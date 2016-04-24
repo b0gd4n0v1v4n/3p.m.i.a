@@ -6,6 +6,7 @@ using System.Data.Entity;
 using Models.Entities;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
+using System.Collections.Generic;
 
 namespace AimpDataAccess.EF.Repository
 {
@@ -92,6 +93,36 @@ namespace AimpDataAccess.EF.Repository
         {
             _AddIdForForeignKey(entity);
             _dbSet.AddOrUpdate(entity);
+        }
+
+        public TEntity GetOrAdd(IDictionary<string, string> fieldValues)
+        {
+
+            string tableName = (_context as IObjectContextAdapter).ObjectContext.CreateObjectSet<TEntity>().EntitySet.Name;
+            string select = $"SELECT * FROM {tableName} ";
+            string where = "WHERE 1 = 1";
+           foreach(var iParam in fieldValues)
+            {
+                where = $"{where} AND {iParam.Key} = '{iParam.Value}'";
+            }
+            var result = _dbSet.SqlQuery(select + where).FirstOrDefault();
+            if(result == null)
+            {
+                string insert = $"INSERT INTO {tableName}(";
+                string columns = string.Empty;
+                string values = string.Empty;
+                foreach (var iParam in fieldValues)
+                {
+                    columns = columns + $"{iParam.Key},";
+                    values = values + $"'{iParam.Value}',";
+                }
+                insert = insert + columns.Substring(0, columns.Length - 1);
+                insert = $"{insert}) VALUES ({values.Substring(0,values.Length - 1)});";
+                _context.Query(insert);
+
+                result = _dbSet.SqlQuery(select + where).FirstOrDefault();
+            }
+            return result;
         }
     }
 }

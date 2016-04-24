@@ -88,6 +88,8 @@ namespace AIMP_v3._0.ViewModel
         {
             IsProxy = creditTransaction.Owner != null;
             PrintedList = new ObservableCollection<PrintItem>(printedList);
+            creditTransaction.Creditor = creditors.FirstOrDefault(x => x.Id == creditTransaction.Creditor?.Id);
+            creditTransaction.Requisit = requisits.FirstOrDefault(x => x.Id == creditTransaction.Requisit?.Id);
             Creditors = new ObservableCollection<Creditor>(creditors);
             Requisits = new ObservableCollection<Requisit>(requisits);
 
