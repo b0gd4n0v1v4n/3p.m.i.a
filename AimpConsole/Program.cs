@@ -1,4 +1,5 @@
 ﻿using AimpConsole.Wcf;
+using AimpLogic.Logging;
 using AimpLogic.UserRights;
 using System;
 using System.ServiceModel.Web;
@@ -12,7 +13,7 @@ namespace AimpConsole
             using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
             {
                 webServiceHost.Open();
-
+                Logger.Instance.Log(new Exception("test"));
                 try
                 {
                     using(UserRightsService aimp = new UserRightsService("",""))

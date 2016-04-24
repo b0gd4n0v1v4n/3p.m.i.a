@@ -15,7 +15,7 @@ namespace AimpDataAccess.EF
             base("aimpConnectionString")
         {
             Configuration.ProxyCreationEnabled = false;
-            Database.Log = Console.WriteLine;
+            ////Database.Log = Console.WriteLine;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
