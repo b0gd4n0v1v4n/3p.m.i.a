@@ -13,7 +13,6 @@ namespace AimpConsole
             using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
             {
                 webServiceHost.Open();
-                Logger.Instance.Log(new Exception("test"));
                 try
                 {
                     using(UserRightsService aimp = new UserRightsService("",""))
@@ -22,7 +21,7 @@ namespace AimpConsole
                     }
                     Console.WriteLine("Сервис запущен...");
                 }
-                catch(AuthorizationException ex)
+                catch(AuthorizationException)
                 {
                     Console.WriteLine("Сервис запущен...");
                 }
