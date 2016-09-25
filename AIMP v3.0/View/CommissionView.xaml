@@ -23,7 +23,7 @@
         <TextBox x:Name="textBox_Copy1" Height="22"  Text="{Binding Commission.NumberRegistry}" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" HorizontalAlignment="Left" Margin="287,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" TabIndex="3"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy6" Content="ТC" HorizontalAlignment="Left" Margin="11,154,0,0" VerticalAlignment="Top"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy7" Content="СТОИМОСТЬ ТC" HorizontalAlignment="Left" Margin="11,184,0,0" VerticalAlignment="Top"/>
-        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy8" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="ДАТА ДКП" HorizontalAlignment="Left" Margin="487,11,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy8" IsEnabled="{Binding IsChecked, ElementName=chbProxy}" Content="ДАТА" HorizontalAlignment="Left" Margin="515,11,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Commission.Price}" Height="22"  HorizontalAlignment="Left" Margin="135,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
             <i:Interaction.Behaviors>
                 <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
@@ -32,7 +32,7 @@
         <User_Control:DateControl TabIndex="1" Date="{Binding Commission.Date, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,14,0,0" VerticalAlignment="Top"/>
         <User_Control:DateControl TabIndex="2" Date="{Binding Commission.DateProxy, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,68,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=chbProxy}"/>
         <User_Control:TrancportControl IsTabStop="False" Trancport="{Binding Commission.Trancport, Mode=TwoWay}" HorizontalAlignment="Left" Margin="109,156,0,0" VerticalAlignment="Top" Width="570" TabIndex="101"/>
-        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy5" Content="КОММИССИЯ" HorizontalAlignment="Left" Margin="11,213,0,0" VerticalAlignment="Top"/>
+        <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy5" Content="КОМИССИЯ" HorizontalAlignment="Left" Margin="11,213,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Commission.Commission}" Height="22"  HorizontalAlignment="Left" Margin="135,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
             <i:Interaction.Behaviors>
                 <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
