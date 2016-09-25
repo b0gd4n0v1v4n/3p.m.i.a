@@ -23,6 +23,6 @@ namespace Models.Documents
 
         public string Identity { get; set; }
 
-        public bool IsNew { get { if (Id != 0) return false; else return true; } }
+        public bool IsNew { get { return Id != 0;  } }
     }
 }

@@ -111,7 +111,8 @@
                     <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
                 </i:Interaction.Behaviors>
             </TextBox>
-            <TextBox x:Name="textBox2" Text="{Binding CardTrancport.CommissionTransaction.SourceTrancport.Name,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="21,514,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <CheckBox IsTabStop="False" x:Name="chbProxy" Content="TRADE IN/ВЫКУП" HorizontalAlignment="Left" Margin="20,518,0,0" VerticalAlignment="Top" TabIndex="102" IsChecked="{Binding CardTrancport.TradeIn}"/>
+            <TextBox x:Name="textBox2" Text="{Binding CardTrancport.CommissionTransaction.SourceTrancport.Name,Mode=TwoWay}"  IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="267,455,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label x:Name="label_Copy29" Content="МАРКА, МОДЕЛЬ ТС" HorizontalAlignment="Left" Margin="164,513,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="textBox_Copy22" Text="{Binding CardTrancport.MakeModel,Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="290,514,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="358" Grid.ColumnSpan="2"/>
             <Label x:Name="label_Copy30" VerticalAlignment="Top" Grid.Row="0" Margin="84,513,0,0" HorizontalAlignment="Left" Grid.Column="1" Content="СТОИМОСТЬ"/>

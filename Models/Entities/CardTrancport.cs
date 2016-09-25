@@ -39,5 +39,6 @@ namespace Models.Entities
         [ForeignKey("CommissionTransaction")]
         public int CommissionTransactionId { get; set; }
         public virtual CommissionTransaction CommissionTransaction { get; set; }
+        public bool TradeIn { get; set; }
     }
 }
