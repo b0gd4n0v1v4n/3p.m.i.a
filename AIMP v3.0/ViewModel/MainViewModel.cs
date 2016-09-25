@@ -55,12 +55,12 @@ namespace AIMP_v3._0.ViewModel
                     },
                     new DictionaryMenuItemViewModel
                     {
-                        TableName = "BankStatuses",
+                        TableName = "BankStatus",
                         Name = "СТАТУСЫ БАНКА"
                     },
                     new DictionaryMenuItemViewModel
                     {
-                        TableName = "ClientStatuses",
+                        TableName = "ClientStatus",
                         Name = "СТАТУСЫ КЛИЕНТА"
                     },
                     new DictionaryMenuItemViewModel
