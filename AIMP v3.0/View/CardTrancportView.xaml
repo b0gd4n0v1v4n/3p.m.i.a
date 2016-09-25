@@ -81,7 +81,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Width="100" Header="КАРТОЧКА">
+                        <GridViewColumn Width="100" Header="ИСПОЛНЕНО">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox Width="30" IsChecked="{Binding Card}"/>
