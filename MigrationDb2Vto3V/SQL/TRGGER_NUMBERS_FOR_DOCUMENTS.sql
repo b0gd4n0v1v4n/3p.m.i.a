@@ -62,20 +62,14 @@ COMMISSION_TRANS__AI ON CommissionTransactions
   go
   --cards trancport
   create trigger
-CARDS_TRANC__AI ON CommissionTransactions
- after insert 
+    CARDS_TRANC__AI ON CardTrancports
+  after insert 
  as   BEGIN
   DECLARE @id int
   DECLARE @number int
   DECLARE @year nvarchar(4)
-    SELECT @id = t.Id,@year = DATEPART(YEAR,c.Date) 
-	FROM  CardTrancports t 
-	join CommissionTransactions c on c.Id = t.CommissionTransactionId
-	 WHERE t.Id = @@identity;
-    SELECT @number = MAX(t.Number) 
-	FROM CardTrancports t 
-	join CommissionTransactions c on c.Id = t.CommissionTransactionId
-	WHERE DATEPART(YEAR,c.Date) = @year;
+    SELECT @id = t.Id,@year = DATEPART(YEAR,t.DateStart) FROM CardTrancports t WHERE t.Id = @@identity;
+    SELECT @number = MAX(t.Number) FROM CardTrancports t WHERE DATEPART(YEAR,t.DateStart) = @year;
 
     IF @number IS NULL
       SET @number = 1
@@ -86,3 +80,4 @@ CARDS_TRANC__AI ON CommissionTransactions
     SET number = @number
     WHERE id = @id;
   END
+  go

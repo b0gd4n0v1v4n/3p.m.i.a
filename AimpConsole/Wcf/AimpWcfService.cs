@@ -1039,14 +1039,14 @@ namespace AimpConsole.Wcf
                 };
             }
         }
-        public SaveEntityResult AddCardTrancport(int idCommission)
+        public SaveEntityResult AddCardTrancport(int idCommission,DateTime dateStart)
         {
             try
             {
                 _WriteLineConsole($"add card trancport id commission: {idCommission}");
                 using (var helper = new CardsTrancportHelper())
                 {
-                    return new SaveEntityResult() { Message = "Данные успешно сохраненны", Id = helper.AddCard(idCommission)
+                    return new SaveEntityResult() { Message = "Данные успешно сохраненны", Id = helper.AddCard(idCommission, dateStart)
                 };
                 }
             }

@@ -19,7 +19,7 @@ namespace AimpLogic.CardTrancports
 
         }
 
-        public int AddCardTrancport(int idCommission)
+        public int AddCardTrancport(int idCommission, DateTime dateStart)
         {
             try
             {
@@ -31,6 +31,7 @@ namespace AimpLogic.CardTrancports
                     {
                         CommissionTransactionId = idCommission,
                         StatusCardTrancport = Context.StatusesCardTrancport.All().FirstOrDefault(),
+                        DateStart = dateStart
                     };
                     Context.CardsTrancport.AddOrUpdate(newCard);
                     Context.SaveChanges();

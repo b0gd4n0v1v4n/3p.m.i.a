@@ -17,6 +17,7 @@ using ClientReport = Models.ReportOfClient.ClientReport;
 using Models.PrintDocumentTemplate;
 using Models.Commission;
 using Models.CardTrancports;
+using System;
 
 namespace ServiceContract.Interfaces
 {
@@ -113,7 +114,7 @@ namespace ServiceContract.Interfaces
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        SaveEntityResult AddCardTrancport(int idCommission);
+        SaveEntityResult AddCardTrancport(int idCommission,DateTime dateStart);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]

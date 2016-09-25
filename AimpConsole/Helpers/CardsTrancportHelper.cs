@@ -25,24 +25,21 @@ namespace AimpConsole.Helpers
             var items = _logic.GetCardTrancports()
                 .OrderByDescending(x => new { x.DateStart, x.Number })
                 .Select(x => new CardTrancportListItemDto()
-            {
-                Id = x.Id,
-                DateSale = x.DateSale,
-                DateStart =x.CommissionTransaction.Date,
-                Status = x.StatusCardTrancport.Name,
-                Number = x.Number.ToString(),
-                NumberT = x.NumberT.ToString(),
-                MakeModelTrancport = x.MakeModel,
-                ColorTrancport = x.CommissionTransaction.Trancport.Color,
-                Vin = x.CommissionTransaction.Trancport.Vin,
-                Pts = x.CommissionTransaction.ComplectDoc,
-                Keys = x.CommissionTransaction.CountKey,
-                Price = x.CommissionTransaction.Price.ToString(),
-                Manager = x.ManagerSeller,
-                OwnerAndTelefon = x.CommissionTransaction.Owner.LastName + " " + x.CommissionTransaction.Owner.FirstName +" "+x.CommissionTransaction.Owner.MiddleName +"/"+ x.CommissionTransaction.Owner.Telefon,
-                User = x.CommissionTransaction.User.LastName
-
-            }).ToList();
+                {
+                    Id = x.Id,
+                    DateSale = x.DateSale,
+                    DateStart = x.CommissionTransaction.Date,
+                    Status = x.StatusCardTrancport.Name,
+                    Number = x.Number.ToString(),
+                    NumberT = x.NumberT.ToString(),
+                    MakeModelTrancport = x.MakeModel,
+                    ColorTrancport = x.CommissionTransaction.Trancport.Color,
+                    Price = x.CommissionTransaction.Price.ToString(),
+                    YearTrancport = x.CommissionTransaction.Trancport.Year.ToString(),
+                    Source = x.CommissionTransaction.SourceTrancport.Name,
+                    Manager = x.ManagerSeller,
+                    User = x.CommissionTransaction.User.LastName
+                }).ToList();
 
             return new CardTrancportsDto()
             {
@@ -65,9 +62,9 @@ namespace AimpConsole.Helpers
                 Document = document
             };
         }
-        public int AddCard(int idCommission)
+        public int AddCard(int idCommission,DateTime dateStart)
         {
-           return _logic.AddCardTrancport(idCommission);
+           return _logic.AddCardTrancport(idCommission, dateStart);
         }
         public void DeleteCard(int id)
         {

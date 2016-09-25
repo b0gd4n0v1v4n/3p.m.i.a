@@ -888,8 +888,8 @@
                                         <GridViewColumn x:Name="NumberProxyCom"  Width="120" Header="ДОВЕРЕННОСТЬ|NumberProxy" DisplayMemberBinding="{Binding NumberProxy}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="SellerFullNameCom"  Width="300" Header="ПРОДАВЕЦ|SellerFullName" DisplayMemberBinding="{Binding SellerFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="TrancportFullNameCom"  Width="300" Header="МОДЕЛЬ, МАРКА ТС|TrancportFullName" DisplayMemberBinding="{Binding TrancportFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="CommissiaCom"  Width="300" Header="КОМИССИЯ|Commission" DisplayMemberBinding="{Binding Commission}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="ParkingCom"  Width="300" Header="СТОЯНКА|Parking" DisplayMemberBinding="{Binding Parking}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="CommissiaCom"  Width="100" Header="КОМИССИЯ|Commission" DisplayMemberBinding="{Binding Commission}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="ParkingCom"  Width="100" Header="СТОЯНКА|Parking" DisplayMemberBinding="{Binding Parking}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn Width="100">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
@@ -943,8 +943,14 @@
                                     <GridView>
                                         <GridViewColumn x:Name="IdCard"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <GridViewColumn x:Name="NumberCard"  Width="45" Header="№|Number" DisplayMemberBinding="{Binding Number}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="NumberTCard"  Width="45" Header="№T|NumberT" DisplayMemberBinding="{Binding NumberT}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="StatusCardTrancportColumn"  Width="150" Header="Статус|Status" DisplayMemberBinding="{Binding Status}">
+                                        <GridViewColumn x:Name="DateStartCard" Width="93" Header="ДАТА ПОСТ.|DateSale" DisplayMemberBinding="{Binding DateStart}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
+                                        <GridViewColumn x:Name="NumberTCard"  Width="51" Header="№TC|NumberT" DisplayMemberBinding="{Binding NumberT}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="MakeModelTrancportCard"  Width="140" Header="МАРКА, МОДЕЛЬ ТС|MakeModelTrancport" DisplayMemberBinding="{Binding MakeModelTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="YearTrancportCard"  Width="50" Header="ГОД|YearTrancport" DisplayMemberBinding="{Binding YearTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="ColorTrancportCard"  Width="120" Header="ЦВЕТ|ColorTrancport" DisplayMemberBinding="{Binding ColorTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="PriceCard"  Width="120" Header="СТОИМОСТЬ|Price" DisplayMemberBinding="{Binding Price}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="SourceTrancportCard"  Width="100" Header="ИСТОЧНИК|Source" DisplayMemberBinding="{Binding Source}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="StatusCardTrancportColumn"  Width="100" Header="СТАТУС|Status" DisplayMemberBinding="{Binding Status}">
                                             <GridViewColumn.HeaderContainerStyle>
                                                 <Style TargetType="GridViewColumnHeader">
                                                     <Setter Property="Template">
@@ -1080,18 +1086,7 @@
                                                 </Style>
                                             </GridViewColumn.HeaderContainerStyle>
                                         </GridViewColumn>
-                                        <GridViewColumn x:Name="DateSaleCard" Width="140" Header="ДАТА ПОСТАНОВКИ|DateStart" DisplayMemberBinding="{Binding DateStart}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="DateStartCard" Width="120" Header="ДАТА ПРОДАЖИ|DateSale" DisplayMemberBinding="{Binding DateSale}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="MakeModelTrancportCard"  Width="140" Header="МАРКА, МОДЕЛЬ ТС|MakeModelTrancport" DisplayMemberBinding="{Binding MakeModelTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="YearTrancportCard"  Width="110" Header="ГОД ВЫПУСКА|YearTrancport" DisplayMemberBinding="{Binding YearTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="ColorTrancportCard"  Width="150" Header="ЦВЕТ|ColorTrancport" DisplayMemberBinding="{Binding ColorTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="VinCard"  Width="150" Header="VIN|Vin" DisplayMemberBinding="{Binding Vin}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="PtsCard"  Width="150" Header="ПТС|Pts" DisplayMemberBinding="{Binding Pts}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="KeysCard"  Width="150" Header="КЛЮЧИ|Keys" DisplayMemberBinding="{Binding Keys}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="PriceCard"  Width="150" Header="СТОИМОСТЬ ТС|Price" DisplayMemberBinding="{Binding Price}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="SourceTrancportCard"  Width="160" Header="УСЛОВИЯ ПОСТАНОВКИ|SourceTrancport" DisplayMemberBinding="{Binding SourceTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="OwnerAndTelefonCard"  Width="300" Header="СОБСТВЕННИК, ТЕЛЕФОН|OwnerAndTelefon" DisplayMemberBinding="{Binding OwnerAndTelefon}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="ManagerCard"  Width="300" Header="МЕНЕДЖЕР|Manager" DisplayMemberBinding="{Binding Manager}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <GridViewColumn x:Name="DateSaleCard" Width="93" Header="ДАТА ПРОД.|DateStart" DisplayMemberBinding="{Binding DateSale}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
                                         <!--<GridViewColumn x:Name="UserCard"  Width="300" Header="ПОЛЬЗОВАТЕЛЬ|User" DisplayMemberBinding="{Binding User}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>-->
                                     </GridView>
                                 </ListView.View>

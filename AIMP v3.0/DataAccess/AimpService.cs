@@ -17,6 +17,7 @@ using Models.UserFiles;
 using Models.PrintDocumentTemplate;
 using Models.Commission;
 using Models.CardTrancports;
+using System;
 
 namespace AIMP_v3._0.DataAccess
 {
@@ -222,9 +223,9 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetCardTrancport(id);
         }
-        public SaveEntityResult AddCardTrancport(int idCommission)
+        public SaveEntityResult AddCardTrancport(int idCommission,DateTime dateStart)
         {
-            return Proxy.AddCardTrancport(idCommission);
+            return Proxy.AddCardTrancport(idCommission, dateStart);
         }
         public SaveEntityResult SaveCardTrancport(CardTrancportDocument document)
         {

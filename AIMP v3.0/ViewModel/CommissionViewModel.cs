@@ -120,7 +120,7 @@ namespace AIMP_v3._0
                                 Commission.Number = response.Number;
                                 if (Commission.IsUseCardTrancport)
                                 {
-                                    var responseAdd = service.AddCardTrancport(Commission.Id);
+                                    var responseAdd = service.AddCardTrancport(Commission.Id,Commission.Date);
                                     if (responseAdd.Error)
                                         throw new Exception(responseAdd.Message);
                                 }

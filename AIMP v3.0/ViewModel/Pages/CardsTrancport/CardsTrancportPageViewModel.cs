@@ -26,17 +26,14 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         ColorTrancport = x.ColorTrancport,
                         DateSale = x.DateSale?.ToString(Models.DataFormats.DateFormat),
                         DateStart = x.DateStart.ToString(Models.DataFormats.DateFormat),
-                        Keys = x.Keys,
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,
                         Number = x.Number,
                         NumberT = x.NumberT,
-                        OwnerAndTelefon = x.OwnerAndTelefon,
                         Price = x.Price,
-                        Pts = x.Pts,
                         Status = x.Status,
+                        Source = x.Source,
                         User = x.User,
-                        Vin = x.Vin,
                         YearTrancport = x.YearTrancport
                     });
                     if (response.StatusesCardForFilerStart != null && response.StatusesCardForFilerStart.Count() > 0)

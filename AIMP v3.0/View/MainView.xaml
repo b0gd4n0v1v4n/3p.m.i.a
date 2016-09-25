@@ -25,7 +25,6 @@
         <Menu Grid.Row="0">
             <MenuItem Header="ФАЙЛ">
                 <MenuItem Header="ДОБАВИТЬ"></MenuItem>
-                <MenuItem Header="УДАЛИТЬ"></MenuItem>
                 <MenuItem Header="ВЫХОД"></MenuItem>
             </MenuItem>
             <MenuItem Header="СПРАВОЧНИКИ" ItemsSource="{Binding DictionaryList}">

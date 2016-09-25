@@ -11,7 +11,7 @@ namespace AimpLogic.CardTrancports
     public interface ICardTrancportService : IDisposable
     {
         CardTrancportDocument GetDocument(int id);
-        int AddCardTrancport(int idCommission);
+        int AddCardTrancport(int idCommission,DateTime dateStart);
         void SaveDocument(CardTrancportDocument document);
         void DeleteCardTrancport(int id);
         IQueryable<CardTrancport> GetCardTrancports();

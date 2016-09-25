@@ -219,6 +219,7 @@ namespace MigrationDb2Vto3V
         } 
         static void Main(string[] args)
         {
+#warning ПРИ ИЗМЕНЕНИИ БД НЕ ЗАБУДЬ СОЗДАТЬ ТРИГЕРЫ
             using (var aimp = new aimpEntities())
             {
                 using (var newDb = new SqlContext())
