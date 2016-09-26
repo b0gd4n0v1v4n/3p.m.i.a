@@ -20,7 +20,7 @@ namespace AIMP_v3._0.View
     /// </summary>
     public partial class EntityNameEditView : Window
     {
-        public EntityNameEditView(EntityNameEditViewModel model)
+        public EntityNameEditView(EntityEditViewModel model)
         {
             InitializeComponent();
             DataContext = model;

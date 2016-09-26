@@ -1,13 +1,8 @@
 ﻿using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
 using Models;
-using Models.Entities;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel
@@ -21,10 +16,10 @@ namespace AIMP_v3._0.ViewModel
             using(var service = new AimpService())
             {
                 _tableName = tableName;
-                var response = service.GetDictionary(_tableName);
-                if (response.Error)
-                    throw new Exception(response.Message);
-                Rows = new ObservableCollection<EntityName>(response.Items);
+                //var response = service.GetDictionary(_tableName);
+                //if (response.Error)
+                //    throw new Exception(response.Message);
+                //Rows = new ObservableCollection<EntityName>(response.Items);
             }
         }
         public EntityName CurrentItem { get; set; }
@@ -37,9 +32,9 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
-                        var vm = new EntityNameEditViewModel(CurrentItem,_tableName);
-                        var view = new EntityNameEditView(vm);
-                        view.ShowDialog();
+                        //var vm = new EntityEditViewModel(CurrentItem,_tableName);
+                        //var view = new EntityNameEditView(vm);
+                        //view.ShowDialog();
                     }
                     catch (Exception ex)
                     {
@@ -56,9 +51,9 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
-                        var vm = new EntityNameEditViewModel(new EntityName(),_tableName);
-                        var view = new EntityNameEditView(vm);
-                        view.ShowDialog();
+                        //var vm = new EntityNameEditViewModel(new EntityName(),_tableName);
+                        //var view = new EntityNameEditView(vm);
+                        //view.ShowDialog();
                     }
                     catch (Exception ex)
                     {

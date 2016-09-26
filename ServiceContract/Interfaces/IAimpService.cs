@@ -207,7 +207,7 @@ namespace ServiceContract.Interfaces
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        DictionaryDto GetDictionary(string tableName);
+        DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]

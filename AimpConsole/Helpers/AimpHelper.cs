@@ -1,7 +1,10 @@
 ﻿using AimpLogic.Transactions;
 using Models;
+using Models.Dictionar;
 using Models.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AimpConsole.Helpers
 {
@@ -12,11 +15,33 @@ namespace AimpConsole.Helpers
         {
             User = new User();
         }
-        public IEnumerable<EntityName> GetDictionary(string tableName)
+        public IEnumerable<Row> GetDictionary(string tableName, IEnumerable<string> columns)
         {
+            if (columns.First() != "Id")
+                throw new ArgumentNullException("Id");
+
+            string nameColumns = string.Empty;
+            
+            foreach (string iColumn in columns)
+            {
+                nameColumns = nameColumns + $",'$#$',{iColumn}";
+            }
+            nameColumns = nameColumns.Substring(7);
             using(var service = new TransactionService(User.Login, User.Password))
             {
-                return service.Query<EntityName>($"SELECT Id,Name FROM {tableName}");
+                var query = service.Query<EntityName>($"SELECT Id,CONCAT({nameColumns}) as Name FROM {tableName}");
+                List<Row> result = new List<Row>();
+                foreach(var iRow in query)
+                {
+                    Row row = new Row(tableName);
+                    var cells = iRow.Name.Split(new[] { "$#$" }, StringSplitOptions.None);
+                    for (int iColumn = 0; iColumn < columns.Count(); iColumn++)
+                    {
+                        row.Cells.Add(columns.Skip(iColumn).First(), cells[iColumn]);
+                    }
+                    result.Add(row);
+                }
+                return result;
             }
         }
 

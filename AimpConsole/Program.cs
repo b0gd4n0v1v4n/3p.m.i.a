@@ -1,5 +1,7 @@
-﻿using AimpConsole.Wcf;
+﻿using AimpConsole.Helpers;
+using AimpConsole.Wcf;
 using AimpLogic.Logging;
+using AimpLogic.PrintedDocument;
 using AimpLogic.UserRights;
 using System;
 using System.ServiceModel.Web;
@@ -17,7 +19,7 @@ namespace AimpConsole
                 {
                     using(UserRightsService aimp = new UserRightsService("",""))
                     {
-
+                        
                     }
                     Console.WriteLine("Сервис запущен...");
                 }

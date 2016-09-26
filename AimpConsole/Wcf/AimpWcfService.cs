@@ -855,7 +855,7 @@ namespace AimpConsole.Wcf
                 };
             }
         }
-        public DictionaryDto GetDictionary(string tableName)
+        public DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns)
         {
             try
             {
@@ -865,7 +865,7 @@ namespace AimpConsole.Wcf
                 {
                     return new DictionaryDto()
                     {
-                        Items = helper.GetDictionary(tableName)
+                        Rows = helper.GetDictionary(tableName, columns)
                     };
                 }
 

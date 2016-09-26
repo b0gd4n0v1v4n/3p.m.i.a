@@ -73,7 +73,9 @@
     <Compile Include="ContractorInfo\ContractorInfo.cs" />
     <Compile Include="CreditTransact\CreditTransactionInfoDto.cs" />
     <Compile Include="DataFormats.cs" />
+    <Compile Include="Dictionary.cs" />
     <Compile Include="DictionaryDto.cs" />
+    <Compile Include="Dictionary\Row.cs" />
     <Compile Include="Documents\CardTrancportDocument.cs" />
     <Compile Include="Documents\CommissionDocument.cs" />
     <Compile Include="Entities\CardTrancport.cs" />

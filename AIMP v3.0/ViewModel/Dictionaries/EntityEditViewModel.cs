@@ -1,9 +1,11 @@
 ﻿
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
+using AIMP_v3._0.ViewModel.Dictionaries;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +13,16 @@ using System.Windows;
 
 namespace AIMP_v3._0.ViewModel
 {
-   public class EntityNameEditViewModel
+   public class EntityEditViewModel
     {
         private string _tableName;
-        public EntityName EntityName { get; }
-        public EntityNameEditViewModel(EntityName entityName,string tableName)
+        private int _id;
+        public ObservableCollection<CellViewModel> Cells { get; }
+        public EntityEditViewModel(EntityViewModel entity)
         {
-            EntityName = entityName;
-            _tableName = tableName;
+            Cells = new ObservableCollection<CellViewModel>(entity.Cells);
+            _tableName = entity.Name;
+            _id = entity.Id;
         }
         public Command SaveCommand
         {
@@ -28,9 +32,12 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
+                        Dictionary<string, string> dictionary = Cells
+                        .Select(c => new { c.ColumnName,c.Value })
+                        .ToDictionary(d=>d.ColumnName,d=>d.Value);
                         using (var service = new AimpService())
                         {
-                            var response = service.SaveRowDictionary(_tableName,EntityName.Name,EntityName.Id);
+                            var response = service.SaveRowValuesDictionary(_tableName,dictionary,_id);
                             if (response.Error)
                                 throw new Exception(response.Message);
                         }
@@ -67,7 +74,7 @@ namespace AIMP_v3._0.ViewModel
                         {
                             using (var service = new AimpService())
                             {
-                                var response = service.DeleteRowDictionary(_tableName,EntityName.Id);
+                                var response = service.DeleteRowDictionary(_tableName,_id);
                                 if (response.Error)
                                     throw new Exception(response.Message);
                                 else
@@ -85,6 +92,5 @@ namespace AIMP_v3._0.ViewModel
                 });
             }
         }
-
     }
 }

@@ -190,9 +190,9 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.DeletePrintedDocTemplate(template);
         }
-        public DictionaryDto GetDictionary(string tableName)
+        public DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns)
         {
-            return Proxy.GetDictionary(tableName);
+            return Proxy.GetDictionary(tableName, columns);
         }
 
         public Response SaveRowDictionary(string tableName, string value,int id)

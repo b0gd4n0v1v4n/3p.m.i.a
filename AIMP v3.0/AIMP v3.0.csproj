@@ -116,6 +116,9 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\CardTrancportViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\CellViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\ColumnViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\EntityViewModel.cs" />
     <Compile Include="ViewModel\Pages\CardsTrancport\CardsTrancportPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\CardsTrancport\CardTrancportListItemViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\PreCheckCardTrancportViewModel.cs" />
@@ -171,9 +174,9 @@
     </Compile>
     <Compile Include="ViewModel\ClientOfReport\ClientBankStatusViewModel.cs" />
     <Compile Include="ViewModel\CreditTransactionViewModel.cs" />
-    <Compile Include="ViewModel\DictionaryListViewModel.cs" />
-    <Compile Include="ViewModel\DictionaryMenuItemViewModel.cs" />
-    <Compile Include="ViewModel\EntityNameEditViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\DictionaryListViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\DictionaryMenuItemViewModel.cs" />
+    <Compile Include="ViewModel\Dictionaries\EntityEditViewModel.cs" />
     <Compile Include="ViewModel\Filtering\FilteringColumn.cs" />
     <Compile Include="ViewModel\LegalPersonViewModel.cs" />
     <Compile Include="ViewModel\Filtering\ListItemFiltering.cs" />

@@ -1,12 +1,7 @@
 ﻿using AIMP_v3._0.View;
-using Models;
-using Models.Entities;
+using AIMP_v3._0.ViewModel.Dictionaries;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel
@@ -15,7 +10,7 @@ namespace AIMP_v3._0.ViewModel
     {
         public string TableName { get; set; }
         public string Name { get; set; }
-
+        ObservableCollection<ColumnViewModel> Columns { get; }
         public Command OpenCommand
         {
             get
