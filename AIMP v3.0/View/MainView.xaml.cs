@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using AIMP_v3._0.View;
+using System.Windows;
 
 namespace AIMP_v3._0.View
 {

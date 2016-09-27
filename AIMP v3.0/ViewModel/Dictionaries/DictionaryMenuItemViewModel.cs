@@ -1,7 +1,7 @@
 ﻿using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.Dictionaries;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel
@@ -10,7 +10,7 @@ namespace AIMP_v3._0.ViewModel
     {
         public string TableName { get; set; }
         public string Name { get; set; }
-        ObservableCollection<ColumnViewModel> Columns { get; }
+        public IEnumerable<ColumnViewModel> Columns { get; set; }
         public Command OpenCommand
         {
             get
@@ -19,7 +19,7 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
-                        var vm = new DictionaryListViewModel(TableName);
+                        var vm = new DictionaryListViewModel(TableName,Columns);
                         var view = new DictionaryListView(vm);
                         view.ShowDialog();
                     }

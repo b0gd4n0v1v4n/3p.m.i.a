@@ -16,6 +16,7 @@ using AIMP_v3._0.ViewModel.Pages.CardsTrancport;
 using System.Collections.Generic;
 using AIMP_v3._0.ViewModel.Pages;
 using AIMP_v3._0.Model;
+using AIMP_v3._0.ViewModel.Dictionaries;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -30,58 +31,72 @@ namespace AIMP_v3._0.ViewModel
         {
             try
             {
-                
+                var idNameColumn = new List<ColumnViewModel>()
+                {
+                    new ColumnViewModel(){ Name = "Id", DbName = "Id" },
+                    new ColumnViewModel(){ Name = "Наименование", DbName = "Name" }
+                };
                 DictionaryList = new ObservableCollection<DictionaryMenuItemViewModel>()
                 {
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "TrancportTypes",
-                        Name = "ВИДЫ ТРАНСПОРТА"
+                        Name = "ВИДЫ ТРАНСПОРТА",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "TrancportCategories",
-                        Name = "КАТИГОРИИ ТРАНСПОРТА"
+                        Name = "КАТИГОРИИ ТРАНСПОРТА",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "Creditors",
-                        Name = "КРЕДИТОРЫ"
+                        Name = "КРЕДИТОРЫ",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "Requisits",
-                        Name = "РЕКВИЗИТЫ"
+                        Name = "РЕКВИЗИТЫ",
+                        Columns = new List<ColumnViewModel>() { new ColumnViewModel() { Name = "Id",DbName = "Id" } }
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "BankStatus",
-                        Name = "СТАТУСЫ БАНКА"
+                        Name = "СТАТУСЫ БАНКА",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "ClientStatus",
-                        Name = "СТАТУСЫ КЛИЕНТА"
+                        Name = "СТАТУСЫ КЛИЕНТА",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "EngineTypes",
-                        Name = "ТИПЫ ДВИГАТЕЛЕЙ"
+                        Name = "ТИПЫ ДВИГАТЕЛЕЙ",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "Banks",
-                        Name = "БАНКИ"
+                        Name = "БАНКИ",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "CreditProgramms",
-                        Name = "ПРОГРАММЫ КРЕДИТОВАНИЯ"
+                        Name = "ПРОГРАММЫ КРЕДИТОВАНИЯ",
+                        Columns = idNameColumn
                     },
                     new DictionaryMenuItemViewModel
                     {
                         TableName = "SourceTrancports",
-                        Name = "ИСТОЧНИКИ ПОСТУПЛЕНИЯ"
+                        Name = "ИСТОЧНИКИ ПОСТУПЛЕНИЯ",
+                        Columns = idNameColumn
                     }
                 };
             }

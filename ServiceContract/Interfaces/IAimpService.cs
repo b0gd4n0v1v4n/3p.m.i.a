@@ -206,7 +206,7 @@ namespace ServiceContract.Interfaces
         Response DeletePrintedDocTemplate(PrintedDocumentTemplate template);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns);
 
         [OperationContract]
