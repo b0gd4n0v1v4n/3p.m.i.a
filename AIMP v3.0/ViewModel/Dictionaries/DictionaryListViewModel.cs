@@ -28,12 +28,18 @@ namespace AIMP_v3._0.ViewModel
                 foreach(var iRow in response.Rows)
                 {
                     var cells = new List<CellViewModel>();
+                    var name = string.Empty;
                     foreach(var iColumn in columnView)
                     {
-                        var cell = new CellViewModel() { ColumnName = iColumn.DbName, Name = iColumn.Name, Value = iRow.Cells[iColumn.Name] };
+                        var value = iRow.Cells.First(x => x.Key == iColumn.DbName).Value;
+                        if (iColumn.DbName == "Name")
+                            name = value;
+                        var cell = new CellViewModel() { ColumnName = iColumn.DbName, Name = iColumn.Name, Value = value};
+                        cells.Add(cell);
                     }
-                    int id = int.Parse(iRow.Cells["Id"]);
-                    var entity = new EntityViewModel(_tableName, cells, id);
+                    int id = int.Parse(iRow.Cells.First(x=>x.Key == "Id").Value);
+                    var entity = new EntityViewModel(name, cells, id);
+                    rows.Add(entity);
                 }
                 Rows = new ObservableCollection<EntityViewModel>(rows);
             }

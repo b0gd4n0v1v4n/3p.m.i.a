@@ -32,6 +32,11 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="" Value="Id">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </Trigger>
+                        </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>

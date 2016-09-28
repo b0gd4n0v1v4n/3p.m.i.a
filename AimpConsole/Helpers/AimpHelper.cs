@@ -37,7 +37,7 @@ namespace AimpConsole.Helpers
                     var cells = iRow.Name.Split(new[] { "$#$" }, StringSplitOptions.None);
                     for (int iColumn = 0; iColumn < columns.Count(); iColumn++)
                     {
-                        row.Cells.Add(columns.Skip(iColumn).First(), cells[iColumn]);
+                        row.Cells.Add(new KeyValue<string, string>() { Key = columns.Skip(iColumn).First(), Value = cells[iColumn] });
                     }
                     result.Add(row);
                 }

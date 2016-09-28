@@ -60,7 +60,15 @@ namespace AIMP_v3._0.ViewModel
                     {
                         TableName = "Requisits",
                         Name = "РЕКВИЗИТЫ",
-                        Columns = new List<ColumnViewModel>() { new ColumnViewModel() { Name = "Id",DbName = "Id" } }
+                        Columns = new List<ColumnViewModel>()
+                        {
+                            new ColumnViewModel() { Name = "Id",DbName = "Id" },
+                            new ColumnViewModel() { Name = "Наименование",DbName = "Name" },
+                            new ColumnViewModel() { Name = "Рос_счет",DbName = "Ros_schet" },
+                            new ColumnViewModel() { Name = "Кор_счет",DbName = "Kor_schet" },
+                            new ColumnViewModel() { Name = "В банке",DbName = "InBank" },
+                            new ColumnViewModel() { Name = "БИК",DbName = "Bik" },
+                        }
                     },
                     new DictionaryMenuItemViewModel
                     {

@@ -5,11 +5,15 @@ namespace Models.Dictionar
     public class Row
     {
         public string Name { get; set; }
-        public IDictionary<string,string>  Cells { get; set; }
-        public Row(string name, IDictionary<string, string> cells = null)
+        public List<KeyValue<string,string>>  Cells { get; set; }
+        public Row(string name, List<KeyValue<string, string>> cells = null)
         {
             Name = name;
-            Cells = cells == null ? new Dictionary<string,string>() : cells;
+            Cells = cells == null ? new List<KeyValue<string,string>>() : cells;
+        }
+        public Row()
+        {
+
         }
     }
 }
