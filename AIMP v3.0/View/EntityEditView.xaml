@@ -10,35 +10,41 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="91*"/>
             <ColumnDefinition Width="155*"/>
-            <ColumnDefinition Width="185*"/>
+            <ColumnDefinition Width="86*"/>
+            <ColumnDefinition Width="99*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="141*"/>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="85.624,9,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="2"/>
-        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveCommand}" HorizontalAlignment="Left" Margin="5.624,9,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="86,9,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <Button x:Name="button_Copy" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveCommand}" HorizontalAlignment="Left" Margin="6,9,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Grid.Column="2"/>
         <Button x:Name="button1" Content="УДАЛИТЬ" Visibility="{Binding VisibleDelete}"  Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}"  HorizontalAlignment="Left" Margin="9,9,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
-        <ListBox Grid.Row="0" ItemsSource="{Binding Cells}" Grid.ColumnSpan="3">
+        <ListBox x:Name="List" Grid.Row="0" ItemsSource="{Binding Cells}" Grid.ColumnSpan="4">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Name}"></Label>
-                                    <TextBox Text="{Binding Value}"></TextBox>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="90*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="{Binding Name}"></Label>
+                                    <TextBox Grid.Column="1" Text="{Binding Value}"></TextBox>
+                                </Grid>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="" Value="Id">
-                            <Setter Property="Visibility" Value="Hidden" />
-                        </Trigger>
-                        </Style.Triggers>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Name}" Value="Id">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </ListBox.ItemContainerStyle>
+
         </ListBox>
     </Grid>
 </Window>

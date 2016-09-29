@@ -54,7 +54,7 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
-                        var entitEditVm = new EntityEditViewModel(CurrentItem);
+                        var entitEditVm = new EntityEditViewModel(CurrentItem, _tableName);
                         var view = new EntityEditView(entitEditVm);
                         view.ShowDialog();
                     }
@@ -73,8 +73,8 @@ namespace AIMP_v3._0.ViewModel
                 {
                     try
                     {
-                        var vm = new EntityEditViewModel(new EntityViewModel(_tableName,_columnView.Select(c=>new CellViewModel() { ColumnName = c.DbName,Name = c.Name })));
-                        var view = new EntityNameEditView(vm);
+                        var vm = new EntityEditViewModel(new EntityViewModel(_tableName,_columnView.Select(c=>new CellViewModel() { ColumnName = c.DbName,Name = c.Name })), _tableName);
+                        var view = new EntityEditView(vm);
                         view.ShowDialog();
                     }
                     catch (Exception ex)

@@ -18,10 +18,10 @@ namespace AIMP_v3._0.ViewModel
         private string _tableName;
         private int _id;
         public ObservableCollection<CellViewModel> Cells { get; }
-        public EntityEditViewModel(EntityViewModel entity)
+        public EntityEditViewModel(EntityViewModel entity,string tableName)
         {
             Cells = new ObservableCollection<CellViewModel>(entity.Cells);
-            _tableName = entity.Name;
+            _tableName = tableName;
             _id = entity.Id;
         }
         public Command SaveCommand

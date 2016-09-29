@@ -60,36 +60,39 @@ namespace AimpConsole.Helpers
             string query = string.Empty;
             if(id == 0)
             {
-                query = $"INSERT INTO {table}(";
+                query = $"INSERT INTO [{table}](";
                 string columns = string.Empty;
                 string values = string.Empty;
                 foreach(var iColum in columnValues)
                 {
-                    columns = $"{columns},{iColum.Key}";
-                    values = $"{values},{iColum.Value}";
+                    if (iColum.Key != "Id")
+                    {
+                        columns = $"{columns},[{iColum.Key}]";
+                        values = $"{values},'{iColum.Value}'";
+                    }
                 }
-                query = $"{query + columns.Substring(0)}) VALUES ({values.Substring(0)})";
+                query = $"{query + columns.Substring(1)}) VALUES ({values.Substring(1)})";
             }
             else
             {
-                query = $"UPDAT {table} SET ";
+                query = $"UPDATE [{table}] SET ";
                 foreach (var iColum in columnValues)
                 {
-                    query = $"{query} {iColum.Key} = '{iColum.Value}',";
+                    if (iColum.Key != "Id")
+                        query = $"{query} {iColum.Key} = '{iColum.Value}',";
                 }
-                query = $"{query.Substring(0, query.Length - 1)} WHERE Id = {id}";
+                query = $"{query.Substring(0, query.Length - 1)} WHERE [Id] = {id}";
             }
             using (var service = new TransactionService(User.Login, User.Password))
             {
                     service.Command(query);;
             }
-
         }
         public void DeleteRowDictionary(string table, int id)
         {
             using (var service = new TransactionService(User.Login, User.Password))
             {
-                service.Command($"DELETE FROM {table} WHERE Id = {id}");
+                service.Command($"DELETE FROM {table} WHERE [Id] = {id}");
             }
         }
     }
