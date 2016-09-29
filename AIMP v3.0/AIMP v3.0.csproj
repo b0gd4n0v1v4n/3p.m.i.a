@@ -237,9 +237,6 @@
     <Compile Include="View\EntityEditView.xaml.cs">
       <DependentUpon>EntityEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EntityNameEditView.xaml.cs">
-      <DependentUpon>EntityNameEditView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\LegalPersonInfoView.xaml.cs">
       <DependentUpon>LegalPersonInfoView.xaml</DependentUpon>
     </Compile>
@@ -343,10 +340,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EntityEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EntityNameEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

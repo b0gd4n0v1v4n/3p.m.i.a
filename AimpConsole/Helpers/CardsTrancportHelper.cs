@@ -32,7 +32,7 @@ namespace AimpConsole.Helpers
                     Status = x.StatusCardTrancport.Name,
                     Number = x.Number.ToString(),
                     NumberT = x.NumberT.ToString(),
-                    MakeModelTrancport = x.MakeModel,
+                    MakeModelTrancport = x.CommissionTransaction.Trancport.Make.Name + ", " + x.CommissionTransaction.Trancport.Model.Name,
                     ColorTrancport = x.CommissionTransaction.Trancport.Color,
                     Price = x.CommissionTransaction.Price.ToString(),
                     YearTrancport = x.CommissionTransaction.Trancport.Year.ToString(),
