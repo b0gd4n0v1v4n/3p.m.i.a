@@ -58,6 +58,45 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
         public CreditTransactionPageViewModel()
         {
             _FillListCreditTransaction();
+            _openListItem = new Command(x =>
+                {
+                    try
+                    {
+                        if (CurrentItem != null)
+                        {
+                            CreditTransactionViewModel vm;
+                            using (AimpService service = new AimpService())
+                            {
+                                var transaction = service.GetCreditTransaction(CurrentItem.Id);
+
+                                if (transaction.Error)
+                                {
+                                    MessageBox.Show("Ошибка сервера", transaction.Message);
+                                    return;
+                                }
+                                var response = service.GetPrintedList(DocumentType.CreditTransaction);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                                var lst = response.List.Select(p => new PrintItem()
+                                {
+                                    Name = p.Name,
+                                    Type = DocumentType.CreditTransaction,
+                                    Document = transaction.Document
+                                });
+                                var responseInfo = service.GetCreditInfo();
+                                if (responseInfo.Error)
+                                    throw new Exception(responseInfo.Message);
+                                vm = new CreditTransactionViewModel(transaction.Document, lst, responseInfo.Creditors, responseInfo.Requisits);
+                            }
+                            CreditTransactionView CreditTransactionView = new CreditTransactionView(vm);
+                            CreditTransactionView.ShowDialog();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Не удалось открыть сделку");
+                    }
+                });
         }
 
         public string Name { get { return "СДЕЛКА В КРЕДИТ"; } }
@@ -107,52 +146,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
         }
         
         public override Command PrintList { get; }
-        public override Command OpenListItem {
-            get
-            {
-                return new Command(x =>
-                {
-                    try
-                    {
-                        if (CurrentItem != null)
-                        {
-                            CreditTransactionViewModel vm;
-                            using (AimpService service = new AimpService())
-                            {
-                                var transaction = service.GetCreditTransaction(CurrentItem.Id);
-
-                                if (transaction.Error)
-                                {
-                                    MessageBox.Show("Ошибка сервера", transaction.Message);
-                                    return;
-                                }
-                                var response = service.GetPrintedList(DocumentType.CreditTransaction);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                var lst = response.List.Select(p => new PrintItem()
-                                {
-                                    Name = p.Name,
-                                    Type = DocumentType.CreditTransaction,
-                                    Document = transaction.Document
-                                });
-                                var responseInfo = service.GetCreditInfo();
-                                if (responseInfo.Error)
-                                    throw new Exception(responseInfo.Message);
-                                vm = new CreditTransactionViewModel(transaction.Document, lst, responseInfo.Creditors, responseInfo.Requisits);
-                            }
-                            CreditTransactionView CreditTransactionView = new CreditTransactionView(vm);
-                            CreditTransactionView.ShowDialog();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Не удалось открыть сделку");
-                    }
-                });
-            
-        }
-        }
-
+        private Command _openListItem; 
+        public override Command OpenListItem { get { return _openListItem; } }
+       
         public Visibility PrintButtonVisible
         {
             get

@@ -47,8 +47,6 @@ namespace AimpConsole.Helpers
         public CreditTransactionDto GetCreditTransaction(int id)
         {
             var document = _logic.GetDocument(id);
-            var creditors = _logic.GetCreditors().ToList();
-            var requsits = _logic.GetRequisits().ToList();
             return new CreditTransactionDto()
             {
                 Document = document

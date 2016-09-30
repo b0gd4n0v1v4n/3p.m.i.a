@@ -48,28 +48,23 @@ namespace AimpLogic.CreditTransactions
                                 .CreditTransactions
                                 .Get(id, x => x.Seller.City,
                                         x => x.Seller.Region,
-                                        x => x.Seller.Document,
-                                        x => x.Seller.Photo,
                                         x => x.Buyer.City,
                                         x => x.Buyer.Region,
-                                        x => x.Buyer.Document,
-                                        x => x.Buyer.Photo,
                                         x => x.Owner.City,
                                         x => x.Owner.Region,
-                                        x => x.Owner.Document,
-                                        x => x.Owner.Photo,
                                         x => x.Trancport.Model,
                                         x => x.Trancport.Make,
                                         x => x.Trancport.Category,
-                                        x => x.Trancport.CopyPts,
                                         x => x.Trancport.EngineType,
                                         x => x.Trancport.Type,
-                                        x => x.DkpDocument,
-                                        x => x.AgentDocument,
                                         x => x.Requisit,
                                         x => x.Creditor);
-
-                return TinyMapper.Map<CreditTransactionDocument>(creditTransaction);
+                
+                var document = TinyMapper.Map<CreditTransactionDocument>(creditTransaction);
+                document.AgentDocument = new UserFile() { Id = creditTransaction.AgentDocumentId.HasValue ? creditTransaction.AgentDocumentId.Value : 0 };
+                document.DkpDocument = new UserFile() { Id = creditTransaction.DkpDocumentId.HasValue ? creditTransaction.DkpDocumentId.Value : 0 };
+    
+                return document;
             }
             catch (AccessDeniedException)
             {
