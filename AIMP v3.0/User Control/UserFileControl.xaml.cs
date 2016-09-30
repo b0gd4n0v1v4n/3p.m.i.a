@@ -82,16 +82,16 @@ namespace AIMP_v3._0.User_Control
             {
                 if (UserFile != null)
                 {
-                    if (UserFile.File != null)
+                    if (UserFile?.File != null)
                         OpenUserFile.Open(UserFile.Name, UserFile.File);
                     else if(UserFile.Id != 0)
                     {
-                        _GetAndOpenFile(UserFile.Id);
+                        OpenUserFile.GetAndOpen(UserFile.Id);
                     }
                 }
                 else if(UserFileId.HasValue)
                 {
-                    _GetAndOpenFile(UserFileId.Value);
+                    OpenUserFile.GetAndOpen(UserFileId.Value);
                 }
             }
             catch(Exception ex)
@@ -130,19 +130,6 @@ namespace AIMP_v3._0.User_Control
             SetValue(UserFileProperty, null);
             SetValue(UserFileIdProperty, null);
             SetValue(OpenButtonIsEnableProperty, false);
-        }
-
-        private void _GetAndOpenFile(int id)
-        {
-            using (AimpService service = new AimpService())
-            {
-                var response = service.GetUserFile(id);
-                if (response.Error)
-                    throw new Exception(response.Message);
-
-                UserFile = response.UserFile;
-                OpenUserFile.Open(UserFile.Name, UserFile.File);
-            }
         }
     }
 }
