@@ -17,6 +17,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {
     public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
     {
+        private bool _isOneLoad;
         private IEnumerable<Bank> _banks;
         private void _FillListReportOfClient()
         {
@@ -34,19 +35,28 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         List = TinyMapper.Map<List<ClientReportListItemViewModel>>(result.Items);
                         
                         
-                        if (result.ClientStatusesForFilter != null && result.ClientStatusesForFilter.Count() > 0)
+                        if (!_isOneLoad && result.ClientStatusesForFilter != null && result.ClientStatusesForFilter.Count() > 0)
                         {
+                            _isOneLoad = true;
                             SetFilter("ClientStatusReportClient", result.ClientStatusesForFilter.ToArray());
                             KASTIL_BRASH_FOR_CLIENT_STATUS = Brushes.Orange;
                             OnPropertyChanged("KASTIL_BRASH_FOR_CLIENT_STATUS");
                         }
-                        if (!string.IsNullOrEmpty(result.UserLastNameForFilter))
+                        else
                         {
+                            ClearFilteres();
+                        }
+                        if (!_isOneLoad && !string.IsNullOrEmpty(result.UserLastNameForFilter))
+                        {
+                            _isOneLoad = true;
                             SetFilter("ManagerReportClient", new[] { result.UserLastNameForFilter });
                             KASTIL_BRASH_FOR_MANAGER = Brushes.Orange;
                             OnPropertyChanged("KASTIL_BRASH_FOR_MANAGER");
                         }
-                        
+                        else
+                        {
+                            ClearFilteres();
+                        }
                     }
                     else
                         throw new Exception(result.Message);
