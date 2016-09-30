@@ -10,7 +10,7 @@
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
         mc:Ignorable="d"
         Name="Window"
-        Title="СДЕЛКА ЗА НАЛИЧНЫЙ РАСЧЕТ" Height="316" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" >
+        Title="СДЕЛКА ЗА НАЛИЧНЫЙ РАСЧЕТ" Height="316" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Icon="/AIMP v3.0;component/Style/Image/Key Exchange-48.png" >
     <!--ПРИ ЗАКРЫТИИ ЕСЛИ ЧТО ТЫ МЕНЯЛОСЬ, ПОЯВЛЯЕТСЯ ДИАЛОГОВОЕ ОКНО С ПРЕДУПРИЖДЕНИЕМ-->
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"></ResourceDictionary>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         mc:Ignorable="d"
-        Title="РЕДАКТИРОВАНИЕ" Height="209.775" Width="438.722" Name="Window" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+        Title="РЕДАКТИРОВАНИЕ" Height="209.775" Width="438.722" Name="Window" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Icon="/AIMP v3.0;component/Style/Image/Edit Property-48.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="91*"/>

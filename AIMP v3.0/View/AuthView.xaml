@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" x:Class="AIMP_v3._0.View.AuthView"
         mc:Ignorable="d"
-        Title="АВТОРИЗАЦИЯ" Height="228" Width="427.09" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="АВТОРИЗАЦИЯ" Height="228" Width="427.09" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP v3.0;component/Style/Image/Facial Recognition Scan-48.png">
     <Grid>
         <Label x:Name="label" Content="АДРЕС" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="ЛОГИН" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>

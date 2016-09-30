@@ -36,6 +36,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -491,6 +494,47 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Style\Image\Filled Filter-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Services-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Facial Recognition Scan-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\View Details-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\User Folder-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Edit User Female-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Documents Folder-48.png" />
+    <Resource Include="Style\Image\MS Word-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Key Exchange-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Contract Job-48.png" />
+    <Resource Include="Style\Image\User-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\T-52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Car Insurance Card-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Parse Resumes-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\SUV-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

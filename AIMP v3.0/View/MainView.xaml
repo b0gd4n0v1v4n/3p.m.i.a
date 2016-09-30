@@ -39,9 +39,9 @@
                 <MenuItem Header="ПОЛЬЗОВАТЕЛИ" Command="{Binding EditUserRightsCommand}"></MenuItem>
                 <MenuItem Header="ПЕЧАТНЫЕ ФОРМЫ" Command="{Binding EditPrintedDocTemplateCommand}"></MenuItem>
                 </MenuItem>
-            <MenuItem Header="СПРАВКА">
+            <!--<MenuItem Header="СПРАВКА">
                 <MenuItem Header="О ПРОГРАММЕ"></MenuItem>
-            </MenuItem>
+            </MenuItem>-->
         </Menu>
         <Menu Grid.Row="1">
             <MenuItem Style="{StaticResource NewMenuItem}" Visibility="{Binding VisibleAdd}" IsEnabled="{Binding CurrentPage.NewIsEnabled}" Command="{Binding CurrentPage.New}"></MenuItem>

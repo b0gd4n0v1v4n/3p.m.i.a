@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CommissionView"
         mc:Ignorable="d"
-        Title="ДОГОВОР КОМИССИИ" Height="424.044" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Name="Window">
+        Title="ДОГОВОР КОМИССИИ" Height="424.044" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Name="Window" Icon="/AIMP v3.0;component/Style/Image/Key Exchange-48.png">
     <Grid>
 
         <Label Grid.Column="0" Grid.Row="0" x:Name="label" Content="НОМЕР" HorizontalAlignment="Left" Margin="11,11,0,0" VerticalAlignment="Top"/>

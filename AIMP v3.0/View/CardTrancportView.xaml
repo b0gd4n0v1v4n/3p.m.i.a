@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CardTrancportView"
         mc:Ignorable="d"
-        Title="КАРТОЧКА ТС" Height="713.63" Width="955.657" WindowStartupLocation="CenterScreen" Name="Window">
+        Title="КАРТОЧКА ТС" Height="713.63" Width="955.657" WindowStartupLocation="CenterScreen" Name="Window" Icon="/AIMP v3.0;component/Style/Image/Car Insurance Card-48.png">
     <Grid>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>

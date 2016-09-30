@@ -943,7 +943,7 @@
                                     <GridView>
                                         <GridViewColumn x:Name="IdCard"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <GridViewColumn x:Name="NumberCard"  Width="45" Header="№|Number" DisplayMemberBinding="{Binding Number}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="DateStartCard" Width="93" Header="ДАТА ПОСТ.|DateSale" DisplayMemberBinding="{Binding DateStart}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
+                                        <GridViewColumn x:Name="DateStartCard" Width="93" Header="ДАТА ПОСТ.|DateStart" DisplayMemberBinding="{Binding DateStart}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
                                         <GridViewColumn x:Name="NumberTCard"  Width="51" Header="№TC|NumberT" DisplayMemberBinding="{Binding NumberT}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="MakeModelTrancportCard"  Width="200" Header="МАРКА, МОДЕЛЬ ТС|MakeModelTrancport" DisplayMemberBinding="{Binding MakeModelTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="YearTrancportCard"  Width="50" Header="ГОД|YearTrancport" DisplayMemberBinding="{Binding YearTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
@@ -1086,7 +1086,7 @@
                                                 </Style>
                                             </GridViewColumn.HeaderContainerStyle>
                                         </GridViewColumn>
-                                        <GridViewColumn x:Name="DateSaleCard" Width="93" Header="ДАТА ПРОД.|DateStart" DisplayMemberBinding="{Binding DateSale}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
+                                        <GridViewColumn x:Name="DateSaleCard" Width="93" Header="ДАТА ПРОД.|DateSale" DisplayMemberBinding="{Binding DateSale}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
                                         <!--<GridViewColumn x:Name="UserCard"  Width="300" Header="ПОЛЬЗОВАТЕЛЬ|User" DisplayMemberBinding="{Binding User}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>-->
                                     </GridView>
                                 </ListView.View>

@@ -6,7 +6,7 @@
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d" Name="Window"
-        Title="ОТЧЕТЫ ПО КЛИЕНТАМ" Height="411" Width="980.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="ОТЧЕТЫ ПО КЛИЕНТАМ" Height="411" Width="980.333" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/AIMP v3.0;component/Style/Image/Parse Resumes-50.png">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"></ResourceDictionary>
     </Window.Resources>
