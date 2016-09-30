@@ -672,6 +672,13 @@ namespace AimpConsole.Wcf
                                 return helper.GetPrintedDocument(id, name);
                             }
                         }
+                    case DocumentType.Commission:
+                        {
+                            using(var helper = new CommissionHelper())
+                            {
+                                return helper.GetPrintedDocument(id, name);
+                            }
+                        }
                     default:
                         throw new NotImplementedException();
                 }
