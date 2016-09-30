@@ -3,7 +3,6 @@ using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.ClientOfReport;
-using Microsoft.Office.Interop.Word;
 using Models.Entities;
 using Models.ReportOfClient;
 using Nelibur.ObjectMapper;
