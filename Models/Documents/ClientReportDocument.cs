@@ -2,23 +2,12 @@
 using System.Collections.Generic;
 using System;
 
-namespace Models.Documents
+namespace Aimp.ServiceContracts.ClientReports
 {
-    public class ClientReportDocument : IDocument
+    public class ClientReportDocument
     {
         public IEnumerable<BankReportClient> BankReportClients { get; set; }
-        public DocumentType DocumentType
-        {
-            get
-            {
-                return DocumentType.ClientOfReport;
-            }
-        }
-
         public int Id { get; set; }
-
-        public string Identity { get; set; }
-
-        public bool IsNew { get { if (Id != 0) return false; else return true; } }
+        public bool IsNew { get { return Id == 0; } }
     }
 }

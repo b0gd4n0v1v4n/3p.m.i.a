@@ -17,8 +17,7 @@ namespace AimpLogic.CashTransactions
         void DeleteDocument(CashTransactionDocument document);
         IQueryable<CashTransaction> GetCashTransactions();
         IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates();
-        WordPrintedDocument GetPrintedDocument(int idTransaction,string name);
+        WordPrintedDocument GetPrintedDocument(int idTransaction, string name);
         IEnumerable<EntityName> GetPrintedList();
-
-        }
+    }
 }

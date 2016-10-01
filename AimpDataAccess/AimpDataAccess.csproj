@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aimp.Infrastructure\Aimp.Infrastructure.csproj">
+      <Project>{071A61C7-6474-478B-B1E0-C152165056C7}</Project>
+      <Name>Aimp.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
       <Name>Models</Name>

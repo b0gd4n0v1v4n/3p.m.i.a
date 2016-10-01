@@ -1,6 +1,6 @@
 ﻿namespace Models.SecurityRigths
 {
-    public class AdminRight : IRight
+    public class RightAdmin : IRight
     {
         public string Id
         {

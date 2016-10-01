@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27770613-24DB-4AE3-A2AB-414E18896E3B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aimp.ServiceContracts</RootNamespace>
+    <AssemblyName>Aimp.ServiceContracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AimpInfo\IAimpInfoContract.cs" />
+    <Compile Include="AimpInfo\ContractorInfo.cs" />
+    <Compile Include="AimpInfo\TrancportInfo.cs" />
+    <Compile Include="AimpInfo\TypeSearchContractor.cs" />
+    <Compile Include="AimpInfo\TypeSearchTrancport.cs" />
+    <Compile Include="CashTransactions\CashTransactionDto.cs" />
+    <Compile Include="CashTransactions\CashTransactionListItem.cs" />
+    <Compile Include="CashTransactions\ICashTransactionsContract.cs" />
+    <Compile Include="CashTransactions\CashTransactionsDto.cs" />
+    <Compile Include="ClientReports\IClientReportContract.cs" />
+    <Compile Include="ClientReports\ClientReportListItem.cs" />
+    <Compile Include="ClientReports\ClientReports.cs" />
+    <Compile Include="CommissionTransactions\CommissionDto.cs" />
+    <Compile Include="CommissionTransactions\CommissionListItem.cs" />
+    <Compile Include="CommissionTransactions\ICommissionTransactionsContract.cs" />
+    <Compile Include="CreditTransactions\CreditTransactionInfoDto.cs" />
+    <Compile Include="CreditTransactions\CreditTransactionListItem.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="CreditTransactions\CreditTransactions.cs" />
+    <Compile Include="CreditTransactions\ICreditTransactionsContract.cs" />
+    <Compile Include="Dictionaries\IDictionariesContract.cs" />
+    <Compile Include="Dictionaries\Row.cs" />
+    <Compile Include="DocumentType.cs" />
+    <Compile Include="EntityName.cs" />
+    <Compile Include="Identity.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="PrintedDocument\IPrintedDocumentContract.cs" />
+    <Compile Include="PrintedDocument\PrinDocTempListItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveEntityResult.cs" />
+    <Compile Include="TrancportCards\CardTrancportDocument.cs" />
+    <Compile Include="TrancportCards\CardTrancportListItemDto.cs" />
+    <Compile Include="TrancportCards\CardTrancportsDto.cs" />
+    <Compile Include="TrancportCards\ITrancportCardsContract.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aimp.Entities\Aimp.Entities.csproj">
+      <Project>{EC227EF6-0F8E-49DD-B314-F2201288B8CA}</Project>
+      <Name>Aimp.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Model\Aimp.Model.csproj">
+      <Project>{C64A7FF3-73C3-4362-8FA4-678E4811AEC7}</Project>
+      <Name>Aimp.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

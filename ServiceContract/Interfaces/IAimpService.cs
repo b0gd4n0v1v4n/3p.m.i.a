@@ -45,6 +45,10 @@ namespace ServiceContract.Interfaces
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
         Response DeleteClientReport(ClientReportDocument document);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
+        ExcelPrintedDocumentDto GetClientReportPrintedDocument(ClientReports reports);
         #endregion
         #region cash tranasction
         [OperationContract]
@@ -129,14 +133,25 @@ namespace ServiceContract.Interfaces
         StatusesCardTrancportDto GetStatusesCardTrancport();
         #endregion
 
+        //trancports
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
         TrancportDto GetTrancport(int id);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        SaveEntityResult SaveTrancport(Trancport trancport);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        SearchTrancportResult SearchTrancports(TypeSearchTrancport type, string text);
+
+
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
         TrancportInfo GetTrancportInfo();
 
+        //contractors
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
         ContractorInfo GetContractorInfo();
@@ -146,21 +161,13 @@ namespace ServiceContract.Interfaces
         SearchContractorResult SearchContractors(TypeSearchContractor type, string text);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        SearchTrancportResult SearchTrancports(TypeSearchTrancport type, string text);
-
-        [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        UserFileDto GetUserFile(int id);
-
-        [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         SaveEntityResult SaveContractor(Contractor contractor);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        SaveEntityResult SaveTrancport(Trancport trancport);
 
+
+
+        //users info
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         UserRightsDto GetUserRights(int id);
@@ -181,6 +188,12 @@ namespace ServiceContract.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Response DeleteUser(User user);
 
+        //user files
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json)]
+        UserFileDto GetUserFile(int id);
+
+        //printed
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         WordPrintedDocumentDto GetPrintedDocument(DocumentType type,string name,int id);
@@ -205,6 +218,7 @@ namespace ServiceContract.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Response DeletePrintedDocTemplate(PrintedDocumentTemplate template);
 
+        //dictionary
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns);
@@ -221,8 +235,6 @@ namespace ServiceContract.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
         Response SaveRowValuesDictionary(string tableName, IDictionary<string,string> columnValues,int id);
 
-        [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ExcelPrintedDocumentDto GetClientReportPrintedDocument(ClientReports reports);
+        
     }
 }

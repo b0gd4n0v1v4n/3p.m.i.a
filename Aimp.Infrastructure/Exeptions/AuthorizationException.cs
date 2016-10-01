@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AimpLogic.UserRights
+namespace Aimp.Infrastructure.Users.Exeptions
 {
     public class AuthorizationException : Exception
     {

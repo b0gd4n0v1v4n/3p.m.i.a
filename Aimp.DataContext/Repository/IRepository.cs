@@ -1,10 +1,10 @@
-﻿using Models.Entities;
+﻿using Aimp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace AimpDataAccess.Repository
+namespace Aimp.DataContext.Repository
 {
     public interface IRepository<TEntity> 
         where TEntity : IEntity
@@ -16,5 +16,6 @@ namespace AimpDataAccess.Repository
         void DeleteRange(int[] ids);
         IQueryable<TEntity> All(params Expression<Func<TEntity, object>>[] includes);
         TEntity GetOrAdd(IDictionary<string, string> fieldValues);
+        TEntity Create();
     }
 }
