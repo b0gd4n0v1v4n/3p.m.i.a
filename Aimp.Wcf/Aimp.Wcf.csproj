@@ -43,7 +43,15 @@
     <Compile Include="CurrentUserProvider.cs" />
     <Compile Include="LoggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AimpInfoService.cs" />
+    <Compile Include="Services\CashTransactionsService.cs" />
+    <Compile Include="Services\ClientReportServices.cs" />
+    <Compile Include="Services\CommissionTransactionsService.cs" />
+    <Compile Include="Services\CreditTransactionsService.cs" />
+    <Compile Include="Services\DictionariesService.cs" />
+    <Compile Include="Services\PrintedDocumentService.cs" />
     <Compile Include="Services\TrancportCardsService.cs" />
+    <Compile Include="UserFileCheck.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aimp.DataContext\Aimp.DataContext.csproj">
@@ -57,6 +65,14 @@
     <ProjectReference Include="..\Aimp.Infrastructure\Aimp.Infrastructure.csproj">
       <Project>{071A61C7-6474-478B-B1E0-C152165056C7}</Project>
       <Name>Aimp.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Model\Aimp.Model.csproj">
+      <Project>{C64A7FF3-73C3-4362-8FA4-678E4811AEC7}</Project>
+      <Name>Aimp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.PrintedDocument\Aimp.PrintedDocument.csproj">
+      <Project>{59AB639D-35E7-4A7B-ADF7-24CD326BC1E6}</Project>
+      <Name>Aimp.PrintedDocument</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aimp.ServiceContracts\Aimp.ServiceContracts.csproj">
       <Project>{27770613-24db-4ae3-a2ab-414e18896e3b}</Project>

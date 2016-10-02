@@ -32,7 +32,7 @@ namespace Aimp.ServiceContracts.AimpInfo
         SaveEntityResult SaveContractor(IContractor contractor);
 
         [OperationContract]
-        IEnumerable<IUserRight> GetUserRights(int id);
+        IEnumerable<IUserRight> GetUserRights(int idUser);
 
         [OperationContract]
         IEnumerable<IUser> GetUsers();

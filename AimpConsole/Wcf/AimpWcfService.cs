@@ -392,13 +392,13 @@ namespace AimpConsole.Wcf
         {
             try
             {
-                //using (var aimp = new Aimp(_login, _password))
-                //{
-                //    return new TrancportDto()
-                //    {
-                //        Trancport = aimp.GetTrancport(id)
-                //    };
-                //}
+                using (var aimp = new Aimp(_login, _password))
+                {
+                    return new TrancportDto()
+                    {
+                        Trancport = aimp.GetTrancport(id)
+                    };
+                }
                 return null;
             }
             catch (Exception ex)

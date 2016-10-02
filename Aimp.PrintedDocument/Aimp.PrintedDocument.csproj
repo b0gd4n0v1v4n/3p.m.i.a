@@ -30,7 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,10 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentBuilders\Excel\Excel.cs" />
+    <Compile Include="DocumentBuilders\Excel\ExcelDocumentBuilder.cs" />
+    <Compile Include="DocumentBuilders\Word\WordDocument.cs" />
+    <Compile Include="DocumentBuilders\Word\WordDocumentBuilder.cs" />
+    <Compile Include="DocumentBuilders\Word\WordSelection.cs" />
     <Compile Include="Helpers\MoneyToText.cs" />
     <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="ILabelValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DocumentBuilders\IDocumentBuilder.cs" />
     <Compile Include="Services\IPrintedDocumentService.cs" />
     <Compile Include="Services\PrintedDocumentService.cs" />
     <Compile Include="Templates\AktTransactionPrintedDocumentTemplate.cs" />
@@ -66,6 +83,14 @@
     <ProjectReference Include="..\Aimp.Infrastructure\Aimp.Infrastructure.csproj">
       <Project>{071A61C7-6474-478B-B1E0-C152165056C7}</Project>
       <Name>Aimp.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Model\Aimp.Model.csproj">
+      <Project>{C64A7FF3-73C3-4362-8FA4-678E4811AEC7}</Project>
+      <Name>Aimp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.ServiceContracts\Aimp.ServiceContracts.csproj">
+      <Project>{27770613-24DB-4AE3-A2AB-414E18896E3B}</Project>
+      <Name>Aimp.ServiceContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aimp.UserRights\Aimp.UserRights.csproj">
       <Project>{3a19cd42-08cc-48ca-9615-49e27b66c400}</Project>

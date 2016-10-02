@@ -1,4 +1,5 @@
 ﻿using Aimp.Entities;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 namespace Aimp.ServiceContracts.CashTransactions
@@ -7,7 +8,7 @@ namespace Aimp.ServiceContracts.CashTransactions
     public interface ICashTransactionsContract
     {
         [OperationContract]
-        CashTransactionsDto GetCashTransactions();
+        IEnumerable<CashTransactionListItem> GetCashTransactions();
 
         [OperationContract]
         CashTransactionDto GetCashTransaction(int id);

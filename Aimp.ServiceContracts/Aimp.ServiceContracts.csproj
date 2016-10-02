@@ -50,7 +50,7 @@
     <Compile Include="CashTransactions\CashTransactionDto.cs" />
     <Compile Include="CashTransactions\CashTransactionListItem.cs" />
     <Compile Include="CashTransactions\ICashTransactionsContract.cs" />
-    <Compile Include="CashTransactions\CashTransactionsDto.cs" />
+    <Compile Include="ClientReports\ClientReportDto.cs" />
     <Compile Include="ClientReports\IClientReportContract.cs" />
     <Compile Include="ClientReports\ClientReportListItem.cs" />
     <Compile Include="ClientReports\ClientReports.cs" />
