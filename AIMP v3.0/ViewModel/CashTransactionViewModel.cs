@@ -1,17 +1,14 @@
-﻿using AIMP_v3._0.DataAccess;
-using AIMP_v3._0.Helpers;
+﻿using AIMP_v3._0.Helpers;
 using AIMP_v3._0.View;
-using Models.Documents;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using AIMP_v3._0.Enums;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.User_Control;
-using Models.Entities;
 using Nelibur.ObjectMapper;
+using Aimp.Entities;
+using AIMP_v3._0.Aimp.Services;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -79,14 +76,14 @@ namespace AIMP_v3._0.ViewModel
             return true;
         }
         public bool IsProxy { get; set; }
-        public CashTransactionDocument CashTransaction { get; }
-        private CashTransactionDocument _transaction;
+        public ICashTransaction CashTransaction { get; }
+        private ICashTransaction _transaction;
         public ObservableCollection<PrintItem> PrintedList { get; }
-        public CashTransactionViewModel(CashTransactionDocument cashTransaction, IEnumerable<PrintItem> printedList)
+        public CashTransactionViewModel(ICashTransaction cashTransaction, IEnumerable<PrintItem> printedList)
         {
             CashTransaction = cashTransaction;
             IsProxy = cashTransaction.Owner != null;
-            _transaction = TinyMapper.Map<CashTransactionDocument>(cashTransaction);
+            _transaction = TinyMapper.Map<ICashTransaction>(cashTransaction);
             PrintedList = new ObservableCollection<PrintItem>(printedList);
         }
         public Command SaveChangesCommand
@@ -106,18 +103,16 @@ namespace AIMP_v3._0.ViewModel
                                 CashTransaction.NumberProxy = null;
                                 CashTransaction.NumberRegistry = null;
                             }
-                            using (AimpService service = new AimpService())
+                            using (var service = ServiceClientProvider.GetCashTransaction())
                             {
                                 var response = service.SaveCashTransaction(CashTransaction);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
+                                
 
                                 CashTransaction.Id = response.Id;
                                 CashTransaction.Number = response.Number;
-                                _transaction = TinyMapper.Map<CashTransactionDocument>(CashTransaction);
+                                _transaction = TinyMapper.Map<ICashTransaction>(CashTransaction);
                                 OnPropertyChanged("CashTransaction");
-                                MessageBox.Show(response.Message);
+                                MessageBox.Show("Данные успешно сохранены.");
                             }
                         }
                         catch (Exception ex)
@@ -140,12 +135,9 @@ namespace AIMP_v3._0.ViewModel
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                using (var service = ServiceClientProvider.GetCashTransaction())
                                 {
-                                    var response = service.DeleteCashTransaction(CashTransaction);
-
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
+                                    service.DeleteCashTransaction(CashTransaction);
                                 }
 
                                 var window = win as Window;

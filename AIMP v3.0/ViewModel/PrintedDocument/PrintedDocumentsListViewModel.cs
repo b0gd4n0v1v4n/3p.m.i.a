@@ -1,4 +1,6 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.Entities;
+using AIMP_v3._0.Aimp.Services;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
 using System;
 using System.Collections.Generic;
@@ -16,12 +18,10 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
         public PrintedDocumentListItemViewModel CurrentItem { get; set; }
         public PrintedDocumentsListViewModel()
         {
-            using (var service = new AimpService())
+            using (var service = ServiceClientProvider.GetPrintedDocument())
             {
-                var response = service.GetListPrintDocTemplateDto();
-                if (response.Error)
-                    throw new Exception(response.Message);
-                var lst = response.Items
+                var response = service.GetPrintedDocTemplatesList();
+                var lst = response
                     .Select(x => new PrintedDocumentListItemViewModel()
                     {
                         Id = x.Id,
@@ -42,12 +42,10 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                 {
                     try
                     {
-                        using (var service = new AimpService())
+                        using (var service = ServiceClientProvider.GetPrintedDocument())
                         {
-                            var response = service.GetPrintDocTemplate(CurrentItem.Id);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var vm = new PrintedDocumentEditViewModel(response.Template);
+                            var response = service.GetPrintedDocTemplate(CurrentItem.Id);
+                            var vm = new PrintedDocumentEditViewModel(response);
                             var view = new EditPrintedDocumentView(vm);
                             view.ShowDialog();
                         }
@@ -67,7 +65,7 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                 {
                     try
                     {
-                        var vm = new PrintedDocumentEditViewModel(new Models.Entities.PrintedDocumentTemplate());
+                        var vm = new PrintedDocumentEditViewModel(new PrintedDocumentTemplate());
                         var view = new EditPrintedDocumentView(vm);
                         view.ShowDialog();
                     }

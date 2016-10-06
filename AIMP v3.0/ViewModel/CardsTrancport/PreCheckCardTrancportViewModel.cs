@@ -1,10 +1,6 @@
-﻿using AIMP_v3._0.Model;
-using Models;
+﻿
+using Aimp.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel.CardsTrancport
@@ -16,7 +12,7 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
         public DateTime Date { get { return _date; } set { _date = value; OnPropertyChanged("DateString"); } }
         public string DateString { get
             {
-                return Date.ToString(Models.DataFormats.DateFormat);
+                return Date.ToString(AimpDataFormats.DateFormat);
             } }
         public string Name { get; set; }
         public decimal Summ { get; set; }

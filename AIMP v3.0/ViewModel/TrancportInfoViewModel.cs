@@ -7,10 +7,12 @@ using System.Collections.ObjectModel;
 using System;
 using System.Windows;
 using AIMP_v3._0.Helpers;
-using Models.Entities;
 using AIMP_v3._0.DataInformation;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.View;
+using Aimp.Entities;
+using Aimp.Model.Entities;
+using AIMP_v3._0.Aimp.Services;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -18,8 +20,8 @@ namespace AIMP_v3._0.ViewModel
     {
         private IObjectSetValue _window;
 
-        private IEnumerable<ModelTrancport> _models;
-        private Trancport _trancport;
+        private IEnumerable<IModelTrancport> _models;
+        private ITrancport _trancport;
         private bool _Validation()
         {
             if (!CheckValue.Check(EditableTrancport.Make?.Name))
@@ -185,9 +187,9 @@ namespace AIMP_v3._0.ViewModel
             }
         }
 
-        public ObservableCollection<ModelTrancport> Models { get; set; }
+        public ObservableCollection<IModelTrancport> Models { get; set; }
 
-        public ObservableCollection<MakeTrancport> Makes { get; set; }
+        public ObservableCollection<IMakeTrancport> Makes { get; set; }
 
         public string MakeTrancport
         {
@@ -208,7 +210,7 @@ namespace AIMP_v3._0.ViewModel
                             Name = value
                         };
 
-                        Models = new ObservableCollection<ModelTrancport>();
+                        Models = new ObservableCollection<IModelTrancport>();
 
                         if (EditableTrancport.Make.Id > 0)
                         {
@@ -219,7 +221,7 @@ namespace AIMP_v3._0.ViewModel
                     {
                         EditableTrancport.Make = make;
 
-                        Models = new ObservableCollection<ModelTrancport>(_models.Where(x => x.Make.Name == value));
+                        Models = new ObservableCollection<IModelTrancport>(_models.Where(x => x.Make.Name == value));
                     }
 
                     OnPropertyChanged("Models");
@@ -344,7 +346,7 @@ namespace AIMP_v3._0.ViewModel
             }
         }
 
-        public Trancport EditableTrancport { get; }
+        public ITrancport EditableTrancport { get; }
 
         public TrancportInfoViewModel(Trancport trancport, IObjectSetValue window)
         {
@@ -382,7 +384,7 @@ namespace AIMP_v3._0.ViewModel
                     {
                         try
                         {
-                            MakeTrancport make = Makes.FirstOrDefault(x => x.Name == EditableTrancport.Make.Name);
+                            var make = Makes.FirstOrDefault(x => x.Name == EditableTrancport.Make.Name);
 
                             if (make == null)
                                 make = new MakeTrancport()
@@ -392,7 +394,7 @@ namespace AIMP_v3._0.ViewModel
 
                             EditableTrancport.Make = make;
 
-                            ModelTrancport model = _models.FirstOrDefault(x => x.Name == EditableTrancport.Model.Name);
+                            var model = _models.FirstOrDefault(x => x.Name == EditableTrancport.Model.Name);
 
                             if (model == null)
                                 model = new ModelTrancport()
@@ -402,11 +404,9 @@ namespace AIMP_v3._0.ViewModel
                                 };
 
                             EditableTrancport.Model = model;
-                            using (var service = new AimpService())
+                            using (var service = ServiceClientProvider.GetAimpInfo())
                             {
                                 var response = service.SaveTrancport(EditableTrancport);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
                                 EditableTrancport.Id = response.Id;
                             }
                             var window = (win as Window);

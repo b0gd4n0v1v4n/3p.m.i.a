@@ -1,6 +1,5 @@
-﻿using Aimp.UserRights.Exeptions;
+﻿using Aimp.Infrastructure.Users.Exeptions;
 using Aimp.UserRights.Rights;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Aimp.UserRights
@@ -15,7 +14,7 @@ namespace Aimp.UserRights
         {
             _add = new RightAdd();
             _delete = new RightDelete();
-            _admin = new RightAdmin());
+            _admin = new RightAdmin();
             _view = new RightView(); 
         }
         public static bool IsAdmin(this IAccount user)

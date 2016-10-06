@@ -1,5 +1,4 @@
-﻿using Aimp.Infrastructure.Users;
-using Aimp.Entities;
+﻿using Aimp.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Aimp.Model.Entities
@@ -8,7 +7,7 @@ namespace Aimp.Model.Entities
     {
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public Infrastucture.Entities.IUser User { get; set; }
+        public IUser User { get; set; }
         public string RightId { get; set; }
     }
 }

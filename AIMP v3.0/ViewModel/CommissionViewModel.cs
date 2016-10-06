@@ -1,18 +1,15 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Entities;
+using AIMP_v3._0.Aimp.Services;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel;
-using Models.Documents;
-using Models.Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0
@@ -80,17 +77,17 @@ namespace AIMP_v3._0
             return true;
         }
         public bool IsProxy { get; set; }
-        public CommissionDocument Commission { get; }
-        private CommissionDocument _commission;
+        public ICommissionTransaction Commission { get; }
+        private ICommissionTransaction _commission;
         public ObservableCollection<PrintItem> PrintedList { get; }
-        public ObservableCollection<SourceTrancport> SourcesTrancport { get; }
-        public CommissionViewModel(CommissionDocument commission, IEnumerable<PrintItem> printedList,IEnumerable<SourceTrancport> sourcesTrancport)
+        public ObservableCollection<ISourceTrancport> SourcesTrancport { get; }
+        public CommissionViewModel(ICommissionTransaction commission, IEnumerable<PrintItem> printedList,IEnumerable<ISourceTrancport> sourcesTrancport)
         {
             Commission = commission;
             IsProxy = commission.Owner != null;
-            _commission = TinyMapper.Map<CommissionDocument>(Commission);
+            _commission = TinyMapper.Map<ICommissionTransaction>(Commission);
             PrintedList = new ObservableCollection<PrintItem>(printedList);
-            SourcesTrancport = new ObservableCollection<SourceTrancport>(sourcesTrancport);
+            SourcesTrancport = new ObservableCollection<ISourceTrancport>(sourcesTrancport);
             Commission.SourceTrancport = sourcesTrancport.FirstOrDefault(x => x.Id == commission.SourceTrancport?.Id);
         }
         public Command SaveChangesCommand
@@ -110,29 +107,24 @@ namespace AIMP_v3._0
                                 Commission.NumberProxy = null;
                                 Commission.NumberRegistry = null;
                             }
-                            using (AimpService service = new AimpService())
+                            using (var service = ServiceClientProvider.GetCommissionTransaction())
                             {
                                 var response = service.SaveCommission(Commission);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
+                                
                                 Commission.Id = response.Id;
                                 Commission.Number = response.Number;
+                                using(var cardService = ServiceClientProvider.GetTrancportCard())
                                 if (Commission.IsUseCardTrancport)
                                 {
-                                    var responseAdd = service.AddCardTrancport(Commission.Id,Commission.Date);
-                                    if (responseAdd.Error)
-                                        throw new Exception(responseAdd.Message);
+                                    var responseAdd = cardService.AddCardTrancport(Commission.Id,Commission.Date);
                                 }
                                 else {
-                                    var responseDelete = service.DeleteCardTrancport(Commission.Id);
-                                    if (responseDelete.Error)
-                                        throw new Exception(responseDelete.Message);
+                                    cardService.DeleteCardTrancport(Commission.Id);
                                 }
                                 
                             }
                             OnPropertyChanged("Commission");
-                            _commission = TinyMapper.Map<CommissionDocument>(Commission);
+                            _commission = TinyMapper.Map<ICommissionTransaction>(Commission);
                             MessageBox.Show("Данные успешно сохранены");
                         }
                         catch (Exception ex)
@@ -155,12 +147,9 @@ namespace AIMP_v3._0
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                using (var service = ServiceClientProvider.GetCommissionTransaction())
                                 {
-                                    var response = service.DeleteCommission(Commission);
-
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
+                                    service.DeleteCommission(Commission);
                                 }
 
                                 var window = win as Window;

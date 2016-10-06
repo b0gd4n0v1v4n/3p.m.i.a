@@ -17,7 +17,7 @@ namespace AIMP_v3._0.Aimp.Services.Clients
             throw new NotImplementedException();
         }
 
-        public ClientReportDto GetClientReport(int id)
+        public ClientReportDto GetClientReport(int? id)
         {
             throw new NotImplementedException();
         }

@@ -93,7 +93,7 @@ namespace Aimp.Wcf.Services
                     return new CardTrancportsDto()
                     {
                         Items = items,
-                        StatusesCardForFilerStart = new string[] { context..StatusesCardTrancport.FirstOrDefault()?.Name }
+                        StatusesCardForFilerStart = new string[] { context.StatusesCardTrancport.All().FirstOrDefault()?.Name }
                     };
                 }
             }

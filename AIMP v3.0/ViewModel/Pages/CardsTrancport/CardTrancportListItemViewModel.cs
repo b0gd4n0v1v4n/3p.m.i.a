@@ -1,4 +1,4 @@
-﻿using AIMP_v3._0.Model;
+﻿using Aimp.ServiceContracts;
 
 namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
 {

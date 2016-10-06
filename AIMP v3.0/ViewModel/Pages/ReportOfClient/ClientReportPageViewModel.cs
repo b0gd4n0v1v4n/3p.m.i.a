@@ -1,10 +1,11 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿
+using Aimp.Entities;
+using Aimp.ServiceContracts.ClientReports;
+using AIMP_v3._0.Aimp.Services;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.ClientOfReport;
-using Models.Entities;
-using Models.ReportOfClient;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,15 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
     public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
     {
         private bool _isOneLoad;
-        private IEnumerable<Bank> _banks;
+        private IEnumerable<IBank> _banks;
         private void _FillListReportOfClient()
         {
             try
             {
-                using (var aimp = new AimpService())
+                using (var aimp = ServiceClientProvider.GetClientReport())
                 {
                     var result = aimp.GetClientReports();
-
-                    if (!result.Error)
-                    {
+                    
                         _banks = result.Banks;
                         BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
 
@@ -57,9 +56,6 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         {
                             ClearFilteres();
                         }
-                    }
-                    else
-                        throw new Exception(result.Message);
                 }
             }
             catch (Exception ex)
@@ -137,31 +133,26 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                 {
                     try
                     {
-                        using (var aimp = new AimpService())
+                        using (var aimp = ServiceClientProvider.GetClientReport())
                         {
                             var clientReports = new ClientReports();
                             clientReports.Banks = _banks;
-                            clientReports.Items = FilteringList.Select(y=>new ClientReportListItem()
+                            clientReports.Items = FilteringList.Select(y => new ClientReportListItem()
                             {
                                 DateReportClient = y.DateReportClient,
                                 FullNameReportClient = y.FullNameReportClient,
                                 TelefonReportClient = y.TelefonReportClient,
-                                TrancportNameReportClient =y.TrancportNameReportClient,
-                                 PriceTrancportReportClient = y.PriceTrancportReportClient,
-                                 TotalContributionReportClient = y.TotalContributionReportClient,
-                                 ProgrammCreditReportClient = y.ProgrammCreditReportClient,
-                                 BankStatusesReportClient = y.BankStatusesReportClient,
-                                  ClientStatusReportClient = y.ClientStatusReportClient,
-                                  SourceInfoReportClient = y.SourceInfoReportClient
+                                TrancportNameReportClient = y.TrancportNameReportClient,
+                                PriceTrancportReportClient = y.PriceTrancportReportClient,
+                                TotalContributionReportClient = y.TotalContributionReportClient,
+                                ProgrammCreditReportClient = y.ProgrammCreditReportClient,
+                                BankStatusesReportClient = y.BankStatusesReportClient,
+                                ClientStatusReportClient = y.ClientStatusReportClient,
+                                SourceInfoReportClient = y.SourceInfoReportClient
                             });
-                            var result = aimp.GetClientReportList(clientReports);
+                            var result = aimp.GetClientReportPrintedDocument(clientReports);
 
-                            if (!result.Error)
-                            {
-                                OpenUserFile.Open("Отчет",result.Document.File);
-                            }
-                            else
-                                throw new Exception(result.Message);
+                            OpenUserFile.Open("Отчет", result.File);
                         }
                     }
                     catch (Exception ex)

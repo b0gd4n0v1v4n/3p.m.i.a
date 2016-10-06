@@ -5,29 +5,30 @@ using System.Linq;
 using System.Windows;
 using AIMP_v3._0.Interfaces;
 using AIMP_v3._0.View;
-using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Extensions;
 using Nelibur.ObjectMapper;
 using AIMP_v3._0.Helpers;
-using Models.Entities;
+using Aimp.Entities;
+using Aimp.Model.Entities;
+using AIMP_v3._0.Aimp.Services;
 
 namespace AIMP_v3._0.ViewModel
 {
     public class LegalPersonViewModel : BaseViewModel
     {
-        private List<City> _cities;
+        private List<ICity> _cities;
 
-        public Contractor EditableContractor { get; }
-        private Contractor _contractor;
+        public IContractor EditableContractor { get; }
+        private IContractor _contractor;
         private IObjectSetValue _window
             ;
         public bool IsPhisicalPerson { get; set; }
 
         public Visibility IsNew { get; set; }
 
-        public ObservableCollection<City> Cities { get; private set; }
+        public ObservableCollection<ICity> Cities { get; private set; }
 
-        public List<Region> Regions { get; private set; }
+        public List<IRegion> Regions { get; private set; }
 
         public string Region
         {
@@ -48,13 +49,13 @@ namespace AIMP_v3._0.ViewModel
                             Name = value
                         };
 
-                        Cities = new ObservableCollection<City>();
+                        Cities = new ObservableCollection<ICity>();
 
                         City = string.Empty;
                     }
                     else
                     {
-                        Cities = new ObservableCollection<City>(_cities.Where(x => x.Region.Name == value));
+                        Cities = new ObservableCollection<ICity>(_cities.Where(x => x.Region.Name == value));
 
                         EditableContractor.Region = region;
                     }
@@ -95,17 +96,15 @@ namespace AIMP_v3._0.ViewModel
 
         private void _Settings()
         {
-            using (AimpService service = new AimpService())
+            using (var service = ServiceClientProvider.GetAimpInfo())
             {
                 var info = service.GetContractorInfo();
-                if (info.Error)
-                    throw new Exception(info.Message);
-                _cities = info.Cities.ToList();
-                Regions = info.Regions.ToList();
+                _cities = info.Cities?.ToList();
+                Regions = info.Regions?.ToList();
             }
         }
 
-        public LegalPersonViewModel(Contractor contractor, IObjectSetValue window)
+        public LegalPersonViewModel(IContractor contractor, IObjectSetValue window)
         {
             _window = window;
 
@@ -199,7 +198,7 @@ namespace AIMP_v3._0.ViewModel
                     {
                         if (_Validation())
                         {
-                            Region region = Regions.FirstOrDefault(x => x.Name == EditableContractor.Region.Name);
+                            var region = Regions.FirstOrDefault(x => x.Name == EditableContractor.Region.Name);
 
                             if (region == null)
                                 region = new Region()
@@ -209,7 +208,7 @@ namespace AIMP_v3._0.ViewModel
 
                             EditableContractor.Region = region;
 
-                            City city = _cities.FirstOrDefault(x => x.Name == EditableContractor.City.Name);
+                            var city = _cities.FirstOrDefault(x => x.Name == EditableContractor.City.Name);
 
                             if (city == null)
                                 city = new City()
@@ -219,11 +218,9 @@ namespace AIMP_v3._0.ViewModel
                                 };
 
                             EditableContractor.City = city;
-                            using (var service = new AimpService())
+                            using (var service = ServiceClientProvider.GetAimpInfo())
                             {
                                 var response = service.SaveContractor(EditableContractor);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
                                 EditableContractor.Id = response.Id;
                             }
                             var window = (win as Window);

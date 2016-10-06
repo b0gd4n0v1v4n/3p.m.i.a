@@ -14,7 +14,7 @@ namespace Aimp.ServiceContracts.ClientReports
         ClientReportDto GetNewClientReport();
 
         [OperationContract]
-        ClientReportDto GetClientReport(int id);
+        ClientReportDto GetClientReport(int? id);
 
         [OperationContract]
         void SaveClientReport(IClientReport document);

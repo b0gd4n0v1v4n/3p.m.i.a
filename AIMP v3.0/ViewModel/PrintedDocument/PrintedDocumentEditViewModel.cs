@@ -1,8 +1,10 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Entities;
+using Aimp.Model.Entities;
+using Aimp.Model.PrintedDocument;
+using AIMP_v3._0.Aimp.Services;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.View;
-using Models.Entities;
-using Models.PrintedDocument.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,9 +19,9 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
 {
     public class PrintedDocumentEditViewModel: BaseViewModel
     {
-        public PrintedDocumentTemplate Template { get; }
+        public IPrintedDocumentTemplate Template { get; }
         public ObservableCollection<string> TypeList { get; }
-        public PrintedDocumentEditViewModel(PrintedDocumentTemplate template)
+        public PrintedDocumentEditViewModel(IPrintedDocumentTemplate template)
         {
             Template = template;
             TypeList = new ObservableCollection<string>()
@@ -86,11 +88,9 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                     {
                         if (Template.File == null)
                             throw new Exception("Шаблон не выбран");
-                        using (var service = new AimpService())
+                        using (var service = ServiceClientProvider.GetPrintedDocument())
                         {
-                            var response = service.SavePrintDocTemplate(Template);
-                            if (response.Error)
-                                throw new Exception(response.Message);
+                            service.SavePrintedDocTemplate(Template);
                         }
                         System.Windows.MessageBox.Show("Данные сохранены");
                     }
@@ -123,16 +123,11 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                     {
                         try
                         {
-                            using (var service = new AimpService())
+                            using (var service = ServiceClientProvider.GetPrintedDocument())
                             {
-                                var response = service.DeletePrintedDocTemplate(Template);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                else
-                                {
-                                    System.Windows.MessageBox.Show(response.Message);
+                                service.DeletePrintedDocTemplate(Template);
+                                    System.Windows.MessageBox.Show("ОК");
                                     (win as Window)?.Close();
-                                }
                             }
                         }
                         catch (Exception ex)

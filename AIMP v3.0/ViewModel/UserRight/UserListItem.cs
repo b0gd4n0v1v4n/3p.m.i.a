@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Models.Entities;
+﻿using Aimp.Model.Entities;
 
 namespace AIMP_v3._0.ViewModel.UserRight
 {

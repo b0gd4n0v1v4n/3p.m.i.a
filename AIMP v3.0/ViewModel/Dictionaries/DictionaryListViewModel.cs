@@ -1,7 +1,7 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using AIMP_v3._0.Aimp.Services;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.Dictionaries;
-using Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,14 +18,13 @@ namespace AIMP_v3._0.ViewModel
         public DictionaryListViewModel(string tableName,IEnumerable<ColumnViewModel> columnView)
         {
             _columnView = columnView;
-            using(var service = new AimpService())
+            using(var service = ServiceClientProvider.GetDictionary())
             {
                 _tableName = tableName;
                 var response = service.GetDictionary(_tableName,columnView.Select(x => x.DbName));
-                if (response.Error)
-                    throw new Exception(response.Message);
+
                 var rows = new List<EntityViewModel>();
-                foreach(var iRow in response.Rows)
+                foreach(var iRow in response)
                 {
                     var cells = new List<CellViewModel>();
                     var name = string.Empty;

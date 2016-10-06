@@ -1,17 +1,14 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Entities;
+using AIMP_v3._0.Aimp.Services;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel
@@ -89,24 +86,24 @@ namespace AIMP_v3._0.ViewModel
             return true;
         }
         public bool IsProxy { get; set; }
-        public CreditTransactionDocument CreditTransaction { get; }
-        private CreditTransactionDocument _transaction;
+        public ICreditTransaction CreditTransaction { get; }
+        private ICreditTransaction _transaction;
         public ObservableCollection<PrintItem> PrintedList { get; }
 
-        public CreditTransactionViewModel(CreditTransactionDocument creditTransaction, IEnumerable<PrintItem> printedList, IEnumerable<Creditor> creditors, IEnumerable<Requisit> requisits)
+        public CreditTransactionViewModel(ICreditTransaction creditTransaction, IEnumerable<PrintItem> printedList, IEnumerable<ICreditor> creditors, IEnumerable<IRequisit> requisits)
         {
             IsProxy = creditTransaction.Owner != null;
             PrintedList = new ObservableCollection<PrintItem>(printedList);
             creditTransaction.Creditor = creditors.FirstOrDefault(x => x.Id == creditTransaction.Creditor?.Id);
             creditTransaction.Requisit = requisits.FirstOrDefault(x => x.Id == creditTransaction.Requisit?.Id);
-            Creditors = new ObservableCollection<Creditor>(creditors);
-            Requisits = new ObservableCollection<Requisit>(requisits);
+            Creditors = new ObservableCollection<ICreditor>(creditors);
+            Requisits = new ObservableCollection<IRequisit>(requisits);
 
             CreditTransaction = creditTransaction;
-            _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
+            _transaction = TinyMapper.Map<ICreditTransaction>(CreditTransaction);
         }
-        public ObservableCollection<Creditor> Creditors { get; private set; }
-        public ObservableCollection<Requisit> Requisits { get; private set; }
+        public ObservableCollection<ICreditor> Creditors { get; private set; }
+        public ObservableCollection<IRequisit> Requisits { get; private set; }
 
         public Command SaveChangesCommand
         {
@@ -125,15 +122,13 @@ namespace AIMP_v3._0.ViewModel
                                 CreditTransaction.NumberProxy = null;
                                 CreditTransaction.NumberRegistry = null;
                             }
-                            using (AimpService service = new AimpService())
+                            using (var service = ServiceClientProvider.GetCreditTransaction())
                             {
                                 var response = service.SaveCreditTransaction(CreditTransaction);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
+                                
                                 CreditTransaction.Id = response.Id;
                                 CreditTransaction.Number = response.Number;
-                                _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
+                                _transaction = TinyMapper.Map<ICreditTransaction>(CreditTransaction);
                                 OnPropertyChanged("CreditTransaction");
                             }
                             MessageBox.Show("Данные успешно сохранены");
@@ -158,12 +153,9 @@ namespace AIMP_v3._0.ViewModel
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                using (var service = ServiceClientProvider.GetCreditTransaction())
                                 {
-                                    var response = service.DeleteCreditTransaction(CreditTransaction);
-
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
+                                    service.DeleteCreditTransaction(CreditTransaction);
                                 }
 
                                 var window = win as Window;

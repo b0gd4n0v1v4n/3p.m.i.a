@@ -1,9 +1,9 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Infrastructure;
+using Aimp.ServiceContracts;
+using AIMP_v3._0.Aimp.Services;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.PrintedDocument.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,26 +18,20 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
         {
             try
             {
-                using (AimpService service = new AimpService())
+                using (var service = ServiceClientProvider.GetCashTransaction())
                 {
                     var response = service.GetCashTransactions();
 
-                    if (response.Error)
-                    {
-                        MessageBox.Show(response.Message);
-                        return;
-                    }
-
                     List =
                         new List<CashTransactionListItemViewModel>(
-                            response.Items.Select(x => new CashTransactionListItemViewModel()
+                            response.Select(x => new CashTransactionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(Models.DataFormats.DateFormat),
+                                Date = x.Date.ToString(AimpDataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -68,19 +62,21 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                 {
                     try
                     {
-                        using(var service = new AimpService())
+                        using (var service = ServiceClientProvider.GetCashTransaction())
                         {
-                            var response = service.GetPrintedList(DocumentType.CashTransaction);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var document = new CashTransactionDocument();
-                            var lst = response.List.Select(p => new PrintItem()
+                            using (var printeService = ServiceClientProvider.GetPrintedDocument())
                             {
-                                Name = p.Name,
-                                Type = DocumentType.CashTransaction,
-                                Document = document
-                            });
-                            new CashTransactionView(new CashTransactionViewModel(document,lst)).ShowDialog();
+                                var response = printeService.GetPrintedList(DocumentType.CashTransaction);
+
+                                var document = new CashTransaction();
+                                var lst = response.Select(p => new PrintItem()
+                                {
+                                    Name = p.Name,
+                                    Type = DocumentType.CashTransaction,
+                                    Document = document
+                                });
+                                new CashTransactionView(new CashTransactionViewModel(document, lst)).ShowDialog();
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -115,25 +111,22 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                         if (CurrentItem != null)
                         {
                             CashTransactionViewModel vm;
-                            using (AimpService service = new AimpService())
+                            using (var service = ServiceClientProvider.GetCashTransaction())
                             {
                                 var transaction = service.GetCashTransaction(CurrentItem.Id);
 
-                                if (transaction.Error)
+                                using (var printeService = ServiceClientProvider.GetPrintedDocument())
                                 {
-                                    MessageBox.Show("Ошибка сервера", transaction.Message);
-                                    return;
-                                }
-                                    var response = service.GetPrintedList(DocumentType.CashTransaction);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    var lst = response.List.Select(p => new PrintItem()
+                                    var response = printeService.GetPrintedList(DocumentType.CashTransaction);
+
+                                    var lst = response.Select(p => new PrintItem()
                                     {
                                         Name = p.Name,
                                         Type = DocumentType.CashTransaction,
                                         Document = transaction.Document
                                     });
-                                 vm = new CashTransactionViewModel(transaction.Document,lst);
+                                    vm = new CashTransactionViewModel(transaction.Document, lst);
+                                }
                             }
                             CashTransactionView cashTransactionView = new CashTransactionView(vm);
                             cashTransactionView.ShowDialog();

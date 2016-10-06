@@ -88,7 +88,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataAccess\AimpServiceClient.cs" />
+    <Compile Include="Aimp.Services\Clients\AimpInfoClient.cs" />
+    <Compile Include="Aimp.Services\Clients\CashTransactionsClient.cs" />
+    <Compile Include="Aimp.Services\Clients\ClientReportClient.cs" />
+    <Compile Include="Aimp.Services\Clients\CommissionTransactionsClient.cs" />
+    <Compile Include="Aimp.Services\Clients\CreditTransactionsClient.cs" />
+    <Compile Include="Aimp.Services\Clients\DictionariesClient.cs" />
+    <Compile Include="Aimp.Services\Clients\PrintedDocumentClient.cs" />
+    <Compile Include="Aimp.Services\Clients\TrancportCardsClient.cs" />
+    <Compile Include="Aimp.Services\ServiceClientProvider.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\CardTrancportViewModel.cs" />
     <Compile Include="ViewModel\Dictionaries\CellViewModel.cs" />
@@ -100,8 +108,6 @@
     <Compile Include="ViewModel\CommissionViewModel.cs" />
     <Compile Include="Converters\ColumnPropertyToVisibilityMConverter.cs" />
     <Compile Include="Converters\FilterHeaderColumnName.cs" />
-    <Compile Include="DataAccess\AimpService.cs" />
-    <Compile Include="DataAccess\BaseHttpServer.cs" />
     <Compile Include="DataAccess\ConnectionSettings.cs" />
     <Compile Include="DataAccess\CurrentUser.cs" />
     <Compile Include="DataInformation\TracnportInformation.cs" />
@@ -398,6 +404,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DataServices\" />
     <Folder Include="Resource\" />
   </ItemGroup>
   <ItemGroup>
@@ -455,16 +462,6 @@
     <Resource Include="Style\Image\View File-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceContract\ServiceContract.csproj">
-      <Project>{58de68b0-7a43-48c9-9ef9-155052828f86}</Project>
-      <Name>ServiceContract</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Style\Image\Filled Filter-48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -507,6 +504,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aimp.Entities\Aimp.Entities.csproj">
+      <Project>{ec227ef6-0f8e-49dd-b314-f2201288b8ca}</Project>
+      <Name>Aimp.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Infrastructure\Aimp.Infrastructure.csproj">
+      <Project>{071a61c7-6474-478b-b1e0-c152165056c7}</Project>
+      <Name>Aimp.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Model\Aimp.Model.csproj">
+      <Project>{c64a7ff3-73c3-4362-8fa4-678e4811aec7}</Project>
+      <Name>Aimp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.ServiceContracts\Aimp.ServiceContracts.csproj">
+      <Project>{27770613-24db-4ae3-a2ab-414e18896e3b}</Project>
+      <Name>Aimp.ServiceContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,11 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Infrastructure;
+using Aimp.Model.Entities;
+using Aimp.ServiceContracts;
+using AIMP_v3._0.Aimp.Services;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.PrintedDocument.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,24 +20,18 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
         {
             try
             {
-                using (AimpService service = new AimpService())
+                using (var service = ServiceClientProvider.GetCommissionTransaction())
                 {
                     var response = service.GetCommissions();
-
-                    if (response.Error)
-                    {
-                        MessageBox.Show(response.Message);
-                        return;
-                    }
-
+                    
                     List =
                         new List<CommissionListItemViewModel>(
-                            response.Items.Select(x => new CommissionListItemViewModel()
+                            response.Select(x => new CommissionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
-                                Date = x.Date.ToString(Models.DataFormats.DateFormat),
+                                Date = x.Date.ToString(AimpDataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -68,22 +64,23 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                 {
                     try
                     {
-                        using(var service = new AimpService())
+                        using (var service = ServiceClientProvider.GetCommissionTransaction())
                         {
-                            var response = service.GetPrintedList(DocumentType.Commission);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var document = new CommissionDocument();
-                            var lst = response.List.Select(p => new PrintItem()
+                            using (var printeService = ServiceClientProvider.GetPrintedDocument())
                             {
-                                Name = p.Name,
-                                Type = DocumentType.Commission,
-                                Document = document
-                            });
-                            var sourcesTrancport = service.GetSourceTrancport();
-                            if (sourcesTrancport.Error)
-                                throw new Exception(response.Message);
-                            new CommissionView(new CommissionViewModel(document,lst, sourcesTrancport.Items)).ShowDialog();
+                                var response = printeService.GetPrintedList(DocumentType.Commission);
+
+                                var document = new CommissionTransaction();
+                                var lst = response.Select(p => new PrintItem()
+                                {
+                                    Name = p.Name,
+                                    Type = DocumentType.Commission,
+                                    Document = document
+                                });
+                                var sourcesTrancport = service.GetSourceTrancport();
+
+                                new CommissionView(new CommissionViewModel(document, lst, sourcesTrancport)).ShowDialog();
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -118,28 +115,23 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                         if (CurrentItem != null)
                         {
                             CommissionViewModel vm;
-                            using (AimpService service = new AimpService())
+                            using (var service = ServiceClientProvider.GetCommissionTransaction())
                             {
                                 var transaction = service.GetCommission(CurrentItem.Id);
-
-                                if (transaction.Error)
+                                using (var printeService = ServiceClientProvider.GetPrintedDocument())
                                 {
-                                    MessageBox.Show("Ошибка сервера", transaction.Message);
-                                    return;
-                                }
-                                    var response = service.GetPrintedList(DocumentType.Commission);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    var lst = response.List.Select(p => new PrintItem()
+                                    var response = printeService.GetPrintedList(DocumentType.Commission);
+
+                                    var lst = response.Select(p => new PrintItem()
                                     {
                                         Name = p.Name,
                                         Type = DocumentType.Commission,
                                         Document = transaction.Document
                                     });
-                                var sourcesTrancport = service.GetSourceTrancport();
-                                if (sourcesTrancport.Error)
-                                    throw new Exception(response.Message);
-                                vm = new CommissionViewModel(transaction.Document,lst,sourcesTrancport.Items);
+                                    var sourcesTrancport = service.GetSourceTrancport();
+
+                                    vm = new CommissionViewModel(transaction.Document, lst, sourcesTrancport);
+                                }
                             }
                             CommissionView CommissionView = new CommissionView(vm);
                             CommissionView.ShowDialog();

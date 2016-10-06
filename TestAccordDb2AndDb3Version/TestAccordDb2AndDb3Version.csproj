@@ -82,14 +82,6 @@
       <Project>{DDCB465C-273D-4108-9C72-3B93F77EA07B}</Project>
       <Name>AIMP v3.0</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AimpReports\AimpReports.csproj">
-      <Project>{e31fb020-1b6a-48e4-b17f-c4bd77ec294d}</Project>
-      <Name>AimpReports</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

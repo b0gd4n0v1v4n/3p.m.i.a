@@ -8,8 +8,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using AIMP_v3._0.Model;
 using AIMP_v3._0.DataAccess;
+using Aimp.ServiceContracts;
 
 namespace AIMP_v3._0.ViewModel.Pages
 {

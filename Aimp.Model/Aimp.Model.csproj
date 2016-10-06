@@ -84,8 +84,15 @@
     <Compile Include="Entities\UserRight.cs" />
     <Compile Include="PrintedDocuments\ExcelPrintedDocument.cs" />
     <Compile Include="PrintedDocuments\IPrintedDocument.cs" />
+    <Compile Include="PrintedDocuments\PrintedDocumentTemplateType.cs" />
     <Compile Include="PrintedDocuments\WordPrintedDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rights\IRight.cs" />
+    <Compile Include="Rights\RightAdd.cs" />
+    <Compile Include="Rights\RightAdmin.cs" />
+    <Compile Include="Rights\RightDelete.cs" />
+    <Compile Include="Rights\RightsCollection.cs" />
+    <Compile Include="Rights\RightView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

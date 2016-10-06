@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Aimp.Entities;
+using Aimp.ServiceContracts.AimpInfo;
+using AIMP_v3._0.Aimp.Services;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using AIMP_v3._0.DataAccess;
-using Models.Entities;
-using Models.TrancportInfo;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -20,9 +21,9 @@ namespace AIMP_v3._0.ViewModel
 
         public string SearchText { get; set; }
 
-        public Trancport CurrentTrancport { get; set; }
+        public ITrancport CurrentTrancport { get; set; }
 
-        public ObservableCollection<Trancport> Trancports { get; set; }
+        public ObservableCollection<ITrancport> Trancports { get; set; }
 
         public Command SearchCommand
         {
@@ -35,13 +36,13 @@ namespace AIMP_v3._0.ViewModel
                     
                     try
                     {
-                        SearchTrancportResult result = null;
+                        IEnumerable<ITrancport> result = null;
 
-                        using (AimpService service = new AimpService())
+                        using (var service = ServiceClientProvider.GetAimpInfo())
                         {
                             if (string.IsNullOrEmpty(SearchText))
                             {
-                                result = service.SearchTranports(TypeSearchTrancport.Empty, null);
+                                result = service.SearchTrancports(TypeSearchTrancport.Empty, null);
                             }
                             else
                             {
@@ -49,32 +50,27 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     case "марка":
                                     {
-                                        result = service.SearchTranports(TypeSearchTrancport.Make, SearchText);
+                                        result = service.SearchTrancports(TypeSearchTrancport.Make, SearchText);
                                         break;
                                     }
                                     case "модель":
                                     {
-                                        result = service.SearchTranports(TypeSearchTrancport.Model, SearchText);
+                                        result = service.SearchTrancports(TypeSearchTrancport.Model, SearchText);
                                         break;
                                     }
                                     case "vin":
                                     {
-                                        result = service.SearchTranports(TypeSearchTrancport.Vin, SearchText);
+                                        result = service.SearchTrancports(TypeSearchTrancport.Vin, SearchText);
                                         break;
                                     }
                                 }
                             }
-                            if (result.Error)
-                            {
-                                MessageBox.Show(result.Message);
-                                return;
-                            }
-                            if (result.Trancports == null || result.Trancports.Count() == 0)
+                            if (result == null || result.Count() == 0)
                             {
                                 MessageBox.Show("Поиск не дал результатов");
                                 return;
                             }
-                            Trancports = new ObservableCollection<Trancport>(result.Trancports);
+                            Trancports = new ObservableCollection<ITrancport>(result);
 
                             OnPropertyChanged("Trancports");
                         }

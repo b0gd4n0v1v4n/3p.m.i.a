@@ -2,10 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using AIMP_v3._0.DataAccess;
-using Models.Entities;
-using Models.ContractorInfo;
 using System.Linq;
+using Aimp.Entities;
+using AIMP_v3._0.Aimp.Services;
+using Aimp.ServiceContracts.AimpInfo;
+using System.Collections.Generic;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -19,9 +20,9 @@ namespace AIMP_v3._0.ViewModel
 
         public string SearchText { get; set; }
 
-        public Contractor CurrentContractor { get; set; }
+        public IContractor CurrentContractor { get; set; }
 
-        public ObservableCollection<Contractor> Contractors { get; set; }
+        public ObservableCollection<IContractor> Contractors { get; set; }
 
         public Command SearchCommand
         {
@@ -34,13 +35,13 @@ namespace AIMP_v3._0.ViewModel
 
                     try
                     {
-                        SearchContractorResult result = null;
+                        IEnumerable<IContractor> result = null;
 
-                        using (AimpService service = new AimpService())
+                        using (var service = ServiceClientProvider.GetAimpInfo())
                         {
                             if (string.IsNullOrEmpty(SearchText))
                             {
-                                result = service.SearchContractor(TypeSearchContractor.Empty, null);
+                                result = service.SearchContractors(TypeSearchContractor.Empty, null);
                             }
                             else
                             {
@@ -48,17 +49,17 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     case "фамилия":
                                     {
-                                        result = service.SearchContractor(TypeSearchContractor.LastName, SearchText);
+                                        result = service.SearchContractors(TypeSearchContractor.LastName, SearchText);
                                         break;
                                     }
                                     case "организация":
                                     {
-                                        result = service.SearchContractor(TypeSearchContractor.Organization, SearchText);
+                                        result = service.SearchContractors(TypeSearchContractor.Organization, SearchText);
                                         break;
                                     }
                                     case "инн":
                                     {
-                                        result = service.SearchContractor(TypeSearchContractor.Inn, SearchText);
+                                        result = service.SearchContractors(TypeSearchContractor.Inn, SearchText);
                                         break;
                                     }
                                 }
@@ -73,7 +74,7 @@ namespace AIMP_v3._0.ViewModel
                                 MessageBox.Show("Поиск не дал результатов");
                                 return;
                             }
-                            Contractors = new ObservableCollection<Contractor>(result.Contractors);
+                            Contractors = new ObservableCollection<IContractor>(result.Contractors);
                         }
 
                         OnPropertyChanged("Contractors");

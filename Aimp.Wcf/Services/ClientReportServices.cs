@@ -130,7 +130,7 @@ namespace Aimp.Wcf.Services
                                                         select bs?.MiddleName
                                                         ).ToArray(),
                             ClientStatusReportClient = x.Key.ClientStatus.Name,
-                            DateReportClient = x.Key.Date.ToString(DataFormats.DateFormat),
+                            DateReportClient = x.Key.Date.ToString(AimpDataFormats.DateFormat),
                             FullNameReportClient = x.Key.FullName,
                             ManagerReportClient = x.Key.User.LastName,
                             PriceTrancportReportClient = x.Key.Price.ToString(),

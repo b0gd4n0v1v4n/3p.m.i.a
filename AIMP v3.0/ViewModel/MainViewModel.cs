@@ -7,15 +7,12 @@ using AIMP_v3._0.DataAccess;
 using System.Windows;
 using System;
 using System.Collections.ObjectModel;
-using Models;
-using Models.Entities;
 using AIMP_v3._0.ViewModel.Pages.CreditDocument;
 using AIMP_v3._0.ViewModel.Pages.Commission;
 using AIMP_v3._0.ViewModel.CardsTrancport;
 using AIMP_v3._0.ViewModel.Pages.CardsTrancport;
 using System.Collections.Generic;
 using AIMP_v3._0.ViewModel.Pages;
-using AIMP_v3._0.Model;
 using AIMP_v3._0.ViewModel.Dictionaries;
 
 namespace AIMP_v3._0.ViewModel

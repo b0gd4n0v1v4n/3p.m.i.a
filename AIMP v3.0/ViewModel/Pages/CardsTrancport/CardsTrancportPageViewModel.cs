@@ -1,4 +1,6 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Infrastructure;
+using AIMP_v3._0.Aimp.Services;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.CardsTrancport;
@@ -17,17 +19,16 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
         {
             try
             {
-                using (AimpService service = new AimpService())
+                using (var service = ServiceClientProvider.GetTrancportCard())
                 {
                     var response = service.GetCardsTrancport();
-                    if (response.Error)
-                        throw new Exception(response.Message);
+
                     List = response.Items.Select(x=> new CardTrancportListItemViewModel()
                     {
                         Id = x.Id,
                         ColorTrancport = x.ColorTrancport,
-                        DateSale = x.DateSale?.ToString(Models.DataFormats.DateFormat),
-                        DateStart = x.DateStart.ToString(Models.DataFormats.DateFormat),
+                        DateSale = x.DateSale?.ToString(AimpDataFormats.DateFormat),
+                        DateStart = x.DateStart.ToString(AimpDataFormats.DateFormat),
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,
                         Number = x.Number,
