@@ -1,7 +1,5 @@
 ﻿using Models;
 using Models.CashTransact;
-using Models;
-using Models.CashTransact;
 using Models.ContractorInfo;
 using Models.CreditTransact;
 using Models.Documents;

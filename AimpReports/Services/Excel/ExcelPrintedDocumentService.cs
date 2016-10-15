@@ -90,7 +90,7 @@ namespace AimpReports.Services.Excel
                     File.Delete(saveFile);
                     _excel.Quit();
                 }
-                catch(Exception ex) 
+                catch 
                     { }
             }
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace AimpDataAccess.Context
 {
+#warning незабываем про тригеры
     public interface IAimpContext : IDisposable
     {
         IRepository<Bank> Banks { get; }

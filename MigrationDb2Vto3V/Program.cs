@@ -80,7 +80,7 @@ namespace MigrationDb2Vto3V
                 };
             }
             return
-                newDb.Contractors.FirstOrDefault(
+                newDb.Contractors.Local.FirstOrDefault(
                     x =>
                         x.FirstName == contractor.FirstName && x.LastName == contractor.LastName &&
                         x.MiddleName == contractor.MiddleName && x.DateBirth == contractor.DateBirth && x.Region.Name == contractor.Region.Name && x.Telefon == contractor.Telefon && x.House == contractor.House && x.Street == contractor.Street && x.NumberDocument == contractor.NumberDocument) ?? contractor;
@@ -257,6 +257,7 @@ namespace MigrationDb2Vto3V
                             Type = type
                         };
                         newDb.PrintedDocumentTemplates.Add(reportTemplate);
+                        Console.Write(type);
                     }
 
                     foreach (ОТЧЁТЫ_КЛИЕНТОВ отчётыКлиентов in aimp.ОТЧЁТЫ_КЛИЕНТОВ)
@@ -333,6 +334,7 @@ namespace MigrationDb2Vto3V
 
                             newDb.BankReportClients.Add(bankReportClient);
                         }
+                        Console.Write(отчётыКлиентов.дата);
                     }
 
 

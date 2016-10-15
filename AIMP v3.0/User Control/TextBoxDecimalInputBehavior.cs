@@ -158,7 +158,6 @@ namespace AIMP_v3._0.User_Control
                 default: throw new ArgumentException("Unknown TextBoxInputMode");
 
             }
-            return true;
         }
 
         private bool CheckIsDigit(string wert)

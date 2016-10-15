@@ -23,7 +23,6 @@ namespace AimpReports.Services.Word
         {
             _document?.Dispose();
         }
-#warning ДУБЛИ В БАЗЕ, ТАБЛИЦА КОНТРАГЕНТОВ, И ЕЩЕ НАВЕРНО ГДЕ ТО БЛЯ
         public IPrintedDocument GetDocument(IPrintedDocumentTemplate template)
         {
             string _pathSaveFile = Directory.GetCurrentDirectory();
