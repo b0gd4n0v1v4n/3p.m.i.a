@@ -95,7 +95,7 @@
       <Name>AimpLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\AimpReports\AimpReports.csproj">
-      <Project>{E31FB020-1B6A-48E4-B17F-C4BD77EC294D}</Project>
+      <Project>{e31fb020-1b6a-48e4-b17f-c4bd77ec294d}</Project>
       <Name>AimpReports</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">

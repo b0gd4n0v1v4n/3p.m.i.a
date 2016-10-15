@@ -151,7 +151,6 @@ namespace AimpReports.Templates
             _labelValues.Add("типы_двигателей_тс", transaction.Trancport.EngineType.Name);
             _labelValues.Add("цвет", transaction.Trancport.Color);
             _labelValues.Add("шасси", transaction.Trancport.ChassisNumber);
-       
     }
 
         public Dictionary<string, string> LabelValues => _labelValues;

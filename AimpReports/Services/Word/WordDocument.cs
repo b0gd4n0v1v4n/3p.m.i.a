@@ -369,7 +369,7 @@ namespace AimpReports.Services.Word
         public void Save(string pathToSave)
         {
             Object pathToSaveObj = pathToSave;
-            _document.SaveAs(ref pathToSaveObj, MSWord.WdSaveFormat.wdFormatDocument, ref _missingObj, ref _missingObj,
+            _document.SaveAs(ref pathToSaveObj, MSWord.WdSaveFormat.wdFormatDocumentDefault, ref _missingObj, ref _missingObj,
                 ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj,
                 ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj, ref _missingObj);
         }

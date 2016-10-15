@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Input;
 
 namespace AIMP_v3._0.ViewModel
@@ -11,7 +12,17 @@ namespace AIMP_v3._0.ViewModel
         {
             DisplayName = "Загрузка...";
         }
+        public void StartLoading()
+        {
+            new Thread(() => 
+            {
+                while (!Stopped)
+                {
 
+                }
+            })
+           .Start();
+        }
         public int MinProgress { get; set; }
         public int MaxProgress { get; set; }
         public bool Stopped { get; private set; }

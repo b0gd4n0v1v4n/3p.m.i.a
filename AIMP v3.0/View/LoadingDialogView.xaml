@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         mc:Ignorable="d"
-        Title="LoadingModalDialog" Height="53.608" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" ShowInTaskbar="False">
-    <Grid Background="#FFEEEEEE">
-        <Label x:Name="lblLoading" Content="{Binding DisplayName}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300"/>
-        <ProgressBar IsIndeterminate="True" Minimum="{Binding MinProgress}" Maximum="{Binding MaxProgress}" Value="{Binding CurrentProgress}" HorizontalAlignment="Left" Height="13" Margin="5,31,0,0" VerticalAlignment="Top" Width="290"/>
+        Title="LoadingModalDialog" Height="80" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" ShowInTaskbar="False">
+    <Grid Background="WhiteSmoke" >
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="lblLoading" Content="{Binding }" Width="300"/>
+            <ProgressBar IsIndeterminate="True" Minimum="{Binding MinProgress}" Maximum="{Binding MaxProgress}" Value="{Binding CurrentProgress}" HorizontalAlignment="Center" Height="13" Margin="5,31,0,0" VerticalAlignment="Top" Width="290"/>
+        </StackPanel>
     </Grid>
 </Window>

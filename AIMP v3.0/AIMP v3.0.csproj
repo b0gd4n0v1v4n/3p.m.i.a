@@ -110,7 +110,6 @@
     <Compile Include="Helpers\CheckValue.cs" />
     <Compile Include="Helpers\EnumDescription.cs" />
     <Compile Include="Helpers\InfoFromTransactionHelper.cs" />
-    <Compile Include="Helpers\LoadingDialogHelper.cs" />
     <Compile Include="Helpers\Messages.cs" />
     <Compile Include="Helpers\OpenUserFile.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
@@ -455,16 +454,6 @@
     <Resource Include="Style\Image\View File-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceContract\ServiceContract.csproj">
-      <Project>{58de68b0-7a43-48c9-9ef9-155052828f86}</Project>
-      <Name>ServiceContract</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Style\Image\Filled Filter-48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -507,6 +496,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceContract\ServiceContract.csproj">
+      <Project>{58de68b0-7a43-48c9-9ef9-155052828f86}</Project>
+      <Name>ServiceContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

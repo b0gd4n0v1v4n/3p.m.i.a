@@ -4,6 +4,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Models.PrintedDocument;
 using Models.PrintedDocument.Templates;
 using System.Configuration;
+using System.Text;
+using System.Threading;
 
 namespace AimpReports.Services.Word
 {
@@ -21,11 +23,11 @@ namespace AimpReports.Services.Word
         {
             _document?.Dispose();
         }
-
+#warning ДУБЛИ В БАЗЕ, ТАБЛИЦА КОНТРАГЕНТОВ, И ЕЩЕ НАВЕРНО ГДЕ ТО БЛЯ
         public IPrintedDocument GetDocument(IPrintedDocumentTemplate template)
         {
-            string _pathSaveFile = @"D:\AimpFiles\temp\PrintedDocuments";
-            string fileName = _pathSaveFile + "\\tmpPDoc" +
+            string _pathSaveFile = Directory.GetCurrentDirectory();
+            string fileName = _pathSaveFile + "\\" +
                        Guid.NewGuid().ToString() +
                        ".doc";
             try

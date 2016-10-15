@@ -1,9 +1,11 @@
 ﻿using AimpConsole.Helpers;
 using AimpConsole.Wcf;
+using AimpLogic.CreditTransactions;
 using AimpLogic.Logging;
 using AimpLogic.PrintedDocument;
 using AimpLogic.UserRights;
 using System;
+using System.IO;
 using System.ServiceModel.Web;
 
 namespace AimpConsole
@@ -17,9 +19,9 @@ namespace AimpConsole
                 webServiceHost.Open();
                 try
                 {
-                    using(UserRightsService aimp = new UserRightsService("",""))
+                    using (UserRightsService aimp = new UserRightsService("", ""))
                     {
-                        
+
                     }
                     Console.WriteLine("Сервис запущен...");
                 }

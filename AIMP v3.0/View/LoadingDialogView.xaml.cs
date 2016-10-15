@@ -1,6 +1,5 @@
-﻿
+﻿using System.Threading;
 using System.Windows;
-using AIMP_v3._0.ViewModel;
 
 namespace AIMP_v3._0.View
 {
@@ -9,19 +8,10 @@ namespace AIMP_v3._0.View
     /// </summary>
     public partial class LoadingView : Window
     {
-        public LoadingView(LoadingDialogViewModel loadingModalDialogViewModel)
-        {
-            DataContext = loadingModalDialogViewModel;
-            loadingModalDialogViewModel.EndProgress += () =>
-            {
-                Close();
-            };
-            InitializeComponent();
-        }
-
-        public LoadingView()
+        public LoadingView(string text)
         {
             InitializeComponent();
+            DataContext = text;
         }
     }
 }
