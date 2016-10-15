@@ -28,6 +28,8 @@ namespace AimpConsole
                 catch(AuthorizationException)
                 {
                     Console.WriteLine("Сервис запущен...");
+
+
                 }
                 catch(Exception ex)
                 {
