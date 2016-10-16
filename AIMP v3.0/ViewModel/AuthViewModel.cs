@@ -68,7 +68,7 @@ namespace AIMP_v3._0.ViewModel
             setings.IsSave = false;
         }
         setings.Save();
-        
+
         ((Window)win)?.Hide();
         MainView mian = new MainView();
         mian.ShowDialog();

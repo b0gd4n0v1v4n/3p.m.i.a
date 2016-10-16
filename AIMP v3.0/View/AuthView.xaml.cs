@@ -20,10 +20,18 @@ namespace AIMP_v3._0.View
     /// </summary>
     public partial class AuthView : Window
     {
+        AuthViewModel model;
         public AuthView()
         {
             InitializeComponent();
-            DataContext = new AuthViewModel();
+            model = new AuthViewModel();
+            passwordBox.Password = model.Password;
+            DataContext = model;
+        }
+
+        private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            model.Password = passwordBox.Password;
         }
     }
 }
