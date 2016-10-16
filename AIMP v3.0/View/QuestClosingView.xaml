@@ -9,9 +9,13 @@
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"></ResourceDictionary>
     </Window.Resources>
-    <Grid Background="#FFBFBFBF">
-        <TextBlock x:Name="TextQuest" HorizontalAlignment="Left" Margin="45,43,0,0" TextWrapping="Wrap" Text="ЗАКРЫТЬ БЕЗ СОХРАНЕНИЯ?" FontSize="15" FontWeight="Bold" VerticalAlignment="Top"/>
-        <Button x:Name="YES" Content="ДА" HorizontalAlignment="Left" Margin="24,103,0,0" VerticalAlignment="Top" Width="75" Click="YES_Click"/>
-        <Button x:Name="NO" Content="НЕТ" HorizontalAlignment="Left" Margin="198,103,0,0" VerticalAlignment="Top" Width="75" Click="NO_Click"/>
+    <Grid Background="WhiteSmoke">
+        <Border BorderThickness="1" BorderBrush="Gray">
+            <Grid>
+            <TextBlock x:Name="TextQuest" HorizontalAlignment="Left" Margin="45,43,0,0" TextWrapping="Wrap" Text="ЗАКРЫТЬ БЕЗ СОХРАНЕНИЯ?" FontSize="15" FontWeight="Bold" VerticalAlignment="Top"/>
+            <Button x:Name="YES" Content="ДА" HorizontalAlignment="Left" Margin="24,103,0,0" VerticalAlignment="Top" Width="75" Click="YES_Click"/>
+            <Button x:Name="NO" Content="НЕТ" HorizontalAlignment="Left" Margin="198,103,0,0" VerticalAlignment="Top" Width="75" Click="NO_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

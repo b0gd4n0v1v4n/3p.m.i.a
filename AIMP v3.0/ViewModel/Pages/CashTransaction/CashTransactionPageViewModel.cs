@@ -1,4 +1,5 @@
 ﻿using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
@@ -66,27 +67,30 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        using(var service = new AimpService())
+                        try
                         {
-                            var response = service.GetPrintedList(DocumentType.CashTransaction);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var document = new CashTransactionDocument();
-                            var lst = response.List.Select(p => new PrintItem()
+                            using (var service = new AimpService())
                             {
-                                Name = p.Name,
-                                Type = DocumentType.CashTransaction,
-                                Document = document
-                            });
-                            new CashTransactionView(new CashTransactionViewModel(document,lst)).ShowDialog();
+                                var response = service.GetPrintedList(DocumentType.CashTransaction);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                                var document = new CashTransactionDocument();
+                                var lst = response.List.Select(p => new PrintItem()
+                                {
+                                    Name = p.Name,
+                                    Type = DocumentType.CashTransaction,
+                                    Document = document
+                                });
+                                new CashTransactionView(new CashTransactionViewModel(document, lst)).ShowDialog();
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        }
+                    });
                 });
             }
         }
@@ -97,7 +101,10 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    _FillListCashTransaction();
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    {
+                        _FillListCashTransaction();
+                    });
                 });
             }
         }
@@ -110,20 +117,22 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        if (CurrentItem != null)
+                        try
                         {
-                            CashTransactionViewModel vm;
-                            using (AimpService service = new AimpService())
+                            if (CurrentItem != null)
                             {
-                                var transaction = service.GetCashTransaction(CurrentItem.Id);
-
-                                if (transaction.Error)
+                                CashTransactionViewModel vm;
+                                using (AimpService service = new AimpService())
                                 {
-                                    MessageBox.Show("Ошибка сервера", transaction.Message);
-                                    return;
-                                }
+                                    var transaction = service.GetCashTransaction(CurrentItem.Id);
+
+                                    if (transaction.Error)
+                                    {
+                                        MessageBox.Show("Ошибка сервера", transaction.Message);
+                                        return;
+                                    }
                                     var response = service.GetPrintedList(DocumentType.CashTransaction);
                                     if (response.Error)
                                         throw new Exception(response.Message);
@@ -133,16 +142,17 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                                         Type = DocumentType.CashTransaction,
                                         Document = transaction.Document
                                     });
-                                 vm = new CashTransactionViewModel(transaction.Document,lst);
+                                    vm = new CashTransactionViewModel(transaction.Document, lst);
+                                }
+                                CashTransactionView cashTransactionView = new CashTransactionView(vm);
+                                cashTransactionView.ShowDialog();
                             }
-                            CashTransactionView cashTransactionView = new CashTransactionView(vm);
-                            cashTransactionView.ShowDialog();
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Не удалось открыть сделку");
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Не удалось открыть сделку");
+                        }
+                    });
                 });
             }
         }

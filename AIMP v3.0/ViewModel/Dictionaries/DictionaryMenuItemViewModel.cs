@@ -1,4 +1,5 @@
-﻿using AIMP_v3._0.View;
+﻿using AIMP_v3._0.Helpers;
+using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.Dictionaries;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,19 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        var vm = new DictionaryListViewModel(TableName,Columns);
-                        var view = new DictionaryListView(vm);
-                        view.ShowDialog();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                        try
+                        {
+                            var vm = new DictionaryListViewModel(TableName, Columns);
+                            var view = new DictionaryListView(vm);
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }

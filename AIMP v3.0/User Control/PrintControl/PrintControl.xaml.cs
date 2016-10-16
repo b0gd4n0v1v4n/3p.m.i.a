@@ -8,6 +8,7 @@ using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.ViewModel;
 using AIMP_v3._0.View;
+using System.Threading;
 
 namespace AIMP_v3._0.User_Control
 {
@@ -49,22 +50,26 @@ namespace AIMP_v3._0.User_Control
             {
                 return new Command((printItem) =>
                 {
+                    
+                        LoadingViewHalper.ShowDialog("Формирование документа...", () =>
+                    {
                     try
                     {
-                        var item = printItem as PrintItem;
-                        using (AimpService service = new AimpService())
-                        {
-                            var response = service.GetPrintedDocument(item.Type, item.Name, item.Document.Id);
-                            if (response.Error)
-                                throw new Exception(response.Message);
+                            var item = printItem as PrintItem;
+                            using (AimpService service = new AimpService())
+                            {
+                                var response = service.GetPrintedDocument(item.Type, item.Name, item.Document.Id);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
 
-                            OpenUserFile.Open(item.Name, response.Document.File);
+                                OpenUserFile.Open(item.Name, response.Document.File);
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка");
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                    });
                 });
             }
         }

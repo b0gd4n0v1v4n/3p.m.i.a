@@ -380,48 +380,51 @@ namespace AIMP_v3._0.ViewModel
                 {
                     if (_Validation())
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Сохранение...", () =>
                         {
-                            MakeTrancport make = Makes.FirstOrDefault(x => x.Name == EditableTrancport.Make.Name);
-
-                            if (make == null)
-                                make = new MakeTrancport()
-                                {
-                                    Name = EditableTrancport.Make.Name
-                                };
-
-                            EditableTrancport.Make = make;
-
-                            ModelTrancport model = _models.FirstOrDefault(x => x.Name == EditableTrancport.Model.Name);
-
-                            if (model == null)
-                                model = new ModelTrancport()
-                                {
-                                    Name = EditableTrancport.Model.Name,
-                                    Make = EditableTrancport.Make
-                                };
-
-                            EditableTrancport.Model = model;
-                            using (var service = new AimpService())
+                            try
                             {
-                                var response = service.SaveTrancport(EditableTrancport);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                EditableTrancport.Id = response.Id;
-                            }
-                            var window = (win as Window);
+                                MakeTrancport make = Makes.FirstOrDefault(x => x.Name == EditableTrancport.Make.Name);
 
-                            if (window != null)
+                                if (make == null)
+                                    make = new MakeTrancport()
+                                    {
+                                        Name = EditableTrancport.Make.Name
+                                    };
+
+                                EditableTrancport.Make = make;
+
+                                ModelTrancport model = _models.FirstOrDefault(x => x.Name == EditableTrancport.Model.Name);
+
+                                if (model == null)
+                                    model = new ModelTrancport()
+                                    {
+                                        Name = EditableTrancport.Model.Name,
+                                        Make = EditableTrancport.Make
+                                    };
+
+                                EditableTrancport.Model = model;
+                                using (var service = new AimpService())
+                                {
+                                    var response = service.SaveTrancport(EditableTrancport);
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    EditableTrancport.Id = response.Id;
+                                }
+                                var window = (win as Window);
+
+                                if (window != null)
+                                {
+                                    _window.SetValue(EditableTrancport);
+
+                                    window.Close();
+                                }
+                            }
+                            catch (Exception ex)
                             {
-                                _window.SetValue(EditableTrancport);
-
-                                window.Close();
+                                MessageBox.Show(ex.Message);
                             }
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        });
                     }
                 });
             }

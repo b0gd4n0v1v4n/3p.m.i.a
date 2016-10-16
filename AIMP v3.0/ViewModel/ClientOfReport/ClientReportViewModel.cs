@@ -148,44 +148,48 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
             {
                 return new Command(x =>
                 {
-                    try
+                    if (_Validation())
                     {
-                        if (_Validation())
+                        LoadingViewHalper.ShowDialog("Сохранение...", () =>
                         {
-                            using (var service = new AimpService())
+                            try
                             {
-                                _clientReportDocument.BankReportClients = null;
-
-                                var newBankReportClients = new List<BankReportClient>();
-
-                                foreach(var iClientBankStatuses in ClientBankStatus.Where(y => y.Enable))
+                                using (var service = new AimpService())
                                 {
-                                    newBankReportClients.Add(new BankReportClient()
+                                    _clientReportDocument.BankReportClients = null;
+
+                                    var newBankReportClients = new List<BankReportClient>();
+
+                                    foreach (var iClientBankStatuses in ClientBankStatus.Where(y => y.Enable))
                                     {
-                                        Id = iClientBankStatuses.Id,
-                                        Bank = iClientBankStatuses.Bank,
-                                        BankStatus = iClientBankStatuses.SelectedBankStatus,
-                                        ClientReport = ClientReport
-                                    });
+                                        newBankReportClients.Add(new BankReportClient()
+                                        {
+                                            Id = iClientBankStatuses.Id,
+                                            Bank = iClientBankStatuses.Bank,
+                                            BankStatus = iClientBankStatuses.SelectedBankStatus,
+                                            ClientReport = ClientReport
+                                        });
+                                    }
+
+                                    _clientReportDocument.BankReportClients = newBankReportClients.ToArray();
+
+                                    var response = service.SaveClientReport(_clientReportDocument);
+
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    else
+                                        MessageBox.Show(response.Message);
                                 }
-
-                                _clientReportDocument.BankReportClients = newBankReportClients.ToArray();
-
-                                var response = service.SaveClientReport(_clientReportDocument);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                else
-                                    MessageBox.Show(response.Message);
+                                _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
                             }
-                            _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
-                        }
+
+                            catch (Exception ex)
+                            {
+                                Logger.Instance.Log("Не удалось сохранить клиентский отчет", "SaveChangesCommand", ex);
+                            }
+                        });
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Не удалось сохранить клиентский отчет", "SaveChangesCommand", ex);
-                    }
-                });
+                }); 
             }
         }
         public Command DeleteChangesCommand
@@ -194,29 +198,35 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
             {
                 return new Command((window) =>
                 {
-                    try
-                    {
-                        if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
-                        {
-                            using (var service = new AimpService())
-                            {
-                                var response = service.DeleteClientReport(_clientReportDocument);
 
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                else
-                                {
-                                    var win = window as Window;
-                                    win.Hide();
-                                    MessageBox.Show(response.Message);
-                                    win.Close();
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
+                    if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                     {
-                        Logger.Instance.Log("Не удалось удалить документ", "DeleteChangesCommand", ex);
+                        LoadingViewHalper.ShowDialog("Удаление...", () =>
+                        {
+                        try
+                        {
+                            
+                                using (var service = new AimpService())
+                                {
+                                    var response = service.DeleteClientReport(_clientReportDocument);
+
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    else
+                                    {
+                                        var win = window as Window;
+                                        win.Hide();
+                                        MessageBox.Show(response.Message);
+                                        win.Close();
+                                    }
+                                }
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Не удалось удалить документ", "DeleteChangesCommand", ex);
+                        }
+                        });
                     }
                 });
             }

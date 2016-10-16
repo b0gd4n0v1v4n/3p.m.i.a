@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using AIMP_v3._0.ViewModel.Pages;
 using AIMP_v3._0.Model;
 using AIMP_v3._0.ViewModel.Dictionaries;
+using AIMP_v3._0.Helpers;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -133,16 +134,19 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        var r = CurrentPage;
-                        PrintedDocumentListView view = new PrintedDocumentListView(new PrintedDocument.PrintedDocumentsListViewModel());
-                        view.ShowDialog();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                        try
+                        {
+                            var r = CurrentPage;
+                            PrintedDocumentListView view = new PrintedDocumentListView(new PrintedDocument.PrintedDocumentsListViewModel());
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }
@@ -152,15 +156,18 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x => 
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        UserRightsView view = new UserRightsView(new UsersViewModel());
-                        view.ShowDialog();
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                        try
+                        {
+                            UserRightsView view = new UserRightsView(new UsersViewModel());
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }

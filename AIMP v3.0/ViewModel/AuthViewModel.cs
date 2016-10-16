@@ -45,6 +45,7 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command((win) =>
 {
+LoadingViewHalper.ShowDialog("Подключение...", () =>{
     try
     {
         ConnectionSettings.Address = $"http://{Address}:{Port}/{ServiceName}";
@@ -68,8 +69,8 @@ namespace AIMP_v3._0.ViewModel
             setings.IsSave = false;
         }
         setings.Save();
-
         ((Window)win)?.Hide();
+        LoadingViewHalper.View.Close();
         MainView mian = new MainView();
         mian.ShowDialog();
         ((Window)win)?.Show();
@@ -77,7 +78,7 @@ namespace AIMP_v3._0.ViewModel
     catch (Exception ex)
     {
         MessageBox.Show(ex.Message);
-    }
+    } });
 });
             }
         }

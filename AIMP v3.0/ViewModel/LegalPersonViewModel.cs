@@ -194,52 +194,54 @@ namespace AIMP_v3._0.ViewModel
             get
             {
                 return new Command((win) =>
-                {
-                    try
+                { if (_Validation())
                     {
-                        if (_Validation())
+                        try
                         {
-                            Region region = Regions.FirstOrDefault(x => x.Name == EditableContractor.Region.Name);
 
-                            if (region == null)
-                                region = new Region()
-                                {
-                                    Name = EditableContractor.Region.Name
-                                };
-
-                            EditableContractor.Region = region;
-
-                            City city = _cities.FirstOrDefault(x => x.Name == EditableContractor.City.Name);
-
-                            if (city == null)
-                                city = new City()
-                                {
-                                    Name = EditableContractor.City.Name,
-                                    Region = EditableContractor.Region
-                                };
-
-                            EditableContractor.City = city;
-                            using (var service = new AimpService())
+                            LoadingViewHalper.ShowDialog("Сохранение...", () =>
                             {
-                                var response = service.SaveContractor(EditableContractor);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                EditableContractor.Id = response.Id;
-                            }
-                            var window = (win as Window);
+                                Region region = Regions.FirstOrDefault(x => x.Name == EditableContractor.Region.Name);
 
-                            if (window != null)
-                            {
-                                _window.SetValue(EditableContractor);
+                                if (region == null)
+                                    region = new Region()
+                                    {
+                                        Name = EditableContractor.Region.Name
+                                    };
 
-                                window.Close();
-                            }
+                                EditableContractor.Region = region;
+
+                                City city = _cities.FirstOrDefault(x => x.Name == EditableContractor.City.Name);
+
+                                if (city == null)
+                                    city = new City()
+                                    {
+                                        Name = EditableContractor.City.Name,
+                                        Region = EditableContractor.Region
+                                    };
+
+                                EditableContractor.City = city;
+                                using (var service = new AimpService())
+                                {
+                                    var response = service.SaveContractor(EditableContractor);
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    EditableContractor.Id = response.Id;
+                                }
+                                var window = (win as Window);
+
+                                if (window != null)
+                                {
+                                    _window.SetValue(EditableContractor);
+
+                                    window.Close();
+                                }
+                            });
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        } } 
                 });
             }
         }

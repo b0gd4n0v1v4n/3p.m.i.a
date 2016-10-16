@@ -1,5 +1,6 @@
 ﻿using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Extensions;
+using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using Models.Documents;
@@ -88,35 +89,38 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Сохранение...", () =>
                     {
-                        using (var service = new AimpService())
+                        try
                         {
-                            var preChecs = PreCheks.Where(y => y.Enable).Select(y => new PreCheckCardTrancport()
+                            using (var service = new AimpService())
                             {
-                                Id = y.CardTrancportId,
-                                Card = y.Card,
-                                Date = y.Date,
-                                Name = y.Name,
-                                Paid = y.Paid,
-                                Summ = y.Summ,
-                                CardTrancport = CardTrancport,
-                                PriceForClient = y.PriceForClient
-                            });
-                            _document.PreChecks = preChecs;
-                            var response = service.SaveCardTrancport(_document);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            CardTrancport.Id = response.Id;
-                            _document.CardTrancport.Id = response.Id;
-                            MessageBox.Show(response.Message);
+                                var preChecs = PreCheks.Where(y => y.Enable).Select(y => new PreCheckCardTrancport()
+                                {
+                                    Id = y.CardTrancportId,
+                                    Card = y.Card,
+                                    Date = y.Date,
+                                    Name = y.Name,
+                                    Paid = y.Paid,
+                                    Summ = y.Summ,
+                                    CardTrancport = CardTrancport,
+                                    PriceForClient = y.PriceForClient
+                                });
+                                _document.PreChecks = preChecs;
+                                var response = service.SaveCardTrancport(_document);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                                CardTrancport.Id = response.Id;
+                                _document.CardTrancport.Id = response.Id;
+                                MessageBox.Show(response.Message);
+                            }
+                            _cardTrancportForCompare = TinyMapper.Map<CardTrancport>(CardTrancport);
                         }
-                        _cardTrancportForCompare = TinyMapper.Map<CardTrancport>(CardTrancport);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Не удалось сохранить", "SaveChangesCommand", ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Не удалось сохранить", "SaveChangesCommand", ex);
+                        }
+                    });
                 });
             }
         }
@@ -194,14 +198,18 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
             {
                 return new Command(x =>
                 {
-                    try {
-                        PreCheckCardTrancportView view = new PreCheckCardTrancportView(CurrentPreCheck);
-                        view.ShowDialog();
-                    }
-                    catch (Exception ex)
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        MessageBox.Show(ex.Message);
-                    }
+                        try
+                        {
+                            PreCheckCardTrancportView view = new PreCheckCardTrancportView(CurrentPreCheck);
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }

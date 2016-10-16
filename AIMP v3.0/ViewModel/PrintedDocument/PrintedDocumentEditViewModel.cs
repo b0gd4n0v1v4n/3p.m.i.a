@@ -38,23 +38,26 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Добавление...", () =>
                     {
-                        using(OpenFileDialog dialg = new OpenFileDialog())
+                        try
                         {
-                            dialg.Filter = "(*.doc ; *.docs ; *.docx) | *.doc; *.docs; *.docx";
-                            if(dialg.ShowDialog() == DialogResult.OK)
+                            using (OpenFileDialog dialg = new OpenFileDialog())
                             {
-                                Template.FileName = dialg.FileName;
-                                Template.File = File.ReadAllBytes(dialg.FileName);
-                                OnPropertyChanged("Template.FileName");
+                                dialg.Filter = "(*.doc ; *.docs ; *.docx) | *.doc; *.docs; *.docx";
+                                if (dialg.ShowDialog() == DialogResult.OK)
+                                {
+                                    Template.FileName = dialg.FileName;
+                                    Template.File = File.ReadAllBytes(dialg.FileName);
+                                    OnPropertyChanged("Template.FileName");
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            System.Windows.MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }
@@ -64,15 +67,18 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Открытие...", () =>
                     {
-                        if (Template?.File != null)
-                            OpenUserFile.Open(Template.FileName, Template.File);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message);
-                    }
+                        try
+                        {
+                            if (Template?.File != null)
+                                OpenUserFile.Open(Template.FileName, Template.File);
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Windows.MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }
@@ -82,22 +88,25 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Сохранение...", () =>
                     {
-                        if (Template.File == null)
-                            throw new Exception("Шаблон не выбран");
-                        using (var service = new AimpService())
+                        try
                         {
-                            var response = service.SavePrintDocTemplate(Template);
-                            if (response.Error)
-                                throw new Exception(response.Message);
+                            if (Template.File == null)
+                                throw new Exception("Шаблон не выбран");
+                            using (var service = new AimpService())
+                            {
+                                var response = service.SavePrintDocTemplate(Template);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                            }
+                            System.Windows.MessageBox.Show("Данные сохранены");
                         }
-                        System.Windows.MessageBox.Show("Данные сохранены");
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Windows.MessageBox.Show(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            System.Windows.MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }
@@ -121,24 +130,27 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                 {
                     if (new QuestClosingView("Удалить?").ShowDialog() == true)
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Удаление...", () =>
                         {
-                            using (var service = new AimpService())
+                            try
                             {
-                                var response = service.DeletePrintedDocTemplate(Template);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                else
+                                using (var service = new AimpService())
                                 {
-                                    System.Windows.MessageBox.Show(response.Message);
-                                    (win as Window)?.Close();
+                                    var response = service.DeletePrintedDocTemplate(Template);
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    else
+                                    {
+                                        System.Windows.MessageBox.Show(response.Message);
+                                        (win as Window)?.Close();
+                                    }
                                 }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            System.Windows.MessageBox.Show(ex.Message);
-                        }
+                            catch (Exception ex)
+                            {
+                                System.Windows.MessageBox.Show(ex.Message);
+                            }
+                        });
                     }
                 });
             }

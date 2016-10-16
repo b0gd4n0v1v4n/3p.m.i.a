@@ -89,6 +89,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\AimpServiceClient.cs" />
+    <Compile Include="Helpers\LoadingViewHalper.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\CardTrancportViewModel.cs" />
     <Compile Include="ViewModel\Dictionaries\CellViewModel.cs" />
@@ -159,7 +160,6 @@
     <Compile Include="ViewModel\CashTransactionViewModel.cs" />
     <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\ContractorInfoViewModel.cs" />
-    <Compile Include="ViewModel\LoadingDialogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Pages\BasePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\CashTransaction\CashTransactionPageViewModel.cs" />
@@ -214,7 +214,7 @@
     <Compile Include="View\LegalPersonInfoView.xaml.cs">
       <DependentUpon>LegalPersonInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LoadingDialogView.xaml.cs">
+    <Compile Include="View\LoadingWait\LoadingDialogView.xaml.cs">
       <DependentUpon>LoadingDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
@@ -321,7 +321,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LoadingDialogView.xaml">
+    <Page Include="View\LoadingWait\LoadingDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

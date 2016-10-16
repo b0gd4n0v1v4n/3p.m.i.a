@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using AIMP_v3._0.DataAccess;
 using Models.Entities;
 using Models.TrancportInfo;
+using AIMP_v3._0.Helpers;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -30,63 +31,59 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x =>
                 {
-
-                    //LoadingDialogHelper.Show("Поиск...");
-                    
-                    try
+                    LoadingViewHalper.ShowDialog("Поиск...", () =>
                     {
-                        SearchTrancportResult result = null;
-
-                        using (AimpService service = new AimpService())
+                        try
                         {
-                            if (string.IsNullOrEmpty(SearchText))
+                            SearchTrancportResult result = null;
+
+                            using (AimpService service = new AimpService())
                             {
-                                result = service.SearchTranports(TypeSearchTrancport.Empty, null);
-                            }
-                            else
-                            {
-                                switch (TypeSearch.ToLower())
+                                if (string.IsNullOrEmpty(SearchText))
                                 {
-                                    case "марка":
+                                    result = service.SearchTranports(TypeSearchTrancport.Empty, null);
+                                }
+                                else
+                                {
+                                    switch (TypeSearch.ToLower())
                                     {
-                                        result = service.SearchTranports(TypeSearchTrancport.Make, SearchText);
-                                        break;
-                                    }
-                                    case "модель":
-                                    {
-                                        result = service.SearchTranports(TypeSearchTrancport.Model, SearchText);
-                                        break;
-                                    }
-                                    case "vin":
-                                    {
-                                        result = service.SearchTranports(TypeSearchTrancport.Vin, SearchText);
-                                        break;
+                                        case "марка":
+                                            {
+                                                result = service.SearchTranports(TypeSearchTrancport.Make, SearchText);
+                                                break;
+                                            }
+                                        case "модель":
+                                            {
+                                                result = service.SearchTranports(TypeSearchTrancport.Model, SearchText);
+                                                break;
+                                            }
+                                        case "vin":
+                                            {
+                                                result = service.SearchTranports(TypeSearchTrancport.Vin, SearchText);
+                                                break;
+                                            }
                                     }
                                 }
-                            }
-                            if (result.Error)
-                            {
-                                MessageBox.Show(result.Message);
-                                return;
-                            }
-                            if (result.Trancports == null || result.Trancports.Count() == 0)
-                            {
-                                MessageBox.Show("Поиск не дал результатов");
-                                return;
-                            }
-                            Trancports = new ObservableCollection<Trancport>(result.Trancports);
+                                if (result.Error)
+                                {
+                                    MessageBox.Show(result.Message);
+                                    return;
+                                }
+                                if (result.Trancports == null || result.Trancports.Count() == 0)
+                                {
+                                    MessageBox.Show("Поиск не дал результатов");
+                                    return;
+                                }
+                                Trancports = new ObservableCollection<Trancport>(result.Trancports);
 
-                            OnPropertyChanged("Trancports");
+                                OnPropertyChanged("Trancports");
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка");
-                    }
-                    //finally
-                    //{
-                    //    LoadingDialogHelper.Hide();
-                    //}
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                    });
                 });
             }
         }

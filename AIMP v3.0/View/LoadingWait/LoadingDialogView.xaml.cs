@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.View
@@ -11,6 +13,7 @@ namespace AIMP_v3._0.View
         public LoadingView(string text)
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
             DataContext = text;
         }
     }

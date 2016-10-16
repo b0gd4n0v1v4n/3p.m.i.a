@@ -116,32 +116,35 @@ namespace AIMP_v3._0.ViewModel
                 {
                     if (_Validation())
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Сохранение...", () =>
                         {
-                            if (!IsProxy)
+                            try
                             {
-                                CreditTransaction.Owner = null;
-                                CreditTransaction.DateProxy = null;
-                                CreditTransaction.NumberProxy = null;
-                                CreditTransaction.NumberRegistry = null;
-                            }
-                            using (AimpService service = new AimpService())
-                            {
-                                var response = service.SaveCreditTransaction(CreditTransaction);
+                                if (!IsProxy)
+                                {
+                                    CreditTransaction.Owner = null;
+                                    CreditTransaction.DateProxy = null;
+                                    CreditTransaction.NumberProxy = null;
+                                    CreditTransaction.NumberRegistry = null;
+                                }
+                                using (AimpService service = new AimpService())
+                                {
+                                    var response = service.SaveCreditTransaction(CreditTransaction);
 
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                CreditTransaction.Id = response.Id;
-                                CreditTransaction.Number = response.Number;
-                                _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
-                                OnPropertyChanged("CreditTransaction");
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    CreditTransaction.Id = response.Id;
+                                    CreditTransaction.Number = response.Number;
+                                    _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
+                                    OnPropertyChanged("CreditTransaction");
+                                }
+                                MessageBox.Show("Данные успешно сохранены");
                             }
-                            MessageBox.Show("Данные успешно сохранены");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        });
                     }
                 });
             }
@@ -158,18 +161,21 @@ namespace AIMP_v3._0.ViewModel
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                LoadingViewHalper.ShowDialog("Удаление...", () =>
                                 {
-                                    var response = service.DeleteCreditTransaction(CreditTransaction);
+                                    using (AimpService service = new AimpService())
+                                    {
+                                        var response = service.DeleteCreditTransaction(CreditTransaction);
 
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
-                                }
+                                        if (response.Error)
+                                            MessageBox.Show(response.Message);
+                                    }
 
-                                var window = win as Window;
+                                    var window = win as Window;
 
-                                if (window != null)
-                                    window.Close();
+                                    if (window != null)
+                                        window.Close();
+                                });
                             }
                         }
                     }

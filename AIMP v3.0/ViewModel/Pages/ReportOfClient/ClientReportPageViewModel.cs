@@ -92,15 +92,18 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        ReportOfClientView view = new ReportOfClientView(new ClientReportViewModel(null));
-                        view.Show();
-                    }
-                    catch(Exception ex)
-                    {
-                        Logger.Instance.Log("Неудалось создать документ","New", ex);
-                    }
+                        try
+                        {
+                            ReportOfClientView view = new ReportOfClientView(new ClientReportViewModel(null));
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        }
+                    });
                 });
             }
         }
@@ -111,20 +114,23 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        if (CurrentItem?.Id != null)
+                        try
                         {
-                            var model = new ClientReportViewModel(CurrentItem.Id);
+                            if (CurrentItem?.Id != null)
+                            {
+                                var model = new ClientReportViewModel(CurrentItem.Id);
 
-                            ReportOfClientView view = new ReportOfClientView(model);
-                            view.Show();
+                                ReportOfClientView view = new ReportOfClientView(model);
+                                view.ShowDialog();
+                            }
                         }
-                    }
-                    catch(Exception ex)
-                    {
-                        Logger.Instance.Log("Неудалось открыть документ", "New", ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Неудалось открыть документ", "New", ex);
+                        }
+                    });
                 });
             }
         }
@@ -135,39 +141,42 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Формирование документа...", () =>
                     {
-                        using (var aimp = new AimpService())
+                        try
                         {
-                            var clientReports = new ClientReports();
-                            clientReports.Banks = _banks;
-                            clientReports.Items = FilteringList.Select(y=>new ClientReportListItem()
+                            using (var aimp = new AimpService())
                             {
-                                DateReportClient = y.DateReportClient,
-                                FullNameReportClient = y.FullNameReportClient,
-                                TelefonReportClient = y.TelefonReportClient,
-                                TrancportNameReportClient =y.TrancportNameReportClient,
-                                 PriceTrancportReportClient = y.PriceTrancportReportClient,
-                                 TotalContributionReportClient = y.TotalContributionReportClient,
-                                 ProgrammCreditReportClient = y.ProgrammCreditReportClient,
-                                 BankStatusesReportClient = y.BankStatusesReportClient,
-                                  ClientStatusReportClient = y.ClientStatusReportClient,
-                                  SourceInfoReportClient = y.SourceInfoReportClient
-                            });
-                            var result = aimp.GetClientReportList(clientReports);
+                                var clientReports = new ClientReports();
+                                clientReports.Banks = _banks;
+                                clientReports.Items = FilteringList.Select(y => new ClientReportListItem()
+                                {
+                                    DateReportClient = y.DateReportClient,
+                                    FullNameReportClient = y.FullNameReportClient,
+                                    TelefonReportClient = y.TelefonReportClient,
+                                    TrancportNameReportClient = y.TrancportNameReportClient,
+                                    PriceTrancportReportClient = y.PriceTrancportReportClient,
+                                    TotalContributionReportClient = y.TotalContributionReportClient,
+                                    ProgrammCreditReportClient = y.ProgrammCreditReportClient,
+                                    BankStatusesReportClient = y.BankStatusesReportClient,
+                                    ClientStatusReportClient = y.ClientStatusReportClient,
+                                    SourceInfoReportClient = y.SourceInfoReportClient
+                                });
+                                var result = aimp.GetClientReportList(clientReports);
 
-                            if (!result.Error)
-                            {
-                                OpenUserFile.Open("Отчет",result.Document.File);
+                                if (!result.Error)
+                                {
+                                    OpenUserFile.Open("Отчет", result.Document.File);
+                                }
+                                else
+                                    throw new Exception(result.Message);
                             }
-                            else
-                                throw new Exception(result.Message);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Не удалось сформировать отчет", "PrintList", ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Не удалось сформировать отчет", "PrintList", ex);
+                        }
+                    });
                 });
             }
         }
@@ -178,7 +187,10 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
             {
                 return new Command(x =>
                 {
-                    _FillListReportOfClient();
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    {
+                        _FillListReportOfClient();
+                    });
                 });
             }
         }

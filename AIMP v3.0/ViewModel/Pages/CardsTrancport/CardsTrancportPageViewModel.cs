@@ -1,4 +1,5 @@
 ﻿using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.CardsTrancport;
@@ -74,16 +75,19 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        var model = new CardTrancportViewModel(null);
-                        var view = new CardTrancportView(model);
-                        view.ShowDialog();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                    }
+                        try
+                        {
+                            var model = new CardTrancportViewModel(null);
+                            var view = new CardTrancportView(model);
+                            view.ShowDialog();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        }
+                    });
                 });
             }
         }
@@ -94,28 +98,31 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        if (CurrentItem != null)
+                        try
                         {
-                            CardTrancportViewModel vm = new CardTrancportViewModel(CurrentItem.Id);
-                            if (vm.CardTrancport.Commission)
+                            if (CurrentItem != null)
                             {
-                                CardCommissionTrancportView CreditTransactionView = new CardCommissionTrancportView(vm);
-                                CreditTransactionView.ShowDialog();
+                                CardTrancportViewModel vm = new CardTrancportViewModel(CurrentItem.Id);
+                                if (vm.CardTrancport.Commission)
+                                {
+                                    CardCommissionTrancportView CreditTransactionView = new CardCommissionTrancportView(vm);
+                                    CreditTransactionView.Show();
+                                }
+                                else
+                                {
+                                    CardTrancportView CreditTransactionView = new CardTrancportView(vm);
+                                    CreditTransactionView.ShowDialog();
+                                }
+
                             }
-                            else
-                            {
-CardTrancportView CreditTransactionView = new CardTrancportView(vm);
-                            CreditTransactionView.ShowDialog();
-                            }
-                            
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Не удалось открыть сделку");
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Не удалось открыть сделку");
+                        }
+                    });
                 });
             }
         }
@@ -131,7 +138,10 @@ CardTrancportView CreditTransactionView = new CardTrancportView(vm);
             {
                 return new Command(x =>
                 {
-                    _FillListCards();
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    {
+                        _FillListCards();
+                    });
                 });
             }
         }

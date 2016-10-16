@@ -101,44 +101,48 @@ namespace AIMP_v3._0
                 {
                     if (_Validation())
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Сохранение...", () =>
                         {
-                            if (!IsProxy)
+                            try
                             {
-                                Commission.Owner = null;
-                                Commission.DateProxy = null;
-                                Commission.NumberProxy = null;
-                                Commission.NumberRegistry = null;
-                            }
-                            using (AimpService service = new AimpService())
-                            {
-                                var response = service.SaveCommission(Commission);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                Commission.Id = response.Id;
-                                Commission.Number = response.Number;
-                                if (Commission.IsUseCardTrancport)
+                                if (!IsProxy)
                                 {
-                                    var responseAdd = service.AddCardTrancport(Commission.Id,Commission.Date);
-                                    if (responseAdd.Error)
-                                        throw new Exception(responseAdd.Message);
+                                    Commission.Owner = null;
+                                    Commission.DateProxy = null;
+                                    Commission.NumberProxy = null;
+                                    Commission.NumberRegistry = null;
                                 }
-                                else {
-                                    var responseDelete = service.DeleteCardTrancport(Commission.Id);
-                                    if (responseDelete.Error)
-                                        throw new Exception(responseDelete.Message);
+                                using (AimpService service = new AimpService())
+                                {
+                                    var response = service.SaveCommission(Commission);
+
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    Commission.Id = response.Id;
+                                    Commission.Number = response.Number;
+                                    if (Commission.IsUseCardTrancport)
+                                    {
+                                        var responseAdd = service.AddCardTrancport(Commission.Id, Commission.Date);
+                                        if (responseAdd.Error)
+                                            throw new Exception(responseAdd.Message);
+                                    }
+                                    else
+                                    {
+                                        var responseDelete = service.DeleteCardTrancport(Commission.Id);
+                                        if (responseDelete.Error)
+                                            throw new Exception(responseDelete.Message);
+                                    }
+
                                 }
-                                
+                                OnPropertyChanged("Commission");
+                                _commission = TinyMapper.Map<CommissionDocument>(Commission);
+                                MessageBox.Show("Данные успешно сохранены");
                             }
-                            OnPropertyChanged("Commission");
-                            _commission = TinyMapper.Map<CommissionDocument>(Commission);
-                            MessageBox.Show("Данные успешно сохранены");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        });
                     }
                 });
             }
@@ -155,18 +159,21 @@ namespace AIMP_v3._0
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                LoadingViewHalper.ShowDialog("Удаление...", () =>
                                 {
-                                    var response = service.DeleteCommission(Commission);
+                                    using (AimpService service = new AimpService())
+                                    {
+                                        var response = service.DeleteCommission(Commission);
 
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
-                                }
+                                        if (response.Error)
+                                            MessageBox.Show(response.Message);
+                                    }
 
-                                var window = win as Window;
+                                    var window = win as Window;
 
-                                if (window != null)
-                                    window.Close();
+                                    if (window != null)
+                                        window.Close();
+                                });
                             }
                         }
                     }

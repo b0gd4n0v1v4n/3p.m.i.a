@@ -6,6 +6,7 @@ using AIMP_v3._0.DataAccess;
 using Models.Entities;
 using Models.ContractorInfo;
 using System.Linq;
+using AIMP_v3._0.Helpers;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -29,63 +30,59 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x =>
                 {
-
-                    //LoadingDialogHelper.Show("Поиск...");
-
-                    try
+                    LoadingViewHalper.ShowDialog("Поиск...", () =>
                     {
-                        SearchContractorResult result = null;
-
-                        using (AimpService service = new AimpService())
+                        try
                         {
-                            if (string.IsNullOrEmpty(SearchText))
+                            SearchContractorResult result = null;
+
+                            using (AimpService service = new AimpService())
                             {
-                                result = service.SearchContractor(TypeSearchContractor.Empty, null);
-                            }
-                            else
-                            {
-                                switch (TypeSearch.ToLower())
+                                if (string.IsNullOrEmpty(SearchText))
                                 {
-                                    case "фамилия":
+                                    result = service.SearchContractor(TypeSearchContractor.Empty, null);
+                                }
+                                else
+                                {
+                                    switch (TypeSearch.ToLower())
                                     {
-                                        result = service.SearchContractor(TypeSearchContractor.LastName, SearchText);
-                                        break;
-                                    }
-                                    case "организация":
-                                    {
-                                        result = service.SearchContractor(TypeSearchContractor.Organization, SearchText);
-                                        break;
-                                    }
-                                    case "инн":
-                                    {
-                                        result = service.SearchContractor(TypeSearchContractor.Inn, SearchText);
-                                        break;
+                                        case "фамилия":
+                                            {
+                                                result = service.SearchContractor(TypeSearchContractor.LastName, SearchText);
+                                                break;
+                                            }
+                                        case "организация":
+                                            {
+                                                result = service.SearchContractor(TypeSearchContractor.Organization, SearchText);
+                                                break;
+                                            }
+                                        case "инн":
+                                            {
+                                                result = service.SearchContractor(TypeSearchContractor.Inn, SearchText);
+                                                break;
+                                            }
                                     }
                                 }
+                                if (result.Error)
+                                {
+                                    MessageBox.Show(result.Message);
+                                    return;
+                                }
+                                if (result.Contractors == null || result.Contractors.Count() == 0)
+                                {
+                                    MessageBox.Show("Поиск не дал результатов");
+                                    return;
+                                }
+                                Contractors = new ObservableCollection<Contractor>(result.Contractors);
                             }
-                            if (result.Error)
-                            {
-                                MessageBox.Show(result.Message);
-                                return;
-                            }
-                            if(result.Contractors == null || result.Contractors.Count() == 0)
-                            {
-                                MessageBox.Show("Поиск не дал результатов");
-                                return;
-                            }
-                            Contractors = new ObservableCollection<Contractor>(result.Contractors);
-                        }
 
-                        OnPropertyChanged("Contractors");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка");
-                    }
-                    //finally
-                    //{
-                    //    LoadingDialogHelper.Hide();
-                    //}
+                            OnPropertyChanged("Contractors");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Ошибка");
+                        }
+                    });
                 });
             }
         }

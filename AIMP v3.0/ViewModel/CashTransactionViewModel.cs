@@ -97,33 +97,36 @@ namespace AIMP_v3._0.ViewModel
                 {
                     if (_Validation())
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Сохранение...", () =>
                         {
-                            if (!IsProxy)
+                            try
                             {
-                                CashTransaction.Owner = null;
-                                CashTransaction.DateProxy = null;
-                                CashTransaction.NumberProxy = null;
-                                CashTransaction.NumberRegistry = null;
+                                if (!IsProxy)
+                                {
+                                    CashTransaction.Owner = null;
+                                    CashTransaction.DateProxy = null;
+                                    CashTransaction.NumberProxy = null;
+                                    CashTransaction.NumberRegistry = null;
+                                }
+                                using (AimpService service = new AimpService())
+                                {
+                                    var response = service.SaveCashTransaction(CashTransaction);
+
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+
+                                    CashTransaction.Id = response.Id;
+                                    CashTransaction.Number = response.Number;
+                                    _transaction = TinyMapper.Map<CashTransactionDocument>(CashTransaction);
+                                    OnPropertyChanged("CashTransaction");
+                                    MessageBox.Show(response.Message);
+                                }
                             }
-                            using (AimpService service = new AimpService())
+                            catch (Exception ex)
                             {
-                                var response = service.SaveCashTransaction(CashTransaction);
-
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-
-                                CashTransaction.Id = response.Id;
-                                CashTransaction.Number = response.Number;
-                                _transaction = TinyMapper.Map<CashTransactionDocument>(CashTransaction);
-                                OnPropertyChanged("CashTransaction");
-                                MessageBox.Show(response.Message);
+                                MessageBox.Show(ex.Message);
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        });
                     }
                 });
             }
@@ -140,18 +143,21 @@ namespace AIMP_v3._0.ViewModel
                         {
                             if (new QuestClosingView("Удалить документ?").ShowDialog() == true)
                             {
-                                using (AimpService service = new AimpService())
+                                LoadingViewHalper.ShowDialog("Удаление...", () =>
                                 {
-                                    var response = service.DeleteCashTransaction(CashTransaction);
+                                    using (AimpService service = new AimpService())
+                                    {
+                                        var response = service.DeleteCashTransaction(CashTransaction);
 
-                                    if (response.Error)
-                                        MessageBox.Show(response.Message);
-                                }
+                                        if (response.Error)
+                                            MessageBox.Show(response.Message);
+                                    }
 
-                                var window = win as Window;
+                                    var window = win as Window;
 
-                                if (window != null)
-                                    window.Close();
+                                    if (window != null)
+                                        window.Close();
+                                });
                             }
                         }
                     }

@@ -60,42 +60,45 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             _FillListCreditTransaction();
             _openListItem = new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        if (CurrentItem != null)
+                        try
                         {
-                            CreditTransactionViewModel vm;
-                            using (AimpService service = new AimpService())
+                            if (CurrentItem != null)
                             {
-                                var transaction = service.GetCreditTransaction(CurrentItem.Id);
+                                CreditTransactionViewModel vm;
+                                using (AimpService service = new AimpService())
+                                {
+                                    var transaction = service.GetCreditTransaction(CurrentItem.Id);
 
-                                if (transaction.Error)
-                                {
-                                    MessageBox.Show("Ошибка сервера", transaction.Message);
-                                    return;
+                                    if (transaction.Error)
+                                    {
+                                        MessageBox.Show("Ошибка сервера", transaction.Message);
+                                        return;
+                                    }
+                                    var response = service.GetPrintedList(DocumentType.CreditTransaction);
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    var lst = response.List.Select(p => new PrintItem()
+                                    {
+                                        Name = p.Name,
+                                        Type = DocumentType.CreditTransaction,
+                                        Document = transaction.Document
+                                    });
+                                    var responseInfo = service.GetCreditInfo();
+                                    if (responseInfo.Error)
+                                        throw new Exception(responseInfo.Message);
+                                    vm = new CreditTransactionViewModel(transaction.Document, lst, responseInfo.Creditors, responseInfo.Requisits);
                                 }
-                                var response = service.GetPrintedList(DocumentType.CreditTransaction);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                var lst = response.List.Select(p => new PrintItem()
-                                {
-                                    Name = p.Name,
-                                    Type = DocumentType.CreditTransaction,
-                                    Document = transaction.Document
-                                });
-                                var responseInfo = service.GetCreditInfo();
-                                if (responseInfo.Error)
-                                    throw new Exception(responseInfo.Message);
-                                vm = new CreditTransactionViewModel(transaction.Document, lst, responseInfo.Creditors, responseInfo.Requisits);
+                                CreditTransactionView CreditTransactionView = new CreditTransactionView(vm);
+                                CreditTransactionView.ShowDialog();
                             }
-                            CreditTransactionView CreditTransactionView = new CreditTransactionView(vm);
-                            CreditTransactionView.ShowDialog();
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Не удалось открыть сделку");
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Не удалось открыть сделку");
+                        }
+                    });
                 });
         }
 
@@ -106,30 +109,33 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
                     {
-                        using (var service = new AimpService())
+                        try
                         {
-                            var response = service.GetPrintedList(DocumentType.CreditTransaction);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var document = new CreditTransactionDocument();
-                            var lst = response.List.Select(p => new PrintItem()
+                            using (var service = new AimpService())
                             {
-                                Name = p.Name,
-                                Type = DocumentType.CreditTransaction,
-                                Document = document
-                            });
-                            var responseInfo = service.GetCreditInfo();
-                            if (responseInfo.Error)
-                                throw new Exception(responseInfo.Message);
-                            new CreditTransactionView(new CreditTransactionViewModel(document, lst, responseInfo.Creditors, responseInfo.Requisits)).ShowDialog();
+                                var response = service.GetPrintedList(DocumentType.CreditTransaction);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                                var document = new CreditTransactionDocument();
+                                var lst = response.List.Select(p => new PrintItem()
+                                {
+                                    Name = p.Name,
+                                    Type = DocumentType.CreditTransaction,
+                                    Document = document
+                                });
+                                var responseInfo = service.GetCreditInfo();
+                                if (responseInfo.Error)
+                                    throw new Exception(responseInfo.Message);
+                                new CreditTransactionView(new CreditTransactionViewModel(document, lst, responseInfo.Creditors, responseInfo.Requisits)).ShowDialog();
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        }
+                    });
                 });
             }
         }
@@ -140,7 +146,10 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    _FillListCreditTransaction();
+                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    {
+                        _FillListCreditTransaction();
+                    });
                 });
             }
         }

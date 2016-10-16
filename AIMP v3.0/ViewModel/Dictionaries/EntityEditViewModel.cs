@@ -1,5 +1,6 @@
 ﻿
 using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Helpers;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.Dictionaries;
 using Models;
@@ -30,23 +31,26 @@ namespace AIMP_v3._0.ViewModel
             {
                 return new Command(x =>
                 {
-                    try
+                    LoadingViewHalper.ShowDialog("Сохранение...", () =>
                     {
-                        Dictionary<string, string> dictionary = Cells
-                        .Select(c => new { c.ColumnName,c.Value })
-                        .ToDictionary(d=>d.ColumnName,d=>d.Value);
-                        using (var service = new AimpService())
+                        try
                         {
-                            var response = service.SaveRowValuesDictionary(_tableName,dictionary,_id);
-                            if (response.Error)
-                                throw new Exception(response.Message);
+                            Dictionary<string, string> dictionary = Cells
+                            .Select(c => new { c.ColumnName, c.Value })
+                            .ToDictionary(d => d.ColumnName, d => d.Value);
+                            using (var service = new AimpService())
+                            {
+                                var response = service.SaveRowValuesDictionary(_tableName, dictionary, _id);
+                                if (response.Error)
+                                    throw new Exception(response.Message);
+                            }
+                            MessageBox.Show("Данные сохранены");
                         }
-                        MessageBox.Show("Данные сохранены");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    });
                 });
             }
         }
@@ -70,24 +74,27 @@ namespace AIMP_v3._0.ViewModel
                 {
                     if (new QuestClosingView("Удалить?").ShowDialog() == true)
                     {
-                        try
+                        LoadingViewHalper.ShowDialog("Удаление...", () =>
                         {
-                            using (var service = new AimpService())
+                            try
                             {
-                                var response = service.DeleteRowDictionary(_tableName,_id);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                else
+                                using (var service = new AimpService())
                                 {
-                                    MessageBox.Show(response.Message);
-                                    (win as Window)?.Close();
+                                    var response = service.DeleteRowDictionary(_tableName, _id);
+                                    if (response.Error)
+                                        throw new Exception(response.Message);
+                                    else
+                                    {
+                                        MessageBox.Show(response.Message);
+                                        (win as Window)?.Close();
+                                    }
                                 }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        });
                     }
                 });
             }
