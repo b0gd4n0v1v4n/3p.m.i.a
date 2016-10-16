@@ -152,6 +152,7 @@ namespace AIMP_v3._0.ViewModel.Pages
                                     CurrentColumn = usingColumn;
                                     CurrentColumn.List = new ObservableCollection<ListItemFiltering>(lst.Distinct());
                                 }
+                                OnPropertyChanged("CurrentColumn");
                             }
                         }
                     }
