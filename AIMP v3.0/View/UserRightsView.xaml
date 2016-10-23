@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="Пользователи" Height="300" Width="424.24" Name="Window" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/AIMP v3.0;component/Style/Image/User Folder-48.png">
+        Title="Пользователи" Height="300" Width="424.24" Name="Window" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/AIMP;component/Style/Image/User Folder-48.png">
     <Grid>
         <ListView x:Name="listView1" HorizontalAlignment="Left" Height="234" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding UserRightList}" SelectedItem="{Binding CurrentItem}">
             <ListView.InputBindings>

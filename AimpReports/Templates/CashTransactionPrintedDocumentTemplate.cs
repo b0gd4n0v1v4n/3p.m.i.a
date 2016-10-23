@@ -9,8 +9,9 @@ namespace AimpReports.PrintedDocument.Templates
     public class CashTransactionPrintedDocumentTemplate : IPrintedDocumentTemplate
     {
         private Dictionary<string, string> _labelValues; 
-        public CashTransactionPrintedDocumentTemplate(CashTransaction transaction,byte[] templateFile)
+        public CashTransactionPrintedDocumentTemplate(CashTransaction transaction,byte[] templateFile, string fileName)
         {
+            FileName = fileName;
             TemplateFile = templateFile;
             _labelValues = new Dictionary<string, string>();
             _labelValues.Add("месяц_доверенность", transaction.DateProxy?.Month.ToString());

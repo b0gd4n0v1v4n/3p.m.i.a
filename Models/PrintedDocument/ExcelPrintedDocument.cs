@@ -13,5 +13,12 @@ namespace Models.PrintedDocument
 
             set;
         }
+
+        public string FileName
+        {
+            get;
+
+            set;
+        }
     }
 }

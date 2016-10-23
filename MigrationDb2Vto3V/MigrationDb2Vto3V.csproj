@@ -58,6 +58,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIMPSPB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIMPSPB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AIMPSPB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AIMPSPB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIMPSPB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,75 +90,92 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="AIMPSPB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AIMPSPB.edmx</DependentUpon>
+      <LastGenOutput>AIMPSPB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AIMPSPB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AIMPSPB.edmx</DependentUpon>
+      <LastGenOutput>AIMPSPB.cs</LastGenOutput>
+    </Content>
     <Content Include="SQL\TRGGER_NUMBERS_FOR_DOCUMENTS.sql" />
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ВИДЫ_ТРАНСПОРТА.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ГОРОДА.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="КАТЕГОРИИ_ТРАНСПОРТА.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="КОНТРАГЕНТЫ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="КРЕДИТОРЫ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="МАРКИ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="МОДЕЛИ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ОТЧЁТЫ_КЛИЕНТОВ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ПОЛЬЗОВАТЕЛИ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="РЕГИОНЫ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="РЕКВИЗИТЫ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="СДЕЛКИ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="спр_СТАТУСЫ_БАНКА.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="спр_СТАТУСЫ_КЛИЕНТОВ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ТИПЫ_ДВИГАТЕЛЕЙ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ТИПЫ_ШАБЛОНОВ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ТРАНСПОРТ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
     <Compile Include="ШАБЛОНЫ.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>AIMPSPB.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="AIMPSPB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AIMPSPB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AIMPSPB.edmx.diagram">
+      <DependentUpon>AIMPSPB.edmx</DependentUpon>
+    </None>
     <None Include="App.config" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

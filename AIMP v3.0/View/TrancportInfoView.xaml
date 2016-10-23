@@ -7,7 +7,7 @@
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
         xmlns:viewModel="clr-namespace:AIMP_v3._0.ViewModel"
         mc:Ignorable="d"
-        Title="ТРАНСПОРТНОЕ СРЕДСТВО" Height="442" Width="897.944" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Name="Window" Icon="/AIMP v3.0;component/Style/Image/SUV-50.png">
+        Title="ТРАНСПОРТНОЕ СРЕДСТВО" Height="442" Width="897.944" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Name="Window" Icon="/AIMP;component/Style/Image/SUV-50.png">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
     </Window.Resources>

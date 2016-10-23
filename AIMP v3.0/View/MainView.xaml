@@ -24,7 +24,6 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="ФАЙЛ">
-                <MenuItem Header="ДОБАВИТЬ"></MenuItem>
                 <MenuItem Header="ВЫХОД"></MenuItem>
             </MenuItem>
             <MenuItem Header="СПРАВОЧНИКИ" ItemsSource="{Binding DictionaryList}">
@@ -40,8 +39,8 @@
                 <MenuItem Header="ПЕЧАТНЫЕ ФОРМЫ" Command="{Binding EditPrintedDocTemplateCommand}"></MenuItem>
                 </MenuItem>
             <!--<MenuItem Header="СПРАВКА">
-                <MenuItem Header="О ПРОГРАММЕ"></MenuItem>
             </MenuItem>-->
+            <MenuItem Header="О ПРОГРАММЕ" Click="MenuItem_Click"></MenuItem>
         </Menu>
         <Menu Grid.Row="1">
             <MenuItem Style="{StaticResource NewMenuItem}" Visibility="{Binding VisibleAdd}" IsEnabled="{Binding CurrentPage.NewIsEnabled}" Command="{Binding CurrentPage.New}"></MenuItem>

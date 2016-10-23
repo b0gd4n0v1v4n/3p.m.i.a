@@ -171,7 +171,7 @@ namespace AimpLogic.CashTransactions
                     Context.PrintedDocumentTemplates.All().FirstOrDefault(x => x.Name == name);
                 if (fileTemplate == null)
                     throw new SqlNullValueException("Шаблон не найден");
-                var template = new CashTransactionPrintedDocumentTemplate(transaction, fileTemplate.File);
+                var template = new CashTransactionPrintedDocumentTemplate(transaction, fileTemplate.File,fileTemplate.FileName);
                 using (var printedService = new WordPrintedDocumentService())
                 {
                     return (WordPrintedDocument)printedService.GetDocument(template);

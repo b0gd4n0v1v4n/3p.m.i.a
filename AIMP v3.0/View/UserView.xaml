@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" x:Class="AIMP_v3._0.View.UserView"
         mc:Ignorable="d"
-        Title="РЕДАКТИРОВАНИЕ ПОЛЬЗОВАТЕЛЯ" Height="336.544" Width="613.597" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Name="Window" Icon="/AIMP v3.0;component/Style/Image/Edit User Female-48.png">
+        Title="РЕДАКТИРОВАНИЕ ПОЛЬЗОВАТЕЛЯ" Height="336.544" Width="613.597" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Name="Window" Icon="/AIMP;component/Style/Image/Edit User Female-48.png">
     <Grid>
         <Label x:Name="label" Content="ФАМИЛИЯ" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="ИМЯ" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>

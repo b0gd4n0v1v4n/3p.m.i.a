@@ -11,8 +11,9 @@ namespace AimpReports.Templates
         private Dictionary<string, string> _labelValues;
         public const string DKP_REPORT_NAME = "Документ купли продажи";
         public const string AKT_REPORT_NAME = "Акт к купле продажи";
-        public CreditTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile)
+        public CreditTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile, string fileName)
         {
+            FileName = fileName;
             TemplateFile = templateFile;
             _labelValues = new Dictionary<string, string>();
 

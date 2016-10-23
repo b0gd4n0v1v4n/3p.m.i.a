@@ -263,7 +263,7 @@ namespace AimpLogic.CreditTransactions
                 
                 if (template == null)
                     throw new SqlNullValueException("Шаблон не найден");
-                var resurl = new CreditTransactionPrintedDocumentTemplate(transaction, template.File);
+                var resurl = new CreditTransactionPrintedDocumentTemplate(transaction, template.File,template.FileName);
                 using (var printedService = new WordPrintedDocumentService())
                 {
                     return (WordPrintedDocument)printedService.GetDocument(resurl);

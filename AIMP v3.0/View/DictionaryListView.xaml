@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.DictionaryListView"
         mc:Ignorable="d"
-        Title="{Binding Name}" Height="330.451" Width="368.797" x:Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP v3.0;component/Style/Image/View Details-48.png">
+        Title="{Binding Name}" Height="330.451" Width="368.797" x:Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP;component/Style/Image/View Details-48.png">
     <Grid>
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="264,254,0,0" VerticalAlignment="Top" Width="75"/>
 

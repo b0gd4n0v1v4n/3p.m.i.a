@@ -73,7 +73,8 @@ namespace AimpReports.Services.Excel
                 byte[] file = File.ReadAllBytes(saveFile);
                 return new ExcelPrintedDocument()
                 {
-                    File = file
+                    File = file,
+                    FileName = $"Отчет клиентов.xslx"
                 };
             }
             catch (Exception ex)

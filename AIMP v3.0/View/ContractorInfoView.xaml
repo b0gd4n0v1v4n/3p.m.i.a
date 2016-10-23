@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         x:Class="AIMP_v3._0.View.ContractorInfoView"
         mc:Ignorable="d"
-        Title="КОНТРАГЕНТ" Height="322" Width="918.775" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/AIMP v3.0;component/Style/Image/Contract Job-48.png">
+        Title="КОНТРАГЕНТ" Height="322" Width="918.775" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="/AIMP;component/Style/Image/Contract Job-48.png">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
     </Window.Resources>

@@ -10,8 +10,9 @@ namespace AimpReports.Templates
     {
         private Dictionary<string, string> _labelValues;
 
-        public CommissionTransactionPrintedDocumentTemplate(CommissionTransaction commission, byte[] templateFile)
+        public CommissionTransactionPrintedDocumentTemplate(CommissionTransaction commission, byte[] templateFile, string fileName)
         {
+            FileName = fileName;
             TemplateFile = templateFile;
             _labelValues = new Dictionary<string, string>();
 

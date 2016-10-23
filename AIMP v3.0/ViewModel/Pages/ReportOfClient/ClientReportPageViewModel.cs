@@ -166,7 +166,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 
                                 if (!result.Error)
                                 {
-                                    OpenUserFile.Open("Отчет", result.Document.File);
+                                    OpenUserFile.Open(result.Document.FileName, result.Document.File);
                                 }
                                 else
                                     throw new Exception(result.Message);

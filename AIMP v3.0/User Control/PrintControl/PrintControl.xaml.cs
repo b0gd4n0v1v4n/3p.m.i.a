@@ -62,7 +62,7 @@ namespace AIMP_v3._0.User_Control
                                 if (response.Error)
                                     throw new Exception(response.Message);
 
-                                OpenUserFile.Open(item.Name, response.Document.File);
+                                OpenUserFile.Open(response.Document.FileName, response.Document.File);
                             }
                         }
                         catch (Exception ex)

@@ -46,7 +46,8 @@ namespace AimpReports.Services.Word
 
                 return new WordPrintedDocument()
                 {
-                    File = file
+                    File = file,
+                    FileName = template.FileName
                 };
             }
             catch (Exception ex)

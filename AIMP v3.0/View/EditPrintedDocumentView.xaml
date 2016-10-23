@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         mc:Ignorable="d"
-        Title="Печатная форма" Height="190.602" Width="488.346" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP v3.0;component/Style/Image/MS Word-48.png">
+        Title="Печатная форма" Height="190.602" Width="488.346" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP;component/Style/Image/MS Word-48.png">
     <Grid>
         <Label x:Name="label" Content="Наименовани" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="102,12,0,0" TextWrapping="Wrap" Text="{Binding Template.Name}" VerticalAlignment="Top" Width="370"/>

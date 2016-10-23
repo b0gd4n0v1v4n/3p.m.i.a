@@ -13,5 +13,10 @@ namespace AIMP_v3._0.View
         {
             InitializeComponent();
         }
+        
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new AboutBox().ShowDialog();
+        }
     }
 }

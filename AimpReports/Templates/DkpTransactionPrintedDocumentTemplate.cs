@@ -9,8 +9,9 @@ namespace AimpReports.Templates
     public class DkpTransactionPrintedDocumentTemplate : IPrintedDocumentTemplate
     {
         private Dictionary<string, string> _labelValues;
-        public DkpTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile)
+        public DkpTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile, string fileName)
         {
+            FileName = fileName;
             TemplateFile = templateFile;
             _labelValues = new Dictionary<string, string>();
 

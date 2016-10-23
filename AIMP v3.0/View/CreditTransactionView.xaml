@@ -7,7 +7,7 @@
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CreditTransactionView"
         mc:Ignorable="d"
         x:Name="Window"
-        Title="СДЕЛКА В КРЕДИТ" Height="384.797" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Icon="/AIMP v3.0;component/Style/Image/Key Exchange-48.png" >
+        Title="СДЕЛКА В КРЕДИТ" Height="384.797" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Icon="/AIMP;component/Style/Image/Key Exchange-48.png" >
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="296" VerticalAlignment="Top" Width="690">
             <TabItem Header="СДЕЛКА" HorizontalAlignment="Right" Width="100">

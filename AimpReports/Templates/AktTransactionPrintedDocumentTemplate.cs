@@ -9,8 +9,9 @@ namespace AimpReports.Templates
     public class AktTransactionPrintedDocumentTemplate : IPrintedDocumentTemplate
     {
         private Dictionary<string, string> _labelValues;
-        public AktTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile)
+        public AktTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile, string fileName)
         {
+            FileName = fileName;
             TemplateFile = templateFile;
             _labelValues = new Dictionary<string, string>();
             _labelValues.Add("банк_кредитор", transaction.Creditor.Name);

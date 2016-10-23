@@ -82,12 +82,15 @@ namespace AIMP_v3._0.User_Control
             {
                 if (UserFile != null)
                 {
-                    if (UserFile?.File != null)
-                        OpenUserFile.Open(UserFile.Name, UserFile.File);
-                    else if(UserFile.Id != 0)
+                    LoadingViewHalper.ShowDialog("Открытие файла...", () =>
                     {
-                        OpenUserFile.GetAndOpen(UserFile.Id);
-                    }
+                        if (UserFile?.File != null)
+                            OpenUserFile.Open(UserFile.Name, UserFile.File);
+                        else if (UserFile.Id != 0)
+                        {
+                            OpenUserFile.GetAndOpen(UserFile.Id);
+                        }
+                    });
                 }
                 else if(UserFileId.HasValue)
                 {

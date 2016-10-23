@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" x:Class="AIMP_v3._0.View.AuthView"
         mc:Ignorable="d"
-        Title="АВТОРИЗАЦИЯ" Height="174" Width="460.518" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP v3.0;component/Style/Image/Facial Recognition Scan-48.png">
+        Title="АВТОРИЗАЦИЯ" Height="174" Width="460.518" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP;component/Style/Image/Facial Recognition Scan-48.png">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
         <!--https://icons8.com/web-app/for/color/add-->

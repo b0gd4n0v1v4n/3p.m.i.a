@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AIMP_v3._0.View"
                 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="Печатные формы" Height="314.662" Width="525.564" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP v3.0;component/Style/Image/Documents Folder-48.png">
+        Title="Печатные формы" Height="314.662" Width="525.564" Name="Window" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/AIMP;component/Style/Image/Documents Folder-48.png">
     <Grid>
         <ListView x:Name="listBox" HorizontalAlignment="Left" Height="223" ItemsSource="{Binding ListItems}"  SelectedItem="{Binding CurrentItem}" VerticalAlignment="Top" Width="507">
             <ListView.InputBindings>
