@@ -212,7 +212,6 @@ namespace MigrationDb2Vto3V
                     };
                     newDb.UserRights.Add(userRightView);
                 }
-                newDb.SaveChanges();
             }
 
             return user;
@@ -340,6 +339,8 @@ namespace MigrationDb2Vto3V
 
                     foreach (var сделка in aimp.СДЕЛКИ)
                     {
+                        Console.WriteLine(сделка.код);
+
                         CashTransaction cash = new CashTransaction();
 
                         cash.Date = сделка.дата ?? DateTime.Now;

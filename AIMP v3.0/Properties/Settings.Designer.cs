@@ -85,7 +85,7 @@ namespace AIMP_v3._0.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("test")]
+        [global::System.Configuration.DefaultSettingValueAttribute("aimp")]
         public string service {
             get {
                 return ((string)(this["service"]));
