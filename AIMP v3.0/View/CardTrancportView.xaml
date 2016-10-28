@@ -127,8 +127,8 @@
                     <User_Control:TextBoxDecimalInputBehavior InputMode="DecimalInput"/>
                 </i:Interaction.Behaviors>
             </TextBox>
-            <Label x:Name="label_Copy32" Content="МЕНЕДЖЕР-ПРОДАВЕЦ" HorizontalAlignment="Left" Margin="422,541,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox_Copy23" Text="{Binding CardTrancport.ManagerSeller,Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="568,542,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="338" Grid.ColumnSpan="2"/>
+            <Label x:Name="label_Copy32" Content="МЕНЕДЖЕР-ПРОДАВЕЦ" HorizontalAlignment="Left" Margin="420,541,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox_Copy23" Text="{Binding CardTrancport.ManagerSeller,Mode=TwoWay}"   HorizontalAlignment="Left" Height="23" Margin="16,542,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="338" Grid.Column="1"/>
             <Button x:Name="button2" Content="+" Command="{Binding NewPreCheckCommand}" HorizontalAlignment="Left" Margin="340,316,0,0" VerticalAlignment="Top" Width="20" Grid.Column="1"/>
             <Label x:Name="label2" Content="НОМЕР" HorizontalAlignment="Left" Margin="164,3,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="textBox3" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="229,4,0,0" TextWrapping="Wrap" Text="{Binding CardTrancport.Number}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.429,-0.565"/>
