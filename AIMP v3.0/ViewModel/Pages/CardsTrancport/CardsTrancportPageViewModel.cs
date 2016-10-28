@@ -12,8 +12,6 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
 {
     public class CardsTrancportPageViewModel : BasePageViewModel<CardTrancportListItemViewModel>, IPageViewModel
     {
-        private bool _isOneLoad;
-
         private void _FillListCards()
         {
             try
@@ -39,9 +37,8 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         User = x.User,
                         YearTrancport = x.YearTrancport
                     });
-                    if (!_isOneLoad && response.StatusesCardForFilerStart != null && response.StatusesCardForFilerStart.Count() > 0)
+                    if (response.StatusesCardForFilerStart != null && response.StatusesCardForFilerStart.Count() > 0)
                     {
-                        _isOneLoad = true;
                         SetFilter("Status", response.StatusesCardForFilerStart);
                         KASTIL_BRASH_FOR_STATUS_CARDTRANCPORT = Brushes.Orange;
                         OnPropertyChanged("KASTIL_BRASH_FOR_STATUS_CARDTRANCPORT");
