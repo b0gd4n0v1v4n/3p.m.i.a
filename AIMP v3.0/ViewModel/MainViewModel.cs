@@ -106,6 +106,12 @@ namespace AIMP_v3._0.ViewModel
                         TableName = "SourceTrancports",
                         Name = "ИСТОЧНИКИ ПОСТУПЛЕНИЯ",
                         Columns = idNameColumn
+                    },
+                    new DictionaryMenuItemViewModel
+                    {
+                        TableName = "StatusCardTrancports",
+                        Name = @"СТАТУСЫ А\М",
+                        Columns = idNameColumn
                     }
                 };
             }
