@@ -16,6 +16,8 @@ namespace AimpConsole
         {
             using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
             {
+                Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
+
                 webServiceHost.Open();
                 try
                 {
