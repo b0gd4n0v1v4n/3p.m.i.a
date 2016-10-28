@@ -131,7 +131,7 @@ namespace AIMP_v3._0.ViewModel
 
                 Tabs.Add(new CardsTrancportPageViewModel());
 
-                CurrentPage = Tabs[0];
+                CurrentPage = Tabs[4];
             }
         }
         public Command EditPrintedDocTemplateCommand

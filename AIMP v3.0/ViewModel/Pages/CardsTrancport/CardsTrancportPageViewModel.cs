@@ -153,5 +153,13 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                 return Visibility.Hidden;
             }
         }
+
+        public override Visibility AddButtonVisible
+        {
+            get
+            {
+                return Visibility.Hidden;
+            }
+        }
     }
 }

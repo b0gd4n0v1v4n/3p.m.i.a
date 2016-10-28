@@ -17,6 +17,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {
     public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
     {
+
         private bool _isOneLoad;
         private IEnumerable<Bank> _banks;
         private void _FillListReportOfClient()
@@ -196,6 +197,13 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
         }
 
         public Visibility PrintButtonVisible
+        {
+            get
+            {
+                return Visibility.Visible;
+            }
+        }
+        public override Visibility AddButtonVisible
         {
             get
             {

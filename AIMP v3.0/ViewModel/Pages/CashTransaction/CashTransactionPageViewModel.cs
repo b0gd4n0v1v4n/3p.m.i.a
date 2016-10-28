@@ -15,6 +15,13 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 {
     public class CashTransactionPageViewModel : BasePageViewModel<CashTransactionListItemViewModel>, IPageViewModel
     {
+        public override Visibility AddButtonVisible
+        {
+            get
+            {
+                return Visibility.Visible;
+            }
+        }
         private void _FillListCashTransaction()
         {
             try

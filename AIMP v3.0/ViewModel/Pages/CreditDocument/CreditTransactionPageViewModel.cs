@@ -13,6 +13,13 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
     public class CreditTransactionPageViewModel : BasePageViewModel<CreditTransactionListItemViewModel>, IPageViewModel
     {
+        public override Visibility AddButtonVisible
+        {
+            get
+            {
+                return Visibility.Visible;
+            }
+        }
         private void _FillListCreditTransaction()
         {
             try

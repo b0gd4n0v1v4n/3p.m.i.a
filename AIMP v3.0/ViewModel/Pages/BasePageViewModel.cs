@@ -16,6 +16,7 @@ namespace AIMP_v3._0.ViewModel.Pages
     public abstract class BasePageViewModel<TList> : BaseViewModel
         where TList : Identity
     {
+        public abstract Visibility AddButtonVisible { get; }
         private string _GetColumnName(string name)
         {
             if (name.IndexOf('|') > 0)
