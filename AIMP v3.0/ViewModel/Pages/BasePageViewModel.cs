@@ -121,7 +121,7 @@ namespace AIMP_v3._0.ViewModel.Pages
                     {
                         if (List != null)
                         {
-                            var queryList = FilteringList?.Select($"new ({columnName} as Text ,true as IsChecked)");
+                            var queryList = FilteringList?.Select($"new ({columnName} as Text ,true as IsChecked)").OrderBy("Text");
 
                             if (queryList != null)
                             {
