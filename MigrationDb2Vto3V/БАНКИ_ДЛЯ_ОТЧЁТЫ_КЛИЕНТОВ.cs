@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace aimp2.models
+namespace MigrationDb2Vto3V
 {
     using System;
     using System.Collections.Generic;
