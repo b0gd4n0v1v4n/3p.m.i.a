@@ -57,7 +57,7 @@
     <Compile Include="CreditTransactions\ICreditTransactionService.cs" />
     <Compile Include="DispatcherDocuments\DispatcherDocument.cs" />
     <Compile Include="DispatcherDocuments\IDispatcherDocument.cs" />
-    <Compile Include="Helpres\UserFileCheck.cs" />
+    <Compile Include="Extensions\ContextExtensions.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logic\Aimp.cs" />
     <Compile Include="CashTransactions\CashTransactionService.cs" />

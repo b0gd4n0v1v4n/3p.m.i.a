@@ -1,4 +1,4 @@
-﻿using AimpLogic.Helpres;
+﻿using AimpLogic.Extensions;
 using AimpLogic.Logging;
 using AimpLogic.Logic;
 using AimpLogic.UserRights;
@@ -6,6 +6,7 @@ using Models.ContractorInfo;
 using Models.Entities;
 using Models.TrancportInfo;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,13 +39,15 @@ namespace AimpLogic.Transactions
                     contractor.CityId = Context.Cities.GetOrAdd(values).Id;
                     contractor.City = null;
                 }
-                Contractor dbContractor = null;
 
                 if(contractor.Id != 0)
-                    dbContractor = Context.Contractors.Get(contractor.Id, x => x.Document, x => x.Photo);
+                {
+                    var dbContractor = Context.Contractors.Get(contractor.Id, x => x.Document, x => x.Photo);
+                    Context.UserFileUpdate(contractor.DocumentId, contractor.Document, dbContractor.Document);
+                    Context.UserFileUpdate(contractor.PhotoId, contractor.Photo, dbContractor.Photo);
+                    Context.SaveChanges();
+                }
 
-                UserFileCheck.AddOrUpdate(Context, contractor, contractor.Document, dbContractor?.Document);
-                UserFileCheck.AddOrUpdate(Context, contractor, contractor.Photo, dbContractor?.Photo);
                 if (contractor.LegalPerson != null)
                     Context.LegalPersons.AddOrUpdate(contractor.LegalPerson);
                 
@@ -97,12 +100,14 @@ namespace AimpLogic.Transactions
                     trancport.ModelId = Context.Cities.GetOrAdd(values).Id;
                     trancport.Model = null;
                 }
-                Trancport dbTrancport = null;
 
                 if (trancport.Id != 0)
-                    dbTrancport = Context.Trancports.Get(trancport.Id, x => x.CopyPts);
-
-                UserFileCheck.AddOrUpdate(Context, trancport, trancport.CopyPts, dbTrancport?.CopyPts);
+                {
+                    var dbTrancport = Context.Trancports.Get(trancport.Id, x => x.CopyPts);
+                    Context.UserFileUpdate(trancport.CopyPtsId,trancport.CopyPts, dbTrancport.CopyPts);
+                    Context.SaveChanges();
+                }
+                
                 Context.Trancports.AddOrUpdate(trancport);
    
                 Context.SaveChanges();

@@ -13,7 +13,7 @@ using System.Data.SqlTypes;
 using AimpReports.Templates;
 using AimpReports.Services.Word;
 using Models;
-using AimpLogic.Helpres;
+using AimpLogic.Extensions;
 
 namespace AimpLogic.CreditTransactions
 {
@@ -87,16 +87,12 @@ namespace AimpLogic.CreditTransactions
                 var creditTransaction = TinyMapper.Map<CreditTransaction>(document);
                 if (creditTransaction.Id == 0)
                     creditTransaction.UserId = User.Id;
-               else
+                else
                 {
-
-                    CreditTransaction dbTransaction = null;
-
-                    if (creditTransaction.Id != 0)
-                        dbTransaction = Context.CreditTransactions.Get(creditTransaction.Id, x => x.DkpDocument,x=>x.AgentDocument);
-
-                    UserFileCheck.AddOrUpdate(Context, creditTransaction, creditTransaction.DkpDocument, dbTransaction?.DkpDocument);
-                    UserFileCheck.AddOrUpdate(Context, creditTransaction, creditTransaction.AgentDocument, dbTransaction?.AgentDocument);
+                    var dbTransaction = Context.CreditTransactions.Get(creditTransaction.Id, x => x.DkpDocument, x => x.AgentDocument);
+                    Context.UserFileUpdate(creditTransaction.AgentDocumentId, creditTransaction.AgentDocument, dbTransaction.AgentDocument);
+                    Context.UserFileUpdate(creditTransaction.DkpDocumentId, creditTransaction.DkpDocument, dbTransaction.DkpDocument);
+                    Context.SaveChanges();
                 }
                 Context.CreditTransactions.AddOrUpdate(creditTransaction);
                 Context.SaveChanges();

@@ -118,6 +118,7 @@ namespace AIMP_v3._0.User_Control
                         file.File = OpenUserFile.GetFile(open.FileName);
 
                         SetValue(UserFileProperty, file);
+                        SetValue(UserFileIdProperty, null);
                         SetValue(OpenButtonIsEnableProperty, true);
                     }
                 }
