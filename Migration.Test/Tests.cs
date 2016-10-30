@@ -1,6 +1,7 @@
 ﻿using AimpDataAccess.Context;
 using AimpDataAccess.EF;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -12,13 +13,13 @@ namespace Migration.Test
         private string _pathLog = @"D:\AimpFiles\Logs\migration";
         private IAimpContext _context = new EfAimpContext();
 
-        public Tests()
-        {
-            if (File.Exists(_pathLog))
-                File.Delete(_pathLog);
+        //public Tests()
+        //{
+        //    if (File.Exists(_pathLog))
+        //        File.Delete(_pathLog);
 
-            File.Create(_pathLog);
-        }
+        //    File.Create(_pathLog);
+        //}
 
         [TestMethod]
         public void Banks()
@@ -138,8 +139,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.ГОРОДА
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[City: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[City: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -151,8 +152,6 @@ namespace Migration.Test
             var news = _context.ClientReports.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.ОТЧЁТЫ_КЛИЕНТОВ.Count());
-
                 foreach (var nReport in news)
                 {
                     var search = oldDb.ОТЧЁТЫ_КЛИЕНТОВ
@@ -160,10 +159,12 @@ namespace Migration.Test
                         x.фио == nReport.FullName &&
                         x.комментарий == nReport.Comment);
 
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[ClientReport: ({nReport.Date}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[ClientReport: ({nReport.Date}]");
                     Assert.AreEqual(true, search);
                 }
+
+                Assert.AreEqual(news.Count(), oldDb.ОТЧЁТЫ_КЛИЕНТОВ.Count());
             }
         }
         
@@ -179,8 +180,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.спр_СТАТУСЫ_КЛИЕНТОВ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[ClientStatuses: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[ClientStatuses: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -204,8 +205,8 @@ namespace Migration.Test
                         x.номер_док == nItem.NumberDocument &&
                         x.серия_док == nItem.SerialDocument);
 
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Contractors: new=({nItem.LastName}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Contractors: new=({nItem.LastName}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -228,8 +229,8 @@ namespace Migration.Test
                         x.рас_счет == nItem.Ras_schet &&
                         x.кпп == nItem.Kpp);
 
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[LegalPersons: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[LegalPersons: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -246,8 +247,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.КРЕДИТОРЫ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Creditors: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Creditors: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -265,8 +266,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[CreditProgramms: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[CreditProgramms: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -277,7 +278,8 @@ namespace Migration.Test
             var news = _context.Trancports.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.ТРАНСПОРТ.Count());
+                var count = oldDb.СДЕЛКИ.Select(x => x.ТРАНСПОРТ1).GroupBy(x=>x.код).Count();
+                Assert.AreEqual(news.Count(), count);
 
                 foreach (var nItem in news)
                 {
@@ -285,8 +287,8 @@ namespace Migration.Test
                         .Any(x => x.вин == nItem.Vin &&
                         x.год.ToString() == nItem.Year.ToString() &&
                         x.дата_птс == nItem.DatePts);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Trancports: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Trancports: new=({nItem.Vin}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -303,8 +305,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.КАТЕГОРИИ_ТРАНСПОРТА
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[TrancportCategories: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[TrancportCategories: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -315,14 +317,20 @@ namespace Migration.Test
             var news = _context.TrancportTypes.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.ВИДЫ_ТРАНСПОРТА.Count());
+                var count = oldDb.СДЕЛКИ
+                    .Select(x=>x.ТРАНСПОРТ1)
+                    .Select(x => x.виды_транспорта)
+                    .GroupBy(x => x)
+                    .Count();
+
+                Assert.AreEqual(news.Count(), count);
 
                 foreach (var nItem in news)
                 {
                     var search = oldDb.ВИДЫ_ТРАНСПОРТА
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[TrancportTypes: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[TrancportTypes: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -333,14 +341,19 @@ namespace Migration.Test
             var news = _context.EngineTypes.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.ТИПЫ_ДВИГАТЕЛЕЙ.Count());
+                var count = oldDb.ТРАНСПОРТ
+                    .Select(x => x.типы_двигателей)
+                    .GroupBy(x=>x)
+                    .Count();
+
+                Assert.AreEqual(news.Count(), count);
 
                 foreach (var nItem in news)
                 {
                     var search = oldDb.ТИПЫ_ДВИГАТЕЛЕЙ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[EngineTypes: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[EngineTypes: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -358,8 +371,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.МАРКИ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[MakesTrancport: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[MakesTrancport: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -371,14 +384,20 @@ namespace Migration.Test
             var news = _context.ModelsTrancport.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.МОДЕЛИ.Count());
+                var count = oldDb.СДЕЛКИ
+                    .Select(x => x.ТРАНСПОРТ1.модели)
+                    
+                    .GroupBy(x => x)
+                    
+                    .Count();
+                Assert.AreEqual(news.Count(), count);
 
                 foreach (var nItem in news)
                 {
                     var search = oldDb.МОДЕЛИ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[ModelsTrancport: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[ModelsTrancport: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -390,14 +409,21 @@ namespace Migration.Test
             var news = _context.Regions.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(news.Count(), oldDb.РЕГИОНЫ.Count());
+                var count = oldDb.СДЕЛКИ
+                    .Select(x => x.КОНТРАГЕНТЫ.регионы)
+                    .Union(oldDb.СДЕЛКИ.Select(x => x.КОНТРАГЕНТЫ1.регионы))
+                    .Union(oldDb.СДЕЛКИ.Select(x => x.КОНТРАГЕНТЫ2.регионы))
+                    .GroupBy(x=>x)
+                    .Count();
+                
+                Assert.AreEqual(news.Count(), count);
 
                 foreach (var nItem in news)
                 {
                     var search = oldDb.РЕГИОНЫ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Regions: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Regions: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -415,8 +441,8 @@ namespace Migration.Test
                 {
                     var search = oldDb.РЕКВИЗИТЫ
                         .Any(x => x.наименование == nItem.Name);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Requisits: new=({nItem.Name}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Requisits: new=({nItem.Name}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -436,8 +462,8 @@ namespace Migration.Test
                         .Any(x => x.имя == nItem.FirstName &&
                             x.отчёство == nItem.MiddleName &&
                             x.фамилия == nItem.LastName);
-                    if (!search)
-                        File.AppendAllText(_pathLog, $"[Users: new=({nItem.LastName}]");
+                    //if (!search)
+                    //    File.AppendAllText(_pathLog, $"[Users: new=({nItem.LastName}]");
                     Assert.AreEqual(true, search);
                 }
             }
@@ -446,9 +472,11 @@ namespace Migration.Test
         [TestMethod]
         public void UserRights()
         {
-            foreach(var iUser in _context.Users.All())
+            foreach(var iUser in _context.Users.All().ToList())
             {
-                Assert.IsTrue(_context.UserRights.All(x => x.UserId == iUser.Id).Count() < 5);
+                var rights = _context.UserRights.All().Count(x => x.UserId == iUser.Id);
+                Console.WriteLine(rights);
+                Assert.IsTrue(rights < 5);
             }
         }
     }

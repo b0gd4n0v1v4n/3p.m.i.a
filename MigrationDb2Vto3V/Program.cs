@@ -83,7 +83,9 @@ namespace MigrationDb2Vto3V
                 newDb.Contractors.Local.FirstOrDefault(
                     x =>
                         x.FirstName == contractor.FirstName && x.LastName == contractor.LastName &&
-                        x.MiddleName == contractor.MiddleName && x.DateBirth == contractor.DateBirth && x.Region.Name == contractor.Region.Name && x.Telefon == contractor.Telefon && x.House == contractor.House && x.Street == contractor.Street && x.NumberDocument == contractor.NumberDocument) ?? contractor;
+                        x.MiddleName == contractor.MiddleName && x.DateBirth == contractor.DateBirth && x.Region.Name == contractor.Region.Name && x.Telefon == contractor.Telefon && x.House == contractor.House && x.Street == contractor.Street && x.NumberDocument == contractor.NumberDocument) 
+                        ?? 
+                        contractor;
         }
         static Trancport NewTrancport(ТРАНСПОРТ trancport, SqlContext newDb)
         {
@@ -165,13 +167,16 @@ namespace MigrationDb2Vto3V
         static User NewUser(ПОЛЬЗОВАТЕЛИ пользовател, SqlContext newDb)
         {
             DateTime date = Convert.ToDateTime(пользовател.дата);
-            var user =
-                newDb.Users.Local.FirstOrDefault(
+
+            var userDb = newDb.Users.Local.FirstOrDefault(
                     x =>
                         x.FirstName == пользовател.имя && x.LastName == пользовател.фамилия &&
                         x.MiddleName == пользовател.отчёство && x.Date == date &&
                         x.Number == пользовател.номер && x.Login == пользовател.логин &&
-                        x.Password == пользовател.пароль) ??
+                        x.Password == пользовател.пароль)
+                        ;
+            var user = userDb
+                 ??
                 new User()
                 {
                     FirstName = пользовател.имя,
@@ -186,7 +191,7 @@ namespace MigrationDb2Vto3V
                     Password = пользовател.пароль
                 };
 
-            if(user.Id == 0)
+            if(userDb == null)
             {
                 if (пользовател.фамилия.ToLower() == "дмитриева")
                 {
@@ -256,28 +261,38 @@ namespace MigrationDb2Vto3V
                             Type = type
                         };
                         newDb.PrintedDocumentTemplates.Add(reportTemplate);
-                        Console.Write(type);
+                        Console.WriteLine(type);
                     }
+                    
+                    int prevClientReport = 0;
+                    ClientReport clientReport = null;
 
-                    foreach (ОТЧЁТЫ_КЛИЕНТОВ отчётыКлиентов in aimp.ОТЧЁТЫ_КЛИЕНТОВ)
+                    foreach (var bankReport in aimp.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ.OrderBy(X=>X.отчёты_клиентов))
                     {
-                        спр_СТАТУСЫ_КЛИЕНТОВ спрСтатусыКлиентов =
-                            aimp.спр_СТАТУСЫ_КЛИЕНТОВ.First(
-                                x => x.код == отчётыКлиентов.спр_статусы_клиентов);
-
-                        спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ программыКредитования =
-                            aimp.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ.First(
-                                x => x.код == отчётыКлиентов.спр_программы_кредитования);
-
-                        ClientReport clientReport = new ClientReport()
+                        if(bankReport.отчёты_клиентов != prevClientReport)
                         {
-                            Date = отчётыКлиентов.дата ?? DateTime.Now,
-                            Source = отчётыКлиентов.источник,
-                            FullName = отчётыКлиентов.фио,
-                            Price = Convert.ToDecimal(отчётыКлиентов.стоимость),
-                            TotalContribution =
+                            prevClientReport = bankReport.отчёты_клиентов.Value;
+
+                            var отчётыКлиентов = aimp.ОТЧЁТЫ_КЛИЕНТОВ
+                                .First(x => x.код == bankReport.отчёты_клиентов);
+
+                            спр_СТАТУСЫ_КЛИЕНТОВ спрСтатусыКлиентов =
+                                aimp.спр_СТАТУСЫ_КЛИЕНТОВ.First(
+                                    x => x.код == отчётыКлиентов.спр_статусы_клиентов);
+
+                            спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ программыКредитования =
+                                aimp.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ.First(
+                                    x => x.код == отчётыКлиентов.спр_программы_кредитования);
+
+                            clientReport = new ClientReport()
+                            {
+                                Date = отчётыКлиентов.дата ?? DateTime.Now,
+                                Source = отчётыКлиентов.источник,
+                                FullName = отчётыКлиентов.фио,
+                                Price = Convert.ToDecimal(отчётыКлиентов.стоимость),
+                                TotalContribution =
                                     Convert.ToDecimal(отчётыКлиентов.общий_взнос),
-                            ClientStatus =
+                                ClientStatus =
                                     newDb.ClientStatuses.Local.FirstOrDefault(
                                         x => x.Name == спрСтатусыКлиентов.наименование) ??
                                     new ClientStatus()
@@ -285,57 +300,120 @@ namespace MigrationDb2Vto3V
                                         Name = спрСтатусыКлиентов.наименование,
                                         UsedFilter = nullBye(спрСтатусыКлиентов.фильтр)
                                     },
-                            Telefon = отчётыКлиентов.телефон,
-                            CreditProgramm =
+                                Telefon = отчётыКлиентов.телефон,
+                                CreditProgramm =
                                     newDb.CreditProgramms.Local.FirstOrDefault(
                                         x => x.Name == программыКредитования.наименование) ??
                                     new CreditProgramm()
                                     {
                                         Name = программыКредитования.наименование
                                     },
-                            CreditSum = Convert.ToDecimal(отчётыКлиентов.сумма_кредита),
-                            CommissionKnow = nullBye(отчётыКлиентов.комиссии_знает),
-                            CommissionRemoval =
+                                CreditSum = Convert.ToDecimal(отчётыКлиентов.сумма_кредита),
+                                CommissionKnow = nullBye(отчётыКлиентов.комиссии_знает),
+                                CommissionRemoval =
                                     Convert.ToDecimal(отчётыКлиентов.комиссия_за_снятие),
-                            CommissionCredit = nullBye(отчётыКлиентов.комиссии_в_кредите),
-                            ActAssessment = Convert.ToDecimal(отчётыКлиентов.акт_оценки),
-                            DKP_DK = отчётыКлиентов.дкп_дк,
-                            Comment = отчётыКлиентов.комментарий,
-                            CommissionSalon = отчётыКлиентов.комиссия_салона,
-                            User = NewUser(отчётыКлиентов.ПОЛЬЗОВАТЕЛИ1, newDb),
-                            Trancport = отчётыКлиентов.тс
+                                CommissionCredit = nullBye(отчётыКлиентов.комиссии_в_кредите),
+                                ActAssessment = Convert.ToDecimal(отчётыКлиентов.акт_оценки),
+                                DKP_DK = отчётыКлиентов.дкп_дк,
+                                Comment = отчётыКлиентов.комментарий,
+                                CommissionSalon = отчётыКлиентов.комиссия_салона,
+                                User = NewUser(отчётыКлиентов.ПОЛЬЗОВАТЕЛИ1, newDb),
+                                Trancport = отчётыКлиентов.тс
+                            };
+                            newDb.ClientReports.Add(clientReport);
+                        }
+                        var bank = newDb.Banks.Local
+                                    .FirstOrDefault(x => x.Name == bankReport.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1.наименование)
+                                    ?? new Bank() { Name = bankReport.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1.наименование };
+                        var bankStatus = newDb.BankStatuses.Local
+                                        .FirstOrDefault(x => x.Name == bankReport.спр_СТАТУСЫ_БАНКА1.наименование)
+                                        ?? new BankStatus() { Name = bankReport.спр_СТАТУСЫ_БАНКА1.наименование };
+
+                        BankReportClient bankReportClient = new BankReportClient()
+                        {
+                            ClientReport = clientReport,
+                            Bank = bank,
+                            BankStatus = bankStatus,
+                            Used = nullBye(bankReport.используется)
                         };
 
-                        foreach (БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ банкиДляОтчётыКлиентов in отчётыКлиентов.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ)
-                        {
-                            BankReportClient bankReportClient = new BankReportClient();
-                            bankReportClient.ClientReport = clientReport;
-                            bankReportClient.Bank =
-                                newDb.Banks.Local.FirstOrDefault(
-                                    x => x.Name == банкиДляОтчётыКлиентов.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1.наименование) ??
-                                new Bank()
-                                {
-                                    Name = банкиДляОтчётыКлиентов.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1.наименование
-                                };
-
-                            bankReportClient.BankStatus =
-                                newDb.BankStatuses.Local.FirstOrDefault(
-                                    x => x.Name == банкиДляОтчётыКлиентов.спр_СТАТУСЫ_БАНКА1.наименование) ??
-                                new BankStatus()
-                                {
-                                    Name = банкиДляОтчётыКлиентов.спр_СТАТУСЫ_БАНКА1.наименование,
-                                    MiddleName = банкиДляОтчётыКлиентов.спр_СТАТУСЫ_БАНКА1.наименование2
-                                };
-
-                            bankReportClient.Used = банкиДляОтчётыКлиентов.используется == null
-                                ? false
-                                : банкиДляОтчётыКлиентов.используется == 1 ? true : false;
-
-                            newDb.BankReportClients.Add(bankReportClient);
-                        }
-                        Console.Write(отчётыКлиентов.дата);
+                        newDb.BankReportClients.Add(bankReportClient);
                     }
 
+                    foreach (var statClient in aimp.спр_СТАТУСЫ_КЛИЕНТОВ)
+                    {
+                        if (!newDb.ClientStatuses.Local.Any(x => x.Name == statClient.наименование))
+                            newDb.ClientStatuses.Add(new ClientStatus() { Name = statClient.наименование });
+                    }
+
+                    foreach (var bankStat in aimp.спр_СТАТУСЫ_БАНКА)
+                    {
+                        if(!newDb.BankStatuses.Local.Any(x=>x.Name == bankStat.наименование))
+                            newDb.BankStatuses.Add(new BankStatus() { Name = bankStat.наименование, MiddleName = bankStat.наименование2 });
+                    }
+                    foreach (var progCredit in aimp.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ)
+                    {
+                        if (!newDb.CreditProgramms.Local.Any(x => x.Name == progCredit.наименование))
+                            newDb.CreditProgramms.Add(new CreditProgramm() { Name = progCredit.наименование });
+                    }
+
+                    foreach(var oldClientReport in aimp.ОТЧЁТЫ_КЛИЕНТОВ)
+                    {
+                        var searchClientReport = newDb.ClientReports.Local.
+                            FirstOrDefault(x => x.Date == oldClientReport.дата
+                            && x.FullName == oldClientReport.фио
+                            && x.Comment == oldClientReport.комментарий
+                            && x.Source == oldClientReport.источник);
+
+                        if(searchClientReport == null)
+                        {
+                            спр_СТАТУСЫ_КЛИЕНТОВ спрСтатусыКлиентов =
+                                aimp.спр_СТАТУСЫ_КЛИЕНТОВ.First(
+                                    x => x.код == oldClientReport.спр_статусы_клиентов);
+
+                            спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ программыКредитования =
+                                aimp.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ.First(
+                                    x => x.код == oldClientReport.спр_программы_кредитования);
+
+                            var cr = new ClientReport()
+                            {
+                                Date = oldClientReport.дата ?? DateTime.Now,
+                                Source = oldClientReport.источник,
+                                FullName = oldClientReport.фио,
+                                Price = Convert.ToDecimal(oldClientReport.стоимость),
+                                TotalContribution =
+                                    Convert.ToDecimal(oldClientReport.общий_взнос),
+                                ClientStatus =
+                                    newDb.ClientStatuses.Local.FirstOrDefault(
+                                        x => x.Name == спрСтатусыКлиентов.наименование) ??
+                                    new ClientStatus()
+                                    {
+                                        Name = спрСтатусыКлиентов.наименование,
+                                        UsedFilter = nullBye(спрСтатусыКлиентов.фильтр)
+                                    },
+                                Telefon = oldClientReport.телефон,
+                                CreditProgramm =
+                                    newDb.CreditProgramms.Local.FirstOrDefault(
+                                        x => x.Name == программыКредитования.наименование) ??
+                                    new CreditProgramm()
+                                    {
+                                        Name = программыКредитования.наименование
+                                    },
+                                CreditSum = Convert.ToDecimal(oldClientReport.сумма_кредита),
+                                CommissionKnow = nullBye(oldClientReport.комиссии_знает),
+                                CommissionRemoval =
+                                    Convert.ToDecimal(oldClientReport.комиссия_за_снятие),
+                                CommissionCredit = nullBye(oldClientReport.комиссии_в_кредите),
+                                ActAssessment = Convert.ToDecimal(oldClientReport.акт_оценки),
+                                DKP_DK = oldClientReport.дкп_дк,
+                                Comment = oldClientReport.комментарий,
+                                CommissionSalon = oldClientReport.комиссия_салона,
+                                User = NewUser(oldClientReport.ПОЛЬЗОВАТЕЛИ1, newDb),
+                                Trancport = oldClientReport.тс
+                            };
+                            newDb.ClientReports.Add(cr);
+                        }
+                    }
 
                     foreach (var сделка in aimp.СДЕЛКИ)
                     {
@@ -458,6 +536,7 @@ namespace MigrationDb2Vto3V
                                 break;
                         }
                     }
+                    
                     newDb.SaveChanges();
                 }
             }
