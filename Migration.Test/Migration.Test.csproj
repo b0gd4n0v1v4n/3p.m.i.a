@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2BF1E83-59BA-4F5B-B4DD-253DE08741E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Migration.Test</RootNamespace>
+    <AssemblyName>Migration.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="ampspb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ampspb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ampspb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ampspb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ampspb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ВИДЫ_ТРАНСПОРТА.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ГОРОДА.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="КАТЕГОРИИ_ТРАНСПОРТА.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="КОНТРАГЕНТЫ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="КРЕДИТОРЫ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="МАРКИ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="МОДЕЛИ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ОТЧЁТЫ_КЛИЕНТОВ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ПОЛЬЗОВАТЕЛИ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="РЕГИОНЫ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="РЕКВИЗИТЫ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="СДЕЛКИ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="спр_СТАТУСЫ_БАНКА.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="спр_СТАТУСЫ_КЛИЕНТОВ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ТИПЫ_ДВИГАТЕЛЕЙ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ТИПЫ_ШАБЛОНОВ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ТРАНСПОРТ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ШАБЛОНЫ.cs">
+      <DependentUpon>ampspb.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AimpDataAccess\AimpDataAccess.csproj">
+      <Project>{8DB90126-BA9D-4678-8E87-6F65DA7D3AFF}</Project>
+      <Name>AimpDataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ampspb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ampspb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ampspb.edmx.diagram">
+      <DependentUpon>ampspb.edmx</DependentUpon>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ampspb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ampspb.edmx</DependentUpon>
+      <LastGenOutput>ampspb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ampspb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ampspb.edmx</DependentUpon>
+      <LastGenOutput>ampspb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

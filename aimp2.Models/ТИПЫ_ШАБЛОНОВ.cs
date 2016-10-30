@@ -12,16 +12,19 @@ namespace aimp2.models
     using System;
     using System.Collections.Generic;
     
-    public partial class БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ
+    public partial class ТИПЫ_ШАБЛОНОВ
     {
-        public int код { get; set; }
-        public Nullable<int> спр_банки_отчёты_клиентов { get; set; }
-        public Nullable<int> спр_статусы_банка { get; set; }
-        public Nullable<byte> используется { get; set; }
-        public Nullable<int> отчёты_клиентов { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ТИПЫ_ШАБЛОНОВ()
+        {
+            this.ШАБЛОНЫ = new HashSet<ШАБЛОНЫ>();
+        }
     
-        public virtual ОТЧЁТЫ_КЛИЕНТОВ ОТЧЁТЫ_КЛИЕНТОВ1 { get; set; }
-        public virtual спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1 { get; set; }
-        public virtual спр_СТАТУСЫ_БАНКА спр_СТАТУСЫ_БАНКА1 { get; set; }
+        public int код { get; set; }
+        public string наименование { get; set; }
+        public string запрос { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ШАБЛОНЫ> ШАБЛОНЫ { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace aimp2.models
+namespace Migration.Test
 {
     using System;
     using System.Collections.Generic;

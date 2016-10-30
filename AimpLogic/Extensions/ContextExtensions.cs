@@ -19,18 +19,6 @@ namespace AimpLogic.Extensions
 
             if (newFile != null)
                 context.UserFiles.AddOrUpdate(newFile);
-
-
-            //if (newFile == null || newFile.Id == 0)
-            //{
-            //    if (oldFile !=null && oldFile.Id > 0 && !newFileId.HasValue)
-
-            //}
-
-            //if (newFile != null)
-            //{
-            //    context.UserFiles.AddOrUpdate(newFile);
-            //}
         }
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a360939b1cee40d28a2d037d14161e50" Name="Diagram1">
+        <EntityTypeShape EntityType="ampspbModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ" Width="1.5" PointX="9.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ВИДЫ_ТРАНСПОРТА" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ГОРОДА" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.КАТЕГОРИИ_ТРАНСПОРТА" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.КОНТРАГЕНТЫ" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.КРЕДИТОРЫ" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.МАРКИ" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.МОДЕЛИ" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ОТЧЁТЫ_КЛИЕНТОВ" Width="1.5" PointX="7.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ПОЛЬЗОВАТЕЛИ" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.РЕГИОНЫ" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.РЕКВИЗИТЫ" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.СДЕЛКИ" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ" Width="1.5" PointX="7.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.спр_ПРОГРАММЫ_КРЕДИТОВАНИЯ" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.спр_СТАТУСЫ_БАНКА" Width="1.5" PointX="7.5" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.спр_СТАТУСЫ_КЛИЕНТОВ" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ТИПЫ_ДВИГАТЕЛЕЙ" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ТИПЫ_ШАБЛОНОВ" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ТРАНСПОРТ" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ampspbModel.ШАБЛОНЫ" Width="1.5" PointX="12" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="ampspbModel.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_ОТЧЁТЫ_КЛИЕНТОВ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ_спр_СТАТУСЫ_БАНКА_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ТРАНСПОРТ_ВИДЫ_ТРАНСПОРТА_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ГОРОДА_РЕГИОНЫ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_КОНТРАГЕНТЫ_ГОРОДА_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ТРАНСПОРТ_КАТЕГОРИИ_ТРАНСПОРТА_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_КОНТРАГЕНТЫ_РЕГИОНЫ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_СДЕЛКИ_КОНТРАГЕНТЫ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_СДЕЛКИ_КОНТРАГЕНТЫ1_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_СДЕЛКИ_КОНТРАГЕНТЫ2_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_МОДЕЛИ_МАРКИ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ТРАНСПОРТ_МАРКИ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ТРАНСПОРТ_МОДЕЛИ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ОТЧЁТЫ_КЛИЕНТОВ_ПОЛЬЗОВАТЕЛИ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_СДЕЛКИ_ПОЛЬЗОВАТЕЛИ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_СДЕЛКИ_ТРАНСПОРТ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ТРАНСПОРТ_ТИПЫ_ДВИГАТЕЛЕЙ_код" ManuallyRouted="false" />
+        <AssociationConnector Association="ampspbModel.FK_ШАБЛОНЫ_ТИПЫ_ШАБЛОНОВ_код" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
