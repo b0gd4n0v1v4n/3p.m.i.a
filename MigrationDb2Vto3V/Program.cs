@@ -327,7 +327,7 @@ namespace MigrationDb2Vto3V
                                     ?? new Bank() { Name = bankReport.спр_БАНКИ_ОТЧЁТЫ_КЛИЕНТОВ1.наименование };
                         var bankStatus = newDb.BankStatuses.Local
                                         .FirstOrDefault(x => x.Name == bankReport.спр_СТАТУСЫ_БАНКА1.наименование)
-                                        ?? new BankStatus() { Name = bankReport.спр_СТАТУСЫ_БАНКА1.наименование };
+                                        ?? new BankStatus() { Name = bankReport.спр_СТАТУСЫ_БАНКА1.наименование,MiddleName = bankReport.спр_СТАТУСЫ_БАНКА1.наименование2 };
 
                         BankReportClient bankReportClient = new BankReportClient()
                         {
