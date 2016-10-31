@@ -466,7 +466,7 @@
                                                         <ItemsControl.ItemTemplate>
                                                             <DataTemplate>
                                                                 <Border BorderThickness="0 0 1 0" BorderBrush="Black" Width="20">
-                                                                    <TextBlock Text="{Binding}">
+                                                                    <TextBlock Text="{Binding}" TextAlignment="Center">
                                                                         <TextBlock.LayoutTransform>
                                                                             <TransformGroup>
                                                                                 <RotateTransform Angle="-90" />

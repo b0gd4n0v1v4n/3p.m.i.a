@@ -61,7 +61,7 @@ namespace Migration.Test
             var newBanks = _context.BankReportClients.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                Assert.AreEqual(newBanks.Count(), oldDb.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ.Count());
+                Assert.AreEqual(newBanks.Count(), oldDb.БАНКИ_ДЛЯ_ОТЧЁТЫ_КЛИЕНТОВ.GroupBy(x=>new { x.отчёты_клиентов,x.спр_банки_отчёты_клиентов }).Count());
             }
         }
 

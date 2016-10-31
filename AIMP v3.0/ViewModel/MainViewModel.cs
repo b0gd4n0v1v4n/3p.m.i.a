@@ -75,7 +75,11 @@ namespace AIMP_v3._0.ViewModel
                     {
                         TableName = "BankStatus",
                         Name = "СТАТУСЫ БАНКА",
-                        Columns = idNameColumn
+                        Columns = new List<ColumnViewModel>()
+                        {
+                            new ColumnViewModel() { Name = "Id",DbName = "Id" },
+                            new ColumnViewModel() { Name = "Наименование",DbName = "Name" },
+                        new ColumnViewModel() { Name = "Кор. наименование",DbName = "MiddleName" }}
                     },
                     new DictionaryMenuItemViewModel
                     {
