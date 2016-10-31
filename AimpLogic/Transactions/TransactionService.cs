@@ -89,7 +89,7 @@ namespace AimpLogic.Transactions
                     var values = new Dictionary<string, string>() {
                         {"Name",trancport.Make.Name }
                     };
-                    trancport.MakeId = Context.Regions.GetOrAdd(values).Id;
+                    trancport.MakeId = Context.MakesTrancport.GetOrAdd(values, "MakeTrancports").Id;
                     trancport.Make = null;
                 }
                 if (trancport.Model.Id == 0)
@@ -97,7 +97,7 @@ namespace AimpLogic.Transactions
                     var values = new Dictionary<string, string>() {
                         {"Name",trancport.Model.Name }, {"MakeId",trancport.MakeId.ToString() }
                     };
-                    trancport.ModelId = Context.Cities.GetOrAdd(values).Id;
+                    trancport.ModelId = Context.ModelsTrancport.GetOrAdd(values, "ModelTrancports").Id;
                     trancport.Model = null;
                 }
 

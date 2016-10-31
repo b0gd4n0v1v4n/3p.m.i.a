@@ -15,6 +15,6 @@ namespace AimpDataAccess.Repository
         void Delete(int idEntity);
         void DeleteRange(int[] ids);
         IQueryable<TEntity> All(params Expression<Func<TEntity, object>>[] includes);
-        TEntity GetOrAdd(IDictionary<string, string> fieldValues);
+        TEntity GetOrAdd(IDictionary<string, string> fieldValues, string tableName = null);
     }
 }

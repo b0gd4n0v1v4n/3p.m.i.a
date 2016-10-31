@@ -95,10 +95,11 @@ namespace AimpDataAccess.EF.Repository
             _dbSet.AddOrUpdate(entity);
         }
 
-        public TEntity GetOrAdd(IDictionary<string, string> fieldValues)
+        public TEntity GetOrAdd(IDictionary<string, string> fieldValues,string tableName = null)
         {
+            if(tableName == null)
+                tableName = (_context as IObjectContextAdapter).ObjectContext.CreateObjectSet<TEntity>().EntitySet.Name;
 
-            string tableName = (_context as IObjectContextAdapter).ObjectContext.CreateObjectSet<TEntity>().EntitySet.Name;
             string select = $"SELECT * FROM {tableName} ";
             string where = "WHERE 1 = 1";
            foreach(var iParam in fieldValues)
