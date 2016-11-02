@@ -77,6 +77,10 @@
     <Compile Include="UserRights\SystemUser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aimp.Domain\Aimp.Domain.csproj">
+      <Project>{e3060fc5-5710-427d-936c-f34acbc8cf08}</Project>
+      <Name>Aimp.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AimpDataAccess\AimpDataAccess.csproj">
       <Project>{8db90126-ba9d-4678-8e87-6f65da7d3aff}</Project>
       <Name>AimpDataAccess</Name>
