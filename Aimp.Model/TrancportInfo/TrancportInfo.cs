@@ -1,4 +1,4 @@
-﻿using Aimp.Model.Entities;
+﻿using Entities;
 using System.Collections.Generic;
 
 namespace Aimp.Model.TrancportInfo
@@ -7,7 +7,7 @@ namespace Aimp.Model.TrancportInfo
     {
         public bool Error { get; set; }
         public string Message { get; set; }
-        public IEnumerable<ModelTrancport> Aimp.Model {get;set;}
+        public IEnumerable<ModelTrancport> Models {get;set;}
         public IEnumerable<MakeTrancport> Makes { get; set; }
         public IEnumerable<TrancportCategory> Categories { get; set; }
         public IEnumerable<TrancportType> Types { get; set; }

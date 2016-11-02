@@ -1,9 +1,10 @@
 ﻿using Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Aimp.DataAccess.Interfaces
 {
-    public interface IDataContext
+    public interface IDataContext : IDisposable
     {
         IRepository<Bank> Banks { get; }
         IRepository<BankStatus> BankStatuses { get; }

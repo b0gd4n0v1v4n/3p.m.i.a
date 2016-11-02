@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{841772EA-0190-4F6D-B50C-CD3C47C8FD0F}</ProjectGuid>
+    <ProjectGuid>{1EFF1BAC-0900-4714-9C13-60E458ED8F30}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aimp.Entities</RootNamespace>
-    <AssemblyName>Aimp.Entities</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Aimp.Reports</RootNamespace>
+    <AssemblyName>Aimp.Reports</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,41 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bank.cs" />
-    <Compile Include="BankReportClient.cs" />
-    <Compile Include="BankStatus.cs" />
-    <Compile Include="CardTrancport.cs" />
-    <Compile Include="CashTransaction.cs" />
-    <Compile Include="City.cs" />
-    <Compile Include="ClientReport.cs" />
-    <Compile Include="ClientStatus.cs" />
-    <Compile Include="CommissionTransaction.cs" />
-    <Compile Include="Contractor.cs" />
-    <Compile Include="Creditor.cs" />
-    <Compile Include="CreditProgramm.cs" />
-    <Compile Include="CreditTransaction.cs" />
-    <Compile Include="EngineType.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="IEntity.cs" />
-    <Compile Include="LegalPerson.cs" />
-    <Compile Include="MakeTrancport.cs" />
-    <Compile Include="ModelTrancport.cs" />
-    <Compile Include="PreCheckCardTrancport.cs" />
-    <Compile Include="PrintedDocumentTemplate.cs" />
+    <Compile Include="Helpers\MoneyToText.cs" />
+    <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Region.cs" />
-    <Compile Include="Requisit.cs" />
-    <Compile Include="SourceTrancport.cs" />
-    <Compile Include="StatusCardTrancport.cs" />
-    <Compile Include="StatusTrancport.cs" />
-    <Compile Include="Trancport.cs" />
-    <Compile Include="TrancportCategory.cs" />
-    <Compile Include="TrancportType.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="TransactionProxy.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserFile.cs" />
-    <Compile Include="UserRight.cs" />
+    <Compile Include="Services\Excel\Excel.cs" />
+    <Compile Include="Services\Excel\ExcelPrintedService.cs" />
+    <Compile Include="Interfaces\IExcelPrintedService.cs" />
+    <Compile Include="Interfaces\IPrintedService.cs" />
+    <Compile Include="Services\Word\WordDocument.cs" />
+    <Compile Include="Services\Word\WordPrintedService.cs" />
+    <Compile Include="Services\Word\WordSelection.cs" />
+    <Compile Include="Templates\AktTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\CashTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\CommissionTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\CreditTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\DkpTransactionPrintedDocumentTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aimp.Entities\Aimp.Entities.csproj">
+      <Project>{841772EA-0190-4F6D-B50C-CD3C47C8FD0F}</Project>
+      <Name>Aimp.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aimp.Model\Aimp.Model.csproj">
+      <Project>{C8290617-1E40-47F9-8B46-F5D589EB187D}</Project>
+      <Name>Aimp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

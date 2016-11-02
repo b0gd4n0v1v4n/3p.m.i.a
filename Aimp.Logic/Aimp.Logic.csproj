@@ -38,11 +38,30 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TinyMapper, Version=2.0.0.40, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TinyMapper.2.0.8\lib\net45\TinyMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ContextExtensions.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
+    <Compile Include="Interfaces\ICardTrancportService.cs" />
+    <Compile Include="Interfaces\ICashTransactionService.cs" />
+    <Compile Include="Interfaces\ICommissionService.cs" />
+    <Compile Include="Interfaces\ICreditTransactionService.cs" />
+    <Compile Include="Interfaces\IDocumentTemplateService.cs" />
+    <Compile Include="Interfaces\IReportOfClientService.cs" />
     <Compile Include="Interfaces\ITransactionService.cs" />
     <Compile Include="Interfaces\IUserRightsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CardTrancportService.cs" />
+    <Compile Include="Services\CashTransactionService.cs" />
+    <Compile Include="Services\CreditTransactionService.cs" />
+    <Compile Include="Services\DocumentTemplateService.cs" />
+    <Compile Include="Services\CommissionService.cs" />
+    <Compile Include="Services\ReportOfClientService.cs" />
+    <Compile Include="Services\TransactionService.cs" />
     <Compile Include="Services\UserRightsService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +81,13 @@
       <Project>{C8290617-1E40-47F9-8B46-F5D589EB187D}</Project>
       <Name>Aimp.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Aimp.Reports\Aimp.Reports.csproj">
+      <Project>{1eff1bac-0900-4714-9c13-60e458ed8f30}</Project>
+      <Name>Aimp.Reports</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

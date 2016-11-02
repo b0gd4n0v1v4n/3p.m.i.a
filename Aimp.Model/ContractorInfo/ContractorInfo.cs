@@ -1,4 +1,4 @@
-﻿using Aimp.Model.Entities;
+﻿using Entities;
 using System.Collections.Generic;
 
 namespace Aimp.Model.ContractorInfo

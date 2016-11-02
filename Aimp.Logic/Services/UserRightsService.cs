@@ -9,53 +9,54 @@ namespace Aimp.Logic.Services
 {
     public class UserRightsService : IUserRightsService
     {
-        private IDataContext _context;
-
-        public UserRightsService()
-        {
-            _context = IoC.Resolve<IDataContext>();
-        }
-
         public IQueryable<UserRight> GetUserRights(int id)
         {
-            return _context.UserRights.All().Where(x => x.UserId == id);
+            using (var context = IoC.Resolve<IDataContext>())
+                return context.UserRights.All().Where(x => x.UserId == id);
         }
         public IQueryable<User> GetUsers()
         {
-            return _context.Users.All();
+            using (var context = IoC.Resolve<IDataContext>())
+                return context.Users.All();
         }
         public void SaveUser(IEnumerable<string> rightIds, User user)
         {
-            var oldRights = _context.UserRights.All().Where(x => x.UserId == user.Id).ToList();
-            if (user.Id != 0)
+            using (var context = IoC.Resolve<IDataContext>())
             {
-                var deleteIds = oldRights.Where(x => !rightIds.Contains(x.RightId)).Select(x => x.Id).ToArray();
-                _context.UserRights.DeleteRange(deleteIds);
-            }
-
-            _context.Users.AddOrUpdate(user);
-            if (user.Id == 0)
-                _context.SaveChanges();
-
-            foreach (string iRight in rightIds)
-            {
-                if (!oldRights.Any(x => x.RightId == iRight))
+                var oldRights = context.UserRights.All().Where(x => x.UserId == user.Id).ToList();
+                if (user.Id != 0)
                 {
-                    _context.UserRights.AddOrUpdate(new UserRight()
-                    {
-                        UserId = user.Id,
-                        RightId = iRight
-                    });
+                    var deleteIds = oldRights.Where(x => !rightIds.Contains(x.RightId)).Select(x => x.Id).ToArray();
+                    context.UserRights.DeleteRange(deleteIds);
                 }
+
+                context.Users.AddOrUpdate(user);
+                if (user.Id == 0)
+                    context.SaveChanges();
+
+                foreach (string iRight in rightIds)
+                {
+                    if (!oldRights.Any(x => x.RightId == iRight))
+                    {
+                        context.UserRights.AddOrUpdate(new UserRight()
+                        {
+                            UserId = user.Id,
+                            RightId = iRight
+                        });
+                    }
+                }
+                context.SaveChanges();
             }
-            _context.SaveChanges();
         }
         public void DeleteUser(User user)
         {
-            var rigths = _context.UserRights.All().Where(x => x.UserId == user.Id).Select(x => x.Id).ToArray();
-            _context.UserRights.DeleteRange(rigths);
-            _context.Users.Delete(user);
-            _context.SaveChanges();
+            using (var context = IoC.Resolve<IDataContext>())
+            {
+                var rigths = context.UserRights.All().Where(x => x.UserId == user.Id).Select(x => x.Id).ToArray();
+                context.UserRights.DeleteRange(rigths);
+                context.Users.Delete(user);
+                context.SaveChanges();
+            }
         }
     }
 }

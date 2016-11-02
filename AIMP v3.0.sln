@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIMP v3.0", "AIMP v3.0\AIMP v3.0.csproj", "{DDCB465C-273D-4108-9C72-3B93F77EA07B}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aimp.DataAccess.Ef", "Aimp.DataAccess.Ef\Aimp.DataAccess.Ef.csproj", "{7D247AE9-608D-4990-AD9F-14B04964DA8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aimp.Model", "Aimp.Model\Aimp.Model.csproj", "{C8290617-1E40-47F9-8B46-F5D589EB187D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aimp.Reports", "Aimp.Reports\Aimp.Reports.csproj", "{1EFF1BAC-0900-4714-9C13-60E458ED8F30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +169,14 @@ Global
 		{C8290617-1E40-47F9-8B46-F5D589EB187D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8290617-1E40-47F9-8B46-F5D589EB187D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8290617-1E40-47F9-8B46-F5D589EB187D}.Release|x86.Build.0 = Release|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Debug|x86.Build.0 = Debug|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EFF1BAC-0900-4714-9C13-60E458ED8F30}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
