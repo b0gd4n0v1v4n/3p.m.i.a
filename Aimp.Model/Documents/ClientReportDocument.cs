@@ -1,5 +1,7 @@
 ﻿using Entities;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace Aimp.Model.Documents
 {
@@ -19,5 +21,13 @@ namespace Aimp.Model.Documents
         public string Identity { get; set; }
 
         public bool IsNew { get { if (Id != 0) return false; else return true; } }
+
+        public int UserId
+        {
+            get
+            {
+                return BankReportClients.First().ClientReport.UserId;
+            }
+        }
     }
 }

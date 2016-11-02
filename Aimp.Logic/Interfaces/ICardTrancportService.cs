@@ -12,7 +12,7 @@ namespace Aimp.Logic.Interfaces
     {
         CardTrancportDocument GetDocument(int id);
         int AddCardTrancport(int idCommission, DateTime dateStart);
-        void SaveDocument(CardTrancportDocument document,User user);
+        void SaveDocument(CardTrancportDocument document);
         void DeleteCardTrancport(int id);
         IQueryable<CardTrancport> GetCardTrancports(User user);
         IQueryable<StatusCardTrancport> GetStatusesCardTrancports();

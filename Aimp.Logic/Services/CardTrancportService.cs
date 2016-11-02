@@ -87,15 +87,18 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public void SaveDocument(CardTrancportDocument document,User user)
+        public void SaveDocument(CardTrancportDocument document)
         {
+            if (document.UserId == 0)
+                throw new ArgumentException("UserId");
+
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var firstCardTrancport = document.CardTrancport;
                 if (firstCardTrancport.Id == 0)
                 {
 
-                    firstCardTrancport.CommissionTransaction.UserId = user.Id;
+                    firstCardTrancport.CommissionTransaction.UserId = document.UserId;
                     foreach (var iPreCheks in document.PreChecks)
                     {
                         iPreCheks.CardTrancport = firstCardTrancport;

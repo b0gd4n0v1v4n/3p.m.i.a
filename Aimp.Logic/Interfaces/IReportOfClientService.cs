@@ -10,7 +10,7 @@ namespace Aimp.Logic.Interfaces
     public interface IReportOfClientService
     {
         ClientReportDocument GetDocument(int id);
-        void SaveDocument(ClientReportDocument document, User user);
+        void SaveDocument(ClientReportDocument document);
         void DeleteDocument(ClientReportDocument document);
         IEnumerable<BankStatus> GetBankStatuses();
         IEnumerable<Bank> GetBanks();

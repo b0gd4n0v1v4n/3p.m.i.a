@@ -1,5 +1,6 @@
 ﻿using Entities;
 using System.Collections.Generic;
+using System;
 
 namespace Aimp.Model.Documents
 {
@@ -21,5 +22,13 @@ namespace Aimp.Model.Documents
         public string Identity { get; set; }
 
         public bool IsNew { get { return Id != 0;  } }
+
+        public int UserId
+        {
+            get
+            {
+                return CardTrancport.CommissionTransaction.UserId;
+            }
+        }
     }
 }

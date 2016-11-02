@@ -7,6 +7,7 @@ using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
 using Aimp.Reports.Services.Excel;
 using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,15 +37,18 @@ namespace Aimp.Logic.Services
                 return printService.GetReportOfClientList(report);
             }
         }
-        public void SaveDocument(ClientReportDocument document, User user)
+        public void SaveDocument(ClientReportDocument document)
         {
+            if (document.UserId == 0)
+                throw new ArgumentException("UserId");
+
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var firstClientReposrt = document.BankReportClients.FirstOrDefault().ClientReport;
                 if (firstClientReposrt.Id == 0)
                 {
 
-                    firstClientReposrt.UserId = user.Id;
+                    firstClientReposrt.UserId = document.UserId;
                     context.ClientReports.AddOrUpdate(firstClientReposrt);
                     foreach (var iBankReportClient in document.BankReportClients)
                     {

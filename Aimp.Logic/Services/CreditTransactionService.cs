@@ -10,6 +10,7 @@ using Aimp.Reports.Services;
 using Aimp.Reports.Templates;
 using Entities;
 using Nelibur.ObjectMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -55,13 +56,16 @@ namespace Aimp.Logic.Services
                 return document;
             }
         }
-        public void SaveDocument(CreditTransactionDocument document,User user)
+        public void SaveDocument(CreditTransactionDocument document)
         {
+            if (document.UserId == 0)
+                throw new ArgumentException("UserId");
+
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var creditTransaction = TinyMapper.Map<CreditTransaction>(document);
                 if (creditTransaction.Id == 0)
-                    creditTransaction.UserId = user.Id;
+                    creditTransaction.UserId =document.UserId;
                 else
                 {
                     var dbTransaction = context.CreditTransactions.Get(creditTransaction.Id, x => x.DkpDocument, x => x.AgentDocument);
@@ -81,16 +85,6 @@ namespace Aimp.Logic.Services
             {
                 context.CreditTransactions.Delete(document.Id);
                 context.SaveChanges();
-            }
-        }
-        public IQueryable<CreditTransaction> GetTransactions(User user)
-        {
-            using (var context = IoC.Resolve<IDataContext>())
-            {
-                if (user.IsAdmin())
-                    return context.CreditTransactions.All();
-                else
-                    return context.CreditTransactions.All().Where(x => x.UserId == user.Id);
             }
         }
         public IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()

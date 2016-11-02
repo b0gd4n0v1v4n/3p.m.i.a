@@ -15,7 +15,7 @@ namespace Aimp.Logic.Interfaces
         void SaveDocument(CommissionDocument document);
         CommissionDocument GetDocument(int id);
         void DeleteDocument(CommissionDocument document);
-        IQueryable<CommissionTransaction> GetCommissions();
+        IQueryable<CommissionTransaction> GetCommissions(User user);
         IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates();
         WordPrintedDocument GetPrintedDocument(int idCommission, string name);
         IEnumerable<EntityName> GetPrintedList();

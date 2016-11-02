@@ -9,7 +9,7 @@ namespace Aimp.Logic.Interfaces
 {
     public interface ICashTransactionService
     {
-        void SaveDocument(CashTransactionDocument document,User user);
+        void SaveDocument(CashTransactionDocument document);
         CashTransactionDocument GetDocument(int id);
         void DeleteDocument(CashTransactionDocument document);
         IQueryable<CashTransaction> GetCashTransactions(User user);

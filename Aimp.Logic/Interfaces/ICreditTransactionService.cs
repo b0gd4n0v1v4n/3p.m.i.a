@@ -9,9 +9,8 @@ namespace Aimp.Logic.Interfaces
     {
         IQueryable<CreditTransaction> GetCreditTransactions(User user);
         CreditTransactionDocument GetDocument(int id);
-        void SaveDocument(CreditTransactionDocument document, User user);
+        void SaveDocument(CreditTransactionDocument document);
         void DeleteDocument(CreditTransactionDocument document);
-        IQueryable<CreditTransaction> GetTransactions(User user);
         IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates();
         IQueryable<Creditor> GetCreditors();
         IQueryable<Requisit> GetRequisits();

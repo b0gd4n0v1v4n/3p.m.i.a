@@ -6,5 +6,6 @@
         string Identity { get; set; }
         DocumentType DocumentType { get;} 
         bool IsNew { get;}
+        int UserId { get; }
     }
 }

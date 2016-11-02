@@ -46,13 +46,16 @@ namespace Aimp.Logic.Services
                 return TinyMapper.Map<CommissionDocument>(commission);
             }
         }
-        public void SaveDocument(CommissionDocument document,User user)
+        public void SaveDocument(CommissionDocument document)
         {
+            if (document.UserId == 0)
+                throw new ArgumentException("UserId");
+
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var commission = TinyMapper.Map<CommissionTransaction>(document);
                 if (commission.Id == 0)
-                    commission.UserId = user.Id;
+                    commission.UserId = document.UserId;
                 context.CommissionTransactions.AddOrUpdate(commission);
                 context.SaveChanges();
                 document.Id = commission.Id;

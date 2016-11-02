@@ -10,6 +10,7 @@ using Aimp.Reports.PrintedDocument.Templates;
 using Aimp.Reports.Services;
 using Entities;
 using Nelibur.ObjectMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -42,13 +43,16 @@ namespace Aimp.Logic.Services
                 return TinyMapper.Map<CashTransactionDocument>(cashTransaction);
             }
         }
-        public void SaveDocument(CashTransactionDocument document,User user)
+        public void SaveDocument(CashTransactionDocument document)
         {
+            if (document.UserId == 0)
+                throw new ArgumentException("UserId");
+
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var cashTransaction = TinyMapper.Map<CashTransaction>(document);
                 if (cashTransaction.Id == 0)
-                    cashTransaction.UserId = user.Id;
+                    cashTransaction.UserId = document.UserId;
                 context.CashTransactions.AddOrUpdate(cashTransaction);
                 context.SaveChanges();
                 document.Id = cashTransaction.Id;
