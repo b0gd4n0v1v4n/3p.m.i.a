@@ -148,10 +148,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AimpDataAccess\AimpDataAccess.csproj">
-      <Project>{8DB90126-BA9D-4678-8E87-6F65DA7D3AFF}</Project>
-      <Name>AimpDataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
       <Name>Models</Name>

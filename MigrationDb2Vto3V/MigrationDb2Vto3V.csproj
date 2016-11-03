@@ -194,10 +194,6 @@
       <Project>{ddcb465c-273d-4108-9c72-3b93f77ea07b}</Project>
       <Name>AIMP v3.0</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AimpDataAccess\AimpDataAccess.csproj">
-      <Project>{8db90126-ba9d-4678-8e87-6f65da7d3aff}</Project>
-      <Name>AimpDataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
       <Name>Models</Name>
