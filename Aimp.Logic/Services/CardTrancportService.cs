@@ -2,6 +2,7 @@
 using Aimp.Domain;
 using Aimp.Logic.Extensions;
 using Aimp.Logic.Interfaces;
+using Aimp.Logic.Sequnces;
 using Aimp.Model.Documents;
 using Entities;
 using System;
@@ -14,6 +15,23 @@ namespace Aimp.Logic.Services
 {
     public class CardTrancportService: ICardTrancportService
     {
+        private readonly IYearNumberSequence<int> _sequnce;
+        private readonly object _sync = new object();
+
+        public CardTrancportService()
+        {
+#warning ПРОВЕРИТЬ
+            using (var context = IoC.Resolve<IDataContext>())
+            {
+                var beginSequnce = context.CardsTrancport
+                    .All()
+                    .GroupBy(x => new { x.CommissionTransaction.Date.Year, x.Number })
+                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().CommissionTransaction.Number })
+                    .ToDictionary(x => x.Year, x => x.Number);
+
+                _sequnce = new YearNumberSequence(beginSequnce);
+            }
+        }
         public int AddCardTrancport(int idCommission, DateTime dateStart)
         {
             using (var context = IoC.Resolve<IDataContext>())
@@ -108,8 +126,6 @@ namespace Aimp.Logic.Services
                 }
                 else
                 {
-
-
                     var oldPreCheks = context.PreChecksCardTrancport
                                                .All()
                                                .Where(x => x.CardTrancport.Id == firstCardTrancport.Id)
@@ -129,8 +145,17 @@ namespace Aimp.Logic.Services
                         context.PreChecksCardTrancport.AddOrUpdate(iNewPreCheck);
                     }
                 }
+
                 context.CardsTrancport.AddOrUpdate(firstCardTrancport);
-                context.SaveChanges();
+
+                lock (_sync)
+                {
+                    firstCardTrancport.CommissionTransaction.Number = _sequnce.CurrentValue(firstCardTrancport.CommissionTransaction.Date);
+                    context.SaveChanges();
+                    _sequnce.NextValue(firstCardTrancport.CommissionTransaction.Date);
+                }
+
+                document.Id = firstCardTrancport.CommissionTransaction.Id;
             }
         }
     }

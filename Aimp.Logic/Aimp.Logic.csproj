@@ -54,7 +54,9 @@
     <Compile Include="Interfaces\IReportOfClientService.cs" />
     <Compile Include="Interfaces\ITransactionService.cs" />
     <Compile Include="Interfaces\IUserRightsService.cs" />
+    <Compile Include="Interfaces\IYearNumberSequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sequnces\YearNumberSequence.cs" />
     <Compile Include="Services\CardTrancportService.cs" />
     <Compile Include="Services\CashTransactionService.cs" />
     <Compile Include="Services\CreditTransactionService.cs" />

@@ -2,6 +2,7 @@
 using Aimp.Domain;
 using Aimp.Logic.Extensions;
 using Aimp.Logic.Interfaces;
+using Aimp.Logic.Sequnces;
 using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
@@ -19,6 +20,23 @@ namespace Aimp.Logic.Services
 {
     public class CashTransactionService : ICashTransactionService
     {
+        private readonly IYearNumberSequence<int> _sequnce;
+        private readonly object _sync = new object();
+
+        public CashTransactionService()
+        {
+#warning ПРОВЕРИТЬ
+            using (var context = IoC.Resolve<IDataContext>())
+            {
+                var beginSequnce = context.CashTransactions
+                    .All()
+                    .GroupBy(x => new { x.Date.Year, x.Number })
+                    .Select(x=> new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Year, x=>x.Number);
+
+                _sequnce = new YearNumberSequence(beginSequnce);
+            }
+        }
         public CashTransactionDocument GetDocument(int id)
         {
             using (var context = IoC.Resolve<IDataContext>())
@@ -53,10 +71,17 @@ namespace Aimp.Logic.Services
                 var cashTransaction = TinyMapper.Map<CashTransaction>(document);
                 if (cashTransaction.Id == 0)
                     cashTransaction.UserId = document.UserId;
+
                 context.CashTransactions.AddOrUpdate(cashTransaction);
-                context.SaveChanges();
+
+                lock (_sync)
+                {
+                    cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);
+                    context.SaveChanges();
+                    _sequnce.NextValue(cashTransaction.Date);
+                }
                 document.Id = cashTransaction.Id;
-                //document.Number = context.CashTransactions.Get(cashTransaction.Id).Number;
+                document.Number = cashTransaction.Number;
             }
         }
         public void DeleteDocument(CashTransactionDocument document)

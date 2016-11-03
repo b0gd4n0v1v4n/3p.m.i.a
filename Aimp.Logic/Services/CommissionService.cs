@@ -2,6 +2,7 @@
 using Aimp.Domain;
 using Aimp.Logic.Extensions;
 using Aimp.Logic.Interfaces;
+using Aimp.Logic.Sequnces;
 using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
@@ -21,6 +22,24 @@ namespace Aimp.Logic.Services
 {
     public class CommissionService : ICommissionService
     {
+        private readonly IYearNumberSequence<int> _sequnce;
+        private readonly object _sync = new object();
+
+        public CommissionService()
+        {
+#warning ПРОВЕРИТЬ
+            using (var context = IoC.Resolve<IDataContext>())
+            {
+                var beginSequnce = context.CommissionTransactions
+                    .All()
+                    .GroupBy(x => new { x.Date.Year, x.Number })
+                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Year, x => x.Number);
+
+                _sequnce = new YearNumberSequence(beginSequnce);
+            }
+        }
+
         public CommissionDocument GetDocument(int id)
         {
             using (var context = IoC.Resolve<IDataContext>())
@@ -56,10 +75,18 @@ namespace Aimp.Logic.Services
                 var commission = TinyMapper.Map<CommissionTransaction>(document);
                 if (commission.Id == 0)
                     commission.UserId = document.UserId;
+                
                 context.CommissionTransactions.AddOrUpdate(commission);
-                context.SaveChanges();
+
+                lock (_sync)
+                {
+                    commission.Number = _sequnce.CurrentValue(commission.Date);
+                    context.SaveChanges();
+                    _sequnce.NextValue(commission.Date);
+                }
+
                 document.Id = commission.Id;
-                //document.Number = context.CommissionTransactions.Get(commission.Id).Number;
+                document.Number = commission.Number;
             }
         }
         public void DeleteDocument(CommissionDocument document)

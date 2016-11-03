@@ -2,6 +2,7 @@
 using Aimp.Domain;
 using Aimp.Logic.Extensions;
 using Aimp.Logic.Interfaces;
+using Aimp.Logic.Sequnces;
 using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
@@ -19,6 +20,24 @@ namespace Aimp.Logic.Services
 {
     public class CreditTransactionService : ICreditTransactionService
     {
+        private readonly IYearNumberSequence<int> _sequnce;
+        private readonly object _sync = new object();
+
+        public CreditTransactionService()
+        {
+#warning ПРОВЕРИТЬ
+            using (var context = IoC.Resolve<IDataContext>())
+            {
+                var beginSequnce = context.CreditTransactions
+                    .All()
+                    .GroupBy(x => new { x.Date.Year, x.Number })
+                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Year, x => x.Number);
+
+                _sequnce = new YearNumberSequence(beginSequnce);
+            }
+        }
+
         public IQueryable<CreditTransaction> GetCreditTransactions(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
@@ -73,10 +92,15 @@ namespace Aimp.Logic.Services
                     context.UserFileUpdate(creditTransaction.DkpDocumentId, creditTransaction.DkpDocument, dbTransaction.DkpDocument);
                     context.SaveChanges();
                 }
-                context.CreditTransactions.AddOrUpdate(creditTransaction);
-                context.SaveChanges();
+
+                lock (_sync)
+                {
+                    creditTransaction.Number = _sequnce.CurrentValue(creditTransaction.Date);
+                    context.SaveChanges();
+                    _sequnce.NextValue(creditTransaction.Date);
+                }
                 document.Id = creditTransaction.Id;
-                //document.Number = context.CreditTransactions.Get(creditTransaction.Id).Number;
+                document.Number = creditTransaction.Number;
             }
         }
         public void DeleteDocument(CreditTransactionDocument document)
