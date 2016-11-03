@@ -1,4 +1,6 @@
-﻿using Aimp.Model.Documents;
+﻿using System.Collections.Generic;
+using Aimp.Model;
+using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Entities;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace Aimp.Logic.Interfaces
         void SaveDocument(CreditTransactionDocument document);
         void DeleteDocument(CreditTransactionDocument document);
         IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates();
+        IEnumerable<EntityName> GetPrintedList();
         IQueryable<Creditor> GetCreditors();
         IQueryable<Requisit> GetRequisits();
         WordPrintedDocument GetPrintedDocument(int idTransaction, string name);

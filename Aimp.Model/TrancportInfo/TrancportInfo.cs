@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Aimp.Model.TrancportInfo
 {
-    public class TrancportInfo : IResponse
+    public class TrancportInfo 
     {
-        public bool Error { get; set; }
-        public string Message { get; set; }
         public IEnumerable<ModelTrancport> Models {get;set;}
         public IEnumerable<MakeTrancport> Makes { get; set; }
         public IEnumerable<TrancportCategory> Categories { get; set; }

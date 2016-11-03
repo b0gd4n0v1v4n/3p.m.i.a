@@ -8,7 +8,7 @@ namespace Aimp.Logic.Interfaces
     {
         IQueryable<UserRight> GetUserRights(int id);
         IQueryable<User> GetUsers();
-        void SaveUser(IEnumerable<string> rightIds, User user);
+        int SaveUser(IEnumerable<string> rightIds, User user);
         void DeleteUser(User user);
     }
 }

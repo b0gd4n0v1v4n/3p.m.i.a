@@ -4,6 +4,7 @@ using System.IO;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
 using Aimp.Model.ReportOfClient;
+using Aimp.Reports.Interfaces;
 
 namespace Aimp.Reports.Services.Excel
 {

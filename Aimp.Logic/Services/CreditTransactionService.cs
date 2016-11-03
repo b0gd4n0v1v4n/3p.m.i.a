@@ -7,6 +7,7 @@ using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
+using Aimp.Reports.Interfaces;
 using Aimp.Reports.Services;
 using Aimp.Reports.Templates;
 using Entities;

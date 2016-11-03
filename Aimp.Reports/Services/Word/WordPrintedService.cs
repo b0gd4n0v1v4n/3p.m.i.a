@@ -3,6 +3,7 @@ using Aimp.Model.PrintedDocument.Templates;
 using System;
 using System.Configuration;
 using System.IO;
+using Aimp.Reports.Interfaces;
 
 namespace Aimp.Reports.Services.Word
 {

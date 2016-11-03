@@ -2,20 +2,11 @@
 using Aimp.Model.Entities;
 using System;
 using System.Collections.Generic;
+using Entities;
 
 namespace Aimp.Model.ReportOfClient
 {
-    public class ClientReport : IResponse
-    {
-        public bool Error
-        {
-            get; set;
-        }
-
-        public string Message
-        {
-            get; set;
-        }
+    public class ClientReport {
 
         public ClientReportDocument Document { get; set; } 
         

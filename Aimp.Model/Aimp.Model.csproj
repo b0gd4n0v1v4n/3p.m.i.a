@@ -41,29 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AimpUserDto.cs" />
-    <Compile Include="CardTrancports\CardTrancportDto.cs" />
     <Compile Include="CardTrancports\CardTrancportListItemDto.cs" />
     <Compile Include="CardTrancports\CardTrancportsDto.cs" />
-    <Compile Include="CardTrancports\StatusesCardTrancportDto.cs" />
     <Compile Include="CashTransact\CashTransactionDto.cs" />
     <Compile Include="CashTransact\CashTransactionListItem.cs" />
-    <Compile Include="CashTransact\CashTransactionsDto.cs" />
     <Compile Include="Commission\CommissionDto.cs" />
     <Compile Include="Commission\CommissionListItem.cs" />
-    <Compile Include="Commission\CommissionsDto.cs" />
-    <Compile Include="Commission\SourcesTrancportDto.cs" />
     <Compile Include="ContractorInfo\ContractorInfo.cs" />
-    <Compile Include="ContractorInfo\SearchContractorResult.cs" />
     <Compile Include="ContractorInfo\TypeSearchContractor.cs" />
-    <Compile Include="CreditTransact\CreditTransactionDto.cs" />
     <Compile Include="CreditTransact\CreditTransactionInfoDto.cs" />
     <Compile Include="CreditTransact\CreditTransactionListItem.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="CreditTransact\CreditTransactions.cs" />
     <Compile Include="DataFormats.cs" />
     <Compile Include="Dictionary.cs" />
-    <Compile Include="DictionaryDto.cs" />
     <Compile Include="Dictionary\Row.cs" />
     <Compile Include="Documents\CardTrancportDocument.cs" />
     <Compile Include="Documents\CashTransactionDocument.cs" />
@@ -74,39 +65,26 @@
     <Compile Include="Documents\IDocument.cs" />
     <Compile Include="EntityName.cs" />
     <Compile Include="Identity.cs" />
-    <Compile Include="IResponse.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="PrintDocumentTemplate\PrinDocTempListItem.cs" />
-    <Compile Include="PrintDocumentTemplate\PrintedDocumentTemplateDto.cs" />
-    <Compile Include="PrintDocumentTemplate\PrintedDocumentTemplatesListDto.cs" />
     <Compile Include="PrintedDocument\ExcelPrintedDocument.cs" />
-    <Compile Include="PrintedDocument\ExcelPrintedDocumentDto.cs" />
     <Compile Include="PrintedDocument\ILabelValue.cs" />
     <Compile Include="PrintedDocument\IPrintedDocument.cs" />
-    <Compile Include="PrintedDocument\PrintedDocumentsListDto.cs" />
     <Compile Include="PrintedDocument\Templates\IPrintedDocumentTemplate.cs" />
     <Compile Include="PrintedDocument\Templates\PrintedDocumentTemplateType.cs" />
     <Compile Include="PrintedDocument\WordPrintedDocument.cs" />
-    <Compile Include="PrintedDocument\WordPrintedDocumentDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportOfClient\ClientReport.cs" />
     <Compile Include="ReportOfClient\ClientReportListItem.cs" />
     <Compile Include="ReportOfClient\ClientReports.cs" />
-    <Compile Include="Response.cs" />
-    <Compile Include="SaveEntityResult.cs" />
     <Compile Include="SecurityRigths\AdminRight.cs" />
     <Compile Include="SecurityRigths\IRight.cs" />
     <Compile Include="SecurityRigths\Operations\AddOperation.cs" />
     <Compile Include="SecurityRigths\Operations\DeleteOperation.cs" />
     <Compile Include="SecurityRigths\Operations\ViewOperation.cs" />
     <Compile Include="SecurityRigths\UserRightsCollection.cs" />
-    <Compile Include="SecurityRigths\UserRightsDto.cs" />
-    <Compile Include="SecurityRigths\UsersDto.cs" />
-    <Compile Include="TrancportInfo\SearchTrancportResult.cs" />
-    <Compile Include="TrancportInfo\TrancportDto.cs" />
     <Compile Include="TrancportInfo\TrancportInfo.cs" />
     <Compile Include="TrancportInfo\TypeSearchTrancport.cs" />
-    <Compile Include="UserFiles\UserFileDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -116,6 +94,9 @@
       <Project>{841772EA-0190-4F6D-B50C-CD3C47C8FD0F}</Project>
       <Name>Aimp.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserFiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

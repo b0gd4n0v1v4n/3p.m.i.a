@@ -1,8 +1,8 @@
-﻿using Aimp.Model.PrintedDocument;
+﻿using System;
+using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
-using System;
 
-namespace Aimp.Reports.Services
+namespace Aimp.Reports.Interfaces
 {
     public interface IPrintedService : IDisposable
     {

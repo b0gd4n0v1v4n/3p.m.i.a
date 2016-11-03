@@ -1,22 +1,10 @@
-﻿using Aimp.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Entities;
 
 namespace Aimp.Model.CreditTransact
 {
-    public class CreditTransactionInfoDto : IResponse
+    public class CreditTransactionInfoDto 
     {
-        public bool Error
-        {
-            get; set;
-        }
-
-        public string Message
-        {
-            get; set;
-        }
         public IEnumerable<Creditor> Creditors { get; set; }
         public IEnumerable<Requisit> Requisits { get; set; }
     }

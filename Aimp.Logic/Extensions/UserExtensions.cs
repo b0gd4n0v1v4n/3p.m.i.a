@@ -1,5 +1,5 @@
-﻿using Aimp.DataAccess.Interfaces;
-using Aimp.Domain;
+﻿using Aimp.Domain;
+using Aimp.Logic.Interfaces;
 using Entities;
 using System.Linq;
 
@@ -9,10 +9,12 @@ namespace Aimp.Logic.Extensions
     {
         public static bool IsAdmin(this User user)
         {
-            using (var context = IoC.Resolve<IDataContext>())
-            {
-                return context.Users.All().Any(x => x == SecurityRigths.UserRightsCollection.Admin.Id);
-            }
+            var service = IoC.Resolve<IUserRightsService>();
+
+            var userRights = service.GetUserRights(user.Id);
+
+            return userRights.Any(x => x.RightId == Model.SecurityRigths.UserRightsCollection.Admin.Id);
         }
     }
 }
+

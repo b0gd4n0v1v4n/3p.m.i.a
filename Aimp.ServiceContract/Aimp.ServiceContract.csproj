@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1EFF1BAC-0900-4714-9C13-60E458ED8F30}</ProjectGuid>
+    <ProjectGuid>{AED723CA-2475-40CA-89FD-61DA8F21ABBB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aimp.Reports</RootNamespace>
-    <AssemblyName>Aimp.Reports</AssemblyName>
+    <RootNamespace>Aimp.ServiceContract</RootNamespace>
+    <AssemblyName>Aimp.ServiceContract</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,8 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,21 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\MoneyToText.cs" />
-    <Compile Include="Helpers\ReportHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Excel\Excel.cs" />
-    <Compile Include="Services\Excel\ExcelPrintedService.cs" />
-    <Compile Include="Interfaces\IExcelPrintedService.cs" />
-    <Compile Include="Interfaces\IPrintedService.cs" />
-    <Compile Include="Services\Word\WordDocument.cs" />
-    <Compile Include="Services\Word\WordPrintedService.cs" />
-    <Compile Include="Services\Word\WordSelection.cs" />
-    <Compile Include="Templates\AktTransactionPrintedDocumentTemplate.cs" />
-    <Compile Include="Templates\CashTransactionPrintedDocumentTemplate.cs" />
-    <Compile Include="Templates\CommissionTransactionPrintedDocumentTemplate.cs" />
-    <Compile Include="Templates\CreditTransactionPrintedDocumentTemplate.cs" />
-    <Compile Include="Templates\DkpTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Services\IAimpUsersWcfService.cs" />
+    <Compile Include="Services\IAimpWcfService.cs" />
+    <Compile Include="Services\ICardTrancportsWcfService.cs" />
+    <Compile Include="Services\ICashTransactionWcfService.cs" />
+    <Compile Include="Services\IClientReportsWcfSerive.cs" />
+    <Compile Include="Services\ICommisionWcfService.cs" />
+    <Compile Include="Services\ICreditTransactionWcfService.cs" />
+    <Compile Include="Services\IDataContextWcfService.cs" />
+    <Compile Include="Services\IPrintedDocumentWcfService.cs" />
+    <Compile Include="Services\ITransactionWcfService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aimp.Entities\Aimp.Entities.csproj">

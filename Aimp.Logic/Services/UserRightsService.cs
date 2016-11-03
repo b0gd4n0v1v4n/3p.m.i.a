@@ -1,4 +1,5 @@
-﻿using Aimp.DataAccess.Interfaces;
+﻿using System;
+using Aimp.DataAccess.Interfaces;
 using Aimp.Domain;
 using Aimp.Logic.Interfaces;
 using Entities;
@@ -23,6 +24,11 @@ namespace Aimp.Logic.Services
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
+                if (user.Id == 0)
+                {
+                    if(context.Users.All().Any(x=>x.Login == user.Login && x.Password == user.Password))
+                        throw new ArgumentException($"User with login and password alredy exsits");
+                }
                 var oldRights = context.UserRights.All().Where(x => x.UserId == user.Id).ToList();
                 if (user.Id != 0)
                 {

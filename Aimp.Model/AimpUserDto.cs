@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Aimp.Model
 {
-    public class AimpUserDto : IResponse
+    public class AimpUserDto
     {
         public int Id { get; set; }
         public IEnumerable<string> UserRights { get; set; }
-        public bool Error { get; set; }
-        public string Message { get; set; }
     }
 }

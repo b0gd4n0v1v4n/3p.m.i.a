@@ -5,6 +5,7 @@ using Aimp.Logic.Interfaces;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
+using Aimp.Reports.Interfaces;
 using Aimp.Reports.Services.Excel;
 using Entities;
 using System;

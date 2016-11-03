@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Aimp.Model.CardTrancports
 {
-    public class CardTrancportsDto : IResponse
+    public class CardTrancportsDto
     {
-        public bool Error
-        {
-            get; set;
-        }
-
         public IEnumerable<CardTrancportListItemDto> Items { get; set; }
         public string[] StatusesCardForFilerStart { get; set; }
-        public string Message
-        {
-            get; set;
-        }
     }
 }
