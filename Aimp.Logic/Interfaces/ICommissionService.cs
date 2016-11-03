@@ -12,7 +12,7 @@ namespace Aimp.Logic.Interfaces
 {
     public interface ICommissionService 
     {
-        int SaveDocument(CommissionDocument document);
+        void SaveDocument(CommissionDocument document);
         CommissionDocument GetDocument(int id);
         void DeleteDocument(CommissionDocument document);
         IQueryable<CommissionTransaction> GetCommissions(User user);

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using Aimp.Model;
 using Aimp.Model.ContractorInfo;
 using Aimp.Model.TrancportInfo;
-using Aimp.Model.UserFiles;
 using Entities;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace Aimp.ServiceContract.Services
 {
+    [ServiceContract]
     public interface ITransactionWcfService
     {
         [OperationContract]

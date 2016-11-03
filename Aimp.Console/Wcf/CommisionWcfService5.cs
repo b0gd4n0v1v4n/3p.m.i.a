@@ -47,7 +47,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Get source trancports");
             try
             {
-                return _service.GetSourcesTrancport().ToList();
+                return IoC.Resolve<ICommissionService>().GetSourcesTrancport().ToList();
             }
             catch (Exception ex)
             {
@@ -92,7 +92,8 @@ namespace Aimp.Console.Wcf
             EventLog($"Save commission document id:{document.Id}");
             try
             {
-                return IoC.Resolve<ICommissionService>().SaveDocument(document);
+                 IoC.Resolve<ICommissionService>().SaveDocument(document);
+                return document.Id;
             }
             catch (Exception ex)
             {

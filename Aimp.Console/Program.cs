@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Web;
-using System.Text;
-using System.Threading.Tasks;
 using Aimp.Console.Wcf;
 
 namespace Aimp.Console
@@ -14,7 +10,12 @@ namespace Aimp.Console
         {
             using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
             {
+                if (webServiceHost.BaseAddresses.Count < 1)
+                    throw new Exception("Adress not found");
+
                 System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
+
+                
 
                 System.Console.ReadLine();
             }

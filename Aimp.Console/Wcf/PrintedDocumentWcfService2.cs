@@ -139,7 +139,7 @@ namespace Aimp.Console.Wcf
 
         public void DeletePrintedDocTemplate(PrintedDocumentTemplate template)
         {
-            EventLog($"Delete printed doc template id: {template.id}");
+            EventLog($"Delete printed doc template id: {template.Id}");
             try
             {
                 IoC.Resolve<IDocumentTemplateService>().DeleteTemplate(template);

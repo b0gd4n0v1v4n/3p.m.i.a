@@ -4,6 +4,7 @@ using System.ServiceModel.Web;
 using Aimp.Domain;
 using Aimp.Logic.Interfaces;
 using Entities;
+using System;
 
 namespace Aimp.Console.Wcf
 {

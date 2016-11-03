@@ -5,6 +5,7 @@ using Aimp.Model.Dictionar;
 
 namespace Aimp.ServiceContract.Services
 {
+    [ServiceContract]
     public interface IDataContextWcfService
     {
         [OperationContract]

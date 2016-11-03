@@ -64,7 +64,8 @@ namespace Aimp.Console.Wcf
             EventLog("save user: [{user.Login},{user.Password}]");
             try
             {
-                return IoC.Resolve<IUserRightsService>().SaveUser(rightIds, user);
+                IoC.Resolve<IUserRightsService>().SaveUser(rightIds, user);
+                return user.Id;
             }
             catch (Exception ex)
             {

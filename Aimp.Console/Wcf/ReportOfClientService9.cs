@@ -64,13 +64,15 @@ namespace Aimp.Console.Wcf
             EventLog($"Get new client report");
             try
             {
+                var service = IoC.Resolve<IReportOfClientService>();
+
                 return new ClientReport()
             {
                 Document = new ClientReportDocument(),
-                Banks = _service.GetBanks(),
-                BankStatuses = _service.GetBankStatuses(),
-                ClientStatuses = _service.GetClientStatuses(),
-                CreditProgramms = _service.GetCreditProgramms()
+                Banks = service.GetBanks(),
+                BankStatuses = service.GetBankStatuses(),
+                ClientStatuses = service.GetClientStatuses(),
+                CreditProgramms = service.GetCreditProgramms()
             };
             }
             catch (Exception ex)

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Aimp.Reports.Helpers;
-using Models.Entities;
-using Models.PrintedDocument.Templates;
+using Aimp.Model.PrintedDocument.Templates;
+using Entities;
 
 namespace Aimp.Reports.Templates
 {

@@ -7,6 +7,7 @@ using Entities;
 
 namespace Aimp.ServiceContract.Services
 {
+    [ServiceContract]
     public interface ICommisionWcfService
     {
         [OperationContract]

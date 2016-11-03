@@ -9,6 +9,7 @@ using System.ServiceModel.Web;
 
 namespace Aimp.ServiceContract.Services
 {
+    [ServiceContract]
     public interface IPrintedDocumentWcfService
     {
         [OperationContract]

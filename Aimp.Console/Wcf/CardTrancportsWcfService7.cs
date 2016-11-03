@@ -67,7 +67,7 @@ namespace Aimp.Console.Wcf
 
         public int AddCardTrancport(int idCommission, DateTime dateStart)
         {
-            EventLog($"Add card trancport for commission id: {id}");
+            EventLog($"Add card trancport for commission id: {idCommission}");
             try
             {
                 return IoC.Resolve<ICardTrancportService>().AddCardTrancport(idCommission, dateStart);
@@ -81,7 +81,7 @@ namespace Aimp.Console.Wcf
 
         public void SaveCardTrancport(CardTrancportDocument document)
         {
-            EventLog($"Save card trancport document id: {id}");
+            EventLog($"Save card trancport document id: {document.Id}");
             try
             {
                 IoC.Resolve<ICardTrancportService>().SaveDocument(document);

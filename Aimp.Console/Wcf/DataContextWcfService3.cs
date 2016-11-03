@@ -13,13 +13,13 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<Row> GetDictionary(string tableName, IEnumerable<string> columns)
         {
-            EventLog($"Get dicionary name: {tableBame}") ;
+            EventLog($"Get dicionary name: {tableName}") ;
             try
             {
                 IEnumerable<EntityName> query;
 
                 using (var service = IoC.Resolve<IDataContext>())
-                    query = service.Query<EntityName>($"SELECT Id,CONCAT({nameColumns}) as Name FROM {tableName}");
+                    query = service.Query<EntityName>($"SELECT Id,CONCAT({columns}) as Name FROM {tableName}");
 
                 List<Row> result = new List<Row>();
                 foreach(var iRow in query)
@@ -47,7 +47,7 @@ namespace Aimp.Console.Wcf
             try
             {
                 using (var service = IoC.Resolve<IDataContext>())
-                    service.Command($"DELETE FROM {table} WHERE [Id] = {id}");
+                    service.Command($"DELETE FROM {tableName} WHERE [Id] = {id}");
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Aimp.Console.Wcf
                 string query = string.Empty;
             if(id == 0)
             {
-                query = $"INSERT INTO [{table}](";
+                query = $"INSERT INTO [{tableName}](";
                 string columns = string.Empty;
                 string values = string.Empty;
                 foreach(var iColum in columnValues)
@@ -79,7 +79,7 @@ namespace Aimp.Console.Wcf
             }
             else
             {
-                query = $"UPDATE [{table}] SET ";
+                query = $"UPDATE [{tableName}] SET ";
                 foreach (var iColum in columnValues)
                 {
                     if (iColum.Key != "Id")
