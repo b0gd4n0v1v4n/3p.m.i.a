@@ -1,5 +1,5 @@
 ﻿using AIMP_v3._0.Model;
-using Aimp.Model.Entities;
+using Entities;
 using System;
 
 namespace Aimp.Model.Documents

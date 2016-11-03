@@ -1,6 +1,4 @@
-﻿using Aimp.DataAccess.Ef;
-using Aimp.DataAccess.Interfaces;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using System;
 
 namespace Aimp.Domain

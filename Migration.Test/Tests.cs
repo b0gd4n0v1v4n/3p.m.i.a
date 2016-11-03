@@ -10,7 +10,7 @@ namespace Migration.Test
     [TestClass]
     public class Tests
     {
-        private string _pathLog = @"D:\AimpFiles\Logs\migration";
+        //private string _pathLog = @"D:\AimpFiles\Logs\migration";
         private IAimpContext _context = new EfAimpContext();
 
         //public Tests()

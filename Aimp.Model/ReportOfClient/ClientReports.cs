@@ -1,6 +1,4 @@
-﻿using Aimp.Model.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entities;
 
 namespace Aimp.Model.ReportOfClient
