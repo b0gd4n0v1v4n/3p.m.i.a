@@ -68,6 +68,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aimp.DataAccess.Ef\Aimp.DataAccess.Ef.csproj">
+      <Project>{7D247AE9-608D-4990-AD9F-14B04964DA8B}</Project>
+      <Name>Aimp.DataAccess.Ef</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aimp.DataAccess\Aimp.DataAccess.csproj">
       <Project>{518E2A83-FA67-42EA-8823-B39F6AAF4A6E}</Project>
       <Name>Aimp.DataAccess</Name>
