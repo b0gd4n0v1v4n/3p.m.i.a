@@ -29,7 +29,6 @@ namespace Aimp.Console
                 System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
 
                 logger.Log("Web service host started.");
-
                 logger.Log("AIMP READY!");
 
                 System.Console.ReadLine();

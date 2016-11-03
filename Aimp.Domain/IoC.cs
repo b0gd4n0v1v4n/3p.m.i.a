@@ -5,7 +5,7 @@ namespace Aimp.Domain
 {
     public static class IoC
     {
-        private static UnityContainer _container;
+        private static readonly IUnityContainer _container;
 
         static IoC()
         {

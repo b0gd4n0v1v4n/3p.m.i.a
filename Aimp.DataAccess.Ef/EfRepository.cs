@@ -7,6 +7,7 @@ using Entities;
 using Aimp.DataAccess.Ef.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 
 namespace Aimp.DataAccess.EF.Repository
 {
