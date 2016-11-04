@@ -6,9 +6,7 @@ using AIMP_v3._0.Helpers;
 using AIMP_v3._0.DataAccess;
 using System.Windows;
 using AIMP_v3._0.PrintControl;
-using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using AIMP_v3._0.Logging;
 
 namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
@@ -36,7 +34,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(DataFormats.DateFormat),
+                                Date = x.Date.ToString(Aimp.Model.DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -123,7 +121,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                     }
                     catch (Exception ex)
                     {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        MessageBox.Show(ex.Message, "Неудалось создать документ");
                     }
                 }));
             }

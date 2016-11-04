@@ -3,11 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
-using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using MessageBox = System.Windows.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
-using Models.Entities;
+using Entities;
 
 namespace AIMP_v3._0.User_Control
 {

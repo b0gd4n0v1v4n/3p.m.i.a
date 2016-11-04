@@ -29,17 +29,20 @@ namespace Aimp.Console
                         throw new Exception("adress not found");
 
                     System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
+                    webServiceHost.Open();
 
                     logger.Log("web service host started.");
                     logger.Log("service ready!");
                     logger.Log("---------------------------");
+
+                    System.Console.ReadLine();
                 }
             }
             catch(Exception ex)
             {
                 logger.Log(ex);
             }
-            System.Console.ReadLine();
+            
         }
 
         static void ServicesInit(ILogger logger)

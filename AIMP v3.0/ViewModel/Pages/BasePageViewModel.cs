@@ -104,7 +104,7 @@ namespace AIMP_v3._0.ViewModel.Pages
                 OnPropertyChanged("FilteringList");
             }
         }
-#warning дубли в правах пользователей
+
         public Command SetCurrentFilterCommand
         {
             get

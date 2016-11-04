@@ -1,7 +1,6 @@
 ﻿using Aimp.Model.ReportOfClient;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.ClientOfReport;
 using Entities;
@@ -61,7 +60,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
             }
             catch (Exception ex)
             {
-                Logger.Instance.Log("Не удалось получить список", "_FillListReportOfClient", ex);
+                MessageBox.Show(ex.Message, "Не удалось получить список");
             }
         }
 
@@ -98,7 +97,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                            MessageBox.Show(ex.Message, "Неудалось создать документ");
                         }
                     });
                 });
@@ -125,7 +124,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Неудалось открыть документ", "New", ex);
+                            MessageBox.Show(ex.Message, "Неудалось открыть документ");
                         }
                     });
                 });
@@ -166,7 +165,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Не удалось сформировать отчет", "PrintList", ex);
+                            MessageBox.Show(ex.Message, "Не удалось сформировать отчет");
                         }
                     });
                 });

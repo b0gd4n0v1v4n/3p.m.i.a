@@ -1,5 +1,5 @@
-﻿using AIMP_v3._0.DataAccess;
-using Models.TrancportInfo;
+﻿using Aimp.Model.TrancportInfo;
+using AIMP_v3._0.DataAccess;
 using System;
 
 namespace AIMP_v3._0.DataInformation
@@ -22,9 +22,6 @@ namespace AIMP_v3._0.DataInformation
                     using (AimpService aimp = new AimpService())
                     {
                         _info = aimp.GetTrancportInfo();
-
-                        if (_info.Error)
-                            throw new Exception(_info.Message);
                     }
                 }
                 return _info;

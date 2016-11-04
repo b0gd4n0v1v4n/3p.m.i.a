@@ -1,11 +1,8 @@
 ﻿using Aimp.Model.Documents;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using Entities;
-using Models.Documents;
-using Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -182,7 +179,7 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
 
                             catch (Exception ex)
                             {
-                                Logger.Instance.Log("Не удалось сохранить клиентский отчет", "SaveChangesCommand", ex);
+                                MessageBox.Show(ex.Message, "Не удалось сохранить клиентский отчет");
                             }
                         });
                     }
@@ -208,15 +205,13 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
                                 service.DeleteClientReport(_clientReportDocument);
 
                                 var win = window as Window;
-                                win.Hide();
-                                MessageBox.Show(response.Message);
                                 win.Close();
                             }
 
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Не удалось удалить документ", "DeleteChangesCommand", ex);
+                                MessageBox.Show(ex.Message, "Не удалось удалить документ");
                         }
                         });
                     }

@@ -192,11 +192,7 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetDictionary(tableName, columns);
         }
-
-        public void SaveRowDictionary(string tableName, string value,int id)
-        {
-            Proxy.SaveRowDictionary(tableName, value,id);
-        }
+        
         public void DeleteRowDictionary(string tableName, int id)
         {
             Proxy.DeleteRowDictionary(tableName, id);
@@ -232,7 +228,7 @@ namespace AIMP_v3._0.DataAccess
         }
         public void DeleteCardTrancport(int idCommission)
         {
-            return Proxy.DeleteCardTrancport(idCommission);
+             Proxy.DeleteCardTrancport(idCommission);
         }
 
         public IEnumerable<StatusCardTrancport> GetStatusesCard()

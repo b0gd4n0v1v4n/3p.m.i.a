@@ -2,7 +2,6 @@
 using Aimp.Model.Documents;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.View;
 using System;
@@ -36,7 +35,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                                 Id = x.Id,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
-                                Date = x.Date.ToString(DataFormats.DateFormat),
+                                Date = x.Date.ToString(Aimp.Model.DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -89,7 +88,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                            MessageBox.Show(ex.Message, "Неудалось создать документ");
                         }
                     });
                 });
