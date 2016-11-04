@@ -31,9 +31,9 @@ namespace Aimp.Logic.Services
             {
                 var beginSequnce = context.CreditTransactions
                     .All()
-                    .GroupBy(x => new { x.Date.Year, x.Number })
-                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Year, x => x.Number);
+                    .GroupBy(x => x.Date.Year)
+                    .Select(x => new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Key, x => x.Number);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }

@@ -8,8 +8,6 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aimp.Logic.Services
 {
@@ -25,9 +23,9 @@ namespace Aimp.Logic.Services
             {
                 var beginSequnce = context.CardsTrancport
                     .All()
-                    .GroupBy(x => new { x.CommissionTransaction.Date.Year, x.Number })
-                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().CommissionTransaction.Number })
-                    .ToDictionary(x => x.Year, x => x.Number);
+                    .GroupBy(x => x.CommissionTransaction.Date.Year)
+                    .Select(x => new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().CommissionTransaction.Number })
+                    .ToDictionary(x => x.Key, x => x.Number);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }

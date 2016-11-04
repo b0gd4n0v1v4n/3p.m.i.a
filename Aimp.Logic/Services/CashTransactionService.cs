@@ -9,7 +9,6 @@ using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
 using Aimp.Reports.Interfaces;
 using Aimp.Reports.PrintedDocument.Templates;
-using Aimp.Reports.Services;
 using Entities;
 using Nelibur.ObjectMapper;
 using System;
@@ -31,9 +30,9 @@ namespace Aimp.Logic.Services
             {
                 var beginSequnce = context.CashTransactions
                     .All()
-                    .GroupBy(x => new { x.Date.Year, x.Number })
-                    .Select(x=> new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Year, x=>x.Number);
+                    .GroupBy(x => x.Date.Year)
+                    .Select(x=> new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Key, x=>x.Number);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }

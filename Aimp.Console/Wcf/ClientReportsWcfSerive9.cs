@@ -41,7 +41,7 @@ namespace Aimp.Console.Wcf
                         ClientStatusReportClient = x.Key.ClientStatus.Name,
                         DateReportClient = x.Key.Date.ToString(DataFormats.DateFormat),
                         FullNameReportClient = x.Key.FullName,
-                        ManagerReportClient = x.Key.User.LastName,
+                        ManagerReportClient = x.Key.User?.LastName,
                         PriceTrancportReportClient = x.Key.Price.ToString(),
                         ProgrammCreditReportClient = x.Key.CreditProgramm.Name,
                         SourceInfoReportClient = x.Key.Source,
