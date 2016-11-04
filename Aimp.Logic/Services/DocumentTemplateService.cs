@@ -1,4 +1,5 @@
-﻿using Aimp.DataAccess.Interfaces;
+﻿using System.Collections.Generic;
+using Aimp.DataAccess.Interfaces;
 using Aimp.Domain;
 using Aimp.Logic.Interfaces;
 using Entities;
@@ -25,11 +26,11 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IQueryable<PrintedDocumentTemplate> GetTemplates()
+        public IEnumerable<PrintedDocumentTemplate> GetTemplates()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.PrintedDocumentTemplates.All();
+                return context.PrintedDocumentTemplates.All().ToList();
             }
         }
 

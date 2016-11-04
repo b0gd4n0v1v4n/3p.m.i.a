@@ -1,4 +1,5 @@
-﻿using Aimp.Model;
+﻿using Aimp.Entities;
+using Aimp.Model;
 using Aimp.Model.SecurityRigths;
 using Entities;
 using System.Collections.Generic;

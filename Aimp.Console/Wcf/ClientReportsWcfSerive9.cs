@@ -10,7 +10,7 @@ using Aimp.ServiceContract.Services;
 
 namespace Aimp.Console.Wcf
 {
-    public class ReportOfClientService9 : AimpUsersWcfService8, IClientReportsWcfSerive
+    public class ClientReportsWcfSerive9 : AimpUsersWcfService8, IClientReportsWcfSerive
     {
         public ClientReports GetClientReports()
         {

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Entities;
 
-namespace Entities
+namespace Aimp.Entities
 {
     public class UserRight : Entity
     {

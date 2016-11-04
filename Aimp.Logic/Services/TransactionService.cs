@@ -1,4 +1,6 @@
-﻿using Aimp.DataAccess.Interfaces;
+﻿using System;
+using System.Linq.Expressions;
+using Aimp.DataAccess.Interfaces;
 using Aimp.Domain;
 using Aimp.Logic.Extensions;
 using Aimp.Logic.Interfaces;
@@ -119,19 +121,34 @@ namespace Aimp.Logic.Services
                 };
             }
         }
-        public IQueryable<Contractor> GetContractors()
+        public IEnumerable<Contractor> GetContractors(Expression<Func<Contractor, bool>> predicate = null)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
+                if (predicate == null)
+                    return context.Contractors
+                        .All(x => x.LegalPerson, x => x.City, x => x.Region)
+                        .ToList();
+
                 return context.Contractors
-                .All(x => x.LegalPerson, x => x.City, x => x.Region);
+                        .All(x => x.LegalPerson, x => x.City, x => x.Region)
+                        .Where(predicate)
+                        .ToList();
             }
         }
-        public IQueryable<Trancport> GetTrancports()
+        public IEnumerable<Trancport> GetTrancports(Expression<Func<Trancport, bool>> predicate = null)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.Trancports.All(x => x.Make, x => x.Model, x => x.Category, x => x.EngineType, x => x.Type);
+                if (predicate == null)
+                    return context.Trancports
+                        .All(x => x.Make, x => x.Model, x => x.Category, x => x.EngineType, x => x.Type)
+                        .ToList();
+
+                return context.Trancports
+                        .All(x => x.Make, x => x.Model, x => x.Category, x => x.EngineType, x => x.Type)
+                        .Where(predicate)
+                        .ToList();
             }
         }
         public UserFile GetUserFile(int id)

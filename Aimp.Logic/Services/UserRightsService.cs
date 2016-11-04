@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Aimp.DataAccess.Interfaces;
 using Aimp.Domain;
+using Aimp.Entities;
 using Aimp.Logic.Interfaces;
 using Entities;
 using System.Collections.Generic;
@@ -10,15 +12,20 @@ namespace Aimp.Logic.Services
 {
     public class UserRightsService : IUserRightsService
     {
-        public IQueryable<UserRight> GetUserRights(int id)
+        public IEnumerable<UserRight> GetUserRights(int id)
         {
             using (var context = IoC.Resolve<IDataContext>())
                 return context.UserRights.All().Where(x => x.UserId == id);
         }
-        public IQueryable<User> GetUsers()
+        public IEnumerable<User> GetUsers(Expression<Func<User, bool>> predicate = null)
         {
             using (var context = IoC.Resolve<IDataContext>())
-                return context.Users.All();
+            {
+                if (predicate != null)
+                    return context.Users.All().Where(predicate).ToList();
+               
+               return context.Users.All().ToList();
+            }
         }
         public void SaveUser(IEnumerable<string> rightIds, User user)
         {

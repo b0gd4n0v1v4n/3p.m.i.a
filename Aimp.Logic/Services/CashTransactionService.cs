@@ -93,22 +93,22 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IQueryable<CashTransaction> GetCashTransactions(User user)
+        public IEnumerable<CashTransaction> GetCashTransactions(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CashTransactions.All();
+                    return context.CashTransactions.All().ToList();
                 else
-                    return context.CashTransactions.All().Where(x => x.UserId == user.Id);
+                    return context.CashTransactions.All().Where(x => x.UserId == user.Id).ToList();
             }
         }
-        public IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
+        public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 string type = PrintedDocumentTemplateType.Сделка.ToString();
-                return context.PrintedDocumentTemplates.All().Where(x => x.Type == type);
+                return context.PrintedDocumentTemplates.All().Where(x => x.Type == type).ToList();
             }
         }
         public WordPrintedDocument GetPrintedDocument(int idTransaction, string name)

@@ -103,22 +103,22 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IQueryable<CommissionTransaction> GetCommissions(User user)
+        public IEnumerable<CommissionTransaction> GetCommissions(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CommissionTransactions.All();
+                    return context.CommissionTransactions.All().ToList();
                 else
-                    return context.CommissionTransactions.All().Where(x => x.UserId == user.Id);
+                    return context.CommissionTransactions.All().Where(x => x.UserId == user.Id).ToList();
             }
         }
-        public IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
+        public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 string type = PrintedDocumentTemplateType.Комиссия.ToString();
-                return context.PrintedDocumentTemplates.All().Where(x => x.Type == type);
+                return context.PrintedDocumentTemplates.All().Where(x => x.Type == type).ToList();
             }
         }
         public WordPrintedDocument GetPrintedDocument(int idCommission, string name)
@@ -171,11 +171,11 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IQueryable<SourceTrancport> GetSourcesTrancport()
+        public IEnumerable<SourceTrancport> GetSourcesTrancport()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.SourcesTrancport.All();
+                return context.SourcesTrancport.All().ToList();
             }
         }
     }

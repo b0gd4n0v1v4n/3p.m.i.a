@@ -6,7 +6,6 @@ using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
 using Aimp.Reports.Interfaces;
-using Aimp.Reports.Services.Excel;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -127,17 +126,19 @@ namespace Aimp.Logic.Services
                 return context.ClientStatuses.All().ToList();
             }
         }
-        public IQueryable<BankReportClient> GetBankReportClients(User user)
+        public IEnumerable<BankReportClient> GetBankReportClients(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
                     return context.BankReportClients
-                            .All(x => x.BankStatus, x => x.ClientReport.User, x => x.ClientReport.ClientStatus, x => x.ClientReport.CreditProgramm);
-                else
+                            .All(x => x.BankStatus, x => x.ClientReport.User, x => x.ClientReport.ClientStatus, x => x.ClientReport.CreditProgramm)
+                            .ToList();
+                
                     return context.BankReportClients
                         .All(x => x.BankStatus, x => x.ClientReport.User, x => x.ClientReport.ClientStatus, x => x.ClientReport.CreditProgramm)
-                        .Where(x => x.ClientReport.User.Id == user.Id);
+                        .Where(x => x.ClientReport.User.Id == user.Id)
+                        .ToList();
             }
         }
     }

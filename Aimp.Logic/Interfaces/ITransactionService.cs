@@ -1,18 +1,20 @@
-﻿using Aimp.Model.ContractorInfo;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using Aimp.Model.ContractorInfo;
 using Aimp.Model.TrancportInfo;
 using Entities;
-using System.Linq;
 
 namespace Aimp.Logic.Interfaces
 {
-    public interface ITransactionService 
+    public interface ITransactionService
     {
         void SaveContractor(Contractor contractor);
         void SaveTrancport(Trancport trancport);
         TrancportInfo GetTrancportInfo();
         ContractorInfo GetContractorInfo();
-        IQueryable<Contractor> GetContractors();
-        IQueryable<Trancport> GetTrancports();
+        IEnumerable<Contractor> GetContractors(Expression<Func<Contractor, bool>> predicate = null);
+        IEnumerable<Trancport> GetTrancports(Expression<Func<Trancport, bool>> predicate = null);
         UserFile GetUserFile(int id);
     }
 }

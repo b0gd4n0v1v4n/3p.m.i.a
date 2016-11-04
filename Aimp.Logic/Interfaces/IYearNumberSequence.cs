@@ -2,7 +2,7 @@
 
 namespace Aimp.Logic.Interfaces
 {
-    public interface IYearNumberSequence<T>
+    public interface IYearNumberSequence<out T>
     {
         T CurrentValue(DateTime date);
         void NextValue(DateTime date);

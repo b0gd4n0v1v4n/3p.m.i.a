@@ -66,7 +66,7 @@
     <Compile Include="Wcf\CommisionWcfService5.cs" />
     <Compile Include="Wcf\CreditTransactionWcfService4.cs" />
     <Compile Include="Wcf\DataContextWcfService3.cs" />
-    <Compile Include="Wcf\ReportOfClientService9.cs" />
+    <Compile Include="Wcf\ClientReportsWcfSerive9.cs" />
     <Compile Include="Wcf\PrintedDocumentWcfService2.cs" />
     <Compile Include="Wcf\TransactionWcfService1.cs" />
     <Compile Include="Wcf\WcfServiceBase.cs" />

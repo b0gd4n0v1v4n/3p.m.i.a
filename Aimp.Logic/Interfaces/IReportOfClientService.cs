@@ -3,7 +3,6 @@ using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
 using Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Aimp.Logic.Interfaces
 {
@@ -16,7 +15,7 @@ namespace Aimp.Logic.Interfaces
         IEnumerable<Bank> GetBanks();
         IEnumerable<CreditProgramm> GetCreditProgramms();
         IEnumerable<ClientStatus> GetClientStatuses();
-        IQueryable<BankReportClient> GetBankReportClients(User user);
+        IEnumerable<BankReportClient> GetBankReportClients(User user);
         IPrintedDocument PrintReport(ClientReports report);
     }
 }

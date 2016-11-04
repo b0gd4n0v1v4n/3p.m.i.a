@@ -66,17 +66,20 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IQueryable<CardTrancport> GetCardTrancports(User user)
+        public IEnumerable<CardTrancport> GetCardTrancports(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
                     return context.CardsTrancport
-                        .All(x => x.CommissionTransaction.User, x => x.CommissionTransaction.Trancport.Make, x => x.CommissionTransaction.Trancport.Model, x => x.CommissionTransaction.Owner.LegalPerson);
-                else
-                    return context.CardsTrancport
+                        .All(x => x.CommissionTransaction.User, x => x.CommissionTransaction.Trancport.Make,
+                            x => x.CommissionTransaction.Trancport.Model, x => x.CommissionTransaction.Owner.LegalPerson)
+                        .ToList();
+                    
+                return context.CardsTrancport
                         .All(x => x.CommissionTransaction.User, x => x.CommissionTransaction.Trancport.Make, x => x.CommissionTransaction.Trancport.Model, x => x.CommissionTransaction.Owner.LegalPerson)
-                        .Where(x => x.CommissionTransaction.User.Id == user.Id);
+                        .Where(x => x.CommissionTransaction.User.Id == user.Id)
+                        .ToList();
             }
         }
 
@@ -97,11 +100,11 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IQueryable<StatusCardTrancport> GetStatusesCardTrancports()
+        public IEnumerable<StatusCardTrancport> GetStatusesCardTrancports()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.StatusesCardTrancport.All();
+                return context.StatusesCardTrancport.All().ToList();
             }
         }
 

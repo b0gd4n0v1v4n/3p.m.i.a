@@ -39,14 +39,14 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IQueryable<CreditTransaction> GetCreditTransactions(User user)
+        public IEnumerable<CreditTransaction> GetCreditTransactions(User user)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if(user.IsAdmin())
-                return context.CreditTransactions.All();
+                    return context.CreditTransactions.All().ToList();
                 else
-                    return context.CreditTransactions.All().Where(x => x.UserId == user.Id);
+                    return context.CreditTransactions.All().Where(x => x.UserId == user.Id).ToList();
             }
         }
         public CreditTransactionDocument GetDocument(int id)
@@ -112,7 +112,7 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IQueryable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
+        public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
@@ -121,7 +121,8 @@ namespace Aimp.Logic.Services
                 string typeAkt = PrintedDocumentTemplateType.Акт.ToString();
                 return context.PrintedDocumentTemplates
                     .All()
-                    .Where(x => x.Type == type || x.Type == typeDkp || x.Type == typeAkt);
+                    .Where(x => x.Type == type || x.Type == typeDkp || x.Type == typeAkt)
+                    .ToList();
             }
         }
         public IEnumerable<EntityName> GetPrintedList()
@@ -209,18 +210,18 @@ namespace Aimp.Logic.Services
                 }
             }
         }
-        public IQueryable<Creditor> GetCreditors()
+        public IEnumerable<Creditor> GetCreditors()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.Creditors.All();
+                return context.Creditors.All().ToList();
             }
         }
-        public IQueryable<Requisit> GetRequisits()
+        public IEnumerable<Requisit> GetRequisits()
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                return context.Requisits.All();
+                return context.Requisits.All().ToList();
             }
         }
     }

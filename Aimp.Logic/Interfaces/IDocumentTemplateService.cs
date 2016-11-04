@@ -1,5 +1,5 @@
-﻿using Entities;
-using System.Linq;
+﻿using System.Collections.Generic;
+using Entities;
 
 namespace Aimp.Logic.Interfaces
 {
@@ -8,6 +8,6 @@ namespace Aimp.Logic.Interfaces
         PrintedDocumentTemplate GetTemplate(int id);
         int SaveTemplate(PrintedDocumentTemplate template);
         void DeleteTemplate(PrintedDocumentTemplate template);
-        IQueryable<PrintedDocumentTemplate> GetTemplates();
+        IEnumerable<PrintedDocumentTemplate> GetTemplates();
     }
 }

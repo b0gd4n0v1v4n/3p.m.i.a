@@ -3,6 +3,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Collections.Generic;
 using System.Linq;
 using Aimp.DataAccess.Ef.Interfaces;
+using Aimp.Entities;
 using Entities;
 
 namespace Aimp.DataAccess.EF

@@ -42,7 +42,7 @@ namespace Aimp.Console
             logger.Log("IDataContext ready.");
 
             IoC.Register<IUserRightsService, UserRightsService>();
-            IoC.Resolve<IUserRightsService>().GetUsers().FirstOrDefault();
+            IoC.Resolve<IUserRightsService>().GetUsers(x=>x);
             logger.Log("IUserRightsService ready.");
 
             IoC.Register<ITransactionService, TransactionService>();

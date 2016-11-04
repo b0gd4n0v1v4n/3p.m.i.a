@@ -1,10 +1,7 @@
-﻿using Aimp.Model.Documents;
-using Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Aimp.Model.Documents;
+using Entities;
 
 namespace Aimp.Logic.Interfaces
 {
@@ -14,7 +11,7 @@ namespace Aimp.Logic.Interfaces
         int AddCardTrancport(int idCommission, DateTime dateStart);
         void SaveDocument(CardTrancportDocument document);
         void DeleteCardTrancport(int id);
-        IQueryable<CardTrancport> GetCardTrancports(User user);
-        IQueryable<StatusCardTrancport> GetStatusesCardTrancports();
+        IEnumerable<CardTrancport> GetCardTrancports(User user);
+        IEnumerable<StatusCardTrancport> GetStatusesCardTrancports();
     }
 }

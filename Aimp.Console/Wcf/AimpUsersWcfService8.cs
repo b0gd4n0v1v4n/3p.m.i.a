@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Aimp.Domain;
+using Aimp.Entities;
 using Aimp.Logic.Interfaces;
 using Aimp.Model;
 using Aimp.ServiceContract.Services;

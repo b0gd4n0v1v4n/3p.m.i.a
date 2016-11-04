@@ -25,7 +25,7 @@ namespace Aimp.Console.Wcf
             if(string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
                 throw new AuthenticationException($"Login or password empty");
 
-            CurrentUser = _service.GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
+            CurrentUser = _service.GetUsers(x => x.Login == login && x.Password == password).FirstOrDefault();
 
             if(CurrentUser == null)
                 throw new AuthenticationException($"Неверный логин или пароль!");

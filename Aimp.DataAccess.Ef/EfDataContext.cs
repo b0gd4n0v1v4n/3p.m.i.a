@@ -2,6 +2,7 @@
 using Aimp.DataAccess.EF;
 using Aimp.DataAccess.EF.Repository;
 using Aimp.DataAccess.Interfaces;
+using Aimp.Entities;
 using Entities;
 using System.Collections.Generic;
 
