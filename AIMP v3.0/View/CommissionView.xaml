@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
-        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CommissionView"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:printControl="clr-namespace:AIMP_v3._0.PrintControl"
+    x:Class="AIMP_v3._0.View.CommissionView"
         mc:Ignorable="d"
         Title="ДОГОВОР КОМИССИИ" Height="424.044" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Name="Window" Icon="/AIMP;component/Style/Image/Key Exchange-48.png">
     <Grid>
@@ -48,7 +50,7 @@
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="600,352,0,0" VerticalAlignment="Top" Width="75" TabIndex="5"/>
         <Button x:Name="button1" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="508,352,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
         <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Visibility="{Binding VisibleDelete}"  Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="366,352,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
-        <User_Control:PrintControl HorizontalAlignment="Left" Margin="16,352,0,0" VerticalAlignment="Top"/>
+        <printControl:PrintControl HorizontalAlignment="Left" Margin="16,352,0,0" VerticalAlignment="Top"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="label_Copy10" Content="СТОИМОСТЬ В ДКП" HorizontalAlignment="Left" Margin="323,214,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Commission.PriceDkp}" HorizontalAlignment="Left" Height="22"  Margin="447,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.778,-1.944" Width="171" TabIndex="4">
             <i:Interaction.Behaviors>

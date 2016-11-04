@@ -148,12 +148,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{7bb3b2ec-2513-4fcc-8524-accd4e95214f}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="ampspb.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ampspb.Designer.cs</LastGenOutput>

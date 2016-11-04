@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Aimp.Model;
 using Aimp.Model.Commission;
 using Aimp.Model.Documents;
 using System.ServiceModel;
@@ -22,7 +23,7 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        int SaveCommission(CommissionDocument document);
+        KeyValue<int, int> SaveCommission(CommissionDocument document);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]

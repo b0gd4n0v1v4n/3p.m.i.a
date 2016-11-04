@@ -1,4 +1,4 @@
-﻿using Models.ReportOfClient;
+﻿using Aimp.Model.ReportOfClient;
 
 namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {

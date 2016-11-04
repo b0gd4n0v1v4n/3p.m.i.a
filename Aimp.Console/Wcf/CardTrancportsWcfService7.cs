@@ -79,12 +79,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveCardTrancport(CardTrancportDocument document)
+        public int SaveCardTrancport(CardTrancportDocument document)
         {
             EventLog($"Save card trancport document id: {document.Id}");
             try
             {
                 IoC.Resolve<ICardTrancportService>().SaveDocument(document);
+                return document.CardTrancport.Id;
             }
             catch (Exception ex)
             {

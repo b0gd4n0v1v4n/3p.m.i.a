@@ -8,6 +8,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control"
+        xmlns:printControl="clr-namespace:AIMP_v3._0.PrintControl"
         mc:Ignorable="d"
         Name="Window"
         Title="СДЕЛКА ЗА НАЛИЧНЫЙ РАСЧЕТ" Height="316" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Icon="/AIMP;component/Style/Image/Key Exchange-48.png" >
@@ -44,6 +45,6 @@
         <userControl:DateControl TabIndex="2" Date="{Binding CashTransaction.DateProxy, Mode=TwoWay}" HorizontalAlignment="Left" Margin="566,68,0,0" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chbProxy,Path=IsChecked}"/>
         <userControl:TrancportControl IsTabStop="False" Trancport="{Binding CashTransaction.Trancport,Mode=TwoWay}" HorizontalAlignment="Left" Margin="109,183,0,0" VerticalAlignment="Top" Width="570" TabIndex="101"></userControl:TrancportControl>
         <Button x:Name="button1_Copy" Content="УДАЛИТЬ"  Visibility="{Binding VisibleDelete}" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="366,240,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
-        <User_Control:PrintControl HorizontalAlignment="Left" Margin="16,240,0,0" VerticalAlignment="Top"/>
+        <printControl:PrintControl HorizontalAlignment="Left" Margin="16,240,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

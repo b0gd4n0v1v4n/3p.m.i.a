@@ -1,5 +1,5 @@
 ﻿using AIMP_v3._0.Model;
-using Models.Entities;
+using Entities;
 using System.Collections.Generic;
 
 namespace AIMP_v3._0.ViewModel.ClientOfReport

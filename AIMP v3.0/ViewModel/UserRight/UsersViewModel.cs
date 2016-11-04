@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using Aimp.Model.SecurityRigths;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
-using Models.SecurityRigths;
 
 namespace AIMP_v3._0.ViewModel.UserRight
 {
@@ -17,10 +17,7 @@ namespace AIMP_v3._0.ViewModel.UserRight
         {
             using (var service = new AimpService())
             {
-                var response = service.GetUsers();
-                if (response.Error)
-                    throw new Exception(response.Message);
-                var lst = response.Users
+                var lst = service.GetUsers()
                     .Select(x => new UserListItem()
                     {
                         User = x
@@ -41,10 +38,7 @@ namespace AIMP_v3._0.ViewModel.UserRight
                         IEnumerable<UserRightViewModel> rigthsDb = null;
                         using (var service = new AimpService())
                         {
-                            var response = service.GetUserRights(CurrentItem.User.Id);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            rigthsDb = response.UserRights.Select(IRight => new UserRightViewModel()
+                            rigthsDb = service.GetUserRights(CurrentItem.User.Id).Select(IRight => new UserRightViewModel()
                             {
                                 BaseId = IRight.Id,
                                 Id = IRight.RightId
@@ -91,7 +85,7 @@ namespace AIMP_v3._0.ViewModel.UserRight
                         });
                         UserView view = new UserView(new UserEditViewModel()
                         {
-                            User = new Models.Entities.User(),
+                            User = new Entities.User(),
                             Rights = new ObservableCollection<UserRightViewModel>(rights)
                         });
                         view.ShowDialog();

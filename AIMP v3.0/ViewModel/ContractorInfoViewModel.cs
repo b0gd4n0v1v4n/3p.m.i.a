@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Interfaces;
 using AIMP_v3._0.View;
 using AIMP_v3._0.DataAccess;
-using AIMP_v3._0.Extensions;
+using Entities;
 using Nelibur.ObjectMapper;
 using AIMP_v3._0.Helpers;
-using Models.Entities;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -169,8 +169,7 @@ namespace AIMP_v3._0.ViewModel
             using (AimpService service = new AimpService())
             {
                 var info = service.GetContractorInfo();
-                if (info.Error)
-                    throw new Exception(info.Message);
+
                 _cities = info.Cities.ToList();
                 Regions = info.Regions.ToList();
             }
@@ -234,10 +233,7 @@ namespace AIMP_v3._0.ViewModel
                                 EditableContractor.City = city;
                                 using (var service = new AimpService())
                                 {
-                                    var response = service.SaveContractor(EditableContractor);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    EditableContractor.Id = response.Id;
+                                    EditableContractor.Id = service.SaveContractor(EditableContractor);
                                 }
                                 var window = (win as Window);
 

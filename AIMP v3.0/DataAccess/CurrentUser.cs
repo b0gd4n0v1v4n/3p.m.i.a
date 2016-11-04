@@ -1,6 +1,6 @@
-﻿using Models.SecurityRigths;
-using System;
+﻿using System;
 using System.Linq;
+using Aimp.Model.SecurityRigths;
 
 namespace AIMP_v3._0.DataAccess
 {
@@ -17,8 +17,7 @@ namespace AIMP_v3._0.DataAccess
             using(var service = new AimpService())
             {
                 var response = service.Auth();
-                if (response.Error)
-                    throw new Exception(response.Message);
+
                 if(response.UserRights.Any(x=>x == UserRightsCollection.Admin.Id))
                 {
                     IsAdd = true;

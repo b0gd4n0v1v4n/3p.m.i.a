@@ -19,14 +19,13 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                 using (AimpService service = new AimpService())
                 {
                     var response = service.GetCardsTrancport();
-                    if (response.Error)
-                        throw new Exception(response.Message);
+
                     List = response.Items.Select(x=> new CardTrancportListItemViewModel()
                     {
                         Id = x.Id,
                         ColorTrancport = x.ColorTrancport,
                         DateSale = x.DateSale?.ToString(Models.DataFormats.DateFormat),
-                        DateStart = x.DateStart.ToString(Models.DataFormats.DateFormat),
+                        DateStart = x.DateStart.ToString(Aimp.Model.DataFormats.DateFormat),
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,
                         Number = x.Number,
@@ -70,22 +69,19 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
         {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Загрузка...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    try
                     {
-                        try
-                        {
-                            var model = new CardTrancportViewModel(null);
-                            var view = new CardTrancportView(model);
-                            view.ShowDialog();
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                        }
-                    });
-                });
+                        var model = new CardTrancportViewModel(null);
+                        var view = new CardTrancportView(model);
+                        view.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,"Неудалось создать документ");
+                    }
+                }));
             }
         }
 

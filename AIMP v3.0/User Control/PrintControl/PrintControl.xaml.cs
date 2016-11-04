@@ -7,10 +7,8 @@ using System.Windows.Controls;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.ViewModel;
-using AIMP_v3._0.View;
-using System.Threading;
 
-namespace AIMP_v3._0.User_Control
+namespace AIMP_v3._0.PrintControl
 {
     /// <summary>
     /// Логика взаимодействия для PrintControl.xaml
@@ -59,10 +57,8 @@ namespace AIMP_v3._0.User_Control
                             using (AimpService service = new AimpService())
                             {
                                 var response = service.GetPrintedDocument(item.Type, item.Name, item.Document.Id);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
 
-                                OpenUserFile.Open(response.Document.FileName, response.Document.File);
+                                OpenUserFile.Open(response.FileName, response.File);
                             }
                         }
                         catch (Exception ex)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using ServiceContract.Interfaces;
 
 namespace AIMP_v3._0.DataAccess
 {

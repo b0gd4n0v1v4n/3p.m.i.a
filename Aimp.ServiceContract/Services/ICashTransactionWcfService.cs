@@ -20,7 +20,7 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        void SaveCashTransaction(CashTransactionDocument document);
+        KeyValue<int, int> SaveCashTransaction(CashTransactionDocument document);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]

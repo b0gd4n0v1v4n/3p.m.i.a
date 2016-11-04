@@ -1,8 +1,6 @@
-﻿using Models.Documents;
-using Models.Entities;
-using Models.PrintedDocument.Templates;
+﻿using Aimp.Model.Documents;
 
-namespace AIMP_v3._0.User_Control
+namespace AIMP_v3._0.PrintControl
 {
     public class PrintItem
     {

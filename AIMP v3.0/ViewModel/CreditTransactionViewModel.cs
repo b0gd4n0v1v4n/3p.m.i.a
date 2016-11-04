@@ -1,10 +1,11 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
+using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.Entities;
+using Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
@@ -131,14 +132,12 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     var response = service.SaveCreditTransaction(CreditTransaction);
 
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    CreditTransaction.Id = response.Id;
-                                    CreditTransaction.Number = response.Number;
+                                    CreditTransaction.Id = response.Key;
+                                    CreditTransaction.Number = response.Value;
+
                                     _transaction = TinyMapper.Map<CreditTransactionDocument>(CreditTransaction);
                                     OnPropertyChanged("CreditTransaction");
                                 }
-                                MessageBox.Show("Данные успешно сохранены");
                             }
                             catch (Exception ex)
                             {
@@ -165,10 +164,7 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     using (AimpService service = new AimpService())
                                     {
-                                        var response = service.DeleteCreditTransaction(CreditTransaction);
-
-                                        if (response.Error)
-                                            MessageBox.Show(response.Message);
+                                        service.DeleteCreditTransaction(CreditTransaction);
                                     }
 
                                     var window = win as Window;

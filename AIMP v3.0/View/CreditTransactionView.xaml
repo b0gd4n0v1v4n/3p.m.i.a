@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
-        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" x:Class="AIMP_v3._0.View.CreditTransactionView"
+        xmlns:User_Control="clr-namespace:AIMP_v3._0.User_Control" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:printControl="clr-namespace:AIMP_v3._0.PrintControl"
+    x:Class="AIMP_v3._0.View.CreditTransactionView"
         mc:Ignorable="d"
         x:Name="Window"
         Title="СДЕЛКА В КРЕДИТ" Height="384.797" Width="696" WindowStartupLocation="CenterScreen" ShowInTaskbar="True" ResizeMode="NoResize" Icon="/AIMP;component/Style/Image/Key Exchange-48.png" >
@@ -106,6 +108,6 @@
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="595,307,0,0" VerticalAlignment="Top" Width="75" TabIndex="5"/>
         <Button x:Name="button1" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="503,307,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
         <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Visibility="{Binding VisibleDelete}"  Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="361,307,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
-        <User_Control:PrintControl HorizontalAlignment="Left" Margin="11,307,0,0" VerticalAlignment="Top"/>
+        <printControl:PrintControl HorizontalAlignment="Left" Margin="11,307,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

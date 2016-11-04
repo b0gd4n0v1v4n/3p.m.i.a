@@ -87,13 +87,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public int SaveCommission(CommissionDocument document)
+        public KeyValue<int,int> SaveCommission(CommissionDocument document)
         {
             EventLog($"Save commission document id:{document.Id}");
             try
             {
                  IoC.Resolve<ICommissionService>().SaveDocument(document);
-                return document.Id;
+                return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
             catch (Exception ex)
             {

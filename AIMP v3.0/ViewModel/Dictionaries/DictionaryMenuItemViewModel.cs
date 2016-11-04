@@ -1,11 +1,10 @@
-﻿using AIMP_v3._0.Helpers;
-using AIMP_v3._0.View;
-using AIMP_v3._0.ViewModel.Dictionaries;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using AIMP_v3._0.Helpers;
+using AIMP_v3._0.View;
 
-namespace AIMP_v3._0.ViewModel
+namespace AIMP_v3._0.ViewModel.Dictionaries
 {
     public class DictionaryMenuItemViewModel
     {
@@ -16,22 +15,19 @@ namespace AIMP_v3._0.ViewModel
         {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Загрузка...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    try
                     {
-                        try
-                        {
-                            var vm = new DictionaryListViewModel(TableName, Columns);
-                            var view = new DictionaryListView(vm);
-                            view.ShowDialog();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                    });
-                });
+                        var vm = new DictionaryListViewModel(TableName, Columns);
+                        var view = new DictionaryListView(vm);
+                        view.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }));
             }
         }
     }

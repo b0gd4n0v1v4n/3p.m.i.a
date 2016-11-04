@@ -1,10 +1,10 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.Entities;
+using Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
@@ -27,12 +27,11 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
                 if (id != null)
                 {
                     var response = service.GetCardTrancport((int)id);
-                    if (response.Error)
-                        throw new Exception(response.Message);
-                    _document = response.Document;
-                    CardTrancport = response.Document.CardTrancport;
+
+                    _document = response;
+                    CardTrancport = response.CardTrancport;
                     _cardTrancportForCompare = TinyMapper.Map<CardTrancport>(CardTrancport);
-                    var preChecks = response.Document.PreChecks.Select(x => new PreCheckCardTrancportViewModel()
+                    var preChecks = response.PreChecks.Select(x => new PreCheckCardTrancportViewModel()
                     {
                         CardTrancportId = x.Id,
                         Date = x.Date,
@@ -53,10 +52,9 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
                     PreCheks = new ObservableCollection<PreCheckCardTrancportViewModel>();
                 }
                 var responseStatuses = service.GetStatusesCard();
-                if (responseStatuses.Error)
-                    throw new Exception(responseStatuses.Message);
-                CardTrancport.StatusCardTrancport = responseStatuses.Items.FirstOrDefault(x => x.Id == CardTrancport.StatusCardTrancport?.Id);
-                StatusesCardTrancport = new ObservableCollection<StatusCardTrancport>(responseStatuses.Items);
+
+                CardTrancport.StatusCardTrancport = responseStatuses.FirstOrDefault(x => x.Id == CardTrancport.StatusCardTrancport?.Id);
+                StatusesCardTrancport = new ObservableCollection<StatusCardTrancport>(responseStatuses);
             }
         }
         public CardTrancport CardTrancport { get; set; }
@@ -108,11 +106,9 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
                                 });
                                 _document.PreChecks = preChecs;
                                 var response = service.SaveCardTrancport(_document);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                CardTrancport.Id = response.Id;
-                                _document.CardTrancport.Id = response.Id;
-                                MessageBox.Show(response.Message);
+
+                                CardTrancport.Id = response;
+                                _document.CardTrancport.Id = response;
                             }
                             _cardTrancportForCompare = TinyMapper.Map<CardTrancport>(CardTrancport);
                         }

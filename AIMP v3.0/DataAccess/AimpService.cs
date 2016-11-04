@@ -1,27 +1,25 @@
-﻿using Models;
-using Models.CashTransact;
-using Models.ContractorInfo;
-using Models.CreditTransact;
-using Models.Documents;
-using Models.Entities;
-using Models.ReportOfClient;
-using Models.TrancportInfo;
-using ServiceContract.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel.Web;
-using Models.PrintedDocument;
-using Models.PrintedDocument.Templates;
-using Models.SecurityRigths;
-using Models.UserFiles;
-using Models.PrintDocumentTemplate;
-using Models.Commission;
-using Models.CardTrancports;
 using System;
+using Aimp.Entities;
+using Aimp.Model;
+using Aimp.Model.CardTrancports;
+using Aimp.Model.CashTransact;
+using Aimp.Model.Commission;
+using Aimp.Model.ContractorInfo;
+using Aimp.Model.CreditTransact;
+using Aimp.Model.Dictionar;
+using Aimp.Model.Documents;
+using Aimp.Model.PrintDocumentTemplate;
+using Aimp.Model.PrintedDocument;
+using Aimp.Model.ReportOfClient;
+using Aimp.Model.TrancportInfo;
+using Aimp.ServiceContract.Services;
+using Entities;
 
 namespace AIMP_v3._0.DataAccess
 {
-    public class AimpService : BaseHttpServer<IAimpService>
+    public class AimpService : BaseHttpServer<IAimpWcfService>
     {
         private void _SetHeaderRequestLoginAndPassword()
         {
@@ -45,24 +43,24 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetClientReports();
         }
-        public Models.ReportOfClient.ClientReport GetClientReport(int? id)
+        public Aimp.Model.ReportOfClient.ClientReport GetClientReport(int? id)
         {
             if (id == null)
                 return Proxy.GetNewClientReport();
             else
                 return Proxy.GetClientReport((int)id);
         }
-        public Response SaveClientReport(ClientReportDocument document)
+        public void SaveClientReport(ClientReportDocument document)
         {
-            return Proxy.SaveClientReport(document);
+            Proxy.SaveClientReport(document);
         }
-        public Response DeleteClientReport(ClientReportDocument document)
+        public void DeleteClientReport(ClientReportDocument document)
         {
-            return Proxy.DeleteClientReport(document);
+            Proxy.DeleteClientReport(document);
         }
         #endregion
         #region cash transaction
-        public CashTransactionsDto GetCashTransactions()
+        public IEnumerable<CashTransactionListItem> GetCashTransactions()
         {
             return Proxy.GetCashTransactions();
         }
@@ -70,17 +68,17 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetCashTransaction(id);
         }
-        public SaveEntityResult SaveCashTransaction(CashTransactionDocument document)
+        public KeyValue<int,int> SaveCashTransaction(CashTransactionDocument document)
         {
             return Proxy.SaveCashTransaction(document);
         }
-        public Response DeleteCashTransaction(CashTransactionDocument document)
+        public void DeleteCashTransaction(CashTransactionDocument document)
         {
-            return Proxy.DeleteCashTransaction(document);
+            Proxy.DeleteCashTransaction(document);
         }
         #endregion
         #region commission
-        public CommissionsDto GetCommissions()
+        public IEnumerable<CommissionListItem> GetCommissions()
         {
             return Proxy.GetCommissions();
         }
@@ -88,34 +86,34 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetCommission(id);
         }
-        public SaveEntityResult SaveCommission(CommissionDocument document)
+        public KeyValue<int, int> SaveCommission(CommissionDocument document)
         {
             return Proxy.SaveCommission(document);
         }
-        public Response DeleteCommission(CommissionDocument document)
+        public void DeleteCommission(CommissionDocument document)
         {
-            return Proxy.DeleteCommission(document);
+            Proxy.DeleteCommission(document);
         }
-        public SourcesTrancportDto GetSourceTrancport()
+        public IEnumerable<SourceTrancport> GetSourceTrancport()
         {
             return Proxy.GetSourceTrancport();       }
         #endregion
         #region credit transaction
-        public CreditTransactions GetCreditTransactions()
+        public IEnumerable<CreditTransactionListItem> GetCreditTransactions()
         {
             return Proxy.GetCreditTransactions();
         }
-        public CreditTransactionDto GetCreditTransaction(int id)
+        public CreditTransactionDocument GetCreditTransaction(int id)
         {
             return Proxy.GetCreditTransaction(id);
         }
-        public SaveEntityResult SaveCreditTransaction(CreditTransactionDocument document)
+        public KeyValue<int, int> SaveCreditTransaction(CreditTransactionDocument document)
         {
             return Proxy.SaveCreditTransaction(document);
         }
-        public Response DeleteCreditTransaction(CreditTransactionDocument document)
+        public void DeleteCreditTransaction(CreditTransactionDocument document)
         {
-            return Proxy.DeleteCreditTransaction(document);
+            Proxy.DeleteCreditTransaction(document);
         }
         #endregion
         public TrancportInfo GetTrancportInfo()
@@ -126,91 +124,92 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetContractorInfo();
         }
-        public SearchContractorResult SearchContractor(TypeSearchContractor type, string text)
+        public IEnumerable<Contractor> SearchContractor(TypeSearchContractor type, string text)
         {
             return Proxy.SearchContractors(type, text);
         }
-        public SearchTrancportResult SearchTranports(TypeSearchTrancport type, string text)
+        public IEnumerable<Trancport> SearchTranports(TypeSearchTrancport type, string text)
         {
             return Proxy.SearchTrancports(type, text);
         }
-        public UserFileDto GetUserFile(int id)
+        public UserFile GetUserFile(int id)
         {
             return Proxy.GetUserFile(id);
         }
-        public SaveEntityResult SaveContractor(Contractor contractor)
+        public int SaveContractor(Contractor contractor)
         {
             return Proxy.SaveContractor(contractor);
         }
-        public SaveEntityResult SaveTrancport(Trancport trancport)
+        public int SaveTrancport(Trancport trancport)
         {
             return Proxy.SaveTrancport(trancport);
         }
-        public UserRightsDto GetUserRights(int id)
+        public IEnumerable<UserRight> GetUserRights(int id)
         {
             return Proxy.GetUserRights(id);
         }
-        public UsersDto GetUsers()
+        public IEnumerable<User> GetUsers()
         {
             return Proxy.GetUsers();
         }
 
-        public SaveEntityResult SaveUser(User user, IEnumerable<string> rightIds)
+        public int SaveUser(User user, IEnumerable<string> rightIds)
         {
             return Proxy.SaveUser(user, rightIds);
         }
 
-        public Response DeleteUser(User user)
+        public void DeleteUser(User user)
         {
-            return Proxy.DeleteUser(user);
+            Proxy.DeleteUser(user);
         }
 
-        public WordPrintedDocumentDto GetPrintedDocument(DocumentType type, string name,int id)
+        public WordPrintedDocument GetPrintedDocument(DocumentType type, string name,int id)
         {
             return Proxy.GetPrintedDocument(type, name,id);
         }
 
-        public PrintedDocumentsListDto GetPrintedList(DocumentType type)
+        public IEnumerable<EntityName> GetPrintedList(DocumentType type)
         {
             return Proxy.GetPrintedList(type);
         }
-        public PrintedDocumentTemplateDto GetPrintDocTemplate(int id)
+        public PrintedDocumentTemplate GetPrintDocTemplate(int id)
         {
            return  Proxy.GetPrintedDocTemplate(id);
         }
-        public PrintedDocumentTemplatesListDto GetListPrintDocTemplateDto()
+        public IEnumerable<PrinDocTempListItem> GetListPrintDocTemplateDto()
         {
             return Proxy.GetPrintedDocTemplatesList();
         }
-        public SaveEntityResult SavePrintDocTemplate(PrintedDocumentTemplate template)
+        public void SavePrintDocTemplate(PrintedDocumentTemplate template)
         {
-            return Proxy.SavePrintedDocTemplate(template);
+            Proxy.SavePrintedDocTemplate(template);
         }
-        public Response DeletePrintedDocTemplate(PrintedDocumentTemplate template)
+        public void DeletePrintedDocTemplate(PrintedDocumentTemplate template)
         {
-            return Proxy.DeletePrintedDocTemplate(template);
+            Proxy.DeletePrintedDocTemplate(template);
         }
-        public DictionaryDto GetDictionary(string tableName, IEnumerable<string> columns)
+        public IEnumerable<Row> GetDictionary(string tableName, IEnumerable<string> columns)
         {
             return Proxy.GetDictionary(tableName, columns);
         }
 
-        public Response SaveRowDictionary(string tableName, string value,int id)
+        public void SaveRowDictionary(string tableName, string value,int id)
         {
-            return Proxy.SaveRowDictionary(tableName, value,id);
+            Proxy.SaveRowDictionary(tableName, value,id);
         }
-        public Response DeleteRowDictionary(string tableName, int id)
+        public void DeleteRowDictionary(string tableName, int id)
         {
-            return Proxy.DeleteRowDictionary(tableName, id);
+            Proxy.DeleteRowDictionary(tableName, id);
         }
-        public Response SaveRowValuesDictionary(string tableName, IDictionary<string, string> columnValues, int id)
+        public void SaveRowValuesDictionary(string tableName, IDictionary<string, string> columnValues, int id)
         {
-            return Proxy.SaveRowValuesDictionary(tableName, columnValues, id);
+            Proxy.SaveRowValuesDictionary(tableName, columnValues, id);
         }
-        public ExcelPrintedDocumentDto GetClientReportList(ClientReports reports)
+        public ExcelPrintedDocument GetClientReportList(ClientReports reports)
         {
             return Proxy.GetClientReportPrintedDocument(reports);
-        }public CreditTransactionInfoDto GetCreditInfo()
+        }
+        public CreditTransactionInfoDto GetCreditInfo()
         {
             return Proxy.GetCreditTransactionInfo();
         }
@@ -219,24 +218,24 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetCardsTrancport();
         }
-        public CardTrancportDto GetCardTrancport(int id)
+        public CardTrancportDocument GetCardTrancport(int id)
         {
             return Proxy.GetCardTrancport(id);
         }
-        public SaveEntityResult AddCardTrancport(int idCommission,DateTime dateStart)
+        public int AddCardTrancport(int idCommission,DateTime dateStart)
         {
             return Proxy.AddCardTrancport(idCommission, dateStart);
         }
-        public SaveEntityResult SaveCardTrancport(CardTrancportDocument document)
+        public int SaveCardTrancport(CardTrancportDocument document)
         {
             return Proxy.SaveCardTrancport(document);
         }
-        public Response DeleteCardTrancport(int idCommission)
+        public void DeleteCardTrancport(int idCommission)
         {
             return Proxy.DeleteCardTrancport(idCommission);
         }
 
-        public StatusesCardTrancportDto GetStatusesCard()
+        public IEnumerable<StatusCardTrancport> GetStatusesCard()
         {
             return Proxy.GetStatusesCardTrancport();
         }

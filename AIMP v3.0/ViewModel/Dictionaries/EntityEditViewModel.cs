@@ -1,18 +1,13 @@
-﻿
-using AIMP_v3._0.DataAccess;
-using AIMP_v3._0.Helpers;
-using AIMP_v3._0.View;
-using AIMP_v3._0.ViewModel.Dictionaries;
-using Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Helpers;
+using AIMP_v3._0.View;
 
-namespace AIMP_v3._0.ViewModel
+namespace AIMP_v3._0.ViewModel.Dictionaries
 {
    public class EntityEditViewModel
     {
@@ -40,9 +35,7 @@ namespace AIMP_v3._0.ViewModel
                             .ToDictionary(d => d.ColumnName, d => d.Value);
                             using (var service = new AimpService())
                             {
-                                var response = service.SaveRowValuesDictionary(_tableName, dictionary, _id);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
+                                service.SaveRowValuesDictionary(_tableName, dictionary, _id);
                             }
                             MessageBox.Show("Данные сохранены");
                         }
@@ -80,14 +73,8 @@ namespace AIMP_v3._0.ViewModel
                             {
                                 using (var service = new AimpService())
                                 {
-                                    var response = service.DeleteRowDictionary(_tableName, _id);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    else
-                                    {
-                                        MessageBox.Show(response.Message);
+                                    service.DeleteRowDictionary(_tableName, _id);
                                         (win as Window)?.Close();
-                                    }
                                 }
                             }
                             catch (Exception ex)

@@ -64,12 +64,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveCreditTransaction(CreditTransactionDocument document)
+        public KeyValue<int,int> SaveCreditTransaction(CreditTransactionDocument document)
         {
             EventLog($"Save credit transaction document id: {document.Id}");
             try
             {
                 IoC.Resolve<ICreditTransactionService>().SaveDocument(document);
+                return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
             catch (Exception ex)
             {

@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="AIMP_v3._0.User_Control.PrintControl"
+﻿<UserControl x:Class="AIMP_v3._0.PrintControl.PrintControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AIMP_v3._0.User_Control"
+             xmlns:printControl="clr-namespace:AIMP_v3._0.PrintControl"
              mc:Ignorable="d" 
              d:DesignHeight="22" d:DesignWidth="80">
     <!--<Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">-->
@@ -13,7 +14,7 @@
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
                         <Setter Property="Header" Value="{Binding Name}" />
-                        <Setter Property="Command" Value="{Binding PrintCommand, RelativeSource={RelativeSource AncestorType={x:Type local:PrintControl}}}"/>
+                        <Setter Property="Command" Value="{Binding PrintCommand, RelativeSource={RelativeSource AncestorType={x:Type printControl:PrintControl}}}"/>
                         <Setter Property="CommandParameter" Value="{Binding}" />
                     </Style>
                 </MenuItem.ItemContainerStyle>

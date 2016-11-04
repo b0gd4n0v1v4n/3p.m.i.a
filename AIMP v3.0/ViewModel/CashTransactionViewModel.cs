@@ -1,16 +1,14 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
+using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.View;
-using Models.Documents;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using AIMP_v3._0.Enums;
-using AIMP_v3._0.Extensions;
 using AIMP_v3._0.User_Control;
-using Models.Entities;
 using Nelibur.ObjectMapper;
 
 namespace AIMP_v3._0.ViewModel
@@ -112,14 +110,10 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     var response = service.SaveCashTransaction(CashTransaction);
 
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-
-                                    CashTransaction.Id = response.Id;
-                                    CashTransaction.Number = response.Number;
+                                    CashTransaction.Id = response.Key;
+                                    CashTransaction.Number = response.Value;
                                     _transaction = TinyMapper.Map<CashTransactionDocument>(CashTransaction);
                                     OnPropertyChanged("CashTransaction");
-                                    MessageBox.Show(response.Message);
                                 }
                             }
                             catch (Exception ex)
@@ -147,10 +141,7 @@ namespace AIMP_v3._0.ViewModel
                                 {
                                     using (AimpService service = new AimpService())
                                     {
-                                        var response = service.DeleteCashTransaction(CashTransaction);
-
-                                        if (response.Error)
-                                            MessageBox.Show(response.Message);
+                                        service.DeleteCashTransaction(CashTransaction);
                                     }
 
                                     var window = win as Window;

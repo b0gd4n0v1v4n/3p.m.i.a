@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Aimp.Model.Documents;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.DataAccess;
 using System.Windows;
-using System.Linq;
-using Models.Documents;
+using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
 using AIMP_v3._0.Logging;
@@ -28,21 +29,14 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                 {
                     var response = service.GetCreditTransactions();
 
-                    if (response.Error)
-                    {
-                        MessageBox.Show(response.Message);
-                        return;
-                    }
-                    var lst =
-                        response.Items
-                            .Select(x => new CreditTransactionListItemViewModel()
+                    var lst = response.Select(x => new CreditTransactionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(Models.DataFormats.DateFormat),
+                                Date = x.Date.ToString(DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -78,24 +72,17 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                                 {
                                     var transaction = service.GetCreditTransaction(CurrentItem.Id);
 
-                                    if (transaction.Error)
-                                    {
-                                        MessageBox.Show("Ошибка сервера", transaction.Message);
-                                        return;
-                                    }
                                     var response = service.GetPrintedList(DocumentType.CreditTransaction);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    var lst = response.List.Select(p => new PrintItem()
+
+                                    var lst = response.Select(p => new PrintItem()
                                     {
                                         Name = p.Name,
                                         Type = DocumentType.CreditTransaction,
-                                        Document = transaction.Document
+                                        Document = transaction
                                     });
                                     var responseInfo = service.GetCreditInfo();
-                                    if (responseInfo.Error)
-                                        throw new Exception(responseInfo.Message);
-                                    vm = new CreditTransactionViewModel(transaction.Document, lst, responseInfo.Creditors, responseInfo.Requisits);
+
+                                    vm = new CreditTransactionViewModel(transaction, lst, responseInfo.Creditors, responseInfo.Requisits);
                                 }
                                 CreditTransactionView CreditTransactionView = new CreditTransactionView(vm);
                                 CreditTransactionView.ShowDialog();
@@ -114,36 +101,31 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
         public Command New {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Загрузка...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    try
                     {
-                        try
+                        using (var service = new AimpService())
                         {
-                            using (var service = new AimpService())
+                            var response = service.GetPrintedList(DocumentType.CreditTransaction);
+
+                            var document = new CreditTransactionDocument();
+                            var lst = response.Select(p => new PrintItem()
                             {
-                                var response = service.GetPrintedList(DocumentType.CreditTransaction);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                var document = new CreditTransactionDocument();
-                                var lst = response.List.Select(p => new PrintItem()
-                                {
-                                    Name = p.Name,
-                                    Type = DocumentType.CreditTransaction,
-                                    Document = document
-                                });
-                                var responseInfo = service.GetCreditInfo();
-                                if (responseInfo.Error)
-                                    throw new Exception(responseInfo.Message);
-                                new CreditTransactionView(new CreditTransactionViewModel(document, lst, responseInfo.Creditors, responseInfo.Requisits)).ShowDialog();
-                            }
+                                Name = p.Name,
+                                Type = DocumentType.CreditTransaction,
+                                Document = document
+                            });
+                            var responseInfo = service.GetCreditInfo();
+
+                            new CreditTransactionView(new CreditTransactionViewModel(document, lst, responseInfo.Creditors, responseInfo.Requisits)).ShowDialog();
                         }
-                        catch (Exception ex)
-                        {
-                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                        }
-                    });
-                });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                    }
+                }));
             }
         }
         

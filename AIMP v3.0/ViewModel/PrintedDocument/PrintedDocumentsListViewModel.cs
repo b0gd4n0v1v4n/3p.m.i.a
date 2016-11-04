@@ -19,9 +19,8 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
             using (var service = new AimpService())
             {
                 var response = service.GetListPrintDocTemplateDto();
-                if (response.Error)
-                    throw new Exception(response.Message);
-                var lst = response.Items
+
+                var lst = response
                     .Select(x => new PrintedDocumentListItemViewModel()
                     {
                         Id = x.Id,
@@ -45,9 +44,8 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                         using (var service = new AimpService())
                         {
                             var response = service.GetPrintDocTemplate(CurrentItem.Id);
-                            if (response.Error)
-                                throw new Exception(response.Message);
-                            var vm = new PrintedDocumentEditViewModel(response.Template);
+
+                            var vm = new PrintedDocumentEditViewModel(response);
                             var view = new EditPrintedDocumentView(vm);
                             view.ShowDialog();
                         }
@@ -67,7 +65,7 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                 {
                     try
                     {
-                        var vm = new PrintedDocumentEditViewModel(new Models.Entities.PrintedDocumentTemplate());
+                        var vm = new PrintedDocumentEditViewModel(new Entities.PrintedDocumentTemplate());
                         var view = new EditPrintedDocumentView(vm);
                         view.ShowDialog();
                     }

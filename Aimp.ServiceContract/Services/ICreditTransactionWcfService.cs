@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Aimp.Model;
 using Aimp.Model.CreditTransact;
 using Aimp.Model.Documents;
 using System.ServiceModel;
@@ -19,7 +20,7 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        void SaveCreditTransaction(CreditTransactionDocument document);
+        KeyValue<int,int> SaveCreditTransaction(CreditTransactionDocument document);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]

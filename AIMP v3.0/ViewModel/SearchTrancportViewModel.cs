@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Aimp.Model.TrancportInfo;
 using AIMP_v3._0.DataAccess;
-using Models.Entities;
-using Models.TrancportInfo;
+using Entities;
 using AIMP_v3._0.Helpers;
 
 namespace AIMP_v3._0.ViewModel
@@ -35,7 +36,7 @@ namespace AIMP_v3._0.ViewModel
                     {
                         try
                         {
-                            SearchTrancportResult result = null;
+                            IEnumerable<Trancport> result = null;
 
                             using (AimpService service = new AimpService())
                             {
@@ -64,17 +65,12 @@ namespace AIMP_v3._0.ViewModel
                                             }
                                     }
                                 }
-                                if (result.Error)
-                                {
-                                    MessageBox.Show(result.Message);
-                                    return;
-                                }
-                                if (result.Trancports == null || result.Trancports.Count() == 0)
+                                if (result == null || result.Count() == 0)
                                 {
                                     MessageBox.Show("Поиск не дал результатов");
                                     return;
                                 }
-                                Trancports = new ObservableCollection<Trancport>(result.Trancports);
+                                Trancports = new ObservableCollection<Trancport>(result);
 
                                 OnPropertyChanged("Trancports");
                             }

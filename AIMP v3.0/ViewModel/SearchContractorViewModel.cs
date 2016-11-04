@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Aimp.Model.ContractorInfo;
 using AIMP_v3._0.DataAccess;
-using Models.Entities;
-using Models.ContractorInfo;
-using System.Linq;
 using AIMP_v3._0.Helpers;
+using Entities;
 
 namespace AIMP_v3._0.ViewModel
 {
@@ -34,7 +35,7 @@ namespace AIMP_v3._0.ViewModel
                     {
                         try
                         {
-                            SearchContractorResult result = null;
+                            IEnumerable<Contractor> result = null;
 
                             using (AimpService service = new AimpService())
                             {
@@ -63,17 +64,12 @@ namespace AIMP_v3._0.ViewModel
                                             }
                                     }
                                 }
-                                if (result.Error)
-                                {
-                                    MessageBox.Show(result.Message);
-                                    return;
-                                }
-                                if (result.Contractors == null || result.Contractors.Count() == 0)
+                                if (result == null || result.Count() == 0)
                                 {
                                     MessageBox.Show("Поиск не дал результатов");
                                     return;
                                 }
-                                Contractors = new ObservableCollection<Contractor>(result.Contractors);
+                                Contractors = new ObservableCollection<Contractor>(result);
                             }
 
                             OnPropertyChanged("Contractors");

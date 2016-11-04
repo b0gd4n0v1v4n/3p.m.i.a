@@ -28,11 +28,11 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void SaveContractor(Contractor contractor);
+        int SaveContractor(Contractor contractor);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        void SaveTrancport(Trancport trancport);
+        int SaveTrancport(Trancport trancport);
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]

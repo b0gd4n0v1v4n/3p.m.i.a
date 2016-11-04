@@ -1,21 +1,19 @@
-﻿using AIMP_v3._0.DataAccess;
-using AIMP_v3._0.Extensions;
-using AIMP_v3._0.Helpers;
-using AIMP_v3._0.User_Control;
-using AIMP_v3._0.View;
-using AIMP_v3._0.ViewModel;
-using Models.Documents;
-using Models.Entities;
-using Nelibur.ObjectMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.Extensions;
+using AIMP_v3._0.Helpers;
+using AIMP_v3._0.PrintControl;
+using AIMP_v3._0.User_Control;
+using AIMP_v3._0.View;
+using Entities;
+using Nelibur.ObjectMapper;
 
-namespace AIMP_v3._0
+namespace AIMP_v3._0.ViewModel
 {
     public class CommissionViewModel : BaseViewModel
     {
@@ -116,27 +114,21 @@ namespace AIMP_v3._0
                                 {
                                     var response = service.SaveCommission(Commission);
 
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    Commission.Id = response.Id;
-                                    Commission.Number = response.Number;
+                                    Commission.Id = response.Key;
+                                    Commission.Number = response.Value;
                                     if (Commission.IsUseCardTrancport)
                                     {
-                                        var responseAdd = service.AddCardTrancport(Commission.Id, Commission.Date);
-                                        if (responseAdd.Error)
-                                            throw new Exception(responseAdd.Message);
+                                        service.AddCardTrancport(Commission.Id, Commission.Date);
                                     }
                                     else
                                     {
-                                        var responseDelete = service.DeleteCardTrancport(Commission.Id);
-                                        if (responseDelete.Error)
-                                            throw new Exception(responseDelete.Message);
+                                        service.DeleteCardTrancport(Commission.Id);
+
                                     }
 
                                 }
                                 OnPropertyChanged("Commission");
                                 _commission = TinyMapper.Map<CommissionDocument>(Commission);
-                                MessageBox.Show("Данные успешно сохранены");
                             }
                             catch (Exception ex)
                             {
@@ -163,10 +155,7 @@ namespace AIMP_v3._0
                                 {
                                     using (AimpService service = new AimpService())
                                     {
-                                        var response = service.DeleteCommission(Commission);
-
-                                        if (response.Error)
-                                            MessageBox.Show(response.Message);
+                                        service.DeleteCommission(Commission);
                                     }
 
                                     var window = win as Window;

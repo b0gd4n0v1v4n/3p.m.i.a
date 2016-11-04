@@ -1,10 +1,10 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.ReportOfClient;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.ClientOfReport;
-using Models.Entities;
-using Models.ReportOfClient;
+using Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
@@ -28,39 +28,35 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                 {
                     var result = aimp.GetClientReports();
 
-                    if (!result.Error)
-                    {
-                        _banks = result.Banks;
-                        BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
+                    _banks = result.Banks;
+                    BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
 
-                        List = TinyMapper.Map<List<ClientReportListItemViewModel>>(result.Items);
-                        
-                        
-                        if (!_isOneLoad && result.ClientStatusesForFilter != null && result.ClientStatusesForFilter.Count() > 0)
-                        {
-                            _isOneLoad = true;
-                            SetFilter("ClientStatusReportClient", result.ClientStatusesForFilter.ToArray());
-                            KASTIL_BRASH_FOR_CLIENT_STATUS = Brushes.Orange;
-                            OnPropertyChanged("KASTIL_BRASH_FOR_CLIENT_STATUS");
-                        }
-                        else
-                        {
-                            ClearFilteres();
-                        }
-                        if (!_isOneLoad && !string.IsNullOrEmpty(result.UserLastNameForFilter))
-                        {
-                            _isOneLoad = true;
-                            SetFilter("ManagerReportClient", new[] { result.UserLastNameForFilter });
-                            KASTIL_BRASH_FOR_MANAGER = Brushes.Orange;
-                            OnPropertyChanged("KASTIL_BRASH_FOR_MANAGER");
-                        }
-                        else
-                        {
-                            ClearFilteres();
-                        }
+                    List = TinyMapper.Map<List<ClientReportListItemViewModel>>(result.Items);
+
+
+                    if (!_isOneLoad && result.ClientStatusesForFilter != null &&
+                        result.ClientStatusesForFilter.Count() > 0)
+                    {
+                        _isOneLoad = true;
+                        SetFilter("ClientStatusReportClient", result.ClientStatusesForFilter.ToArray());
+                        KASTIL_BRASH_FOR_CLIENT_STATUS = Brushes.Orange;
+                        OnPropertyChanged("KASTIL_BRASH_FOR_CLIENT_STATUS");
                     }
                     else
-                        throw new Exception(result.Message);
+                    {
+                        ClearFilteres();
+                    }
+                    if (!_isOneLoad && !string.IsNullOrEmpty(result.UserLastNameForFilter))
+                    {
+                        _isOneLoad = true;
+                        SetFilter("ManagerReportClient", new[] {result.UserLastNameForFilter});
+                        KASTIL_BRASH_FOR_MANAGER = Brushes.Orange;
+                        OnPropertyChanged("KASTIL_BRASH_FOR_MANAGER");
+                    }
+                    else
+                    {
+                        ClearFilteres();
+                    }
                 }
             }
             catch (Exception ex)
@@ -165,12 +161,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                                 });
                                 var result = aimp.GetClientReportList(clientReports);
 
-                                if (!result.Error)
-                                {
-                                    OpenUserFile.Open(result.Document.FileName, result.Document.File);
-                                }
-                                else
-                                    throw new Exception(result.Message);
+                                    OpenUserFile.Open(result.FileName, result.File);
                             }
                         }
                         catch (Exception ex)

@@ -1,13 +1,13 @@
 ﻿using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Interfaces;
 using System.Linq;
+using Entities;
 using Nelibur.ObjectMapper;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
 using System.Windows;
 using AIMP_v3._0.Helpers;
-using Models.Entities;
 using AIMP_v3._0.DataInformation;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.View;
@@ -406,10 +406,7 @@ namespace AIMP_v3._0.ViewModel
                                 EditableTrancport.Model = model;
                                 using (var service = new AimpService())
                                 {
-                                    var response = service.SaveTrancport(EditableTrancport);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    EditableTrancport.Id = response.Id;
+                                    EditableTrancport.Id = service.SaveTrancport(EditableTrancport);
                                 }
                                 var window = (win as Window);
 

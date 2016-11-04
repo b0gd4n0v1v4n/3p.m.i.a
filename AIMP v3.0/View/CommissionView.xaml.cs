@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AIMP_v3._0.ViewModel;
 
 namespace AIMP_v3._0.View
 {

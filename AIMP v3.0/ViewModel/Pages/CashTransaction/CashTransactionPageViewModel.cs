@@ -1,14 +1,13 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using System.Linq;
+using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
-using AIMP_v3._0.User_Control;
+using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.View;
-using Models.Documents;
-using Models.PrintedDocument.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
@@ -30,22 +29,16 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                 {
                     var response = service.GetCashTransactions();
 
-                    if (response.Error)
-                    {
-                        MessageBox.Show(response.Message);
-                        return;
-                    }
-
                     List =
                         new List<CashTransactionListItemViewModel>(
-                            response.Items.Select(x => new CashTransactionListItemViewModel()
+                            response.Select(x => new CashTransactionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(Models.DataFormats.DateFormat),
+                                Date = x.Date.ToString(DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
@@ -72,33 +65,29 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
         {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Загрузка...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
+                    try
                     {
-                        try
+                        using (var service = new AimpService())
                         {
-                            using (var service = new AimpService())
+                            var response = service.GetPrintedList(DocumentType.CashTransaction);
+
+                            var document = new CashTransactionDocument();
+                            var lst = response.Select(p => new PrintItem()
                             {
-                                var response = service.GetPrintedList(DocumentType.CashTransaction);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                                var document = new CashTransactionDocument();
-                                var lst = response.List.Select(p => new PrintItem()
-                                {
-                                    Name = p.Name,
-                                    Type = DocumentType.CashTransaction,
-                                    Document = document
-                                });
-                                new CashTransactionView(new CashTransactionViewModel(document, lst)).ShowDialog();
-                            }
+                                Name = p.Name,
+                                Type = DocumentType.CashTransaction,
+                                Document = document
+                            });
+                            new CashTransactionView(new CashTransactionViewModel(document, lst)).ShowDialog();
                         }
-                        catch (Exception ex)
-                        {
-                            Logger.Instance.Log("Неудалось создать документ", "New", ex);
-                        }
-                    });
-                });
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                    }
+                }));
             }
         }
         
@@ -135,15 +124,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                                 {
                                     var transaction = service.GetCashTransaction(CurrentItem.Id);
 
-                                    if (transaction.Error)
-                                    {
-                                        MessageBox.Show("Ошибка сервера", transaction.Message);
-                                        return;
-                                    }
                                     var response = service.GetPrintedList(DocumentType.CashTransaction);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    var lst = response.List.Select(p => new PrintItem()
+
+                                    var lst = response.Select(p => new PrintItem()
                                     {
                                         Name = p.Name,
                                         Type = DocumentType.CashTransaction,

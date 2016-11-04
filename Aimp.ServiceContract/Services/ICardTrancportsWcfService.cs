@@ -25,7 +25,7 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        void SaveCardTrancport(CardTrancportDocument document);
+        int SaveCardTrancport(CardTrancportDocument document);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]

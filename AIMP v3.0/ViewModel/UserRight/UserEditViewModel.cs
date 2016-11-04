@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.View;
-using Models.Entities;
+using Entities;
 using AIMP_v3._0.Helpers;
 
 namespace AIMP_v3._0.ViewModel.UserRight
@@ -27,11 +27,8 @@ namespace AIMP_v3._0.ViewModel.UserRight
                             var rightIds = Rights.Where(e => e.Enable).Select(y => y.Id);
                             using (var service = new AimpService())
                             {
-                                var response = service.SaveUser(User, rightIds);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
+                                service.SaveUser(User, rightIds);
                             }
-                            MessageBox.Show("Данные сохранены");
                         }
                         catch (Exception ex)
                         {
@@ -66,14 +63,8 @@ namespace AIMP_v3._0.ViewModel.UserRight
                             {
                                 using (var service = new AimpService())
                                 {
-                                    var response = service.DeleteUser(User);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    else
-                                    {
-                                        MessageBox.Show(response.Message);
-                                        (win as Window)?.Close();
-                                    }
+                                    service.DeleteUser(User);
+                                    (win as Window)?.Close();
                                 }
                             }
                             catch (Exception ex)

@@ -1,7 +1,9 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.Documents;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
+using Entities;
 using Models.Documents;
 using Models.Entities;
 using System;
@@ -173,12 +175,7 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
 
                                     _clientReportDocument.BankReportClients = newBankReportClients.ToArray();
 
-                                    var response = service.SaveClientReport(_clientReportDocument);
-
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    else
-                                        MessageBox.Show(response.Message);
+                                    service.SaveClientReport(_clientReportDocument);
                                 }
                                 _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
                             }
@@ -205,22 +202,17 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
                         {
                         try
                         {
-                            
-                                using (var service = new AimpService())
-                                {
-                                    var response = service.DeleteClientReport(_clientReportDocument);
 
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    else
-                                    {
-                                        var win = window as Window;
-                                        win.Hide();
-                                        MessageBox.Show(response.Message);
-                                        win.Close();
-                                    }
-                                }
-                            
+                            using (var service = new AimpService())
+                            {
+                                service.DeleteClientReport(_clientReportDocument);
+
+                                var win = window as Window;
+                                win.Hide();
+                                MessageBox.Show(response.Message);
+                                win.Close();
+                            }
+
                         }
                         catch (Exception ex)
                         {

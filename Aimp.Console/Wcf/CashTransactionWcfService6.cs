@@ -77,12 +77,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveCashTransaction(CashTransactionDocument document)
+        public KeyValue<int,int> SaveCashTransaction(CashTransactionDocument document)
         {
             EventLog($"Save cash transaction id: {document.Id}");
             try
             {
                 IoC.Resolve<ICashTransactionService>().SaveDocument(document);
+                return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
             catch (Exception ex)
             {

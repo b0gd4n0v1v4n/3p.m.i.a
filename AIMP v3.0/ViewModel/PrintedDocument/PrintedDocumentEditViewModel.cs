@@ -1,8 +1,8 @@
-﻿using AIMP_v3._0.DataAccess;
+﻿using Aimp.Model.PrintedDocument.Templates;
+using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.View;
-using Models.Entities;
-using Models.PrintedDocument.Templates;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -86,28 +86,22 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
         {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Сохранение...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Сохранение...", () =>
+                    try
                     {
-                        try
+                        if (Template.File == null)
+                            throw new Exception("Шаблон не выбран");
+                        using (var service = new AimpService())
                         {
-                            if (Template.File == null)
-                                throw new Exception("Шаблон не выбран");
-                            using (var service = new AimpService())
-                            {
-                                var response = service.SavePrintDocTemplate(Template);
-                                if (response.Error)
-                                    throw new Exception(response.Message);
-                            }
-                            System.Windows.MessageBox.Show("Данные сохранены");
+                            service.SavePrintDocTemplate(Template);
                         }
-                        catch (Exception ex)
-                        {
-                            System.Windows.MessageBox.Show(ex.Message);
-                        }
-                    });
-                });
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.MessageBox.Show(ex.Message);
+                    }
+                }));
             }
         }
 
@@ -136,14 +130,8 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                             {
                                 using (var service = new AimpService())
                                 {
-                                    var response = service.DeletePrintedDocTemplate(Template);
-                                    if (response.Error)
-                                        throw new Exception(response.Message);
-                                    else
-                                    {
-                                        System.Windows.MessageBox.Show(response.Message);
-                                        (win as Window)?.Close();
-                                    }
+                                    service.DeletePrintedDocTemplate(Template);
+                                    (win as Window)?.Close();
                                 }
                             }
                             catch (Exception ex)

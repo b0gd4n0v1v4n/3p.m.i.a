@@ -111,12 +111,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveContractor(Contractor contractor)
+        public int SaveContractor(Contractor contractor)
         {
             EventLog($"Save contractor id: {contractor.Id}");
             try
             {
                 IoC.Resolve<ITransactionService>().SaveContractor(contractor);
+                return contractor.Id;
             }
             catch (Exception ex)
             {
@@ -125,12 +126,13 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveTrancport(Trancport trancport)
+        public int SaveTrancport(Trancport trancport)
         {
            EventLog($"Save trancport id: {trancport.Id}");
             try
             {
                 IoC.Resolve<ITransactionService>().SaveTrancport(trancport);
+                return trancport.Id;
             }
             catch (Exception ex)
             {
