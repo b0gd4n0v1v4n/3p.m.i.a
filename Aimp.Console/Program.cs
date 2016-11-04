@@ -17,60 +17,67 @@ namespace Aimp.Console
             IoC.Register<ILogger, Logger>();
             var logger = IoC.Resolve<ILogger>();
             logger.LogEvent += System.Console.WriteLine;
-            logger.Log("ILogger ready.");
-
-            ServicesInit(logger);
-
-            using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
+            logger.Log("---------------------------");
+            logger.Log("start service.");
+            try
             {
-                if (webServiceHost.BaseAddresses.Count < 1)
-                    throw new Exception("Adress not found");
+                ServicesInit(logger);
 
-                System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
+                using (WebServiceHost webServiceHost = new WebServiceHost(typeof(AimpWcfService)))
+                {
+                    if (webServiceHost.BaseAddresses.Count < 1)
+                        throw new Exception("adress not found");
 
-                logger.Log("Web service host started.");
-                logger.Log("AIMP READY!");
+                    System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
 
-                System.Console.ReadLine();
+                    logger.Log("web service host started.");
+                    logger.Log("service ready!");
+                    logger.Log("---------------------------");
+                }
             }
+            catch(Exception ex)
+            {
+                logger.Log(ex);
+            }
+            System.Console.ReadLine();
         }
 
         static void ServicesInit(ILogger logger)
         {
             IoC.Register<IDataContext, EfDataContext>(false);
-            IoC.Resolve<IDataContext>().Users.Get(0);
+            IoC.Resolve<IDataContext>();
             logger.Log("IDataContext ready.");
 
             IoC.Register<IUserRightsService, UserRightsService>();
-            IoC.Resolve<IUserRightsService>().GetUsers(x=>x);
+            IoC.Resolve<IUserRightsService>();
             logger.Log("IUserRightsService ready.");
 
             IoC.Register<ITransactionService, TransactionService>();
-            IoC.Resolve<ITransactionService>().GetUserFile(0);
+            IoC.Resolve<ITransactionService>();
             logger.Log("ITransactionService ready.");
 
             IoC.Register<IReportOfClientService, ReportOfClientService>();
-            IoC.Resolve<IReportOfClientService>().GetDocument(0);
+            IoC.Resolve<IReportOfClientService>();
             logger.Log("IReportOfClientService ready.");
 
             IoC.Register<IDocumentTemplateService, DocumentTemplateService>();
-            IoC.Resolve<IDocumentTemplateService>().GetTemplate(0);
+            IoC.Resolve<IDocumentTemplateService>();
             logger.Log("IDocumentTemplateService ready.");
 
-            IoC.Register<ICreditTransactionService, ICreditTransactionService>();
-            IoC.Resolve<ICreditTransactionService>().GetDocument(0);
+            IoC.Register<ICreditTransactionService, CreditTransactionService>();
+            IoC.Resolve<ICreditTransactionService>();
             logger.Log("ICreditTransactionService ready.");
 
-            IoC.Register<ICommissionService, ICommissionService>();
-            IoC.Resolve<ICommissionService>().GetDocument(0);
+            IoC.Register<ICommissionService, CommissionService>();
+            IoC.Resolve<ICommissionService>();
             logger.Log("ICommissionService ready.");
 
-            IoC.Register<ICashTransactionService, ICashTransactionService>();
-            IoC.Resolve<ICashTransactionService>().GetDocument(0);
+            IoC.Register<ICashTransactionService, CashTransactionService>();
+            IoC.Resolve<ICashTransactionService>();
             logger.Log("ICashTransactionService ready.");
 
-            IoC.Register<ICardTrancportService, ICardTrancportService>();
-            IoC.Resolve<ICardTrancportService>().GetDocument(0);
+            IoC.Register<ICardTrancportService, CardTrancportService>();
+            IoC.Resolve<ICardTrancportService>();
             logger.Log("ICardTrancportService ready.");
         }
     }

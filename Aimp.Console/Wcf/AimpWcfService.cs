@@ -4,7 +4,7 @@ using  Entities;
 
 namespace Aimp.Console.Wcf
 {
-    public class AimpWcfService : ReportOfClientWcfService9, IAimpWcfService
+    public class AimpWcfService : ClientReportsWcfSerive9, IAimpWcfService
     {
 
     }
