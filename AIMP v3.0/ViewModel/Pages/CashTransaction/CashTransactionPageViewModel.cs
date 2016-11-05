@@ -30,7 +30,10 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 
                     List =
                         new List<CashTransactionListItemViewModel>(
-                            response.Select(x => new CashTransactionListItemViewModel()
+                            response
+                            .OrderByDescending(x => x.Date)
+                            .ThenByDescending(x => x.Number)
+                            .Select(x => new CashTransactionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
@@ -42,7 +45,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
                                 SellerFullName = x.SellerFullName
-                            }));
+                            }))
+                            
+                            ;
                 }
             }
             catch (Exception ex)

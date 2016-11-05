@@ -26,14 +26,13 @@ namespace Aimp.Logic.Services
 
         public CashTransactionService()
         {
-#warning ПРОВЕРИТЬ
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var beginSequnce = context.CashTransactions
                     .All()
                     .GroupBy(x => x.Date.Year)
                     .Select(x=> new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Key, x=>x.Number);
+                    .ToDictionary(x => x.Key, x=>x.Number + 1);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }
@@ -75,14 +74,19 @@ namespace Aimp.Logic.Services
 
                 context.CashTransactions.AddOrUpdate(cashTransaction);
 
-                lock (_sync)
+                if (cashTransaction.Id == 0)
                 {
-                    cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);
-                    context.SaveChanges();
-                    _sequnce.NextValue(cashTransaction.Date);
+                    lock (_sync)
+                    {
+                        cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);
+                        context.SaveChanges();
+                        _sequnce.NextValue(cashTransaction.Date);
+                    }
+                    document.Id = cashTransaction.Id;
+                    document.Number = cashTransaction.Number;
                 }
-                document.Id = cashTransaction.Id;
-                document.Number = cashTransaction.Number;
+                else
+                    context.SaveChanges();
             }
         }
         public void DeleteDocument(CashTransactionDocument document)

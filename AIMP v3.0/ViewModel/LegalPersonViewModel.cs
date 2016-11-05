@@ -107,13 +107,14 @@ namespace AIMP_v3._0.ViewModel
         public LegalPersonViewModel(Contractor contractor, IObjectSetValue window)
         {
             _window = window;
+            _contractor = contractor;
 
             if (contractor.Id > 0)
             {
                 IsNew = Visibility.Hidden;
 
                 EditableContractor = TinyMapper.Map<Contractor>(contractor);
-                _contractor = contractor;
+                EditableContractor.LegalPerson = TinyMapper.Map<LegalPerson>(contractor.LegalPerson);
             }
             else
             {
@@ -122,7 +123,8 @@ namespace AIMP_v3._0.ViewModel
                 EditableContractor = new Contractor()
                 {
                     City = new City(),
-                    Region = new Region()
+                    Region = new Region(),
+                    LegalPerson = new LegalPerson()
                 };
             }
             _Settings();

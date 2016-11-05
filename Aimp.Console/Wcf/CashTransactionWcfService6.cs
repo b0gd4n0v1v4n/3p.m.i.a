@@ -16,7 +16,6 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CashTransactionListItem> GetCashTransactions()
         {
-#warning перенести сортировку на клиента
             EventLog($"Get cash transactions");
             try
             {
@@ -47,7 +46,6 @@ namespace Aimp.Console.Wcf
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
                         PtsId = x.Trancport.CopyPtsId
                     })
-                    //.OrderByDescending(x => new { x.Date, x.Number })
                     .ToList();
             }
             catch (Exception ex)
@@ -91,6 +89,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save cash transaction id: {document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                 IoC.Resolve<ICashTransactionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
