@@ -15,27 +15,35 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CommissionListItem> GetCommissions()
         {
+#warning перенести сортировку на клиента
             EventLog("Get commissions");
             try
             {
                 return IoC.Resolve<ICommissionService>()
-                    .GetCommissions(CurrentUser)
+                    .GetCommissions(CurrentUser,
+                                    x => x.Seller,
+                                    x => x.Seller.LegalPerson,
+                                    x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CommissionListItem()
-                {
-                    Id = x.Id,
-                    SellerFullName = x.Seller.LegalPerson != null ? x.Seller.LegalPerson.Name : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                    Date = x.Date,
-                    DocumentSellerId = x.Seller.Document.Id,
-                    Number = x.Number.ToString(),
-                    NumberProxy = x.NumberProxy,
-                    TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                    PtsId = x.Trancport.CopyPts.Id,
-                    Parking = x.Parking.ToString(),
-                    Commission = x.Commission.ToString()
+                    {
+                        Id = x.Id,
+                        SellerFullName = x.Seller.LegalPerson != null ? x.Seller.LegalPerson.Name : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
+                        Date = x.Date,
+                        DocumentSellerId = x.Seller.DocumentId,
+                        Number = x.Number.ToString(),
+                        NumberProxy = x.NumberProxy,
+                        TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
+                        PtsId = x.Trancport.CopyPtsId,
+                        Parking = x.Parking.ToString(),
+                        Commission = x.Commission.ToString()
 
-                }).OrderByDescending(x => new { x.Date, x.Number }).ToList();
+                    })
+                //.OrderByDescending(x => new { x.Date, x.Number })
+                .ToList();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Logger.Log(ex);
                 throw;

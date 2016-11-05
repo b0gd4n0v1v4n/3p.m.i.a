@@ -5,6 +5,8 @@ using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
 using Aimp.Model.ReportOfClient;
 using Aimp.Reports.Interfaces;
+using System.Collections.Generic;
+using Entities;
 
 namespace Aimp.Reports.Services.Excel
 {
@@ -21,12 +23,10 @@ namespace Aimp.Reports.Services.Excel
         {
             throw new NotImplementedException();
         }
-        public IPrintedDocument GetReportOfClientList(ClientReports reports)
+        public IPrintedDocument GetReportOfClientList(IEnumerable<Bank> banks,IEnumerable<ClientReportListItem> reports)
         {
             string _pathSaveFile = Directory.GetCurrentDirectory();
-            string fileName = _pathSaveFile + "\\tmpPDoc" +
-                       Guid.NewGuid().ToString() +
-                       ".xlsx";
+
             string saveFile = _pathSaveFile + "\\tmpPDoc" +
                        Guid.NewGuid().ToString() +
                        ".xlsx";
@@ -40,31 +40,32 @@ namespace Aimp.Reports.Services.Excel
                 _excel.SetColumn(1, 5, "Стоимость ТС");
                 _excel.SetColumn(1, 6, "Общий взнос");
                 _excel.SetColumn(1, 7, "Программа кредитования");
-                int bankColumnsCount = reports.Banks.Count();
-                var banks = reports.Banks.ToList();
-                for (int iColumn = 8;iColumn < bankColumnsCount; iColumn++)
+                int bankColumnsCount = banks.Count();
+                var banksList = banks.ToList();
+
+                for (int iColumn = 0;iColumn < bankColumnsCount; iColumn++)
                 {
-                    _excel.SetColumn(1, iColumn, banks[iColumn].Name, Microsoft.Office.Interop.Excel.XlOrientation.xlVertical);
+                    _excel.SetColumn(1, iColumn + 8, banksList[iColumn].Name, Microsoft.Office.Interop.Excel.XlOrientation.xlVertical);
                 }
-                _excel.SetColumn(1, bankColumnsCount, "Статус клиента");
-                _excel.SetColumn(1, bankColumnsCount + 1, "Источник");
+                _excel.SetColumn(1, bankColumnsCount + 8, "Статус клиента");
+                _excel.SetColumn(1, bankColumnsCount + 9, "Источник");
                 int iRow = 1;
-                foreach (var iReport in reports.Items)
+                foreach (var iReport in reports)
                 {
                     iRow++;
-                    _excel.SetValue(iRow,1, iReport.DateReportClient);
+                    _excel.SetValue(iRow,1, iReport.DateReport);
                     _excel.SetValue(iRow, 2, iReport.FullNameReportClient);
                     _excel.SetValue(iRow, 3, iReport.TelefonReportClient);
                     _excel.SetValue(iRow, 4, iReport.TrancportNameReportClient);
                     _excel.SetValue(iRow, 5, iReport.PriceTrancportReportClient);
                     _excel.SetValue(iRow, 6, iReport.TotalContributionReportClient);
                     _excel.SetValue(iRow, 7, iReport.ProgrammCreditReportClient);
-                    for (int iColumn = 8; iColumn < bankColumnsCount; iColumn++)
+                    for (int iColumn = 0; iColumn < bankColumnsCount; iColumn++)
                     {
-                        _excel.SetValue(iRow, iColumn, iReport.BankStatusesReportClient[iColumn]);
+                        _excel.SetValue(iRow, iColumn + 8, iReport.BankStatusesReportClient[iColumn]);
                     }
-                    _excel.SetValue(iRow, bankColumnsCount, iReport.ClientStatusReportClient);
-                    _excel.SetValue(iRow, bankColumnsCount+1, iReport.SourceInfoReportClient);
+                    _excel.SetValue(iRow, bankColumnsCount + 8, iReport.ClientStatusReportClient);
+                    _excel.SetValue(iRow, bankColumnsCount+ 9, iReport.SourceInfoReportClient);
                 }
                 _excel.Save(saveFile);
                 
@@ -85,7 +86,6 @@ namespace Aimp.Reports.Services.Excel
             {
                 try
                 {
-                    File.Delete(fileName);
                     File.Delete(saveFile);
                     _excel.Quit();
                 }

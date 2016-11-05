@@ -14,7 +14,7 @@ using System.Windows.Media;
 
 namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {
-    public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
+    public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItem>, IPageViewModel
     {
 
         private bool _isOneLoad;
@@ -30,9 +30,30 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                     _banks = result.Banks;
                     BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
 
-                    List = TinyMapper.Map<List<ClientReportListItemViewModel>>(result.Items);
-
-
+                    List = result.Items.GroupBy(g => g.ClientReportId)
+                    .Select(x => new ClientReportListItem()
+                    {
+                        Id = x.Key,
+                        BankStatusesReportClient = (from b in result.Banks
+                                                    join bs in x.Select(y => new { y.BankId, y.BankStatus.MiddleName })
+                                                        on b.Id equals bs.BankId
+                                                        into statusDefault
+                                                    from bs in statusDefault.DefaultIfEmpty()
+                                                    select bs?.MiddleName).ToArray(),
+                        ClientStatusReportClient = x.First().ClientReport.ClientStatus.Name,
+                        DateReportClient = x.First().ClientReport.Date,
+                        FullNameReportClient = x.First().ClientReport.FullName,
+                        ManagerReportClient = x.First().ClientReport.User.LastName,
+                        PriceTrancportReportClient = x.First().ClientReport.Price.ToString(),
+                        ProgrammCreditReportClient = x.First().ClientReport.CreditProgramm.Name,
+                        SourceInfoReportClient = x.First().ClientReport.Source,
+                        TelefonReportClient = x.First().ClientReport.Telefon,
+                        TotalContributionReportClient = x.First().ClientReport.TotalContribution.ToString(),
+                        TrancportNameReportClient = x.First().ClientReport.Trancport
+                    })
+                    .OrderByDescending(x => x.DateReportClient)
+                    .ToList();
+                    
                     if (!_isOneLoad && result.ClientStatusesForFilter != null &&
                         result.ClientStatusesForFilter.Count() > 0)
                     {
@@ -143,24 +164,9 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         {
                             using (var aimp = new AimpService())
                             {
-                                var clientReports = new ClientReports();
-                                clientReports.Banks = _banks;
-                                clientReports.Items = FilteringList.Select(y => new ClientReportListItem()
-                                {
-                                    DateReportClient = y.DateReportClient,
-                                    FullNameReportClient = y.FullNameReportClient,
-                                    TelefonReportClient = y.TelefonReportClient,
-                                    TrancportNameReportClient = y.TrancportNameReportClient,
-                                    PriceTrancportReportClient = y.PriceTrancportReportClient,
-                                    TotalContributionReportClient = y.TotalContributionReportClient,
-                                    ProgrammCreditReportClient = y.ProgrammCreditReportClient,
-                                    BankStatusesReportClient = y.BankStatusesReportClient,
-                                    ClientStatusReportClient = y.ClientStatusReportClient,
-                                    SourceInfoReportClient = y.SourceInfoReportClient
-                                });
-                                var result = aimp.GetClientReportList(clientReports);
+                                var result = aimp.GetClientReportList(_banks, FilteringList);
 
-                                    OpenUserFile.Open(result.FileName, result.File);
+                                OpenUserFile.Open(result.FileName, result.File);
                             }
                         }
                         catch (Exception ex)

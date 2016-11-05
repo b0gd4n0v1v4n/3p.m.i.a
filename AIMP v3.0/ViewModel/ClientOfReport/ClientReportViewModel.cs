@@ -95,29 +95,33 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
                 else
                 {
                     ClientReport = response.Document.BankReportClients.First().ClientReport;
-                    _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
-                    ClientReport.ClientStatus = response.ClientStatuses.FirstOrDefault(x => x.Id == ClientReport.ClientStatus?.Id);
 
-                    ClientReport.CreditProgramm = response.CreditProgramms.FirstOrDefault(x => x.Id == ClientReport.CreditProgramm?.Id);
+                    _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
+                    ClientReport.ClientStatus = response.ClientStatuses.FirstOrDefault(x => x.Id == ClientReport.ClientStatusId);
+
+                    ClientReport.CreditProgramm = response.CreditProgramms.FirstOrDefault(x => x.Id == ClientReport.CreditProgrammId);
 
                     _clientReportDocument = response.Document;
 
                     var clientBankStatuses = (from bRep in response.Banks
                                               join bClient in response.Document.BankReportClients
-                                              on bRep.Id equals bClient.Bank.Id into bankDefault
+                                              on bRep.Id equals bClient.BankId into bankDefault
                                               from bClient in bankDefault.DefaultIfEmpty()
-                                              select new { bClient?.Id,
-                                                           Enabled = bClient != null ? true : false,
-                                                           Bank = bRep,
-                                                           BankStatus = bClient?.BankStatus })
+                                              select new
+                                              {
+                                                  bClient?.Id,
+                                                  Enabled = bClient != null ? true : false,
+                                                  Bank = bRep,
+                                                  BankStatusId = bClient?.BankStatusId
+                                              })
                                              .Select(x => new ClientBankStatusViewModel()
                                              {
                                                  Id = x.Id != null ? (int)x.Id : 0,
                                                  Bank = x.Bank,
                                                  Enable = x.Enabled,
                                                  BankStatuses = response.BankStatuses,
-                                                 SelectedBankStatus = response.BankStatuses.FirstOrDefault(y=>y.Id == x.BankStatus?.Id)
-                                             });
+                                                 SelectedBankStatus = response.BankStatuses.FirstOrDefault(y => y.Id == x.BankStatusId)
+                                             }).ToList();
 
                     ClientBankStatus = new ObservableCollection<ClientBankStatusViewModel>(clientBankStatuses);
                 }
@@ -172,7 +176,7 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
 
                                     _clientReportDocument.BankReportClients = newBankReportClients.ToArray();
 
-                                    service.SaveClientReport(_clientReportDocument);
+                                    ClientReport.Id = service.SaveClientReport(_clientReportDocument);
                                 }
                                 _clientReport = TinyMapper.Map<ClientReport>(ClientReport);
                             }

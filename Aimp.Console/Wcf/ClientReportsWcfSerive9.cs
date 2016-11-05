@@ -2,11 +2,12 @@
 using System.Linq;
 using Aimp.Domain;
 using Aimp.Logic.Interfaces;
-using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
 using Aimp.ServiceContract.Services;
+using Entities;
+using System.Collections.Generic;
 
 namespace Aimp.Console.Wcf
 {
@@ -26,30 +27,8 @@ namespace Aimp.Console.Wcf
                     .Select(x => x.Name);
                 result.Banks = service.GetBanks();
 
-                result.Items = service.GetBankReportClients(CurrentUser).ToList()
-                    .GroupBy(g => g.ClientReport)
-                    .OrderByDescending(x => x.Key.Date)
-                    .Select(x => new ClientReportListItem()
-                    {
-                        Id = x.Key.Id,
-                        BankStatusesReportClient = (from b in result.Banks
-                            join bs in x.Select(y => new {y.Bank.Id, y.BankStatus.MiddleName})
-                                on b.Id equals bs.Id
-                                into statusDefault
-                            from bs in statusDefault.DefaultIfEmpty()
-                            select bs?.MiddleName).ToArray(),
-                        ClientStatusReportClient = x.Key.ClientStatus.Name,
-                        DateReportClient = x.Key.Date.ToString(DataFormats.DateFormat),
-                        FullNameReportClient = x.Key.FullName,
-                        ManagerReportClient = x.Key.User?.LastName,
-                        PriceTrancportReportClient = x.Key.Price.ToString(),
-                        ProgrammCreditReportClient = x.Key.CreditProgramm.Name,
-                        SourceInfoReportClient = x.Key.Source,
-                        TelefonReportClient = x.Key.Telefon,
-                        TotalContributionReportClient = x.Key.TotalContribution?.ToString(),
-                        TrancportNameReportClient = x.Key.Trancport
-                    }).ToList();
-
+                result.Items = service.GetBankReportClients(CurrentUser);
+                    
                 return result;
             }
             catch (Exception ex)
@@ -59,14 +38,14 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public ClientReport GetNewClientReport()
+        public ClientReportDto GetNewClientReport()
         {
             EventLog($"Get new client report");
             try
             {
                 var service = IoC.Resolve<IReportOfClientService>();
 
-                return new ClientReport()
+                return new ClientReportDto()
             {
                 Document = new ClientReportDocument(),
                 Banks = service.GetBanks(),
@@ -82,7 +61,7 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public ClientReport GetClientReport(int id)
+        public ClientReportDto GetClientReport(int id)
         {
             EventLog($"Get client report id: {id}");
             try
@@ -99,7 +78,7 @@ namespace Aimp.Console.Wcf
 
             var bankStatuses = service.GetBankStatuses();
 
-            var response = new ClientReport()
+            var response = new ClientReportDto()
             {
                 Banks = banks,
                 BankStatuses = bankStatuses,
@@ -117,12 +96,14 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public void SaveClientReport(ClientReportDocument document)
+        public int SaveClientReport(ClientReportDocument document)
         {
             EventLog($"Save client report id: {document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                 IoC.Resolve<IReportOfClientService>().SaveDocument(document);
+                return document.Id;
             }
             catch (Exception ex)
             {
@@ -145,12 +126,12 @@ namespace Aimp.Console.Wcf
             }
         }
 
-        public ExcelPrintedDocument GetClientReportPrintedDocument(ClientReports reports)
+        public ExcelPrintedDocument GetClientReportPrintedDocument(IEnumerable<Bank> banks, IEnumerable<ClientReportListItem> reports)
         {
             EventLog($"Get new client report");
             try
             {
-                return (ExcelPrintedDocument)IoC.Resolve<IReportOfClientService>().PrintReport(reports);
+                return (ExcelPrintedDocument)IoC.Resolve<IReportOfClientService>().PrintReport(banks,reports);
             }
             catch (Exception ex)
             {

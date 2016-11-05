@@ -16,11 +16,18 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CashTransactionListItem> GetCashTransactions()
         {
+#warning перенести сортировку на клиента
             EventLog($"Get cash transactions");
             try
             {
                 return IoC.Resolve<ICashTransactionService>()
-                    .GetCashTransactions(CurrentUser)
+                    .GetCashTransactions(CurrentUser, x => x.Buyer,
+                             x => x.Buyer.LegalPerson,
+                             x => x.Seller,
+                             x => x.Seller.LegalPerson,
+                             x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CashTransactionListItem()
                     {
                         Id = x.Id,
@@ -33,13 +40,15 @@ namespace Aimp.Console.Wcf
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
                         Date = x.Date,
-                        DocumentBuyerId = x.Buyer.Document.Id,
-                        DocumentSellerId = x.Seller.Document.Id,
+                        DocumentBuyerId = x.Buyer.DocumentId,
+                        DocumentSellerId = x.Seller.DocumentId,
                         Number = x.Number.ToString(),
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                        PtsId = x.Trancport.CopyPts.Id
-                    }).OrderByDescending(x => new {x.Date, x.Number}).ToList();
+                        PtsId = x.Trancport.CopyPtsId
+                    })
+                    //.OrderByDescending(x => new { x.Date, x.Number })
+                    .ToList();
             }
             catch (Exception ex)
             {

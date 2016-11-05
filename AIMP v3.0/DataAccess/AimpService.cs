@@ -43,16 +43,16 @@ namespace AIMP_v3._0.DataAccess
         {
             return Proxy.GetClientReports();
         }
-        public Aimp.Model.ReportOfClient.ClientReport GetClientReport(int? id)
+        public Aimp.Model.ReportOfClient.ClientReportDto GetClientReport(int? id)
         {
             if (id == null)
                 return Proxy.GetNewClientReport();
             else
                 return Proxy.GetClientReport((int)id);
         }
-        public void SaveClientReport(ClientReportDocument document)
+        public int SaveClientReport(ClientReportDocument document)
         {
-            Proxy.SaveClientReport(document);
+            return Proxy.SaveClientReport(document);
         }
         public void DeleteClientReport(ClientReportDocument document)
         {
@@ -201,9 +201,9 @@ namespace AIMP_v3._0.DataAccess
         {
             Proxy.SaveRowValuesDictionary(tableName, columnValues, id);
         }
-        public ExcelPrintedDocument GetClientReportList(ClientReports reports)
+        public ExcelPrintedDocument GetClientReportList(IEnumerable<Bank> banks, IEnumerable<ClientReportListItem> reports)
         {
-            return Proxy.GetClientReportPrintedDocument(reports);
+            return Proxy.GetClientReportPrintedDocument(banks,reports);
         }
         public CreditTransactionInfoDto GetCreditInfo()
         {

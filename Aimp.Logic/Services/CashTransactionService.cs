@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
@@ -92,14 +93,18 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IEnumerable<CashTransaction> GetCashTransactions(User user)
+        public IEnumerable<CashTransaction> GetCashTransactions(User user, params Expression<Func<CashTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CashTransactions.All().ToList();
+                    return context.CashTransactions
+                        .All(includes)
+                        .ToList();
                 else
-                    return context.CashTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CashTransactions
+                        .All(includes)
+                             .ToList();
             }
         }
         public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()

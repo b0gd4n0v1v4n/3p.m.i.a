@@ -4,7 +4,7 @@ using Entities;
 
 namespace Aimp.Model.ReportOfClient
 {
-    public class ClientReport {
+    public class ClientReportDto {
 
         public ClientReportDocument Document { get; set; } 
         

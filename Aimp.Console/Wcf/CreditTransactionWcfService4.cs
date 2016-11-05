@@ -14,11 +14,18 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CreditTransactionListItem> GetCreditTransactions()
         {
+#warning перенести сортировку на клиента
             EventLog($"Get credit transactions");
             try
             {
                 return IoC.Resolve<ICreditTransactionService>()
-                    .GetCreditTransactions(CurrentUser)
+                    .GetCreditTransactions(CurrentUser, x => x.Buyer,
+                             x => x.Buyer.LegalPerson,
+                             x => x.Seller,
+                             x => x.Seller.LegalPerson,
+                             x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CreditTransactionListItem()
                     {
                         Id = x.Id,
@@ -31,17 +38,19 @@ namespace Aimp.Console.Wcf
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
                         Date = x.Date,
-                        DocumentBuyerId = x.Buyer.Document.Id,
-                        DocumentSellerId = x.Seller.Document.Id,
+                        DocumentBuyerId = x.Buyer.DocumentId,
+                        DocumentSellerId = x.Seller.DocumentId,
                         Number = x.Number.ToString(),
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                        PtsId = x.Trancport.CopyPts.Id,
-                        AdId = x.AgentDocument.Id,
-                        DkpId = x.DkpDocument.Id,
+                        PtsId = x.Trancport.CopyPtsId,
+                        AdId = x.AgentDocumentId,
+                        DkpId = x.DkpDocumentId,
                         PhotoBuyerId = x.Buyer.PhotoId,
-                        PhotoSellerId = x.SellerId
-                    }).OrderByDescending(x => new {x.Date, x.Number}).ToList();
+                        PhotoSellerId = x.Seller.PhotoId
+                    })
+                    //.OrderByDescending(x => new {x.Date, x.Number})
+                    .ToList();
             }
             catch (Exception ex)
             {

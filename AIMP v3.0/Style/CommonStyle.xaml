@@ -429,7 +429,7 @@
                                             </Style>
                                         </GridView.ColumnHeaderContainerStyle>
                                         <GridViewColumn Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
-                                        <GridViewColumn x:Name="DateReportClient" Width="Auto" Header="ДАТА|DateReportClient" DisplayMemberBinding="{Binding DateReportClient}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
+                                        <GridViewColumn x:Name="DateReport" Width="Auto" Header="ДАТА|DateReport" DisplayMemberBinding="{Binding DateReport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
                                         <GridViewColumn x:Name="FullNameReportClient" Width="Auto" Header="Ф.И.О. ЗАЕМЩИКА|FullNameReportClient" DisplayMemberBinding="{Binding FullNameReportClient}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="TelefonReportClient" Width="Auto" Header="ТЕЛЕФОН|TelefonReportClient" DisplayMemberBinding="{Binding TelefonReportClient}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
                                         <GridViewColumn x:Name="TrancportNameReportClient"  Width="Auto" Header="ДАННЫЕ ТС|TrancportNameReportClient" DisplayMemberBinding="{Binding TrancportNameReportClient}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>

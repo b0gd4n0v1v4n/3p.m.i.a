@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -103,14 +104,14 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IEnumerable<CommissionTransaction> GetCommissions(User user)
+        public IEnumerable<CommissionTransaction> GetCommissions(User user, params Expression<Func<CommissionTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CommissionTransactions.All().ToList();
+                    return context.CommissionTransactions.All(includes).ToList();
                 else
-                    return context.CommissionTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CommissionTransactions.All(includes).Where(x => x.UserId == user.Id).ToList();
             }
         }
         public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()

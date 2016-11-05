@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
@@ -39,14 +40,14 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IEnumerable<CreditTransaction> GetCreditTransactions(User user)
+        public IEnumerable<CreditTransaction> GetCreditTransactions(User user, params Expression<Func<CreditTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if(user.IsAdmin())
-                    return context.CreditTransactions.All().ToList();
+                    return context.CreditTransactions.All(includes).ToList();
                 else
-                    return context.CreditTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CreditTransactions.All(includes).Where(x => x.UserId == user.Id).ToList();
             }
         }
         public CreditTransactionDocument GetDocument(int id)

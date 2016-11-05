@@ -30,25 +30,25 @@ namespace Aimp.Logic.Services
                 };
             }
         }
-        public IPrintedDocument PrintReport(ClientReports report)
+        public IPrintedDocument PrintReport(IEnumerable<Bank> banks, IEnumerable<ClientReportListItem> reports)
         {
             using (var printService = IoC.Resolve<IExcelPrintedService>())
             {
-                return printService.GetReportOfClientList(report);
+                return printService.GetReportOfClientList(banks,reports);
             }
         }
         public void SaveDocument(ClientReportDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
-
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var firstClientReposrt = document.BankReportClients.FirstOrDefault().ClientReport;
                 if (firstClientReposrt.Id == 0)
                 {
+                    if (document.UserId == 0)
+                        throw new ArgumentException("UserId");
 
                     firstClientReposrt.UserId = document.UserId;
+
                     context.ClientReports.AddOrUpdate(firstClientReposrt);
                     foreach (var iBankReportClient in document.BankReportClients)
                     {
@@ -56,11 +56,13 @@ namespace Aimp.Logic.Services
 
                         context.BankReportClients.AddOrUpdate(iBankReportClient);
                     }
+                    context.SaveChanges();
+                    document.Id = firstClientReposrt.Id;
                 }
                 else
                 {
                     var oldBankReportClients = context.BankReportClients
-                                               .All()
+                                               .All(x=>x.ClientReport)
                                                .Where(x => x.ClientReport.Id == firstClientReposrt.Id)
                                                .ToList();
                     foreach (BankReportClient iClientBankReport in oldBankReportClients)
@@ -77,9 +79,10 @@ namespace Aimp.Logic.Services
                     {
                         context.BankReportClients.AddOrUpdate(iNewBank);
                     }
+                    firstClientReposrt.UserId = oldBankReportClients.First().ClientReport.UserId;
                     context.ClientReports.AddOrUpdate(firstClientReposrt);
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
         }
         public void DeleteDocument(ClientReportDocument document)

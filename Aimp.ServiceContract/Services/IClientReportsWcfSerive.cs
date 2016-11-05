@@ -1,7 +1,9 @@
-﻿    using Aimp.Model;
+﻿using Aimp.Model;
 using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.ReportOfClient;
+using Entities;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -16,15 +18,15 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        ClientReport GetNewClientReport();
+        ClientReportDto GetNewClientReport();
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        ClientReport GetClientReport(int id);
+        ClientReportDto GetClientReport(int id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
-        void SaveClientReport(ClientReportDocument document);
+        int SaveClientReport(ClientReportDocument document);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json)]
@@ -32,6 +34,6 @@ namespace Aimp.ServiceContract.Services
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped)]
-        ExcelPrintedDocument GetClientReportPrintedDocument(ClientReports reports);
+        ExcelPrintedDocument GetClientReportPrintedDocument(IEnumerable<Bank> banks, IEnumerable<ClientReportListItem> reports);
     }
 }
