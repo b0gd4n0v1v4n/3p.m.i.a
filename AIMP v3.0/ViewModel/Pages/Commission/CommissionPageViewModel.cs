@@ -30,7 +30,10 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                     
                     List =
                         new List<CommissionListItemViewModel>(
-                            response.Select(x => new CommissionListItemViewModel()
+                            response
+                            .OrderByDescending(x=>x.Date)
+                            .ThenByDescending(x=>x.Number)
+                            .Select(x => new CommissionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentSellerId = x.DocumentSellerId,

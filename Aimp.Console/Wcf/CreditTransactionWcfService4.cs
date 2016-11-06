@@ -47,8 +47,7 @@ namespace Aimp.Console.Wcf
                         DkpId = x.DkpDocumentId,
                         PhotoBuyerId = x.Buyer.PhotoId,
                         PhotoSellerId = x.Seller.PhotoId
-                    })
-                    .ToList();
+                    });
             }
             catch (Exception ex)
             {
@@ -107,8 +106,8 @@ namespace Aimp.Console.Wcf
 
             try
             {
-                var creditors = IoC.Resolve<ICreditTransactionService>().GetCreditors().ToList();
-                var requsits = IoC.Resolve<ICreditTransactionService>().GetRequisits().ToList();
+                var creditors = IoC.Resolve<ICreditTransactionService>().GetCreditors();
+                var requsits = IoC.Resolve<ICreditTransactionService>().GetRequisits();
                 return new CreditTransactionInfoDto()
                 {
                     Creditors = creditors,

@@ -36,7 +36,7 @@ namespace Aimp.Console.Wcf
                     Source = x.CommissionTransaction.SourceTrancport.Name,
                     Manager = x.ManagerSeller,
                     User = x.CommissionTransaction.User.LastName
-                }).ToList();
+                });
 
             return new CardTrancportsDto()
             {
@@ -113,7 +113,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Get statuses card trancport");
             try
             {
-                return IoC.Resolve<ICardTrancportService>().GetStatusesCardTrancports().ToList();
+                return IoC.Resolve<ICardTrancportService>().GetStatusesCardTrancports();
             }
             catch (Exception ex)
             {

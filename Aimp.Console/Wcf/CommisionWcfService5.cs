@@ -15,7 +15,6 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CommissionListItem> GetCommissions()
         {
-#warning перенести сортировку на клиента
             EventLog("Get commissions");
             try
             {
@@ -38,10 +37,7 @@ namespace Aimp.Console.Wcf
                         PtsId = x.Trancport.CopyPtsId,
                         Parking = x.Parking.ToString(),
                         Commission = x.Commission.ToString()
-
-                    })
-                //.OrderByDescending(x => new { x.Date, x.Number })
-                .ToList();
+                    });
             }
             catch (Exception ex)
             {
@@ -55,7 +51,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Get source trancports");
             try
             {
-                return IoC.Resolve<ICommissionService>().GetSourcesTrancport().ToList();
+                return IoC.Resolve<ICommissionService>().GetSourcesTrancport();
             }
             catch (Exception ex)
             {
@@ -76,7 +72,6 @@ namespace Aimp.Console.Wcf
                 var document = service.GetDocument(id);
                 var printedDocuments =
                     service.GetPrintedDocumentTemplates()
-                        .ToList()
                         .Select(x => new KeyValue<string, string>()
                         {
                             Key = x.Type,
@@ -100,6 +95,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save commission document id:{document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                  IoC.Resolve<ICommissionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }

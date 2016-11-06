@@ -45,8 +45,7 @@ namespace Aimp.Console.Wcf
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
                         PtsId = x.Trancport.CopyPtsId
-                    })
-                    .ToList();
+                    });
             }
             catch (Exception ex)
             {
@@ -65,7 +64,6 @@ namespace Aimp.Console.Wcf
                 var document = service.GetDocument(id);
                 var printedDocuments =
                     service.GetPrintedDocumentTemplates()
-                        .ToList()
                         .Select(x => new KeyValue<string, string>()
                         {
                             Key = x.Type,

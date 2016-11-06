@@ -13,25 +13,38 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<Row> GetDictionary(string tableName, IEnumerable<string> columns)
         {
-            EventLog($"Get dicionary name: {tableName}") ;
+            EventLog($"Get dicionary name: {tableName}");
+
+            if (columns.First() != "Id")
+                throw new ArgumentNullException("Id");
+
+            string nameColumns = string.Empty;
+
+            foreach (string iColumn in columns)
+                nameColumns = nameColumns + $",'$#$',{iColumn}";
+
+            nameColumns = nameColumns.Substring(7);
+
+            IEnumerable<EntityName> query;
             try
             {
-                IEnumerable<EntityName> query;
-
                 using (var service = IoC.Resolve<IDataContext>())
-                    query = service.Query<EntityName>($"SELECT Id,CONCAT({columns}) as Name FROM {tableName}");
+                    query = service.Query<EntityName>($"SELECT Id,CONCAT({nameColumns}) as Name FROM {tableName}");
 
                 List<Row> result = new List<Row>();
-                foreach(var iRow in query)
+
+                foreach (var iRow in query)
                 {
                     Row row = new Row(tableName);
+
                     var cells = iRow.Name.Split(new[] { "$#$" }, StringSplitOptions.None);
+
                     for (int iColumn = 0; iColumn < columns.Count(); iColumn++)
-                    {
                         row.Cells.Add(new KeyValue<string, string>() { Key = columns.Skip(iColumn).First(), Value = cells[iColumn] });
-                    }
+
                     result.Add(row);
                 }
+
                 return result;
             }
             catch (Exception ex)
@@ -39,6 +52,31 @@ namespace Aimp.Console.Wcf
                 Logger.Log(ex);
                 throw;
             }
+
+
+            //    IEnumerable<EntityName> query;
+
+            //    using (var service = IoC.Resolve<IDataContext>())
+            //        query = service.Query<EntityName>($"SELECT Id,CONCAT({nameColumns}) as Name FROM {tableName}");
+
+            //    List<Row> result = new List<Row>();
+            //    foreach(var iRow in query)
+            //    {
+            //        Row row = new Row(tableName);
+            //        var cells = iRow.Name.Split(new[] { "$#$" }, StringSplitOptions.None);
+            //        for (int iColumn = 0; iColumn < columns.Count(); iColumn++)
+            //        {
+            //            row.Cells.Add(new KeyValue<string, string>() { Key = columns.Skip(iColumn).First(), Value = cells[iColumn] });
+            //        }
+            //        result.Add(row);
+            //    }
+            //    return result;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger.Log(ex);
+            //    throw;
+            //}
         }
 
         public void DeleteRowDictionary(string tableName, int id)
