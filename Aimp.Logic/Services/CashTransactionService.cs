@@ -63,9 +63,6 @@ namespace Aimp.Logic.Services
         }
         public void SaveDocument(CashTransactionDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
-
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var cashTransaction = TinyMapper.Map<CashTransaction>(document);
@@ -76,6 +73,9 @@ namespace Aimp.Logic.Services
 
                 if (cashTransaction.Id == 0)
                 {
+                    if (document.UserId == 0)
+                        throw new ArgumentException("UserId");
+
                     lock (_sync)
                     {
                         cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);

@@ -107,7 +107,7 @@
         </TabControl>
         <Button x:Name="button" Content="ЗАКРЫТЬ" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="595,307,0,0" VerticalAlignment="Top" Width="75" TabIndex="5"/>
         <Button x:Name="button1" Content="СОХРАНИТЬ" Visibility="{Binding VisibleSave}"  Command="{Binding SaveChangesCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="503,307,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
-        <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Visibility="{Binding VisibleDelete}"  Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="361,307,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
+        <Button x:Name="button1_Copy" Content="УДАЛИТЬ" Visibility="Hidden"  Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="361,307,0,0" VerticalAlignment="Top" Width="84" TabIndex="6"/>
         <printControl:PrintControl HorizontalAlignment="Left" Margin="11,307,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

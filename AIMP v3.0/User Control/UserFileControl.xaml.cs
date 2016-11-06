@@ -77,29 +77,31 @@ namespace AIMP_v3._0.User_Control
 
         private void Open_OnClick(object sender, RoutedEventArgs e)
         {
-            try
+            LoadingViewHalper.ShowDialog("Открытие файла...", () =>
             {
-                if (UserFile != null)
+                try
                 {
-                    LoadingViewHalper.ShowDialog("Открытие файла...", () =>
+                    if (UserFile != null)
                     {
+
                         if (UserFile?.File != null)
                             OpenUserFile.Open(UserFile.Name, UserFile.File);
                         else if (UserFile.Id != 0)
                         {
                             OpenUserFile.GetAndOpen(UserFile.Id);
                         }
-                    });
+
+                    }
+                    else if (UserFileId.HasValue)
+                    {
+                        OpenUserFile.GetAndOpen(UserFileId.Value);
+                    }
                 }
-                else if(UserFileId.HasValue)
+                catch (Exception ex)
                 {
-                    OpenUserFile.GetAndOpen(UserFileId.Value);
+                    MessageBox.Show("Не удалось открыть файл", ex.Message);
                 }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Не удалось открыть файл",ex.Message);
-            }
+            });
         }
 
         private void Explorer_OnClick(object sender, RoutedEventArgs e)

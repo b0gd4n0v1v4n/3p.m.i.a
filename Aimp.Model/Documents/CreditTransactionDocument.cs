@@ -25,7 +25,9 @@ namespace Aimp.Model.Documents
         public DateTime? DateProxy { get; set; }
         public string NumberProxy { get; set; }
         public string NumberRegistry { get; set; }
+        public int? AgentDocumentId { get; set; }
         public virtual UserFile AgentDocument { get; set; }
+        public int? DkpDocumentId { get; set; }
         public virtual UserFile DkpDocument { get; set; }
         public DateTime? DateAgent { get; set; }
         public DateTime? DateDkp { get; set; }

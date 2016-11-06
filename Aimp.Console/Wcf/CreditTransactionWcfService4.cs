@@ -14,7 +14,6 @@ namespace Aimp.Console.Wcf
     {
         public IEnumerable<CreditTransactionListItem> GetCreditTransactions()
         {
-#warning перенести сортировку на клиента
             EventLog($"Get credit transactions");
             try
             {
@@ -37,7 +36,7 @@ namespace Aimp.Console.Wcf
                             x.Seller.LegalPerson != null
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                        Date = x.Date,
+                        DateTime = x.Date,
                         DocumentBuyerId = x.Buyer.DocumentId,
                         DocumentSellerId = x.Seller.DocumentId,
                         Number = x.Number.ToString(),
@@ -49,7 +48,6 @@ namespace Aimp.Console.Wcf
                         PhotoBuyerId = x.Buyer.PhotoId,
                         PhotoSellerId = x.Seller.PhotoId
                     })
-                    //.OrderByDescending(x => new {x.Date, x.Number})
                     .ToList();
             }
             catch (Exception ex)
@@ -78,6 +76,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save credit transaction document id: {document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                 IoC.Resolve<ICreditTransactionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
