@@ -19,7 +19,10 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                 {
                     var response = service.GetCardsTrancport();
 
-                    List = response.Items.Select(x=> new CardTrancportListItemViewModel()
+                    List = response.Items
+                        .OrderByDescending(x => x.DateStart)
+                        .ThenByDescending(x=>x.Number)
+                        .Select(x=> new CardTrancportListItemViewModel()
                     {
                         Id = x.Id,
                         ColorTrancport = x.ColorTrancport,

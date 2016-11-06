@@ -19,8 +19,13 @@ namespace Aimp.Console.Wcf
             {
                 var service = IoC.Resolve<ICardTrancportService>();
 
-                var items = service.GetCardTrancports(CurrentUser)
-                .OrderByDescending(x => new { x.DateStart, x.Number })
+                var items = service.GetCardTrancports(CurrentUser, 
+                            x => x.CommissionTransaction.User, 
+                            x => x.CommissionTransaction.Trancport.Make,
+                            x => x.CommissionTransaction.Trancport.Model, 
+                            x => x.CommissionTransaction.Owner.LegalPerson,
+                            x => x.CommissionTransaction.SourceTrancport,
+                            x => x.StatusCardTrancport)
                 .Select(x => new CardTrancportListItemDto()
                 {
                     Id = x.Id,
