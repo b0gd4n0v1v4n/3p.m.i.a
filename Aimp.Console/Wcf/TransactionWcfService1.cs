@@ -49,26 +49,26 @@ namespace Aimp.Console.Wcf
             try
             {
                 switch (type)
-            {
-                case TypeSearchContractor.LastName:
-                    {
-                        return IoC.Resolve<ITransactionService>().GetContractors().Where(x => x.LastName.Contains(text)).ToList();
-                    }
-                case TypeSearchContractor.Inn:
-                    {
-                        return IoC.Resolve<ITransactionService>().GetContractors().Where(x => x.LegalPerson.Inn.Contains(text)).ToList();
-                    }
-                case TypeSearchContractor.Organization:
-                    {
-                        return IoC.Resolve<ITransactionService>().GetContractors().Where(x => x.LegalPerson.Name.Contains(text)).ToList();
-                    }
-                    case TypeSearchContractor.Empty:
                 {
-                        return IoC.Resolve<ITransactionService>().GetContractors().ToList();
-                    }
-                default:
-                    throw new NotImplementedException("Not Implemented search for{type}");
-            }
+                    case TypeSearchContractor.LastName:
+                        {
+                            return IoC.Resolve<ITransactionService>().GetContractors(x => x.LastName.Contains(text));
+                        }
+                    case TypeSearchContractor.Inn:
+                        {
+                            return IoC.Resolve<ITransactionService>().GetContractors(x => x.LegalPerson != null && x.LegalPerson.Inn.Contains(text));
+                        }
+                    case TypeSearchContractor.Organization:
+                        {
+                            return IoC.Resolve<ITransactionService>().GetContractors(x => x.LegalPerson != null && x.LegalPerson.Name.Contains(text));
+                        }
+                    case TypeSearchContractor.Empty:
+                        {
+                            return IoC.Resolve<ITransactionService>().GetContractors();
+                        }
+                    default:
+                        throw new NotImplementedException("Not Implemented search for{type}");
+                }
             }
             catch (Exception ex)
             {
@@ -86,19 +86,19 @@ namespace Aimp.Console.Wcf
             {
                 case TypeSearchTrancport.Make:
                     {
-                        return IoC.Resolve<ITransactionService>().GetTrancports().Where(x => x.Make.Name.Contains(text)).ToList();
+                        return IoC.Resolve<ITransactionService>().GetTrancports(x => x.Make.Name.Contains(text));
                     }
                 case TypeSearchTrancport.Model:
                     {
-                        return IoC.Resolve<ITransactionService>().GetTrancports().Where(x => x.Model.Name.Contains(text)).ToList();
+                        return IoC.Resolve<ITransactionService>().GetTrancports(x => x.Model.Name.Contains(text));
                     }
                 case TypeSearchTrancport.Vin:
                     {
-                        return IoC.Resolve<ITransactionService>().GetTrancports().Where(x => x.Vin.Contains(text)).ToList();
+                        return IoC.Resolve<ITransactionService>().GetTrancports(x => x.Vin.Contains(text));
                     }
                 case TypeSearchTrancport.Empty:
                     {
-                        return IoC.Resolve<ITransactionService>().GetTrancports().ToList();
+                        return IoC.Resolve<ITransactionService>().GetTrancports();
                     }
                 default:
                     throw new NotImplementedException("Not Implemented search for{type}");

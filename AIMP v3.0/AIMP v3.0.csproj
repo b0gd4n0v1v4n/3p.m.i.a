@@ -197,7 +197,6 @@
     <Compile Include="ViewModel\Pages\CreditDocument\CreditTransactionListItemViewModel.cs" />
     <Compile Include="ViewModel\Pages\CreditDocument\CreditTransactionPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\IPageViewModel.cs" />
-    <Compile Include="ViewModel\Pages\ReportOfClient\ClientReportListItemViewModel.cs" />
     <Compile Include="ViewModel\Pages\ReportOfClient\ClientReportPageViewModel.cs" />
     <Compile Include="ViewModel\ClientOfReport\ClientReportViewModel.cs" />
     <Compile Include="ViewModel\PrintedDocument\PrintedDocumentEditViewModel.cs" />

@@ -15,7 +15,7 @@ namespace Aimp.Logic.Services
         public IEnumerable<UserRight> GetUserRights(int id)
         {
             using (var context = IoC.Resolve<IDataContext>())
-                return context.UserRights.All().Where(x => x.UserId == id);
+                return context.UserRights.All().Where(x => x.UserId == id).ToList();
         }
         public IEnumerable<User> GetUsers(Expression<Func<User, bool>> predicate = null)
         {

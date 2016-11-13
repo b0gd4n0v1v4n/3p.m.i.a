@@ -2,16 +2,12 @@
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Extensions;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using Entities;
 using Nelibur.ObjectMapper;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AIMP_v3._0.ViewModel.CardsTrancport
@@ -114,7 +110,7 @@ namespace AIMP_v3._0.ViewModel.CardsTrancport
                         }
                         catch (Exception ex)
                         {
-                            Logger.Instance.Log("Не удалось сохранить", "SaveChangesCommand", ex);
+                            MessageBox.Show(ex.Message,"Не удалось сохранить");
                         }
                     });
                 });

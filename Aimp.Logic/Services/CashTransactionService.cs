@@ -9,13 +9,13 @@ using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
 using Aimp.Reports.Interfaces;
 using Aimp.Reports.PrintedDocument.Templates;
-using Aimp.Reports.Services;
 using Entities;
 using Nelibur.ObjectMapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
@@ -26,14 +26,13 @@ namespace Aimp.Logic.Services
 
         public CashTransactionService()
         {
-#warning ПРОВЕРИТЬ
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var beginSequnce = context.CashTransactions
                     .All()
-                    .GroupBy(x => new { x.Date.Year, x.Number })
-                    .Select(x=> new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Year, x=>x.Number);
+                    .GroupBy(x => x.Date.Year)
+                    .Select(x=> new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Key, x=>x.Number + 1);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }
@@ -64,9 +63,6 @@ namespace Aimp.Logic.Services
         }
         public void SaveDocument(CashTransactionDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
-
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var cashTransaction = TinyMapper.Map<CashTransaction>(document);
@@ -75,14 +71,22 @@ namespace Aimp.Logic.Services
 
                 context.CashTransactions.AddOrUpdate(cashTransaction);
 
-                lock (_sync)
+                if (cashTransaction.Id == 0)
                 {
-                    cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);
-                    context.SaveChanges();
-                    _sequnce.NextValue(cashTransaction.Date);
+                    if (document.UserId == 0)
+                        throw new ArgumentException("UserId");
+
+                    lock (_sync)
+                    {
+                        cashTransaction.Number = _sequnce.CurrentValue(cashTransaction.Date);
+                        context.SaveChanges();
+                        _sequnce.NextValue(cashTransaction.Date);
+                    }
+                    document.Id = cashTransaction.Id;
+                    document.Number = cashTransaction.Number;
                 }
-                document.Id = cashTransaction.Id;
-                document.Number = cashTransaction.Number;
+                else
+                    context.SaveChanges();
             }
         }
         public void DeleteDocument(CashTransactionDocument document)
@@ -93,14 +97,18 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IEnumerable<CashTransaction> GetCashTransactions(User user)
+        public IEnumerable<CashTransaction> GetCashTransactions(User user, params Expression<Func<CashTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CashTransactions.All().ToList();
+                    return context.CashTransactions
+                        .All(includes)
+                        .ToList();
                 else
-                    return context.CashTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CashTransactions
+                        .All(includes)
+                             .ToList();
             }
         }
         public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()

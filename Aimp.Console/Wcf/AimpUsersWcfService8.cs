@@ -17,7 +17,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Get user rights");
             try
             {
-                return IoC.Resolve<IUserRightsService>().GetUserRights(id).ToList();
+                return IoC.Resolve<IUserRightsService>().GetUserRights(id);
             }
             catch (Exception ex)
             {
@@ -31,7 +31,7 @@ namespace Aimp.Console.Wcf
             EventLog("Auth");
             try
             {
-                var userRights = IoC.Resolve<IUserRightsService>().GetUserRights(CurrentUser.Id).Select(x => x.RightId).ToList();
+                var userRights = IoC.Resolve<IUserRightsService>().GetUserRights(CurrentUser.Id).Select(x => x.RightId);
 
                 return new AimpUserDto()
                 {
@@ -51,7 +51,7 @@ namespace Aimp.Console.Wcf
             EventLog("get users");
             try
             {
-                return IoC.Resolve<IUserRightsService>().GetUsers().ToList();
+                return IoC.Resolve<IUserRightsService>().GetUsers();
             }
             catch (Exception ex)
             {

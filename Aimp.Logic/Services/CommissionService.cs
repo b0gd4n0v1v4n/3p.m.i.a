@@ -15,8 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
@@ -27,14 +26,13 @@ namespace Aimp.Logic.Services
 
         public CommissionService()
         {
-#warning ПРОВЕРИТЬ
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var beginSequnce = context.CommissionTransactions
                     .All()
-                    .GroupBy(x => new { x.Date.Year, x.Number })
-                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Year, x => x.Number);
+                    .GroupBy(x => x.Date.Year)
+                    .Select(x => new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Key, x => x.Number + 1);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }
@@ -67,26 +65,31 @@ namespace Aimp.Logic.Services
         }
         public void SaveDocument(CommissionDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
-
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var commission = TinyMapper.Map<CommissionTransaction>(document);
-                if (commission.Id == 0)
-                    commission.UserId = document.UserId;
-                
+
                 context.CommissionTransactions.AddOrUpdate(commission);
 
-                lock (_sync)
+                if (commission.Id == 0)
                 {
-                    commission.Number = _sequnce.CurrentValue(commission.Date);
-                    context.SaveChanges();
-                    _sequnce.NextValue(commission.Date);
-                }
+                    if (document.UserId == 0)
+                        throw new ArgumentException("UserId");
 
-                document.Id = commission.Id;
-                document.Number = commission.Number;
+                    commission.UserId = document.UserId;
+
+                    lock (_sync)
+                    {
+                        commission.Number = _sequnce.CurrentValue(commission.Date);
+                        context.SaveChanges();
+                        _sequnce.NextValue(commission.Date);
+                    }
+
+                    document.Id = commission.Id;
+                    document.Number = commission.Number;
+                }
+                else
+                    context.SaveChanges();
             }
         }
         public void DeleteDocument(CommissionDocument document)
@@ -103,14 +106,14 @@ namespace Aimp.Logic.Services
                 context.SaveChanges();
             }
         }
-        public IEnumerable<CommissionTransaction> GetCommissions(User user)
+        public IEnumerable<CommissionTransaction> GetCommissions(User user, params Expression<Func<CommissionTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
-                    return context.CommissionTransactions.All().ToList();
+                    return context.CommissionTransactions.All(includes).ToList();
                 else
-                    return context.CommissionTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CommissionTransactions.All(includes).Where(x => x.UserId == user.Id).ToList();
             }
         }
         public IEnumerable<PrintedDocumentTemplate> GetPrintedDocumentTemplates()

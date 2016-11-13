@@ -5,7 +5,7 @@ namespace Aimp.Model.CreditTransact
 {
     public class CreditTransactionListItem : Identity
     {
-        public DateTime Date { get; set; }
+        public DateTime DateTime { get; set; }
         public string Number { get; set; }
         public string NumberProxy { get; set; }
         public string SellerFullName { get; set; }

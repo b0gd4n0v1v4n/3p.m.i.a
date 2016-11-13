@@ -6,6 +6,7 @@ namespace Aimp.Logic.Extensions
 {
     public static class ContextExtensions
     {
+#warning refactoring
         public static void UserFileUpdate(this IDataContext context, int? newFileId, UserFile newFile,UserFile oldFile)
         {
             if (StructuralComparisons.StructuralEqualityComparer.Equals(newFile?.File, oldFile?.File))

@@ -1,24 +1,17 @@
 ﻿using System.Windows;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Model;
+using System;
+using Aimp.Model.CreditTransact;
 
 namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
-    public class CreditTransactionListItemViewModel : Identity
+    public class CreditTransactionListItemViewModel : CreditTransactionListItem
     {
-        public string Date { get; set; }
-        public string Number { get; set; }
-        public string NumberProxy { get; set; }
-        public string SellerFullName { get; set; }
-        public string BuyerFullName { get; set; }
-        public string TrancportFullName { get; set; }
-        public int? DocumentSellerId { get; set; }
-        public int? DocumentBuyerId { get; set; }
-        public int? PtsId { get; set; }
-        public int? DkpId { get; set; }
-        public int? AdId { get; set; }
-        public int? PhotoSellerId { get; set; }
-        public int? PhotoBuyerId { get; set; }
+        public string Date { get
+            {
+                return DateTime.ToString(Aimp.Model.DataFormats.DateFormat);
+            } }
         public Visibility VisibilityOpenDocumentSeller => DocumentSellerId != null ? Visibility.Visible : Visibility.Hidden;
 
         public Visibility VisibilityOpenDocumentBuyer => DocumentBuyerId != null ? Visibility.Visible : Visibility.Hidden;
@@ -39,7 +32,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)AdId);
+                    OpenFile(AdId);
                 });
             }
         }
@@ -50,7 +43,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)DkpId);
+                    OpenFile(DkpId);
                 });
             }
         }
@@ -61,7 +54,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)PhotoBuyerId);
+                    OpenFile(PhotoBuyerId);
                 });
             }
         }
@@ -72,7 +65,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)PhotoSellerId);
+                    OpenFile(PhotoSellerId);
                 });
             }
         }
@@ -83,7 +76,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)DocumentSellerId);
+                    OpenFile(DocumentSellerId);
                 });
             }
         }
@@ -94,7 +87,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)DocumentBuyerId);
+                    OpenFile(DocumentBuyerId);
                 });
             }
         }
@@ -105,9 +98,25 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)PtsId);
+                    OpenFile((int)PtsId);
                 });
             }
+        }
+        private void OpenFile(int? id)
+        {
+            LoadingViewHalper.ShowDialog("Открытие файла...", () =>
+            {
+                try
+                {
+
+                    OpenUserFile.GetAndOpen((int)id);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Не удалось открыть файл");
+                }
+            });
         }
     }
 }

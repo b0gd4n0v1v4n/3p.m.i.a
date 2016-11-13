@@ -19,23 +19,27 @@ namespace Aimp.Console.Wcf
             try
             {
                 return IoC.Resolve<ICommissionService>()
-                    .GetCommissions(CurrentUser)
+                    .GetCommissions(CurrentUser,
+                                    x => x.Seller,
+                                    x => x.Seller.LegalPerson,
+                                    x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CommissionListItem()
-                {
-                    Id = x.Id,
-                    SellerFullName = x.Seller.LegalPerson != null ? x.Seller.LegalPerson.Name : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                    Date = x.Date,
-                    DocumentSellerId = x.Seller.Document.Id,
-                    Number = x.Number.ToString(),
-                    NumberProxy = x.NumberProxy,
-                    TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                    PtsId = x.Trancport.CopyPts.Id,
-                    Parking = x.Parking.ToString(),
-                    Commission = x.Commission.ToString()
-
-                }).OrderByDescending(x => new { x.Date, x.Number }).ToList();
+                    {
+                        Id = x.Id,
+                        SellerFullName = x.Seller.LegalPerson != null ? x.Seller.LegalPerson.Name : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
+                        Date = x.Date,
+                        DocumentSellerId = x.Seller.DocumentId,
+                        Number = x.Number.ToString(),
+                        NumberProxy = x.NumberProxy,
+                        TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
+                        PtsId = x.Trancport.CopyPtsId,
+                        Parking = x.Parking.ToString(),
+                        Commission = x.Commission.ToString()
+                    });
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Logger.Log(ex);
                 throw;
@@ -47,7 +51,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Get source trancports");
             try
             {
-                return IoC.Resolve<ICommissionService>().GetSourcesTrancport().ToList();
+                return IoC.Resolve<ICommissionService>().GetSourcesTrancport();
             }
             catch (Exception ex)
             {
@@ -68,7 +72,6 @@ namespace Aimp.Console.Wcf
                 var document = service.GetDocument(id);
                 var printedDocuments =
                     service.GetPrintedDocumentTemplates()
-                        .ToList()
                         .Select(x => new KeyValue<string, string>()
                         {
                             Key = x.Type,
@@ -92,6 +95,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save commission document id:{document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                  IoC.Resolve<ICommissionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }

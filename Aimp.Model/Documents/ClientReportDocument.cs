@@ -24,10 +24,7 @@ namespace Aimp.Model.Documents
 
         public int UserId
         {
-            get
-            {
-                return BankReportClients.First().ClientReport.UserId;
-            }
+            get;set;
         }
     }
 }

@@ -113,8 +113,7 @@ namespace Aimp.Console.Wcf
                         Id = x.Id,
                         Name = x.Name,
                         Type = x.Type
-                    })
-                    .ToList();
+                    });
             }
             catch (Exception ex)
             {

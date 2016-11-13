@@ -7,7 +7,7 @@ namespace Aimp.ServiceContract.Services
     [ServiceKnownType(typeof(DocumentType))]
     public interface IAimpWcfService : ICashTransactionWcfService, ICreditTransactionWcfService, 
         ICommisionWcfService, IClientReportsWcfSerive, IDataContextWcfService, IAimpUsersWcfService,
-        IPrintedDocumentWcfService
+        IPrintedDocumentWcfService,ITransactionWcfService,ICardTrancportsWcfService
     {
 
     }

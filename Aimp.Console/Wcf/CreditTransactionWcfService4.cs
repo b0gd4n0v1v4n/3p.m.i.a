@@ -18,7 +18,13 @@ namespace Aimp.Console.Wcf
             try
             {
                 return IoC.Resolve<ICreditTransactionService>()
-                    .GetCreditTransactions(CurrentUser)
+                    .GetCreditTransactions(CurrentUser, x => x.Buyer,
+                             x => x.Buyer.LegalPerson,
+                             x => x.Seller,
+                             x => x.Seller.LegalPerson,
+                             x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CreditTransactionListItem()
                     {
                         Id = x.Id,
@@ -30,18 +36,18 @@ namespace Aimp.Console.Wcf
                             x.Seller.LegalPerson != null
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                        Date = x.Date,
-                        DocumentBuyerId = x.Buyer.Document.Id,
-                        DocumentSellerId = x.Seller.Document.Id,
+                        DateTime = x.Date,
+                        DocumentBuyerId = x.Buyer.DocumentId,
+                        DocumentSellerId = x.Seller.DocumentId,
                         Number = x.Number.ToString(),
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                        PtsId = x.Trancport.CopyPts.Id,
-                        AdId = x.AgentDocument.Id,
-                        DkpId = x.DkpDocument.Id,
+                        PtsId = x.Trancport.CopyPtsId,
+                        AdId = x.AgentDocumentId,
+                        DkpId = x.DkpDocumentId,
                         PhotoBuyerId = x.Buyer.PhotoId,
-                        PhotoSellerId = x.SellerId
-                    }).OrderByDescending(x => new {x.Date, x.Number}).ToList();
+                        PhotoSellerId = x.Seller.PhotoId
+                    });
             }
             catch (Exception ex)
             {
@@ -69,6 +75,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save credit transaction document id: {document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                 IoC.Resolve<ICreditTransactionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }
@@ -99,8 +106,8 @@ namespace Aimp.Console.Wcf
 
             try
             {
-                var creditors = IoC.Resolve<ICreditTransactionService>().GetCreditors().ToList();
-                var requsits = IoC.Resolve<ICreditTransactionService>().GetRequisits().ToList();
+                var creditors = IoC.Resolve<ICreditTransactionService>().GetCreditors();
+                var requsits = IoC.Resolve<ICreditTransactionService>().GetRequisits();
                 return new CreditTransactionInfoDto()
                 {
                     Creditors = creditors,

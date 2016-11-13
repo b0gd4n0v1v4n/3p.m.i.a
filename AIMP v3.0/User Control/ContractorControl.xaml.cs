@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using AIMP_v3._0.Interfaces;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel;
-using Models.Entities;
+using Entities;
 
 namespace AIMP_v3._0.User_Control
 {

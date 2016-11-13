@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
@@ -26,27 +27,26 @@ namespace Aimp.Logic.Services
 
         public CreditTransactionService()
         {
-#warning ПРОВЕРИТЬ
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var beginSequnce = context.CreditTransactions
                     .All()
-                    .GroupBy(x => new { x.Date.Year, x.Number })
-                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
-                    .ToDictionary(x => x.Year, x => x.Number);
+                    .GroupBy(x => x.Date.Year)
+                    .Select(x => new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().Number })
+                    .ToDictionary(x => x.Key, x => x.Number+1);
 
                 _sequnce = new YearNumberSequence(beginSequnce);
             }
         }
 
-        public IEnumerable<CreditTransaction> GetCreditTransactions(User user)
+        public IEnumerable<CreditTransaction> GetCreditTransactions(User user, params Expression<Func<CreditTransaction, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if(user.IsAdmin())
-                    return context.CreditTransactions.All().ToList();
+                    return context.CreditTransactions.All(includes).ToList();
                 else
-                    return context.CreditTransactions.All().Where(x => x.UserId == user.Id).ToList();
+                    return context.CreditTransactions.All(includes).Where(x => x.UserId == user.Id).ToList();
             }
         }
         public CreditTransactionDocument GetDocument(int id)
@@ -78,30 +78,39 @@ namespace Aimp.Logic.Services
         }
         public void SaveDocument(CreditTransactionDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
 
             using (var context = IoC.Resolve<IDataContext>())
             {
                 var creditTransaction = TinyMapper.Map<CreditTransaction>(document);
+
                 if (creditTransaction.Id == 0)
-                    creditTransaction.UserId =document.UserId;
+                {
+                    context.CreditTransactions.AddOrUpdate(creditTransaction);
+
+                    if (document.UserId == 0)
+                        throw new ArgumentException("UserId");
+
+                    creditTransaction.UserId = document.UserId;
+                    lock (_sync)
+                    {
+                        creditTransaction.Number = _sequnce.CurrentValue(creditTransaction.Date);
+                        context.SaveChanges();
+                        _sequnce.NextValue(creditTransaction.Date);
+                    }
+                    document.Id = creditTransaction.Id;
+                    document.Number = creditTransaction.Number;
+                }
                 else
                 {
                     var dbTransaction = context.CreditTransactions.Get(creditTransaction.Id, x => x.DkpDocument, x => x.AgentDocument);
-                    context.UserFileUpdate(creditTransaction.AgentDocumentId, creditTransaction.AgentDocument, dbTransaction.AgentDocument);
-                    context.UserFileUpdate(creditTransaction.DkpDocumentId, creditTransaction.DkpDocument, dbTransaction.DkpDocument);
-                    context.SaveChanges();
-                }
 
-                lock (_sync)
-                {
-                    creditTransaction.Number = _sequnce.CurrentValue(creditTransaction.Date);
+                    context.UserFileUpdate(creditTransaction.DkpDocumentId, creditTransaction.DkpDocument, dbTransaction.DkpDocument);
+                    context.UserFileUpdate(creditTransaction.AgentDocumentId, creditTransaction.AgentDocument, dbTransaction.AgentDocument);
                     context.SaveChanges();
-                    _sequnce.NextValue(creditTransaction.Date);
+
+                    context.CreditTransactions.AddOrUpdate(creditTransaction);
+                    context.SaveChanges();
                 }
-                document.Id = creditTransaction.Id;
-                document.Number = creditTransaction.Number;
             }
         }
         public void DeleteDocument(CreditTransactionDocument document)

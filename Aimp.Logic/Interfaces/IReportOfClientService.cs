@@ -16,6 +16,6 @@ namespace Aimp.Logic.Interfaces
         IEnumerable<CreditProgramm> GetCreditProgramms();
         IEnumerable<ClientStatus> GetClientStatuses();
         IEnumerable<BankReportClient> GetBankReportClients(User user);
-        IPrintedDocument PrintReport(ClientReports report);
+        IPrintedDocument PrintReport(IEnumerable<Bank> banks, IEnumerable<ClientReportListItem> reports);
     }
 }

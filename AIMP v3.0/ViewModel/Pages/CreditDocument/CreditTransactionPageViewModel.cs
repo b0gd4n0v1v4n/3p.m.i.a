@@ -6,9 +6,10 @@ using AIMP_v3._0.Helpers;
 using AIMP_v3._0.DataAccess;
 using System.Windows;
 using AIMP_v3._0.PrintControl;
-using AIMP_v3._0.User_Control;
 using AIMP_v3._0.View;
-using AIMP_v3._0.Logging;
+using System.Collections;
+using System.Collections.Generic;
+using Nelibur.ObjectMapper;
 
 namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
@@ -28,24 +29,26 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                 using (AimpService service = new AimpService())
                 {
                     var response = service.GetCreditTransactions();
-
-                    var lst = response.Select(x => new CreditTransactionListItemViewModel()
-                            {
-                                Id = x.Id,
-                                DocumentBuyerId = x.DocumentBuyerId,
-                                DocumentSellerId = x.DocumentSellerId,
-                                PtsId = x.PtsId,
-                                BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(DataFormats.DateFormat),
-                                TrancportFullName = x.TrancportFullName,
-                                Number = x.Number,
-                                NumberProxy = x.NumberProxy,
-                                SellerFullName = x.SellerFullName,
-                                PhotoSellerId = x.PhotoSellerId,
-                                PhotoBuyerId = x.PhotoBuyerId,
-                                DkpId = x.DkpId,
-                                AdId = x.AdId
-                            });
+                    var lst = response
+                            .OrderByDescending(x => x.DateTime)
+                            .ThenByDescending(x => x.Number)
+                            .Select(x => new CreditTransactionListItemViewModel()
+                             {
+                                DateTime = x.DateTime,
+                                 Id = x.Id,
+                                 DocumentBuyerId = x.DocumentBuyerId,
+                                 DocumentSellerId = x.DocumentSellerId,
+                                 PtsId = x.PtsId,
+                                 BuyerFullName = x.BuyerFullName,
+                                 TrancportFullName = x.TrancportFullName,
+                                 Number = x.Number,
+                                 NumberProxy = x.NumberProxy,
+                                 SellerFullName = x.SellerFullName,
+                                 PhotoSellerId = x.PhotoSellerId,
+                                 PhotoBuyerId = x.PhotoBuyerId,
+                                 DkpId = x.DkpId,
+                                 AdId = x.AdId
+                             });
 
                     List = new ObservableCollection<CreditTransactionListItemViewModel>(lst);
                 }
@@ -123,7 +126,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                     }
                     catch (Exception ex)
                     {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        MessageBox.Show(ex.Message, "Неудалось создать документ");
                     }
                 }));
             }

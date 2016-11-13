@@ -37,7 +37,6 @@ namespace AIMP_v3._0.ViewModel.Dictionaries
                             {
                                 service.SaveRowValuesDictionary(_tableName, dictionary, _id);
                             }
-                            MessageBox.Show("Данные сохранены");
                         }
                         catch (Exception ex)
                         {

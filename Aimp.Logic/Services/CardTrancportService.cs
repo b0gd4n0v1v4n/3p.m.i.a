@@ -8,30 +8,28 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Aimp.Logic.Services
 {
     public class CardTrancportService: ICardTrancportService
     {
-        private readonly IYearNumberSequence<int> _sequnce;
-        private readonly object _sync = new object();
+        //private readonly IYearNumberSequence<int> _sequnce;
+        //private readonly object _sync = new object();
 
-        public CardTrancportService()
-        {
-#warning ПРОВЕРИТЬ
-            using (var context = IoC.Resolve<IDataContext>())
-            {
-                var beginSequnce = context.CardsTrancport
-                    .All()
-                    .GroupBy(x => new { x.CommissionTransaction.Date.Year, x.Number })
-                    .Select(x => new { x.Key.Year, x.OrderByDescending(m => m.Number).FirstOrDefault().CommissionTransaction.Number })
-                    .ToDictionary(x => x.Year, x => x.Number);
+        //public CardTrancportService()
+        //{
+        //    using (var context = IoC.Resolve<IDataContext>())
+        //    {
+        //        var beginSequnce = context.CardsTrancport
+        //            .All()
+        //            .GroupBy(x => x.CommissionTransaction.Date.Year)
+        //            .Select(x => new { x.Key, x.OrderByDescending(m => m.Number).FirstOrDefault().CommissionTransaction.Number })
+        //            .ToDictionary(x => x.Key, x => x.Number + 1);
 
-                _sequnce = new YearNumberSequence(beginSequnce);
-            }
-        }
+        //        _sequnce = new YearNumberSequence(beginSequnce);
+        //    }
+        //}
         public int AddCardTrancport(int idCommission, DateTime dateStart)
         {
             using (var context = IoC.Resolve<IDataContext>())
@@ -66,18 +64,17 @@ namespace Aimp.Logic.Services
             }
         }
 
-        public IEnumerable<CardTrancport> GetCardTrancports(User user)
+        public IEnumerable<CardTrancport> GetCardTrancports(User user, params Expression<Func<CardTrancport, object>>[] includes)
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
                 if (user.IsAdmin())
                     return context.CardsTrancport
-                        .All(x => x.CommissionTransaction.User, x => x.CommissionTransaction.Trancport.Make,
-                            x => x.CommissionTransaction.Trancport.Model, x => x.CommissionTransaction.Owner.LegalPerson)
+                        .All(includes)
                         .ToList();
                     
                 return context.CardsTrancport
-                        .All(x => x.CommissionTransaction.User, x => x.CommissionTransaction.Trancport.Make, x => x.CommissionTransaction.Trancport.Model, x => x.CommissionTransaction.Owner.LegalPerson)
+                        .All(includes)
                         .Where(x => x.CommissionTransaction.User.Id == user.Id)
                         .ToList();
             }
@@ -110,8 +107,8 @@ namespace Aimp.Logic.Services
 
         public void SaveDocument(CardTrancportDocument document)
         {
-            if (document.UserId == 0)
-                throw new ArgumentException("UserId");
+            //if (document.UserId == 0)
+            //    throw new ArgumentException("UserId");
 
             using (var context = IoC.Resolve<IDataContext>())
             {
@@ -151,14 +148,14 @@ namespace Aimp.Logic.Services
 
                 context.CardsTrancport.AddOrUpdate(firstCardTrancport);
 
-                lock (_sync)
-                {
-                    firstCardTrancport.CommissionTransaction.Number = _sequnce.CurrentValue(firstCardTrancport.CommissionTransaction.Date);
+                //lock (_sync)
+                //{
+                //    firstCardTrancport.CommissionTransaction.Number = _sequnce.CurrentValue(firstCardTrancport.CommissionTransaction.Date);
                     context.SaveChanges();
-                    _sequnce.NextValue(firstCardTrancport.CommissionTransaction.Date);
-                }
+                //    _sequnce.NextValue(firstCardTrancport.CommissionTransaction.Date);
+                //}
 
-                document.Id = firstCardTrancport.CommissionTransaction.Id;
+                //document.Id = firstCardTrancport.CommissionTransaction.Id;
             }
         }
     }

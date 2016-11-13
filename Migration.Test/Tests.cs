@@ -1,8 +1,7 @@
-﻿using AimpDataAccess.Context;
-using AimpDataAccess.EF;
+﻿using Aimp.DataAccess.Ef;
+using Aimp.DataAccess.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
 using System.Linq;
 
 namespace Migration.Test
@@ -11,7 +10,7 @@ namespace Migration.Test
     public class Tests
     {
         //private string _pathLog = @"D:\AimpFiles\Logs\migration";
-        private IAimpContext _context = new EfAimpContext();
+        private IDataContext _context = new EfDataContext();
 
         //public Tests()
         //{
@@ -149,7 +148,7 @@ namespace Migration.Test
         [TestMethod]
         public void ClientReports()
         {
-            var news = _context.ClientReports.All();
+            var news = _context.ClientReports.All(x=>x.User);
             using (ampspbEntities oldDb = new ampspbEntities())
             {
                 foreach (var nReport in news)
@@ -157,8 +156,8 @@ namespace Migration.Test
                     var search = oldDb.ОТЧЁТЫ_КЛИЕНТОВ
                         .Any(x => x.дата == nReport.Date &&
                         x.фио == nReport.FullName &&
-                        x.комментарий == nReport.Comment);
-
+                        x.комментарий == nReport.Comment
+                      && x.ПОЛЬЗОВАТЕЛИ1.логин == nReport.User.Login);
                     //if (!search)
                     //    File.AppendAllText(_pathLog, $"[ClientReport: ({nReport.Date}]");
                     Assert.AreEqual(true, search);

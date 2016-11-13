@@ -9,6 +9,6 @@ namespace Aimp.Model.ReportOfClient
         public IEnumerable<string> ClientStatusesForFilter { get; set; }
         public IEnumerable<Bank> Banks { get; set; }
         
-        public IEnumerable<ClientReportListItem> Items { get; set; } 
+        public IEnumerable<BankReportClient> Items { get; set; } 
     }
 }

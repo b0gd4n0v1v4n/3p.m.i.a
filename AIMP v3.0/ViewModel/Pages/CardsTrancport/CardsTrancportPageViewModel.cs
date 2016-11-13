@@ -1,6 +1,5 @@
 ﻿using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.View;
 using AIMP_v3._0.ViewModel.CardsTrancport;
 using System;
@@ -20,11 +19,14 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                 {
                     var response = service.GetCardsTrancport();
 
-                    List = response.Items.Select(x=> new CardTrancportListItemViewModel()
+                    List = response.Items
+                        .OrderByDescending(x => x.DateStart)
+                        .ThenByDescending(x=>x.Number)
+                        .Select(x=> new CardTrancportListItemViewModel()
                     {
                         Id = x.Id,
                         ColorTrancport = x.ColorTrancport,
-                        DateSale = x.DateSale?.ToString(Models.DataFormats.DateFormat),
+                        DateSale = x.DateSale?.ToString(Aimp.Model.DataFormats.DateFormat),
                         DateStart = x.DateStart.ToString(Aimp.Model.DataFormats.DateFormat),
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,

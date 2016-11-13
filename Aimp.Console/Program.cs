@@ -7,6 +7,9 @@ using Aimp.DataAccess.Interfaces;
 using Aimp.Domain;
 using Aimp.Logic.Interfaces;
 using Aimp.Logic.Services;
+using Aimp.Reports.Interfaces;
+using Aimp.Reports.Services.Word;
+using Aimp.Reports.Services.Excel;
 
 namespace Aimp.Console
 {
@@ -29,21 +32,33 @@ namespace Aimp.Console
                         throw new Exception("adress not found");
 
                     System.Console.Title = webServiceHost.BaseAddresses[0].AbsoluteUri;
+                    webServiceHost.Open();
 
                     logger.Log("web service host started.");
                     logger.Log("service ready!");
                     logger.Log("---------------------------");
+
+                    System.Console.ReadLine();
                 }
             }
             catch(Exception ex)
             {
                 logger.Log(ex);
             }
-            System.Console.ReadLine();
+            
         }
 
         static void ServicesInit(ILogger logger)
         {
+            IoC.Register<IExcelPrintedService, ExcelPrintedService>(false);
+            using (IoC.Resolve<IExcelPrintedService>()) { };
+            logger.Log("IExcelPrintedService ready.");
+
+            IoC.Register<IPrintedService, WordPrintedService>(false);
+            using (IoC.Resolve<IPrintedService>()) { } ;
+            logger.Log("IPrintedService ready.");
+
+
             IoC.Register<IDataContext, EfDataContext>(false);
             IoC.Resolve<IDataContext>();
             logger.Log("IDataContext ready.");

@@ -19,7 +19,7 @@ namespace Aimp.Logic.Sequnces
         public int CurrentValue(DateTime date)
         {
             if (!_dictionary.ContainsKey(date.Year))
-                _dictionary.Add(date.Year, 0);
+                _dictionary.Add(date.Year, 1);
 
             return _dictionary[date.Year];
         }
@@ -27,7 +27,7 @@ namespace Aimp.Logic.Sequnces
         public void NextValue(DateTime date)
         {
             if (!_dictionary.ContainsKey(date.Year))
-                _dictionary.Add(date.Year, 0);
+                _dictionary.Add(date.Year, 1);
 
             _dictionary[date.Year]++;
         }

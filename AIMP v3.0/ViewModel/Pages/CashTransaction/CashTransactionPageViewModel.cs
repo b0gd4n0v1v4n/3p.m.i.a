@@ -2,7 +2,6 @@
 using Aimp.Model.Documents;
 using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
-using AIMP_v3._0.Logging;
 using AIMP_v3._0.PrintControl;
 using AIMP_v3._0.View;
 using System;
@@ -31,19 +30,24 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 
                     List =
                         new List<CashTransactionListItemViewModel>(
-                            response.Select(x => new CashTransactionListItemViewModel()
+                            response
+                            .OrderByDescending(x => x.Date)
+                            .ThenByDescending(x => x.Number)
+                            .Select(x => new CashTransactionListItemViewModel()
                             {
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
                                 BuyerFullName = x.BuyerFullName,
-                                Date = x.Date.ToString(DataFormats.DateFormat),
+                                Date = x.Date.ToString(Aimp.Model.DataFormats.DateFormat),
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
                                 SellerFullName = x.SellerFullName
-                            }));
+                            }))
+                            
+                            ;
                 }
             }
             catch (Exception ex)
@@ -85,7 +89,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                     }
                     catch (Exception ex)
                     {
-                        Logger.Instance.Log("Неудалось создать документ", "New", ex);
+                        MessageBox.Show(ex.Message, "Неудалось создать документ");
                     }
                 }));
             }

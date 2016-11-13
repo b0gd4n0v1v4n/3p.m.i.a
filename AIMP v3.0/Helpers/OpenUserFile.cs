@@ -20,14 +20,8 @@ namespace AIMP_v3._0.Helpers
                 using (AimpService service = new AimpService())
                 {
                     var file = service.GetUserFile(id);
-
-                    if (file.Error)
-                    {
-                        MessageBox.Show(file.Message);
-                        return;
-                    }
-
-                    Open(file.UserFile.Name,file.UserFile.File);
+                    
+                    Open(file.Name,file.File);
                 }
             }
             catch(Exception ex)

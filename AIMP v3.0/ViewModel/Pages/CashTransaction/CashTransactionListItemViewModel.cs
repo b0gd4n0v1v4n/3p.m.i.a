@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Model;
+using System;
 
 namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 {
@@ -35,7 +36,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)DocumentSellerId);
+                    OpenFile(DocumentSellerId);
                 });
             }
         }
@@ -46,7 +47,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)DocumentBuyerId);
+                    OpenFile(DocumentBuyerId);
                 });
             }
         }
@@ -57,9 +58,24 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             {
                 return new Command(x =>
                 {
-                    OpenUserFile.GetAndOpen((int)PtsId);
+                    OpenFile(PtsId);
                 });
             }
+        }
+
+        private void OpenFile(int? id)
+        {
+            LoadingViewHalper.ShowDialog("Открытие файла...", () =>
+            {
+            try
+            {
+                OpenUserFile.GetAndOpen((int)id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Не удалось открыть файл");
+            }
+            });
         }
     }
 }

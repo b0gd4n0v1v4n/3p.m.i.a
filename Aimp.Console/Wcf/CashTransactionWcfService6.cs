@@ -20,7 +20,13 @@ namespace Aimp.Console.Wcf
             try
             {
                 return IoC.Resolve<ICashTransactionService>()
-                    .GetCashTransactions(CurrentUser)
+                    .GetCashTransactions(CurrentUser, x => x.Buyer,
+                             x => x.Buyer.LegalPerson,
+                             x => x.Seller,
+                             x => x.Seller.LegalPerson,
+                             x => x.Trancport,
+                             x => x.Trancport.Make,
+                             x => x.Trancport.Model)
                     .Select(x => new CashTransactionListItem()
                     {
                         Id = x.Id,
@@ -33,13 +39,13 @@ namespace Aimp.Console.Wcf
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
                         Date = x.Date,
-                        DocumentBuyerId = x.Buyer.Document.Id,
-                        DocumentSellerId = x.Seller.Document.Id,
+                        DocumentBuyerId = x.Buyer.DocumentId,
+                        DocumentSellerId = x.Seller.DocumentId,
                         Number = x.Number.ToString(),
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
-                        PtsId = x.Trancport.CopyPts.Id
-                    }).OrderByDescending(x => new {x.Date, x.Number}).ToList();
+                        PtsId = x.Trancport.CopyPtsId
+                    });
             }
             catch (Exception ex)
             {
@@ -58,7 +64,6 @@ namespace Aimp.Console.Wcf
                 var document = service.GetDocument(id);
                 var printedDocuments =
                     service.GetPrintedDocumentTemplates()
-                        .ToList()
                         .Select(x => new KeyValue<string, string>()
                         {
                             Key = x.Type,
@@ -82,6 +87,7 @@ namespace Aimp.Console.Wcf
             EventLog($"Save cash transaction id: {document.Id}");
             try
             {
+                document.UserId = CurrentUser.Id;
                 IoC.Resolve<ICashTransactionService>().SaveDocument(document);
                 return new KeyValue<int, int>(){Key = document.Id,Value = document.Number};
             }

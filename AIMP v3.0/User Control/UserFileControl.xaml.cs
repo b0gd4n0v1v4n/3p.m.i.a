@@ -3,11 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Forms;
-using AIMP_v3._0.DataAccess;
 using AIMP_v3._0.Helpers;
 using MessageBox = System.Windows.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
-using Models.Entities;
+using Entities;
 
 namespace AIMP_v3._0.User_Control
 {
@@ -78,29 +77,31 @@ namespace AIMP_v3._0.User_Control
 
         private void Open_OnClick(object sender, RoutedEventArgs e)
         {
-            try
+            LoadingViewHalper.ShowDialog("Открытие файла...", () =>
             {
-                if (UserFile != null)
+                try
                 {
-                    LoadingViewHalper.ShowDialog("Открытие файла...", () =>
+                    if (UserFile != null)
                     {
+
                         if (UserFile?.File != null)
                             OpenUserFile.Open(UserFile.Name, UserFile.File);
                         else if (UserFile.Id != 0)
                         {
                             OpenUserFile.GetAndOpen(UserFile.Id);
                         }
-                    });
+
+                    }
+                    else if (UserFileId.HasValue)
+                    {
+                        OpenUserFile.GetAndOpen(UserFileId.Value);
+                    }
                 }
-                else if(UserFileId.HasValue)
+                catch (Exception ex)
                 {
-                    OpenUserFile.GetAndOpen(UserFileId.Value);
+                    MessageBox.Show("Не удалось открыть файл", ex.Message);
                 }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Не удалось открыть файл",ex.Message);
-            }
+            });
         }
 
         private void Explorer_OnClick(object sender, RoutedEventArgs e)
