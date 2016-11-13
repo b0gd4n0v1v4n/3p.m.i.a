@@ -2,10 +2,11 @@
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Model;
 using System;
+using AIMP_v3._0.PerfectListView;
 
 namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 {
-    public class CashTransactionListItemViewModel : Identity
+    public class CashTransactionListItemViewModel : Identity,IFilterRow
     {
         
         public string Date { get; set; }
@@ -77,5 +78,8 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
             }
             });
         }
+
+        public bool IsVisible { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

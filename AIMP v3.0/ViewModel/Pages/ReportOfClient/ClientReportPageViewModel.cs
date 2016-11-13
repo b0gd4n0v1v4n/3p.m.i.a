@@ -14,7 +14,7 @@ using System.Windows.Media;
 
 namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {
-    public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItem>, IPageViewModel
+    public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
     {
 
         private bool _isOneLoad;
@@ -156,25 +156,22 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
         {
             get
             {
-                return new Command(x =>
+                return new Command(x => LoadingViewHalper.ShowDialog("Формирование документа...", () =>
                 {
-                    LoadingViewHalper.ShowDialog("Формирование документа...", () =>
+                    try
                     {
-                        try
+                        using (var aimp = new AimpService())
                         {
-                            using (var aimp = new AimpService())
-                            {
-                                var result = aimp.GetClientReportList(_banks, FilteringList);
+                            var result = aimp.GetClientReportList(_banks, List.Where(item=>item.IsVisible));
 
-                                OpenUserFile.Open(result.FileName, result.File);
-                            }
+                            OpenUserFile.Open(result.FileName, result.File);
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Не удалось сформировать отчет");
-                        }
-                    });
-                });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Не удалось сформировать отчет");
+                    }
+                }));
             }
         }
 

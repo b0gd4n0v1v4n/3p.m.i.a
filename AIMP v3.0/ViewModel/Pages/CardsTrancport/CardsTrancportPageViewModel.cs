@@ -38,16 +38,6 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         User = x.User,
                         YearTrancport = x.YearTrancport
                     });
-                    if (response.StatusesCardForFilerStart != null && response.StatusesCardForFilerStart.Count() > 0)
-                    {
-                        SetFilter("Status", response.StatusesCardForFilerStart);
-                        KASTIL_BRASH_FOR_STATUS_CARDTRANCPORT = Brushes.Orange;
-                        OnPropertyChanged("KASTIL_BRASH_FOR_STATUS_CARDTRANCPORT");
-                    }
-                    else
-                    {
-                        ClearFilteres();
-                    }
                 }
             }
             catch (Exception ex)

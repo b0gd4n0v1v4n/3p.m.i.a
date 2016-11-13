@@ -120,6 +120,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\LoadingViewHalper.cs" />
+    <Compile Include="User Control\PerfectListView\IFilterRow.cs" />
+    <Compile Include="User Control\PerfectListView\PerfectFilterColumnsGeneratorConverter.cs" />
+    <Compile Include="User Control\PerfectListView\PerfectGridViewColumn.cs" />
+    <Compile Include="User Control\PerfectListView\PerfectGridViewColumnHeader.cs" />
+    <Compile Include="User Control\PerfectListView\PerfectGridViewColumnHeaderViewModel.cs" />
+    <Compile Include="User Control\PerfectListView\PerfectListView.cs" />
     <Compile Include="ViewModel\AuthViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\CardTrancportViewModel.cs" />
     <Compile Include="ViewModel\Dictionaries\CellViewModel.cs" />
@@ -129,8 +135,6 @@
     <Compile Include="ViewModel\Pages\CardsTrancport\CardTrancportListItemViewModel.cs" />
     <Compile Include="ViewModel\CardsTrancport\PreCheckCardTrancportViewModel.cs" />
     <Compile Include="ViewModel\CommissionViewModel.cs" />
-    <Compile Include="Converters\ColumnPropertyToVisibilityMConverter.cs" />
-    <Compile Include="Converters\FilterHeaderColumnName.cs" />
     <Compile Include="DataAccess\AimpService.cs" />
     <Compile Include="DataAccess\BaseHttpServer.cs" />
     <Compile Include="DataAccess\ConnectionSettings.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="ViewModel\Pages\CreditDocument\CreditTransactionListItemViewModel.cs" />
     <Compile Include="ViewModel\Pages\CreditDocument\CreditTransactionPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\IPageViewModel.cs" />
+    <Compile Include="ViewModel\Pages\ReportOfClient\ClientReportListItemViewModel.cs" />
     <Compile Include="ViewModel\Pages\ReportOfClient\ClientReportPageViewModel.cs" />
     <Compile Include="ViewModel\ClientOfReport\ClientReportViewModel.cs" />
     <Compile Include="ViewModel\PrintedDocument\PrintedDocumentEditViewModel.cs" />
@@ -562,6 +567,10 @@
       <Project>{aed723ca-2475-40ca-89fd-61da8f21abbb}</Project>
       <Name>Aimp.ServiceContract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Style\Image\Ascending Sorting-50.png" />
+    <Resource Include="Style\Image\Descending Sorting-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

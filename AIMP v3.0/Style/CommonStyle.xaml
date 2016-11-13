@@ -12,21 +12,6 @@
                     xmlns:cardsTrancport="clr-namespace:AIMP_v3._0.ViewModel.Pages.CardsTrancport"
                     xmlns:converters="clr-namespace:AIMP_v3._0.Converters">
     <!--https://icons8.com/web-app/for/color/search-->
-    <!--<Grid x:Key="CashTransactionGridAutoSize"  Visibility="Hidden">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0" />
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnDate"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnNumber"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnNumberProxy"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnSellerFullName"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnBuyerFullName"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnTrancportFullName"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnDocSeller"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnDocBuyer"/>
-            <ColumnDefinition Width="10*" x:Name="CashTransactionGridColumnPts"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" x:Name="CashTransactionGridColumnId"/>
-    </Grid>-->
     <Style x:Key="NewMenuItem" TargetType="MenuItem">
         <Setter Property="Header">
             <Setter.Value>
@@ -162,149 +147,6 @@
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="BorderThickness" Value="0.1"></Setter>
         <Setter Property="Height" Value="22"></Setter>
-    </Style>
-    <converters:FilterHeaderColumnName x:Key="HeaderConverter"/>
-    <Style x:Key="FilteringColumnStyle" TargetType="{x:Type GridViewColumnHeader}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                    <Grid SnapsToDevicePixels="True">
-                        <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1" Background="{TemplateBinding Background}">
-                            <DockPanel>
-                                <Border Name="CheckColumnBorder" Tag="{TemplateBinding Content}" BorderThickness="1" DockPanel.Dock="Right" VerticalAlignment="Center">
-                                    <CheckBox Name="CheckColumn" Tag="{Binding ElementName=CheckColumnBorder}" IsChecked="{Binding IsCheckedCurrentColumn}" Command="{Binding SetCurrentFilterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
-                                        <CheckBox.Template>
-                                            <ControlTemplate TargetType="CheckBox">
-                                                <Image x:Name="ImageFilter" Source="/Style/Image/Empty Filter-24.png" Width="14" Height="14"/>
-                                            </ControlTemplate>
-                                        </CheckBox.Template>
-                                    </CheckBox>
-                                </Border>
-                                <Popup x:Name="FilteringPopup" Tag="{Binding ElementName=CheckColumnBorder}" IsOpen="{Binding Path=IsChecked, ElementName=CheckColumn}" PlacementTarget="{Binding ElementName=CheckColumn}">
-                                    <Border BorderThickness="1" BorderBrush="Gray">
-                                        <Grid Width="200" Height="300" Background="WhiteSmoke">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="10*"/>
-                                                <RowDefinition Height="80*"/>
-                                                <RowDefinition Height="10*"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid Grid.Row="0">
-                                                <StackPanel  Orientation="Horizontal">
-                                                    <TextBox Text="{Binding CurrentColumn.SearchText}" Width="150" Height="30"/>
-                                                    <Button Command="{Binding SearchFromCurrentColumnCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">искать</Button>
-                                                </StackPanel>
-                                            </Grid>
-                                            <Grid Grid.Row="1">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="10*"/>
-                                                    <RowDefinition Height="90*"/>
-                                                </Grid.RowDefinitions>
-                                                <CheckBox Grid.Row="0" Content="выбрать все" FontWeight="Bold" Command="{Binding CheckAllItemCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"></CheckBox>
-                                                <ListBox Grid.Row="1"  ItemsSource="{Binding CurrentColumn.List}">
-                                                    <ListBox.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
-                                                                <TextBlock Text="{Binding Text}"></TextBlock>
-                                                            </StackPanel>
-                                                        </DataTemplate>
-                                                    </ListBox.ItemTemplate>
-                                                    <ListBox.ItemContainerStyle>
-                                                        <Style TargetType="ListBoxItem">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding IsVisible}" Value="False">
-                                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </ListBox.ItemContainerStyle>
-                                                </ListBox>
-                                            </Grid>
-                                            <Grid Grid.Row="2">
-                                                <StackPanel  Orientation="Horizontal">
-                                                    <Button Command="{Binding ClearFilterCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">сбросить</Button>
-                                                    <Button Command="{Binding FilteringCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">приминить</Button>
-                                                    <Button Command="{Binding ClosePopupCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">закрыть</Button>
-                                                </StackPanel>
-                                            </Grid>
-                                        </Grid>
-                                    </Border>
-                                </Popup>
-                                <Border Padding="{TemplateBinding Padding}">
-                                    <ContentPresenter x:Name="HeaderContent"  Content="{TemplateBinding Content,Converter={StaticResource ResourceKey=HeaderConverter}}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0,0,0,1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                            </DockPanel>
-                        </Border>
-                        <Border x:Name="HeaderHoverBorder" BorderThickness="1,0,1,1" Margin="1,1,0,0"/>
-                        <Border x:Name="HeaderPressBorder" BorderThickness="1,1,1,0" Margin="1,0,0,1"/>
-                        <Canvas>
-                            <Thumb x:Name="PART_HeaderGripper">
-                                <Thumb.Style>
-                                    <Style TargetType="{x:Type Thumb}">
-                                        <Setter Property="Canvas.Right" Value="-9"/>
-                                        <Setter Property="Width" Value="10"/>
-                                        <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="Background">
-                                            <Setter.Value>
-                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                    <GradientStop Color="#FFF2F2F2" Offset="0"/>
-                                                    <GradientStop Color="#FFD5D5D5" Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Thumb}">
-                                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                                                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="1"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Thumb.Style>
-                            </Thumb>
-                        </Canvas>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="HeaderBorder">
-                                <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                        <GradientStop Color="#FFBDEDFF" Offset="0"/>
-                                        <GradientStop Color="#FFB7E7FB" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="BorderBrush" TargetName="HeaderHoverBorder" Value="#FF88CBEB"/>
-                            <Setter Property="Background" TargetName="PART_HeaderGripper" Value="Transparent"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="HeaderBorder">
-                                <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                        <GradientStop Color="#FF8DD6F7" Offset="0"/>
-                                        <GradientStop Color="#FF8AD1F5" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="BorderBrush" TargetName="HeaderHoverBorder" Value="#FF95DAF9"/>
-                            <Setter Property="BorderBrush" TargetName="HeaderPressBorder" Value="#FF7A9EB1"/>
-                            <Setter Property="Visibility" TargetName="PART_HeaderGripper" Value="Hidden"/>
-                            <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
-                        </Trigger>
-                        <Trigger Property="Height" Value="Auto">
-                            <Setter Property="MinHeight" Value="20"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <!--<Setter Property="Background" Value="Gray"></Setter>-->
     </Style>
 
     <Style x:Key="ListViewStyle" TargetType="ListView">
@@ -1130,12 +972,4 @@
             Content="{Binding Name}"/>
         </StackPanel>
     </DataTemplate>
-
-    <!--<Style x:Key="TextBoxForControl" TargetType="TextBox">
-        <Setter Property="Text" Value="{Binding RelativeSource={RelativeSource 
-                            AncestorType=UserControl}, Path=Text,Mode=OneWay}"></Setter>
-        <Setter Property="IsEnabled" Value="False"></Setter>
-        <Setter Property="FontWeight" Value="Bold"></Setter>
-        <Setter Property="FontSize" Value="12"></Setter>
-     </Style>-->
 </ResourceDictionary>

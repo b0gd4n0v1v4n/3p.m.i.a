@@ -2,10 +2,11 @@
 using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Model;
 using System;
+using AIMP_v3._0.PerfectListView;
 
 namespace AIMP_v3._0.ViewModel.Pages.Commission
 {
-    public class CommissionListItemViewModel : Identity
+    public class CommissionListItemViewModel : Identity,IFilterRow
     {
 
         public string Date { get; set; }
@@ -66,5 +67,8 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                        }
                    });
         }
+
+        public bool IsVisible { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

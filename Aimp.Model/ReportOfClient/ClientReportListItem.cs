@@ -3,7 +3,7 @@ using System;
 
 namespace Aimp.Model.ReportOfClient
 {
-    public class ClientReportListItem 
+    public class ClientReportListItem
         : Identity
     {
         public DateTime DateReportClient { get; set; }
