@@ -18,10 +18,6 @@ namespace AIMP_v3._0.ViewModel.Pages
         where TList : Identity,IFilterRow
     {
         public abstract Visibility AddButtonVisible { get; }
-        public BasePageViewModel()
-        {
-            _usingColumns = new Collection<FilteringColumn>();
-        }
 
         public abstract Command PrintList { get; }
         public abstract Command OpenListItem { get; }

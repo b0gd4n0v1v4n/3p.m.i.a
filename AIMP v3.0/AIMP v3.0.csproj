@@ -119,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\LoadingViewHalper.cs" />
     <Compile Include="User Control\PerfectListView\IFilterRow.cs" />
     <Compile Include="User Control\PerfectListView\PerfectFilterColumnsGeneratorConverter.cs" />

@@ -30,7 +30,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                     _banks = result.Banks;
                     BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
 
-                    List = result.Items.GroupBy(g => g.ClientReportId)
+                    var orderList = result.Items.GroupBy(g => g.ClientReportId)
                     .Select(x => new ClientReportListItem()
                     {
                         Id = x.Key,
@@ -51,32 +51,10 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         TotalContributionReportClient = x.First().ClientReport.TotalContribution.ToString(),
                         TrancportNameReportClient = x.First().ClientReport.Trancport
                     })
-                    .OrderByDescending(x => x.DateReportClient)
-                    .ToList();
-                    
-                    if (!_isOneLoad && result.ClientStatusesForFilter != null &&
-                        result.ClientStatusesForFilter.Count() > 0)
-                    {
-                        _isOneLoad = true;
-                        SetFilter("ClientStatusReportClient", result.ClientStatusesForFilter.ToArray());
-                        KASTIL_BRASH_FOR_CLIENT_STATUS = Brushes.Orange;
-                        OnPropertyChanged("KASTIL_BRASH_FOR_CLIENT_STATUS");
-                    }
-                    else
-                    {
-                        ClearFilteres();
-                    }
-                    if (!_isOneLoad && !string.IsNullOrEmpty(result.UserLastNameForFilter))
-                    {
-                        _isOneLoad = true;
-                        SetFilter("ManagerReportClient", new[] {result.UserLastNameForFilter});
-                        KASTIL_BRASH_FOR_MANAGER = Brushes.Orange;
-                        OnPropertyChanged("KASTIL_BRASH_FOR_MANAGER");
-                    }
-                    else
-                    {
-                        ClearFilteres();
-                    }
+                    .OrderByDescending(x => x.DateReportClient) ;
+
+                    List = TinyMapper.Map<IEnumerable<ClientReportListItemViewModel>>(orderList);
+                        
                 }
             }
             catch (Exception ex)
