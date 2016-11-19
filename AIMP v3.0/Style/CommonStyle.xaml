@@ -462,7 +462,7 @@
                 <Setter Property="Content">
                     <Setter.Value>
                         <Grid>
-                            <perfectListView:PerfectListView x:Name="ClientReportListView"  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource PerfectListViewItemStyle}" SelectionMode="Single" ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
+                            <perfectListView:PerfectListView x:Name="ClientReportListView" Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource PerfectListViewItemStyle}" SelectionMode="Single" ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
                                 <ListView.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding OpenListItem}"/>
                                 </ListView.InputBindings>
@@ -486,7 +486,7 @@
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="6" DisplayMemberBinding="{Binding TelefonReportClient}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ТЕЛЕФОН" SourceColumn="FullNameReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ТЕЛЕФОН" SourceColumn="TelefonReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding TrancportNameReportClient}">
@@ -575,12 +575,12 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
-            <!--<DataTrigger Binding="{Binding Path=Type}" Value="{x:Type creditTransaction:CreditTransactionPageViewModel}">
+            <DataTrigger Binding="{Binding Path=Type}" Value="{x:Type creditTransaction:CreditTransactionPageViewModel}">
                 <Setter Property="Header" Value="{Binding Path=Name}"></Setter>
                 <Setter Property="Content">
                     <Setter.Value>
                         <Grid>
-                            <ListView  Style="{StaticResource ListViewStyle}" SelectionMode="Single" ItemsSource="{Binding FilteringList}" SelectedItem="{Binding CurrentItem}">
+                            <perfectListView:PerfectListView Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource PerfectListViewItemStyle}" SelectionMode="Single" ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
                                 <ListView.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding OpenListItem}"/>
                                 </ListView.InputBindings>
@@ -592,13 +592,37 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn x:Name="Idcredit"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
-                                        <GridViewColumn x:Name="DateCredit" Width="Auto" Header="ДАТА|Date" DisplayMemberBinding="{Binding Date}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="NumberCredit"  Width="Auto" Header="№|Number" DisplayMemberBinding="{Binding Number}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="NumberProxyCredit"  Width="Auto" Header="ДОВЕРЕННОСТЬ|NumberProxy" DisplayMemberBinding="{Binding NumberProxy}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="SellerFullNameCredit"  Width="Auto" Header="ПРОДАВЕЦ|SellerFullName" DisplayMemberBinding="{Binding SellerFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="BuyerFullNameCcredit"  Width="Auto" Header="ПОКУПАТЕЛЬ|BuyerFullName" DisplayMemberBinding="{Binding BuyerFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="TrancportFullNameCredit"  Width="Auto" Header="МОДЕЛЬ, МАРКА ТС|TrancportFullName" DisplayMemberBinding="{Binding TrancportFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn Width="Auto">
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Date}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Number}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding NumberProxy}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДОВЕРЕННОСТЬ" SourceColumn="NumberProxy" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="15" DisplayMemberBinding="{Binding SellerFullName}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ПРОДАВЕЦ" SourceColumn="SellerFullName" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="15" DisplayMemberBinding="{Binding BuyerFullName}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ПОКУПАТЕЛЬ" SourceColumn="BuyerFullName" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="15" DisplayMemberBinding="{Binding TrancportFullName}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="МОДЕЛЬ, МАРКА ТС" SourceColumn="TrancportFullName" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDocumentSeller}">
@@ -615,8 +639,8 @@
                                                     </TextBlock.Inlines>
                                                 </TextBlock>
                                             </GridViewColumn.Header>
-                                        </GridViewColumn>
-                                        <GridViewColumn Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDocumentBuyer}">
@@ -633,8 +657,8 @@
                                                     </TextBlock.Inlines>
                                                 </TextBlock>
                                             </GridViewColumn.Header>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="ПТС"  Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" Header="ПТС">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenPts}">
@@ -642,8 +666,8 @@
                                                     </TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="ДКП"  Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" Header="ДКП">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDkp}">
@@ -651,8 +675,8 @@
                                                     </TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="АД"  Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" Header="АД">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenAd}">
@@ -660,8 +684,8 @@
                                                     </TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDocumentSeller}">
@@ -678,8 +702,8 @@
                                                     </TextBlock.Inlines>
                                                 </TextBlock>
                                             </GridViewColumn.Header>
-                                        </GridViewColumn>
-                                        <GridViewColumn Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDocumentBuyer}">
@@ -696,10 +720,10 @@
                                                     </TextBlock.Inlines>
                                                 </TextBlock>
                                             </GridViewColumn.Header>
-                                        </GridViewColumn>
+                                        </perfectListView:PerfectGridViewColumn>
                                     </GridView>
                                 </ListView.View>
-                            </ListView>
+                            </perfectListView:PerfectListView>
                         </Grid>
                     </Setter.Value>
                 </Setter>
@@ -709,7 +733,7 @@
                 <Setter Property="Content">
                     <Setter.Value>
                         <Grid>
-                            <ListView  Style="{StaticResource ListViewStyle}" SelectionMode="Single" ItemsSource="{Binding FilteringList}" SelectedItem="{Binding CurrentItem}">
+                            <perfectListView:PerfectListView Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource PerfectListViewItemStyle}" SelectionMode="Single" ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
                                 <ListView.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding OpenListItem}"/>
                                 </ListView.InputBindings>
@@ -721,14 +745,42 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn x:Name="IdCom"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
-                                        <GridViewColumn x:Name="DateCom" Width="Auto" Header="ДАТА|Date" DisplayMemberBinding="{Binding Date}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="NumberCom"  Width="Auto" Header="№|Number" DisplayMemberBinding="{Binding Number}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="NumberProxyCom"  Width="Auto" Header="ДОВЕРЕННОСТЬ|NumberProxy" DisplayMemberBinding="{Binding NumberProxy}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="SellerFullNameCom"  Width="Auto" Header="ПРОДАВЕЦ|SellerFullName" DisplayMemberBinding="{Binding SellerFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="TrancportFullNameCom"  Width="Auto" Header="МОДЕЛЬ, МАРКА ТС|TrancportFullName" DisplayMemberBinding="{Binding TrancportFullName}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="CommissiaCom"  Width="Auto" Header="КОМИССИЯ|Commission" DisplayMemberBinding="{Binding Commission}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="ParkingCom"  Width="Auto" Header="СТОЯНКА|Parking" DisplayMemberBinding="{Binding Parking}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn Width="Auto">
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Date}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Number}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding NumberProxy}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДОВЕРЕННОСТЬ" SourceColumn="NumberProxy" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="25" DisplayMemberBinding="{Binding SellerFullName}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ПРОДАВЕЦ" SourceColumn="SellerFullName" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="25" DisplayMemberBinding="{Binding TrancportFullName}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="МОДЕЛЬ, МАРКА ТС" SourceColumn="TrancportFullName" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="10" DisplayMemberBinding="{Binding Commission}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="КОМИССИЯ" SourceColumn="Commission" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="10" DisplayMemberBinding="{Binding Parking}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="СТОЯНКА" SourceColumn="Parking" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenDocumentSeller}">
@@ -745,8 +797,8 @@
                                                     </TextBlock.Inlines>
                                                 </TextBlock>
                                             </GridViewColumn.Header>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="ПТС"  Width="Auto">
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" Header="ПТС">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Visibility="{Binding VisibilityOpenPts}">
@@ -754,10 +806,10 @@
                                                     </TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
+                                        </perfectListView:PerfectGridViewColumn>
                                     </GridView>
                                 </ListView.View>
-                            </ListView>
+                            </perfectListView:PerfectListView>
                         </Grid>
                     </Setter.Value>
                 </Setter>
@@ -767,7 +819,7 @@
                 <Setter Property="Content">
                     <Setter.Value>
                         <Grid>
-                            <ListView  Style="{StaticResource ListViewStyle}" SelectionMode="Single" ItemsSource="{Binding FilteringList}" SelectedItem="{Binding CurrentItem}">
+                            <perfectListView:PerfectListView Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource PerfectListViewItemStyle}" SelectionMode="Single" ItemsSource="{Binding List}" SelectedItem="{Binding CurrentItem}">
                                 <ListView.InputBindings>
                                     <KeyBinding Key="Enter" Command="{Binding OpenListItem}"/>
                                 </ListView.InputBindings>
@@ -779,159 +831,68 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn x:Name="IdCard"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
-                                        <GridViewColumn x:Name="NumberCard"  Width="Auto" Header="№|Number" DisplayMemberBinding="{Binding Number}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="DateStartCard" Width="Auto" Header="ДАТА ПОСТ.|DateStart" DisplayMemberBinding="{Binding DateStart}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="NumberTCard"  Width="Auto" Header="№TC|NumberT" DisplayMemberBinding="{Binding NumberT}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="MakeModelTrancportCard"  Width="Auto" Header="МАРКА, МОДЕЛЬ ТС|MakeModelTrancport" DisplayMemberBinding="{Binding MakeModelTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="YearTrancportCard"  Width="Auto" Header="ГОД|YearTrancport" DisplayMemberBinding="{Binding YearTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="ColorTrancportCard"  Width="Auto" Header="ЦВЕТ|ColorTrancport" DisplayMemberBinding="{Binding ColorTrancport}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="PriceCard"  Width="Auto" Header="СТОИМОСТЬ|Price" DisplayMemberBinding="{Binding Price}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="SourceTrancportCard"  Width="Auto" Header="ИСТОЧНИК|Source" DisplayMemberBinding="{Binding Source}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
-                                        <GridViewColumn x:Name="StatusCardTrancportColumn"  Width="Auto" Header="СТАТУС|Status" DisplayMemberBinding="{Binding Status}">
-                                            <GridViewColumn.HeaderContainerStyle>
-                                                <Style TargetType="GridViewColumnHeader">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                                                                <Grid SnapsToDevicePixels="True">
-                                                                    <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}"  BorderThickness="0,1" Background="{TemplateBinding Background}">
-                                                                        <DockPanel>
-                                                                            <Border Name="CheckColumnBorder" BorderBrush="{Binding KASTIL_BRASH_FOR_STATUS_CARDTRANCPORT}" Tag="{TemplateBinding Content}" BorderThickness="1" DockPanel.Dock="Right" VerticalAlignment="Center">
-                                                                                <CheckBox Name="CheckColumn" Tag="{Binding ElementName=CheckColumnBorder}" IsChecked="{Binding IsCheckedCurrentColumn}" Command="{Binding SetCurrentFilterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
-                                                                                    <CheckBox.Template>
-                                                                                        <ControlTemplate TargetType="CheckBox">
-                                                                                            <Image x:Name="ImageFilter" Source="/Style/Image/Empty Filter-24.png" Width="14" Height="14"/>
-                                                                                        </ControlTemplate>
-                                                                                    </CheckBox.Template>
-                                                                                </CheckBox>
-                                                                            </Border>
-                                                                            <Popup x:Name="FilteringPopup" Tag="{Binding ElementName=CheckColumnBorder}" IsOpen="{Binding Path=IsChecked, ElementName=CheckColumn}" PlacementTarget="{Binding ElementName=CheckColumn}">
-                                                                                <Border BorderThickness="1" BorderBrush="Gray">
-                                                                                    <Grid Width="200" Height="300" Background="WhiteSmoke">
-                                                                                        <Grid.RowDefinitions>
-                                                                                            <RowDefinition Height="10*"/>
-                                                                                            <RowDefinition Height="80*"/>
-                                                                                            <RowDefinition Height="10*"/>
-                                                                                        </Grid.RowDefinitions>
-                                                                                        <Grid Grid.Row="0">
-                                                                                            <StackPanel  Orientation="Horizontal">
-                                                                                                <TextBox Text="{Binding CurrentColumn.SearchText}" Width="150" Height="30"/>
-                                                                                                <Button Command="{Binding SearchFromCurrentColumnCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">искать</Button>
-                                                                                            </StackPanel>
-                                                                                        </Grid>
-                                                                                        <Grid Grid.Row="1">
-                                                                                            <Grid.RowDefinitions>
-                                                                                                <RowDefinition Height="10*"/>
-                                                                                                <RowDefinition Height="90*"/>
-                                                                                            </Grid.RowDefinitions>
-                                                                                            <CheckBox Grid.Row="0" Content="выбрать все" FontWeight="Bold" Command="{Binding CheckAllItemCommand}" CommandParameter="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}}"></CheckBox>
-                                                                                            <ListBox Grid.Row="1"  ItemsSource="{Binding CurrentColumn.List}">
-                                                                                                <ListBox.ItemTemplate>
-                                                                                                    <DataTemplate>
-                                                                                                        <StackPanel Orientation="Horizontal">
-                                                                                                            <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
-                                                                                                            <TextBlock Text="{Binding Text}"></TextBlock>
-                                                                                                        </StackPanel>
-                                                                                                    </DataTemplate>
-                                                                                                </ListBox.ItemTemplate>
-                                                                                            </ListBox>
-                                                                                        </Grid>
-                                                                                        <Grid Grid.Row="2">
-                                                                                            <StackPanel  Orientation="Horizontal">
-                                                                                                <Button Command="{Binding ClearFilterCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">сбросить</Button>
-                                                                                                <Button Command="{Binding FilteringCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">приминить</Button>
-                                                                                                <Button Command="{Binding ClosePopupCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">закрыть</Button>
-                                                                                            </StackPanel>
-                                                                                        </Grid>
-                                                                                    </Grid>
-                                                                                </Border>
-                                                                            </Popup>
-                                                                            <Border Padding="{TemplateBinding Padding}">
-                                                                                <ContentPresenter x:Name="HeaderContent"  Content="{TemplateBinding Content,Converter={StaticResource ResourceKey=HeaderConverter}}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0,0,0,1" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                                                            </Border>
-                                                                        </DockPanel>
-                                                                    </Border>
-                                                                    <Border x:Name="HeaderHoverBorder" BorderThickness="1,0,1,1" Margin="1,1,0,0"/>
-                                                                    <Border x:Name="HeaderPressBorder" BorderThickness="1,1,1,0" Margin="1,0,0,1"/>
-                                                                    <Canvas>
-                                                                        <Thumb x:Name="PART_HeaderGripper">
-                                                                            <Thumb.Style>
-                                                                                <Style TargetType="{x:Type Thumb}">
-                                                                                    <Setter Property="Canvas.Right" Value="-9"/>
-                                                                                    <Setter Property="Width" Value="10"/>
-                                                                                    <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                                                                    <Setter Property="Padding" Value="0"/>
-                                                                                    <Setter Property="Background">
-                                                                                        <Setter.Value>
-                                                                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                                                                <GradientStop Color="#FFF2F2F2" Offset="0"/>
-                                                                                                <GradientStop Color="#FFD5D5D5" Offset="1"/>
-                                                                                            </LinearGradientBrush>
-                                                                                        </Setter.Value>
-                                                                                    </Setter>
-                                                                                    <Setter Property="Template">
-                                                                                        <Setter.Value>
-                                                                                            <ControlTemplate TargetType="{x:Type Thumb}">
-                                                                                                <Border Background="Transparent" Padding="{TemplateBinding Padding}">
-                                                                                                    <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="1"/>
-                                                                                                </Border>
-                                                                                            </ControlTemplate>
-                                                                                        </Setter.Value>
-                                                                                    </Setter>
-                                                                                </Style>
-                                                                            </Thumb.Style>
-                                                                        </Thumb>
-                                                                    </Canvas>
-                                                                </Grid>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                        <Setter Property="Background" TargetName="HeaderBorder">
-                                                                            <Setter.Value>
-                                                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                                                    <GradientStop Color="#FFBDEDFF" Offset="0"/>
-                                                                                    <GradientStop Color="#FFB7E7FB" Offset="1"/>
-                                                                                </LinearGradientBrush>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                        <Setter Property="BorderBrush" TargetName="HeaderHoverBorder" Value="#FF88CBEB"/>
-                                                                        <Setter Property="Background" TargetName="PART_HeaderGripper" Value="Transparent"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="IsPressed" Value="True">
-                                                                        <Setter Property="Background" TargetName="HeaderBorder">
-                                                                            <Setter.Value>
-                                                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                                                    <GradientStop Color="#FF8DD6F7" Offset="0"/>
-                                                                                    <GradientStop Color="#FF8AD1F5" Offset="1"/>
-                                                                                </LinearGradientBrush>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                        <Setter Property="BorderBrush" TargetName="HeaderHoverBorder" Value="#FF95DAF9"/>
-                                                                        <Setter Property="BorderBrush" TargetName="HeaderPressBorder" Value="#FF7A9EB1"/>
-                                                                        <Setter Property="Visibility" TargetName="PART_HeaderGripper" Value="Hidden"/>
-                                                                        <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="Height" Value="Auto">
-                                                                        <Setter Property="MinHeight" Value="20"/>
-                                                                    </Trigger>
-                                                                    <Trigger Property="IsEnabled" Value="False">
-                                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </GridViewColumn.HeaderContainerStyle>
-                                        </GridViewColumn>
-                                        <GridViewColumn x:Name="DateSaleCard" Width="Auto" Header="ДАТА ПРОД.|DateSale" DisplayMemberBinding="{Binding DateSale}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"/>
-                                        <GridViewColumn x:Name="UserCard"  Width="300" Header="ПОЛЬЗОВАТЕЛЬ|User" DisplayMemberBinding="{Binding User}" HeaderContainerStyle="{StaticResource ResourceKey=FilteringColumnStyle}"></GridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Number}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding DateStart}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПОСТ." SourceColumn="DateStart" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding NumberT}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№TC" SourceColumn="NumberT" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="17" DisplayMemberBinding="{Binding MakeModelTrancport}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="МАРКА, МОДЕЛЬ ТС" SourceColumn="MakeModelTrancport" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding YearTrancport}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ГОД" SourceColumn="YearTrancport" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding ColorTrancport}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ЦВЕТ" SourceColumn="ColorTrancport" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Price}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="СТОИМОСТЬ" SourceColumn="Price" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Source}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ИСТОЧНИК" SourceColumn="Source" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Status}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="СТАТУС" SourceColumn="Status" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding DateSale}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПРОД." SourceColumn="DateSale" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding User}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ПОЛЬЗОВАТЕЛЬ" SourceColumn="User" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
                                     </GridView>
                                 </ListView.View>
-                            </ListView>
+                            </perfectListView:PerfectListView>
                         </Grid>
                     </Setter.Value>
                 </Setter>
-            </DataTrigger>-->
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

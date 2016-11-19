@@ -3,10 +3,12 @@ using AIMP_v3._0.Helpers;
 using AIMP_v3._0.Model;
 using System;
 using AIMP_v3._0.PerfectListView;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AIMP_v3._0.ViewModel.Pages.Commission
 {
-    public class CommissionListItemViewModel : Identity,IFilterRow
+    public class CommissionListItemViewModel : Identity,IFilterRow,INotifyPropertyChanged
     {
 
         public string Date { get; set; }
@@ -68,7 +70,21 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                    });
         }
 
-        public bool IsVisible { get; set; }
-        public bool IsSelected { get; set; }
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

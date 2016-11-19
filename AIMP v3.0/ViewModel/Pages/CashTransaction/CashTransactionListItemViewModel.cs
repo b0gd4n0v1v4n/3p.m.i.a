@@ -12,7 +12,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
     {
         
         public string Date { get; set; }
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         public string NumberProxy { get; set; }
 

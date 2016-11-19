@@ -16,8 +16,6 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 {
     public class ClientReportPageViewModel : BasePageViewModel<ClientReportListItemViewModel>, IPageViewModel
     {
-
-        private bool _isOneLoad;
         private IEnumerable<Bank> _banks;
         private void _FillListReportOfClient()
         {
@@ -153,7 +151,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                     {
                         using (var aimp = new AimpService())
                         {
-                            var result = aimp.GetClientReportList(_banks, List.Where(item=>item.IsVisible));
+                            var result = aimp.GetClientReportList(_banks, List.Where(item => item.IsVisible));
 
                             OpenUserFile.Open(result.FileName, result.File);
                         }

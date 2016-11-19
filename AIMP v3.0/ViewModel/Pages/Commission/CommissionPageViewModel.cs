@@ -35,6 +35,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                             .ThenByDescending(x=>x.Number)
                             .Select(x => new CommissionListItemViewModel()
                             {
+                                IsVisible = true,
                                 Id = x.Id,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,

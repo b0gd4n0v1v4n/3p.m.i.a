@@ -49,7 +49,7 @@ namespace AIMP_v3._0.PerfectListView
 
                         if (perfectHeader != null)
                         {
-                            perfectHeader.ItemSourceChanged += (s) => ItemsSource = s;
+                            //perfectHeader.ItemSourceChanged += (s) => ItemsSource = s;
                             perfectHeader.SetItemSource(source);
                         }
                     }

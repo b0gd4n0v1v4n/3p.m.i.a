@@ -20,14 +20,13 @@ namespace AIMP_v3._0.PerfectListView
         private bool _isSelected;
         public bool IsSelected { get { return _isSelected; } set { _isSelected = value; OnPropertyChanged(); } }
 
-        public dynamic Text { get; set; }
+        public string Text { get; set; }
     }
     public class PerfectGridViewColumnHeaderViewModel : BaseViewModel
     {
         public string ColumnName { get; private set; }
-
-        //private IEnumerable<IFilterRow> _originalSource;
-        private IEnumerable _originalSource;
+        
+        private IEnumerable<IFilterRow> _originalSource;
         public ObservableCollection<FilterRow> Rows { get; private set; }
         private bool _isOpenMenu;
         public bool IsOpenMenu
@@ -46,8 +45,6 @@ namespace AIMP_v3._0.PerfectListView
         public bool IsSelectedAll { get; set; }
 
         public bool IsFiltering { get; set; }
-
-        public event Action<IEnumerable> ItemSourceChanged;
 
         public PerfectGridViewColumnHeaderViewModel(string columnName)
         {
@@ -100,9 +97,8 @@ namespace AIMP_v3._0.PerfectListView
             {
                 foreach (var iRow in Rows)
                     if (iRow.Text == filterText)
-                        foreach (var iId in iRow.Ids)
-                            foreach(dynamic iOrifginRow in _originalSource.Where(string.Format("Id = {0}",iId)))
-                               iOrifginRow.IsVisible = false;
+                        foreach (var iOriginal in _originalSource.Where(x => !iRow.Ids.Contains(x.Id)))
+                            iOriginal.IsVisible = false;
 
                 IsFiltering = true;
                 OnPropertyChanged("IsFiltering");
@@ -123,8 +119,7 @@ namespace AIMP_v3._0.PerfectListView
         {
             try
             {
-                if (ItemSourceChanged != null)
-                    ItemSourceChanged(_originalSource.OrderBy(asc ? "Text ASC" : "Text DESC"));
+                //ItemSourceChanged(ItemSource.OrderBy(string.Format(asc ? "{0} ASC" : "{0} DESC", ColumnName)));
             }
             catch (Exception ex)
             {
@@ -143,10 +138,10 @@ namespace AIMP_v3._0.PerfectListView
         {
             try
             {
-                //foreach (var iRow in Rows)
-                //    foreach (var iOriginalRow in _originalSource)
-                //        if (iRow.Ids.Contains(iOriginalRow.Id))
-                //            iOriginalRow.IsVisible = iRow.IsSelected;
+                foreach (var iRow in Rows)
+                    foreach (var iOriginalRow in _originalSource)
+                        if (iRow.Ids.Contains(iOriginalRow.Id))
+                            iOriginalRow.IsVisible = iRow.IsSelected;
 
                 IsFiltering = true;
                 OnPropertyChanged("IsFiltering");

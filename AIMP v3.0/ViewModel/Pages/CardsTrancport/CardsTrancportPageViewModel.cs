@@ -24,7 +24,8 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         .ThenByDescending(x=>x.Number)
                         .Select(x=> new CardTrancportListItemViewModel()
                     {
-                        Id = x.Id,
+                            IsVisible = true,
+                            Id = x.Id,
                         ColorTrancport = x.ColorTrancport,
                         DateSale = x.DateSale?.ToString(Aimp.Model.DataFormats.DateFormat),
                         DateStart = x.DateStart.ToString(Aimp.Model.DataFormats.DateFormat),

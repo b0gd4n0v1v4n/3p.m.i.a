@@ -34,6 +34,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                             .ThenByDescending(x => x.Number)
                             .Select(x => new CreditTransactionListItemViewModel()
                              {
+                                IsVisible = true,
                                 DateTime = x.DateTime,
                                  Id = x.Id,
                                  DocumentBuyerId = x.DocumentBuyerId,
