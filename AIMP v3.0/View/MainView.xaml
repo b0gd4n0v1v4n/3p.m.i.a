@@ -10,7 +10,6 @@
         Title="MainView" Height="500" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
-        <!--https://icons8.com/web-app/for/color/add-->
     </Window.Resources>
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>

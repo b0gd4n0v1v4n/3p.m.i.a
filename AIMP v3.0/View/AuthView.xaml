@@ -14,7 +14,7 @@
     <Grid>
         <Button x:Name="button" Content="ВЫХОД" Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=Window}"  HorizontalAlignment="Left" Margin="365,110,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="button1" Content="ПОДКЛЮЧИТЬСЯ" Command="{Binding ConnectCommand}" CommandParameter="{Binding ElementName=Window}" HorizontalAlignment="Left" Margin="245,110,0,0" VerticalAlignment="Top" Width="115"/>
-        <TabControl x:Name="tabControl"  ItemContainerStyle="{StaticResource TabItemPagesStyle}" HorizontalAlignment="Left" Height="106" VerticalAlignment="Top" Width="440" RenderTransformOrigin="0.5,0.5">
+        <TabControl x:Name="tabControl"  HorizontalAlignment="Left" Height="106" VerticalAlignment="Top" Width="440" RenderTransformOrigin="0.5,0.5">
             <TabControl.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

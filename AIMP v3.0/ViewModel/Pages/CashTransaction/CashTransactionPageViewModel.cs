@@ -13,6 +13,10 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
 {
     public class CashTransactionPageViewModel : BasePageViewModel<CashTransactionListItemViewModel>, IPageViewModel
     {
+        public string StartFilterTEST { get
+            {
+                return "0";
+            } }
         public override Visibility AddButtonVisible
         {
             get
@@ -35,6 +39,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                             .ThenByDescending(x => x.Number)
                             .Select(x => new CashTransactionListItemViewModel()
                             {
+                                IsVisible = true,
                                 Id = x.Id,
                                 DocumentBuyerId = x.DocumentBuyerId,
                                 DocumentSellerId = x.DocumentSellerId,
@@ -45,9 +50,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CashTransaction
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,
                                 SellerFullName = x.SellerFullName
-                            }))
-                            
-                            ;
+                            }));
                 }
             }
             catch (Exception ex)

@@ -1,16 +1,15 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace AIMP_v3._0.PerfectListView
 {
     public class PerfectListView : System.Windows.Controls.ListView
     {
-        private Collection<PerfectGridViewColumnHeaderViewModel> _headers = new Collection<PerfectGridViewColumnHeaderViewModel>();
- 
         public PerfectListView()
         {
-            Initialized += (sender, args) => SubscribeForPerfectHeader();
-            SizeChanged += (sender, args) => ColumnsSetWidth();
+            //SizeChanged += (sender, args) => ColumnsSetWidth();
+            
+            Loaded += (sender, args) => { ColumnsSetWidth(); SubscribeForPerfectHeader(); };
         }
 
         private void ColumnsSetWidth()
@@ -22,21 +21,27 @@ namespace AIMP_v3._0.PerfectListView
                 foreach (System.Windows.Controls.GridViewColumn iColumn in gridView.Columns)
                 {
                     var perfColumn = iColumn as PerfectGridViewColumn;
+
                     if (perfColumn != null)
-                        perfColumn.Width = (ActualWidth * perfColumn.PercentageWidth) / 100;
+                        if (perfColumn.PercentageWidth > 0)
+                            perfColumn.Width = (ActualWidth * perfColumn.PercentageWidth) / 100;
                 }
             }
         }
 
         private void SubscribeForPerfectHeader()
         {
+            var source = ItemsSource as IEnumerable<IFilterRow>;
+            if (source == null)
+                throw new System.Exception("ItemsSource is not IEnumerable<IFilterRow>");
+
             var gridView = View as GridView;
 
             if (gridView != null)
             {
                 foreach (System.Windows.Controls.GridViewColumn iColumn in gridView.Columns)
                 {
-                    var columnHeader = iColumn.Header as GridViewColumnHeader;
+                    var columnHeader = iColumn.Header as PerfectGridViewColumnHeader;
 
                     if (columnHeader != null)
                     {
@@ -44,21 +49,8 @@ namespace AIMP_v3._0.PerfectListView
 
                         if (perfectHeader != null)
                         {
-                            _headers.Add(perfectHeader);
-
-                            perfectHeader.SetItemSource(ItemsSource);
-                            perfectHeader.ApplyFilter();
-
-                            perfectHeader.ItemSourceChanged += (source) =>
-                            {
-                                ItemsSource = source;
-
-                                foreach (var iHeader in _headers)
-                                    //if (perfectHeader != iHeader)
-                                        iHeader.SetItemSource(ItemsSource);
-                                
-                                Items.Refresh();
-                            };
+                            perfectHeader.ItemSourceChanged += (s) => ItemsSource = s;
+                            perfectHeader.SetItemSource(source);
                         }
                     }
                 }

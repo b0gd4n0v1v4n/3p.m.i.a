@@ -30,7 +30,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                     _banks = result.Banks;
                     BanksColumnName = new ObservableCollection<string>(result.Banks.Select(x => x.Name));
 
-                    var orderList = result.Items.GroupBy(g => g.ClientReportId)
+                    List = result.Items.GroupBy(g => g.ClientReportId)
                     .Select(x => new ClientReportListItem()
                     {
                         Id = x.Key,
@@ -51,10 +51,23 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         TotalContributionReportClient = x.First().ClientReport.TotalContribution.ToString(),
                         TrancportNameReportClient = x.First().ClientReport.Trancport
                     })
-                    .OrderByDescending(x => x.DateReportClient) ;
-
-                    List = TinyMapper.Map<IEnumerable<ClientReportListItemViewModel>>(orderList);
-                        
+                    .OrderByDescending(x => x.DateReportClient)
+                    .Select(x => new ClientReportListItemViewModel()
+                    {
+                        IsVisible = true,
+                        BankStatusesReportClient = x.BankStatusesReportClient,
+                        ClientStatusReportClient =x.ClientStatusReportClient,
+                        DateReportClient = x.DateReportClient,
+                        FullNameReportClient =x.FullNameReportClient,
+                        Id = x.Id,
+                        ManagerReportClient = x.ManagerReportClient,
+                        PriceTrancportReportClient = x.PriceTrancportReportClient,
+                        ProgrammCreditReportClient = x.ProgrammCreditReportClient,
+                        SourceInfoReportClient = x.SourceInfoReportClient,
+                        TelefonReportClient = x.TelefonReportClient,
+                         TotalContributionReportClient = x.TotalContributionReportClient,
+                         TrancportNameReportClient = x.TrancportNameReportClient
+                    });
                 }
             }
             catch (Exception ex)

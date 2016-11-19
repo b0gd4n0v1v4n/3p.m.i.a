@@ -7,21 +7,44 @@ namespace AIMP_v3._0.PerfectListView
         private PerfectGridViewColumnHeaderViewModel _perfectColumnHeaderViewModel;
         public PerfectGridViewColumnHeader()
         {
-            Initialized += (sender, args) =>
+            Loaded+=(s,a)=>
             {
-                _perfectColumnHeaderViewModel = new PerfectGridViewColumnHeaderViewModel(SourceColumn, StartFilterItem);
+                if (!string.IsNullOrEmpty(StartFilterRow))
+                {
+                    _perfectColumnHeaderViewModel.StartFilterApply(StartFilterRow);
+                }
+            };
+            Initialized += (sender, args) => 
+            {
+                _perfectColumnHeaderViewModel = new PerfectGridViewColumnHeaderViewModel(SourceColumn);
                 DataContext = _perfectColumnHeaderViewModel;
             };
         }
+
         protected override void OnClick()
         {
-            _perfectColumnHeaderViewModel.IsOpenMenu = !_perfectColumnHeaderViewModel.IsOpenMenu;     
+            _perfectColumnHeaderViewModel.IsOpenMenu = !_perfectColumnHeaderViewModel.IsOpenMenu;
+
+            if (_perfectColumnHeaderViewModel.IsOpenMenu)
+                _perfectColumnHeaderViewModel.RefreshItemSource();
+
             base.OnClick();
         }
+
         public string SourceColumn { get; set; }
-        public string StartFilterItem { get; set; }
-        public static readonly DependencyProperty StartFilterItemProperty =
+        public string StartFilterRow
+        {
+            get
+            {
+                return (string)GetValue(StartFilterRowProperty);
+            }
+            set
+            {
+                SetValue(StartFilterRowProperty, value);
+            }
+        }
+        public static readonly DependencyProperty StartFilterRowProperty =
     DependencyProperty.Register(
-        "StartFilterItem", typeof(string), typeof(PerfectGridViewColumnHeader),null);
+        "StartFilterRow", typeof(string), typeof(PerfectGridViewColumnHeader),null);
     }
 }

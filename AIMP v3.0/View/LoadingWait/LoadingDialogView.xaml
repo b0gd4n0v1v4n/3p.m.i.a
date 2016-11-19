@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AIMP_v3._0.View"
         mc:Ignorable="d"
-        Title="LoadingModalDialog" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Background="LightGray" Opacity="0.7" AllowsTransparency="True" WindowStyle="None" WindowState="Maximized">
+        Title="LoadingModalDialog" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Background="LightGray" Opacity="0.7" AllowsTransparency="True" WindowStyle="None"
+    WindowState="Maximized">
     <Grid>
             <Label x:Name="lblLoading" Content="{Binding }" FontSize="16" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <!--<ProgressBar IsIndeterminate="True"  HorizontalAlignment="Center" Height="13"  VerticalAlignment="Top" Width="290"/>-->
