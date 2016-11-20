@@ -78,7 +78,6 @@ namespace AIMP_v3._0.ViewModel.ClientOfReport
             using(var service = new AimpService())
             {
                 var response = service.GetClientReport(id);
-
                 if (id == null)
                 {
                     ClientReport = new ClientReport();

@@ -6,6 +6,7 @@ namespace AIMP_v3._0.DataAccess
 {
     public static class CurrentUser
     {
+        public static string LastName { get; set; }
         public static bool IsAdmin { get; private set; }
         public static bool IsView { get; private set; }
         public static bool IsAdd { get; private set; }
@@ -17,8 +18,8 @@ namespace AIMP_v3._0.DataAccess
             using(var service = new AimpService())
             {
                 var response = service.Auth();
-
-                if(response.UserRights.Any(x=>x == UserRightsCollection.Admin.Id))
+                LastName = response.LastName;
+                if (response.UserRights.Any(x=>x == UserRightsCollection.Admin.Id))
                 {
                     IsAdd = true;
                     IsAdmin = true;

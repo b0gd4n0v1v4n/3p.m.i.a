@@ -23,7 +23,7 @@ namespace Aimp.Console.Wcf
 
                 var login = WebOperationContext.Current.IncomingRequest.Headers.Get("login");
                 var password = WebOperationContext.Current.IncomingRequest.Headers.Get("password");
-
+                
                 if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
                     throw new AuthenticationException($"Login or password empty");
 
@@ -40,8 +40,7 @@ namespace Aimp.Console.Wcf
 
         protected void EventLog(string action)
         {
-            Logger.Log($"-----{DateTime.Now.ToLongDateString()}------");
-            Logger.Log("User: {CurrentUser.Login}");
+            Logger.Log($"User: {CurrentUser.Login}");
             Logger.Log(action);
         }
     }

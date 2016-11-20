@@ -1,4 +1,5 @@
-﻿using AIMP_v3._0.User_Control.PerfectListView;
+﻿using AIMP_v3._0.DataAccess;
+using AIMP_v3._0.User_Control.PerfectListView;
 using System.Windows;
 
 namespace AIMP_v3._0.PerfectListView
@@ -10,9 +11,13 @@ namespace AIMP_v3._0.PerfectListView
         {
             Loaded+=(s,a)=>
             {
-                if (!string.IsNullOrEmpty(StartFilterRow))
+                if (!string.IsNullOrEmpty(StartFilterItem))
                 {
-                    _perfectColumnHeaderViewModel.StartFilterApply(StartFilterRow);
+#warning не биндится поле, ход конем
+                    if (StartFilterItem == "manager")
+                        _perfectColumnHeaderViewModel.StartFilterApply(CurrentUser.LastName);
+                    else
+                        _perfectColumnHeaderViewModel.StartFilterApply(StartFilterItem);
                 }
             };
             Initialized += (sender, args) => 
@@ -26,26 +31,26 @@ namespace AIMP_v3._0.PerfectListView
         {
             _perfectColumnHeaderViewModel.IsOpenMenu = !_perfectColumnHeaderViewModel.IsOpenMenu;
 
-            if (_perfectColumnHeaderViewModel.IsOpenMenu)
-                _perfectColumnHeaderViewModel.RefreshItemSource();
+            //if (_perfectColumnHeaderViewModel.IsOpenMenu)
+            //    _perfectColumnHeaderViewModel.RefreshItemSource();
 
             base.OnClick();
         }
         public ColumnDataType DataType { get; set; }
         public string SourceColumn { get; set; }
-        public string StartFilterRow
+        public string StartFilterItem
         {
             get
             {
-                return (string)GetValue(StartFilterRowProperty);
+                return (string)GetValue(StartFilterItemProperty);
             }
             set
             {
-                SetValue(StartFilterRowProperty, value);
+                SetValue(StartFilterItemProperty, value);
             }
         }
-        public static readonly DependencyProperty StartFilterRowProperty =
+        public static readonly DependencyProperty StartFilterItemProperty =
     DependencyProperty.Register(
-        "StartFilterRow", typeof(string), typeof(PerfectGridViewColumnHeader),null);
+        "StartFilterItem", typeof(string), typeof(PerfectGridViewColumnHeader), new PropertyMetadata(string.Empty));
     }
 }

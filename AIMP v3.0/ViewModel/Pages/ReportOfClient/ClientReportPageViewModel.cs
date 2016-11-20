@@ -65,7 +65,7 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                         TelefonReportClient = x.TelefonReportClient,
                          TotalContributionReportClient = x.TotalContributionReportClient,
                          TrancportNameReportClient = x.TrancportNameReportClient
-                    });
+                    }).ToList();
                 }
             }
             catch (Exception ex)
@@ -78,7 +78,11 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
         {
             _FillListReportOfClient();
         }
-
+        public string StartFilter
+        {
+            get {
+                return "1"; }
+        }
         public ObservableCollection<string> BanksColumnName
         {
             get; private set;

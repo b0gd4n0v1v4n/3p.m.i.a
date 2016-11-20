@@ -49,9 +49,13 @@ namespace AIMP_v3._0.PerfectListView
         public string SearchText { get; set; }
         public ICommand SearchCommand { get; private set; }
 
-        public bool IsFiltering { get; set; }
+        private bool _isFiltering;
+        public bool IsFiltering { get {
+                return _isFiltering;
+            } set { _isFiltering = value; OnPropertyChanged(); } }
 
         public event Action<IEnumerable<IFilterRow>> ItemSourceChanged;
+        public event Action FilterClearCahnged;
 
         public PerfectGridViewColumnHeaderViewModel(string columnName,ColumnDataType type)
         {
@@ -71,7 +75,7 @@ namespace AIMP_v3._0.PerfectListView
             RefreshItemSource();
         }
 
-        public void RefreshItemSource()
+        private void RefreshItemSource()
         {
             try
             {
@@ -105,7 +109,6 @@ namespace AIMP_v3._0.PerfectListView
                             iOriginal.IsVisible = false;
 
                 IsFiltering = true;
-                OnPropertyChanged("IsFiltering");
             }
             catch (Exception ex)
             {
@@ -152,7 +155,9 @@ namespace AIMP_v3._0.PerfectListView
                 iRow.IsVisible = true;
 
             IsFiltering = false;
-            OnPropertyChanged("IsFiltering");
+
+            if (FilterClearCahnged != null)
+                FilterClearCahnged();
         }
         private void FilterApply()
         {
@@ -164,7 +169,6 @@ namespace AIMP_v3._0.PerfectListView
                             iOriginalRow.IsVisible = iRow.IsSelected;
 
                 IsFiltering = true;
-                OnPropertyChanged("IsFiltering");
             }
             catch (Exception ex)
             {
@@ -183,7 +187,6 @@ namespace AIMP_v3._0.PerfectListView
                                 iOriginalRow.IsVisible = false;
 
                     IsFiltering = true;
-                    OnPropertyChanged("IsFiltering");
                 }
                 catch (Exception ex)
                 {

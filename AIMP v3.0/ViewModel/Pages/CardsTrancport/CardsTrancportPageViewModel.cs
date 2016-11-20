@@ -38,7 +38,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         Source = x.Source,
                         User = x.User,
                         YearTrancport = x.YearTrancport
-                    });
+                    }).ToList();
                 }
             }
             catch (Exception ex)

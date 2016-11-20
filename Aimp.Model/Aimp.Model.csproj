@@ -51,9 +51,7 @@
     <Compile Include="ContractorInfo\ContractorInfo.cs" />
     <Compile Include="ContractorInfo\TypeSearchContractor.cs" />
     <Compile Include="CreditTransact\CreditTransactionInfoDto.cs" />
-    <Compile Include="CreditTransact\CreditTransactionListItem.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="CreditTransact\CreditTransactionListItem.cs" />
     <Compile Include="DataFormats.cs" />
     <Compile Include="Dictionary.cs" />
     <Compile Include="Dictionary\Row.cs" />

@@ -8,6 +8,7 @@ namespace Aimp.Model
     public class AimpUserDto
     {
         public int Id { get; set; }
+        public string LastName { get; set; }
         public IEnumerable<string> UserRights { get; set; }
     }
 }

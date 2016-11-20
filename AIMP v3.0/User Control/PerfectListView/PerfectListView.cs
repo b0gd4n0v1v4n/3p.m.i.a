@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace AIMP_v3._0.PerfectListView
 {
     public class PerfectListView : System.Windows.Controls.ListView
     {
+        private Collection<PerfectGridViewColumnHeaderViewModel> _headers;
         public PerfectListView()
         {
+            _headers = new Collection<PerfectGridViewColumnHeaderViewModel>();
             //SizeChanged += (sender, args) => ColumnsSetWidth();
             
             Loaded += (sender, args) => { ColumnsSetWidth(); SubscribeForPerfectHeader(); };
@@ -49,7 +52,14 @@ namespace AIMP_v3._0.PerfectListView
 
                         if (perfectHeader != null)
                         {
+                            _headers.Add(perfectHeader);
+
                             perfectHeader.ItemSourceChanged += (s) => ItemsSource = s;
+                            perfectHeader.FilterClearCahnged += () => 
+                            {
+                                foreach (var iHeader in _headers)
+                                    iHeader.IsFiltering = false;
+                            };
                             perfectHeader.SetItemSource(source);
                         }
                     }

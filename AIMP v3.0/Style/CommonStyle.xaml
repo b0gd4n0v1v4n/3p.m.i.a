@@ -186,6 +186,7 @@
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:DateForViewConverter x:Key="DateForViewConverter"/>
+
     <perfectListView:PerfectFilterColumnsGeneratorConverter x:Key="PerfectFilterColumnsGeneratorConverter"/>
     <Style x:Key="PerfectListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="Visibility" Value="{Binding IsVisible,Converter={StaticResource BoolToVisibilityConverter}}"></Setter>
@@ -204,22 +205,7 @@
                         <Border x:Name="HeaderBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1" Background="{TemplateBinding Background}">
                             <DockPanel>
                                 <Border Name="CheckColumnBorder" Tag="{TemplateBinding Content}" BorderThickness="1" DockPanel.Dock="Right" VerticalAlignment="Center">
-                                    <ContentControl>
-                                        <Image x:Name="ImageFilter" Source="/Style/Image/Empty Filter-24.png" Width="14" Height="14"/>
-                                        <ContentControl.Style>
-                                            <Style TargetType="ContentControl">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsFiltering}" Value="True">
-                                                        <Setter Property="Content">
-                                                            <Setter.Value>
-                                                                <Image x:Name="ImageFilter" Source="/Style/Image/Filled Filter-24.png" Width="14" Height="14"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ContentControl.Style>
-                                    </ContentControl>
+                                    <CheckBox Name="ColumnHeaderCheckBox" IsChecked="{Binding IsFiltering}" IsEnabled="False"/>
                                 </Border>
                                 <Popup x:Name="FilteringPopup"  IsOpen="{Binding Path=IsOpenMenu}">
                                     <Border BorderThickness="1" BorderBrush="Gray">
@@ -566,7 +552,7 @@
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="6" DisplayMemberBinding="{Binding ManagerReportClient}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="МЕНЕДЖЕР" SourceColumn="ManagerReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="МЕНЕДЖЕР" StartFilterItem="manager" SourceColumn="ManagerReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                     </GridView>
@@ -874,7 +860,7 @@
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Status}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="СТАТУС" SourceColumn="Status" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="СТАТУС" SourceColumn="Status" StartFilterItem="В наличии" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding DateSale,Converter={StaticResource ResourceKey=DateForViewConverter}}">

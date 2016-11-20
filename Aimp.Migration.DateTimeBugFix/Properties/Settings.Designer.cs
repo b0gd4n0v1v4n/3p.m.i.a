@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AIMP_v3._0.Properties {
+namespace Aimp.Migration.DateTimeBugFix.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,31 +25,7 @@ namespace AIMP_v3._0.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("strh-srvpk")]
-        public string hostname {
-            get {
-                return ((string)(this["hostname"]));
-            }
-            set {
-                this["hostname"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1234")]
-        public string port {
-            get {
-                return ((string)(this["port"]));
-            }
-            set {
-                this["port"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
         public string login {
             get {
                 return ((string)(this["login"]));
@@ -61,7 +37,7 @@ namespace AIMP_v3._0.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
         public string password {
             get {
                 return ((string)(this["password"]));
@@ -73,37 +49,13 @@ namespace AIMP_v3._0.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsSave {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:1234/aimp.spb")]
+        public string uri {
             get {
-                return ((bool)(this["IsSave"]));
+                return ((string)(this["uri"]));
             }
             set {
-                this["IsSave"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("aimp.spb")]
-        public string service {
-            get {
-                return ((string)(this["service"]));
-            }
-            set {
-                this["service"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool dateWTFbugFix {
-            get {
-                return ((bool)(this["dateWTFbugFix"]));
-            }
-            set {
-                this["dateWTFbugFix"] = value;
+                this["uri"] = value;
             }
         }
     }

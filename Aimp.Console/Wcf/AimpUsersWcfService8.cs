@@ -36,6 +36,7 @@ namespace Aimp.Console.Wcf
                 return new AimpUserDto()
                 {
                     Id = CurrentUser.Id,
+                    LastName = CurrentUser.LastName,
                     UserRights = userRights
                 };
             }

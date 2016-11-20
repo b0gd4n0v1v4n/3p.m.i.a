@@ -69,6 +69,20 @@ LoadingViewHalper.ShowDialog("Подключение...", () =>{
             setings.IsSave = false;
         }
         setings.Save();
+        if (setings.dateWTFbugFix)
+        {
+            var view = new QuestClosingView("В настройках указано исправление ошибок дат, начать исправление?");
+            view.ShowDialog();
+
+            if (view.DialogResult == true)
+            {
+                LoadingViewHalper.ShowDialog("Исправление дат...", () =>
+                {
+                    new WTFdateTimeBugFix().Start();
+                });
+            }
+
+        }
         ((Window)win)?.Hide();
         LoadingViewHalper.View.Close();
         MainView mian = new MainView();
