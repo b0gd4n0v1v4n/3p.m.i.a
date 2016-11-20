@@ -10,6 +10,7 @@ using AIMP_v3._0.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using AIMP_v3._0.User_Control.PerfectListView;
 
 namespace AIMP_v3._0.PerfectListView
 {
@@ -19,10 +20,12 @@ namespace AIMP_v3._0.PerfectListView
                
         private bool _isSelected;
         public bool IsSelected { get { return _isSelected; } set { _isSelected = value; OnPropertyChanged(); } }
-        public dynamic Text { get; set; }
+        public dynamic Value { get; set; }
+        public string Text { get; set; }
     }
     public class PerfectGridViewColumnHeaderViewModel : BaseViewModel
     {
+        public ColumnDataType DataType { get; private set; }
         public string ColumnName { get; private set; }
         
         private IEnumerable<IFilterRow> _originalSource;
@@ -43,18 +46,23 @@ namespace AIMP_v3._0.PerfectListView
         public ICommand SelectedAllItemCommand { get; private set; }
         public bool IsSelectedAll { get; set; }
 
+        public string SearchText { get; set; }
+        public ICommand SearchCommand { get; private set; }
+
         public bool IsFiltering { get; set; }
 
         public event Action<IEnumerable<IFilterRow>> ItemSourceChanged;
 
-        public PerfectGridViewColumnHeaderViewModel(string columnName)
+        public PerfectGridViewColumnHeaderViewModel(string columnName,ColumnDataType type)
         {
+            DataType = type;
             ColumnName = columnName;
             OrderingAscCommand = new Command((x) => Ordering(true));
             OrderingDescCommand = new Command((x) => Ordering(false));
             FilterApplyCommand = new Command((x)=> FilterApply());
             ClearFilterCommand = new Command((x)=> ClearFilter());
             SelectedAllItemCommand = new Command((x)=>SelectedAllItem());
+            SearchCommand = new Command((x) => Search());
         }
 
         public void SetItemSource(IEnumerable<IFilterRow> itemSource)
@@ -73,7 +81,8 @@ namespace AIMP_v3._0.PerfectListView
                     var filterRow = new GroupingFilterRow()
                     {
                         OriginalRows = iGroupColumn.GroupingRows,
-                        Text = iGroupColumn.Text
+                        Value = iGroupColumn.Text,
+                        Text = iGroupColumn.Text?.ToString()
                     };
 
                     Rows.Add(filterRow);
@@ -91,7 +100,7 @@ namespace AIMP_v3._0.PerfectListView
             try
             {
                 foreach (var iRow in Rows)
-                    if (iRow.Text?.ToString() == filterText)
+                    if (iRow.Text == filterText)
                         foreach (var iOriginal in _originalSource.Where(x => !iRow.OriginalRows.Select(o=>o.Id).Contains(x.Id)))
                             iOriginal.IsVisible = false;
 
@@ -118,13 +127,13 @@ namespace AIMP_v3._0.PerfectListView
 
                 if (asc)
                 {
-                    foreach(var iOrd in Rows.OrderBy(x => x.Text))
+                    foreach(var iOrd in Rows.OrderBy(x => x.Value))
                         foreach(var iG in iOrd.OriginalRows)
                             orderingRows.Add(iG);
                 }
                 else
                 {
-                    foreach (var iOrd in Rows.OrderByDescending(x => x.Text))
+                    foreach (var iOrd in Rows.OrderByDescending(x => x.Value))
                         foreach (var iG in iOrd.OriginalRows)
                             orderingRows.Add(iG);
                 }
@@ -160,6 +169,26 @@ namespace AIMP_v3._0.PerfectListView
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+        private void Search()
+        {
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                try
+                {
+                    foreach (var iRow in Rows.Where(x=>!x.Text.Contains(SearchText)))
+                        foreach (var iOriginalRow in _originalSource)
+                            if (iRow.OriginalRows.Select(o => o.Id).Contains(iOriginalRow.Id))
+                                iOriginalRow.IsVisible = false;
+
+                    IsFiltering = true;
+                    OnPropertyChanged("IsFiltering");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

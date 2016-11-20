@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using AIMP_v3._0.User_Control.PerfectListView;
+using System.Windows;
 
 namespace AIMP_v3._0.PerfectListView
 {
@@ -16,7 +17,7 @@ namespace AIMP_v3._0.PerfectListView
             };
             Initialized += (sender, args) => 
             {
-                _perfectColumnHeaderViewModel = new PerfectGridViewColumnHeaderViewModel(SourceColumn);
+                _perfectColumnHeaderViewModel = new PerfectGridViewColumnHeaderViewModel(SourceColumn,DataType);
                 DataContext = _perfectColumnHeaderViewModel;
             };
         }
@@ -30,7 +31,7 @@ namespace AIMP_v3._0.PerfectListView
 
             base.OnClick();
         }
-
+        public ColumnDataType DataType { get; set; }
         public string SourceColumn { get; set; }
         public string StartFilterRow
         {

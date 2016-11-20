@@ -246,8 +246,8 @@
                                             </Grid>
                                             <Grid Grid.Row="1">
                                                 <StackPanel  Orientation="Horizontal">
-                                                    <TextBox Text="{Binding CurrentColumn.SearchText}" Width="170" Height="24"/>
-                                                    <Button Height="28" Command="{Binding SearchFromCurrentColumnCommand}" CommandParameter="{Binding ElementName=FilteringPopup}">
+                                                    <TextBox Text="{Binding SearchText}" Width="170" Height="24"/>
+                                                    <Button Height="28" Command="{Binding SearchCommand}">
                                                         <Button.Content>
                                                             <Image Source="Image\Search-24.png"  Width="24" Height="24"/>
                                                         </Button.Content>
@@ -378,12 +378,12 @@
                                         <GridViewColumn Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Date,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" DataType="Date" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Number}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="№" StartFilterRow="0" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" DataType="Int" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn  PercentageWidth="10" DisplayMemberBinding="{Binding NumberProxy}">
@@ -477,7 +477,7 @@
                                         <GridViewColumn Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding DateReportClient,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="DateReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" DataType="Date" SourceColumn="DateReportClient" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding FullNameReportClient}">
@@ -595,12 +595,12 @@
                                         <GridViewColumn x:Name="Idcredit"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Date,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Number}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" DataType="Int" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding NumberProxy}">
@@ -748,12 +748,12 @@
                                         <GridViewColumn x:Name="IdCom"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Date,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА" SourceColumn="Date" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding Number}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" DataType="Int" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding NumberProxy}">
@@ -834,12 +834,12 @@
                                         <GridViewColumn x:Name="IdCard"  Width="0" Header="id"  DisplayMemberBinding="{Binding Id}"/>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding Number}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№" SourceColumn="Number" DataType="Int" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding DateStart,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПОСТ." SourceColumn="DateStart" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПОСТ." SourceColumn="DateStart" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding NumberT}">
@@ -879,7 +879,7 @@
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="7" DisplayMemberBinding="{Binding DateSale,Converter={StaticResource ResourceKey=DateForViewConverter}}">
                                             <GridViewColumn.Header>
-                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПРОД." SourceColumn="DateSale" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПРОД." SourceColumn="DateSale" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                         <perfectListView:PerfectGridViewColumn PercentageWidth="9" DisplayMemberBinding="{Binding User}">
