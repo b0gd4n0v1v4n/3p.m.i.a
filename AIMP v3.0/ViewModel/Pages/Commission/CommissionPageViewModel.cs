@@ -39,7 +39,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
                                 Id = x.Id,
                                 DocumentSellerId = x.DocumentSellerId,
                                 PtsId = x.PtsId,
-                                Date = x.Date.ToString(Aimp.Model.DataFormats.DateFormat),
+                                Date = x.Date,
                                 TrancportFullName = x.TrancportFullName,
                                 Number = x.Number,
                                 NumberProxy = x.NumberProxy,

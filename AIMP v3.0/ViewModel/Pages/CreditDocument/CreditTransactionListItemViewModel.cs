@@ -11,10 +11,6 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
 {
     public class CreditTransactionListItemViewModel : CreditTransactionListItem,IFilterRow,INotifyPropertyChanged
     {
-        public string Date { get
-            {
-                return DateTime.ToString(Aimp.Model.DataFormats.DateFormat);
-            } }
         public Visibility VisibilityOpenDocumentSeller => DocumentSellerId != null ? Visibility.Visible : Visibility.Hidden;
 
         public Visibility VisibilityOpenDocumentBuyer => DocumentBuyerId != null ? Visibility.Visible : Visibility.Hidden;

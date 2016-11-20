@@ -36,10 +36,10 @@ namespace Aimp.Console.Wcf
                             x.Seller.LegalPerson != null
                                 ? x.Seller.LegalPerson.Name
                                 : x.Seller.LastName + " " + x.Seller.FirstName + " " + x.Seller.MiddleName,
-                        DateTime = x.Date,
+                        Date = x.Date,
                         DocumentBuyerId = x.Buyer.DocumentId,
                         DocumentSellerId = x.Seller.DocumentId,
-                        Number = x.Number.ToString(),
+                        Number = x.Number,
                         NumberProxy = x.NumberProxy,
                         TrancportFullName = x.Trancport.Model.Name + ", " + x.Trancport.Make.Name,
                         PtsId = x.Trancport.CopyPtsId,

@@ -13,21 +13,20 @@ using System.Collections.ObjectModel;
 
 namespace AIMP_v3._0.PerfectListView
 {
-    public class FilterRow : BaseViewModel
+    public class GroupingFilterRow : BaseViewModel
     {
-        public IEnumerable<int> Ids { get; set; }
+        public IEnumerable<IFilterRow> OriginalRows { get; set; }
                
         private bool _isSelected;
         public bool IsSelected { get { return _isSelected; } set { _isSelected = value; OnPropertyChanged(); } }
-
-        public string Text { get; set; }
+        public dynamic Text { get; set; }
     }
     public class PerfectGridViewColumnHeaderViewModel : BaseViewModel
     {
         public string ColumnName { get; private set; }
         
         private IEnumerable<IFilterRow> _originalSource;
-        public ObservableCollection<FilterRow> Rows { get; private set; }
+        public ObservableCollection<GroupingFilterRow> Rows { get; private set; }
         private bool _isOpenMenu;
         public bool IsOpenMenu
         {
@@ -45,6 +44,8 @@ namespace AIMP_v3._0.PerfectListView
         public bool IsSelectedAll { get; set; }
 
         public bool IsFiltering { get; set; }
+
+        public event Action<IEnumerable<IFilterRow>> ItemSourceChanged;
 
         public PerfectGridViewColumnHeaderViewModel(string columnName)
         {
@@ -66,18 +67,12 @@ namespace AIMP_v3._0.PerfectListView
         {
             try
             {
-                Rows = new ObservableCollection<FilterRow>();
-                foreach (dynamic iGroupColumn in _originalSource.GroupBy(ColumnName, "it").Select("new (it.Key as Text,it as Ids)"))
+                Rows = new ObservableCollection<GroupingFilterRow>();
+                foreach (dynamic iGroupColumn in _originalSource.GroupBy(ColumnName, "it").Select("new (it.Key as Text,it as GroupingRows)"))
                 {
-                    var ids = new Collection<int>();
-
-                    foreach (dynamic iColumn in iGroupColumn.Ids)
+                    var filterRow = new GroupingFilterRow()
                     {
-                        ids.Add(iColumn.Id);
-                    }
-                    var filterRow = new FilterRow()
-                    {
-                        Ids = ids,
+                        OriginalRows = iGroupColumn.GroupingRows,
                         Text = iGroupColumn.Text
                     };
 
@@ -96,8 +91,8 @@ namespace AIMP_v3._0.PerfectListView
             try
             {
                 foreach (var iRow in Rows)
-                    if (iRow.Text == filterText)
-                        foreach (var iOriginal in _originalSource.Where(x => !iRow.Ids.Contains(x.Id)))
+                    if (iRow.Text?.ToString() == filterText)
+                        foreach (var iOriginal in _originalSource.Where(x => !iRow.OriginalRows.Select(o=>o.Id).Contains(x.Id)))
                             iOriginal.IsVisible = false;
 
                 IsFiltering = true;
@@ -119,7 +114,23 @@ namespace AIMP_v3._0.PerfectListView
         {
             try
             {
-                //ItemSourceChanged(ItemSource.OrderBy(string.Format(asc ? "{0} ASC" : "{0} DESC", ColumnName)));
+                Collection<IFilterRow> orderingRows = new Collection<IFilterRow>();
+
+                if (asc)
+                {
+                    foreach(var iOrd in Rows.OrderBy(x => x.Text))
+                        foreach(var iG in iOrd.OriginalRows)
+                            orderingRows.Add(iG);
+                }
+                else
+                {
+                    foreach (var iOrd in Rows.OrderByDescending(x => x.Text))
+                        foreach (var iG in iOrd.OriginalRows)
+                            orderingRows.Add(iG);
+                }
+
+                if (ItemSourceChanged != null)
+                    ItemSourceChanged(orderingRows);
             }
             catch (Exception ex)
             {
@@ -140,7 +151,7 @@ namespace AIMP_v3._0.PerfectListView
             {
                 foreach (var iRow in Rows)
                     foreach (var iOriginalRow in _originalSource)
-                        if (iRow.Ids.Contains(iOriginalRow.Id))
+                        if (iRow.OriginalRows.Select(o=>o.Id).Contains(iOriginalRow.Id))
                             iOriginalRow.IsVisible = iRow.IsSelected;
 
                 IsFiltering = true;

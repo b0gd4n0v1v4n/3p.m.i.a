@@ -30,12 +30,12 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
                 {
                     var response = service.GetCreditTransactions();
                     var lst = response
-                            .OrderByDescending(x => x.DateTime)
+                            .OrderByDescending(x => x.Date)
                             .ThenByDescending(x => x.Number)
                             .Select(x => new CreditTransactionListItemViewModel()
                              {
                                 IsVisible = true,
-                                DateTime = x.DateTime,
+                                Date = x.Date,
                                  Id = x.Id,
                                  DocumentBuyerId = x.DocumentBuyerId,
                                  DocumentSellerId = x.DocumentSellerId,

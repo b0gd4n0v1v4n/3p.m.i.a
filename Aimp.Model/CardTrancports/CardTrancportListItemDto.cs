@@ -5,7 +5,7 @@ namespace Aimp.Model.CardTrancports
 {
     public class CardTrancportListItemDto : Identity
     {
-        public string Number {get;set;}
+        public int Number {get;set;}
         public DateTime DateStart { get; set; }
         public string NumberT { get; set; }
         public string MakeModelTrancport { get; set; }

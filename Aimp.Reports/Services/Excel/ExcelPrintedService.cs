@@ -7,6 +7,7 @@ using Aimp.Model.ReportOfClient;
 using Aimp.Reports.Interfaces;
 using System.Collections.Generic;
 using Entities;
+using Aimp.Model;
 
 namespace Aimp.Reports.Services.Excel
 {
@@ -53,7 +54,7 @@ namespace Aimp.Reports.Services.Excel
                 foreach (var iReport in reports)
                 {
                     iRow++;
-                    _excel.SetValue(iRow,1, iReport.DateReport);
+                    _excel.SetValue(iRow,1, iReport.DateReportClient.ToString(DataFormats.DateFormat));
                     _excel.SetValue(iRow, 2, iReport.FullNameReportClient);
                     _excel.SetValue(iRow, 3, iReport.TelefonReportClient);
                     _excel.SetValue(iRow, 4, iReport.TrancportNameReportClient);

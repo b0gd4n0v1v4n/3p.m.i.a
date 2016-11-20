@@ -6,7 +6,7 @@ namespace Aimp.Model.CashTransact
     public class CashTransactionListItem : Identity
     {
         public DateTime Date { get; set; }
-        public string Number { get; set; }
+        public int Number { get; set; }
 
         public string NumberProxy { get; set; }
 

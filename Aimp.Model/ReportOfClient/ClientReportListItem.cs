@@ -17,13 +17,5 @@ namespace Aimp.Model.ReportOfClient
         public string ClientStatusReportClient { get; set; }
         public string SourceInfoReportClient { get; set; }
         public string ManagerReportClient { get; set; }
-
-        public string DateReport
-        {
-            get
-            {
-                return DateReportClient.ToString(DataFormats.DateFormat);
-            }
-        }
     }
 }
