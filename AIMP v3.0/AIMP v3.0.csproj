@@ -295,7 +295,6 @@
     <Compile Include="View\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WTFdateTimeBugFix.cs" />
     <Page Include="Style\CommonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

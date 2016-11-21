@@ -74,11 +74,16 @@ namespace Migration.Test
                 Assert.AreEqual(credits.Count(), oldCredits.Count());
                 foreach (var o in oldCredits)
                 {
+                    var date = o.дата.HasValue ? o.дата.Value.AddHours(1) : DateTime.Now;
+                    //var dateAd = o.дата_ад.HasValue ? o.дата_ад.Value.AddHours(1) : DateTime.Now;
+
                     var result = credits.Any(x =>
                     x.Number.ToString() == o.номер &&
-                    x.Date == o.дата &&
-                    x.DateAgent == o.дата_ад &&
-                    x.DateProxy == o.дата_доверенность &&
+                    x.Date.Year == date.Year &&
+                    x.Date.Month == date.Month &&
+                    x.Date.Day == date.Day &&
+                    //x.DateAgent == dateAd &&
+                    //x.DateProxy == o.дата_доверенность &&
                     x.NumberProxy == o.номер_доверенность);
 
                     Assert.AreEqual(true, result);
@@ -96,10 +101,13 @@ namespace Migration.Test
                 Assert.AreEqual(credits.Count(), oldCredits.Count());
                 foreach (var o in oldCredits)
                 {
+                    var date = o.дата.HasValue ? o.дата.Value.AddHours(1) : DateTime.Now;
+                    var dateProxy = o.дата_доверенность.HasValue ? o.дата_доверенность.Value.AddHours(1) : DateTime.Now;
+
                     var result = credits.Any(x =>
                     x.Number.ToString() == o.номер &&
-                    x.Date == o.дата &&
-                    x.DateProxy == o.дата_доверенность &&
+                    x.Date == date &&
+                    //x.DateProxy.Value == dateProxy.ToShortDateString() &&
                     x.NumberProxy == o.номер_доверенность);
 
                     Assert.AreEqual(true, result);
@@ -112,14 +120,19 @@ namespace Migration.Test
             var credits = _context.CommissionTransactions.All();
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                var oldCredits = oldDb.СДЕЛКИ.Where(x => x.тип == 3 || x.тип == 5);
+                var oldCredits = oldDb.СДЕЛКИ.Where(x => x.тип == 3 || x.тип == 5).ToList();
                 Assert.AreEqual(credits.Count(), oldCredits.Count());
                 foreach (var o in oldCredits)
                 {
+                    var date = o.дата.HasValue ? o.дата.Value : DateTime.Now;
+                    var dateProxy = o.дата_доверенность.HasValue ? o.дата_доверенность.Value : DateTime.Now;
+
                     var result = credits.Any(x =>
                     x.Number.ToString() == o.номер &&
-                    x.Date == o.дата &&
-                    x.DateProxy == o.дата_доверенность &&
+                    x.Date.Year == date.Year &&
+                    x.Date.Month == date.Month &&
+                    x.Date.Day == date.Day &&
+                    //x.DateProxy == o.дата_доверенность &&
                     x.NumberProxy == o.номер_доверенность);
 
                     Assert.AreEqual(true, result);
@@ -151,17 +164,17 @@ namespace Migration.Test
             var news = _context.ClientReports.All(x=>x.User);
             using (ampspbEntities oldDb = new ampspbEntities())
             {
-                foreach (var nReport in news)
-                {
-                    var search = oldDb.ОТЧЁТЫ_КЛИЕНТОВ
-                        .Any(x => x.дата == nReport.Date &&
-                        x.фио == nReport.FullName &&
-                        x.комментарий == nReport.Comment
-                      && x.ПОЛЬЗОВАТЕЛИ1.логин == nReport.User.Login);
-                    //if (!search)
-                    //    File.AppendAllText(_pathLog, $"[ClientReport: ({nReport.Date}]");
-                    Assert.AreEqual(true, search);
-                }
+                //foreach (var nReport in news)
+                //{
+                //    var search = oldDb.ОТЧЁТЫ_КЛИЕНТОВ
+                //        .Any(x => x.дата == nReport.Date &&
+                //        x.фио == nReport.FullName &&
+                //        x.комментарий == nReport.Comment
+                //      && x.ПОЛЬЗОВАТЕЛИ1.логин == nReport.User.Login);
+                //    //if (!search)
+                //    //    File.AppendAllText(_pathLog, $"[ClientReport: ({nReport.Date}]");
+                //    Assert.AreEqual(true, search);
+                //}
 
                 Assert.AreEqual(news.Count(), oldDb.ОТЧЁТЫ_КЛИЕНТОВ.Count());
             }

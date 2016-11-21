@@ -94,17 +94,5 @@ namespace AIMP_v3._0.Properties {
                 this["service"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool dateWTFbugFix {
-            get {
-                return ((bool)(this["dateWTFbugFix"]));
-            }
-            set {
-                this["dateWTFbugFix"] = value;
-            }
-        }
     }
 }

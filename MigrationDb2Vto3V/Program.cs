@@ -16,6 +16,17 @@ namespace MigrationDb2Vto3V
         {
             return byt == null ? false : (byt == 1 ? true : false);
         }
+        static DateTime GetDate(DateTime? date)
+        {
+            return date.HasValue ? date.Value.AddHours(1) : DateTime.Now;
+        }
+        static DateTime? GetDateNull(DateTime? date)
+        { 
+            if(date.HasValue)
+                return  date.Value.AddHours(1) ;
+            
+            return null;
+        }
         static Contractor NewContractor(КОНТРАГЕНТЫ ct, Aimp.DataAccess.EF.SqlContext newDb)
         {
             Contractor contractor = new Contractor();
@@ -26,7 +37,7 @@ namespace MigrationDb2Vto3V
             contractor.FirstNameGenitive = ct.имя_р;
             contractor.LastNameGenitive = ct.фамилия_р;
             contractor.MiddleNameGenitive = ct.отчество_р;
-            contractor.DateBirth = ct.дата ?? DateTime.Now;
+            contractor.DateBirth = GetDate(ct.дата);
 
             contractor.Region =
                 newDb.Regions.Local.FirstOrDefault(x => x.Name == ct.РЕГИОНЫ1.наименование) ??
@@ -49,7 +60,7 @@ namespace MigrationDb2Vto3V
             contractor.Telefon = ct.телефон;
             contractor.NumberDocument = ct.номер_док;
             contractor.SerialDocument = ct.серия_док;
-            contractor.DateDocument = ct.дата_док ?? DateTime.Now;
+            contractor.DateDocument = GetDateNull(ct.дата_док);
             contractor.ByDocument = ct.кем_док;
             if (!string.IsNullOrWhiteSpace(ct.документ_наим))
             {
@@ -133,8 +144,8 @@ namespace MigrationDb2Vto3V
             tc.BySts = trancport.кем_стс;
             tc.ChassisNumber = trancport.шасси;
             tc.Color = trancport.цвет;
-            tc.DatePts = trancport.дата_птс;
-            tc.DateSts = trancport.дата_стс;
+            tc.DatePts = GetDateNull(trancport.дата_птс);
+            tc.DateSts = GetDateNull(trancport.дата_стс);
             tc.NumberPts = trancport.номер_птс;
             tc.NumberSts = trancport.номер_стс;
             tc.Pa = trancport.па;
@@ -168,7 +179,7 @@ namespace MigrationDb2Vto3V
 
         static User NewUser(ПОЛЬЗОВАТЕЛИ пользовател, Aimp.DataAccess.EF.SqlContext newDb)
         {
-            DateTime date = Convert.ToDateTime(пользовател.дата);
+            DateTime date = GetDate(Convert.ToDateTime(пользовател.дата));
 
             var userDb = newDb.Users.Local.FirstOrDefault(
                     x =>
@@ -282,7 +293,7 @@ namespace MigrationDb2Vto3V
 
                         clientReport = new ClientReport()
                         {
-                            Date = отчётыКлиентов.дата ?? DateTime.Now,
+                            Date = GetDate(отчётыКлиентов.дата),
                             Source = отчётыКлиентов.источник,
                             FullName = отчётыКлиентов.фио,
                             Price = Convert.ToDecimal(отчётыКлиентов.стоимость),
@@ -362,7 +373,7 @@ namespace MigrationDb2Vto3V
                     foreach(var oldClientReport in aimp.ОТЧЁТЫ_КЛИЕНТОВ)
                     {
                         var searchClientReport = newDb.ClientReports.Local.
-                            FirstOrDefault(x => x.Date == oldClientReport.дата
+                            FirstOrDefault(x => x.Date == GetDate(oldClientReport.дата)
                             && x.FullName == oldClientReport.фио
                             && x.Comment == oldClientReport.комментарий
                             && x.Source == oldClientReport.источник);
@@ -379,7 +390,7 @@ namespace MigrationDb2Vto3V
 
                             var cr = new ClientReport()
                             {
-                                Date = oldClientReport.дата ?? DateTime.Now,
+                                Date = GetDate(oldClientReport.дата),
                                 Source = oldClientReport.источник,
                                 FullName = oldClientReport.фио,
                                 Price = Convert.ToDecimal(oldClientReport.стоимость),
@@ -417,127 +428,127 @@ namespace MigrationDb2Vto3V
                         }
                     }
 
-                    //foreach (var сделка in aimp.СДЕЛКИ)
-                    //{
-                    //    Console.WriteLine(сделка.код);
+                    foreach (var сделка in aimp.СДЕЛКИ)
+                    {
+                        Console.WriteLine(сделка.код);
 
-                    //    CashTransaction cash = new CashTransaction();
+                        CashTransaction cash = new CashTransaction();
 
-                    //    cash.Date = сделка.дата ?? DateTime.Now;
-                    //    cash.Number = Convert.ToInt32(сделка.номер);
+                        cash.Date = GetDate(сделка.дата);
+                        cash.Number = Convert.ToInt32(сделка.номер);
 
-                    //    if (сделка.КОНТРАГЕНТЫ1 != null)
-                    //        cash.Buyer = NewContractor(сделка.КОНТРАГЕНТЫ1, newDb);
+                        if (сделка.КОНТРАГЕНТЫ1 != null)
+                            cash.Buyer = NewContractor(сделка.КОНТРАГЕНТЫ1, newDb);
 
-                    //    if (сделка.КОНТРАГЕНТЫ2 != null)
-                    //        cash.Owner = NewContractor(сделка.КОНТРАГЕНТЫ2, newDb);
+                        if (сделка.КОНТРАГЕНТЫ2 != null)
+                            cash.Owner = NewContractor(сделка.КОНТРАГЕНТЫ2, newDb);
 
-                    //    cash.Trancport = NewTrancport(сделка.ТРАНСПОРТ1, newDb);
-                    //    cash.Price = Convert.ToDecimal(сделка.стоимость);
-                    //    cash.User = NewUser(сделка.ПОЛЬЗОВАТЕЛИ1, newDb);
+                        cash.Trancport = NewTrancport(сделка.ТРАНСПОРТ1, newDb);
+                        cash.Price = Convert.ToDecimal(сделка.стоимость);
+                        cash.User = NewUser(сделка.ПОЛЬЗОВАТЕЛИ1, newDb);
 
-                    //    cash.DateProxy = сделка.дата_доверенность;
-                    //    cash.NumberProxy = сделка.номер_доверенность;
-                    //    cash.NumberRegistry = сделка.номер_реестр;
+                        cash.DateProxy = GetDateNull(сделка.дата_доверенность);
+                        cash.NumberProxy = сделка.номер_доверенность;
+                        cash.NumberRegistry = сделка.номер_реестр;
 
-                    //    if (сделка.КОНТРАГЕНТЫ != null)
-                    //        cash.Seller = NewContractor(сделка.КОНТРАГЕНТЫ, newDb);
+                        if (сделка.КОНТРАГЕНТЫ != null)
+                            cash.Seller = NewContractor(сделка.КОНТРАГЕНТЫ, newDb);
 
-                    //    switch (сделка.тип)
-                    //    {
-                    //        case 1:
-                    //            newDb.CashTransactions.Add(cash);
-                    //            break;
-                    //        case 2:
-                    //            CreditTransaction credit = new CreditTransaction()
-                    //            {
-                    //                Date = cash.Date,
-                    //                Number = cash.Number,
-                    //                Seller = cash.Seller,
-                    //                Buyer = cash.Buyer,
-                    //                Owner = cash.Owner,
-                    //                Trancport = cash.Trancport,
-                    //                Price = cash.Price,
-                    //                User = cash.User,
-                    //                DateProxy = cash.DateProxy,
-                    //                NumberProxy = cash.NumberProxy,
-                    //                NumberRegistry = cash.NumberRegistry
-                    //            };
-                    //            credit.AgentDocument = new UserFile()
-                    //            {
-                    //                Name = сделка.агенский_наим,
-                    //                File = сделка.агенский
-                    //            };
-                    //            credit.DkpDocument = new UserFile()
-                    //            {
-                    //                Name = сделка.дкп_наим,
-                    //                File = сделка.дкп
-                    //            };
-                    //            credit.DateAgent = сделка.дата_ад ?? DateTime.Now;
-                    //            credit.DateDkp = сделка.дата ?? DateTime.Now;
-                    //            credit.PriceBank = Convert.ToDecimal(сделка.стоимость_банк);
-                    //            credit.DownPayment = Convert.ToDecimal(сделка.первый_взнос);
-                    //            credit.CreditSumm = Convert.ToDecimal(сделка.сумма_кредит);
-                    //            credit.RealPrice = Convert.ToDecimal(сделка.стоимость_реальная);
-                    //            credit.DownPaymentCashbox = Convert.ToDecimal(сделка.первый_взнос_касса);
-                    //            string creditor = aimp.КРЕДИТОРЫ.FirstOrDefault(x => x.код == сделка.кредиторы)?.наименование;
-                    //            if (!string.IsNullOrWhiteSpace(creditor))
-                    //            {
-                    //                credit.Creditor = newDb.Creditors.Local.FirstOrDefault(x => x.Name == creditor) ??
-                    //                                  new Creditor()
-                    //                                  {
-                    //                                      Name = creditor
-                    //                                  };
-                    //            }
-                    //            РЕКВИЗИТЫ реквизит = aimp.РЕКВИЗИТЫ.First(x => x.код == сделка.реквизиты);
+                        switch (сделка.тип)
+                        {
+                            case 1:
+                                newDb.CashTransactions.Add(cash);
+                                break;
+                            case 2:
+                                CreditTransaction credit = new CreditTransaction()
+                                {
+                                    Date = GetDate(cash.Date),
+                                    Number = cash.Number,
+                                    Seller = cash.Seller,
+                                    Buyer = cash.Buyer,
+                                    Owner = cash.Owner,
+                                    Trancport = cash.Trancport,
+                                    Price = cash.Price,
+                                    User = cash.User,
+                                    DateProxy = GetDateNull(cash.DateProxy),
+                                    NumberProxy = cash.NumberProxy,
+                                    NumberRegistry = cash.NumberRegistry
+                                };
+                                credit.AgentDocument = new UserFile()
+                                {
+                                    Name = сделка.агенский_наим,
+                                    File = сделка.агенский
+                                };
+                                credit.DkpDocument = new UserFile()
+                                {
+                                    Name = сделка.дкп_наим,
+                                    File = сделка.дкп
+                                };
+                                credit.DateAgent = GetDateNull(сделка.дата_ад);
+                                credit.DateDkp = GetDateNull(сделка.дата);
+                                credit.PriceBank = Convert.ToDecimal(сделка.стоимость_банк);
+                                credit.DownPayment = Convert.ToDecimal(сделка.первый_взнос);
+                                credit.CreditSumm = Convert.ToDecimal(сделка.сумма_кредит);
+                                credit.RealPrice = Convert.ToDecimal(сделка.стоимость_реальная);
+                                credit.DownPaymentCashbox = Convert.ToDecimal(сделка.первый_взнос_касса);
+                                string creditor = aimp.КРЕДИТОРЫ.FirstOrDefault(x => x.код == сделка.кредиторы)?.наименование;
+                                if (!string.IsNullOrWhiteSpace(creditor))
+                                {
+                                    credit.Creditor = newDb.Creditors.Local.FirstOrDefault(x => x.Name == creditor) ??
+                                                      new Creditor()
+                                                      {
+                                                          Name = creditor
+                                                      };
+                                }
+                                РЕКВИЗИТЫ реквизит = aimp.РЕКВИЗИТЫ.First(x => x.код == сделка.реквизиты);
 
-                    //            credit.Requisit =
-                    //                newDb.Requisits.Local.FirstOrDefault(
-                    //                    x => x.Name == реквизит.наименование && x.Bik == реквизит.бик) ??
-                    //                new Requisit()
-                    //                {
-                    //                    Name = реквизит.наименование,
-                    //                    Bik = реквизит.бик,
-                    //                    InBank = реквизит.в_банке,
-                    //                    Kor_schet = реквизит.кор_счет,
-                    //                    Ros_schet = реквизит.рос_счет
-                    //                };
+                                credit.Requisit =
+                                    newDb.Requisits.Local.FirstOrDefault(
+                                        x => x.Name == реквизит.наименование && x.Bik == реквизит.бик) ??
+                                    new Requisit()
+                                    {
+                                        Name = реквизит.наименование,
+                                        Bik = реквизит.бик,
+                                        InBank = реквизит.в_банке,
+                                        Kor_schet = реквизит.кор_счет,
+                                        Ros_schet = реквизит.рос_счет
+                                    };
 
-                    //            credit.ReportInsurance = Convert.ToDecimal(сделка.отчёт_по_страховым);
-                    //            credit.Rollback = Convert.ToDecimal(сделка.откат);
-                    //            credit.Source = сделка.источник;
-                    //            credit.IsCredit = сделка.кредит == 1 ? true : false;
-                    //            credit.CommissionCashbox = Convert.ToDecimal(сделка.комиссия_Касса);
+                                credit.ReportInsurance = Convert.ToDecimal(сделка.отчёт_по_страховым);
+                                credit.Rollback = Convert.ToDecimal(сделка.откат);
+                                credit.Source = сделка.источник;
+                                credit.IsCredit = сделка.кредит == 1 ? true : false;
+                                credit.CommissionCashbox = Convert.ToDecimal(сделка.комиссия_Касса);
 
-                    //            newDb.CreditTransactions.Add(credit);
-                    //            break;
-                    //        case 3:
-                    //        case 5:
-                    //            CommissionTransaction commission = new CommissionTransaction()
-                    //            {
-                    //                Date = cash.Date,
-                    //                Number = cash.Number,
-                    //                Seller = cash.Seller,
-                    //                Buyer = cash.Buyer,
-                    //                Owner = cash.Owner,
-                    //                Trancport = cash.Trancport,
-                    //                Price = cash.Price,
-                    //                User = cash.User,
-                    //                DateProxy = cash.DateProxy,
-                    //                NumberProxy = cash.NumberProxy,
-                    //                NumberRegistry = cash.NumberRegistry
-                    //            };
+                                newDb.CreditTransactions.Add(credit);
+                                break;
+                            case 3:
+                            case 5:
+                                CommissionTransaction commission = new CommissionTransaction()
+                                {
+                                    Date = GetDate(cash.Date),
+                                    Number = cash.Number,
+                                    Seller = cash.Seller,
+                                    Buyer = cash.Buyer,
+                                    Owner = cash.Owner,
+                                    Trancport = cash.Trancport,
+                                    Price = cash.Price,
+                                    User = cash.User,
+                                    DateProxy = GetDateNull(cash.DateProxy),
+                                    NumberProxy = cash.NumberProxy,
+                                    NumberRegistry = cash.NumberRegistry
+                                };
 
-                    //            commission.Commission = Convert.ToDecimal(сделка.комиссия);
-                    //            commission.Parking = Convert.ToDecimal(сделка.стоянка);
-                    //            commission.IsTwoMounth = сделка.второй_месяц == null
-                    //                ? false
-                    //                : сделка.второй_месяц == 1 ? true : false;
+                                commission.Commission = Convert.ToDecimal(сделка.комиссия);
+                                commission.Parking = Convert.ToDecimal(сделка.стоянка);
+                                commission.IsTwoMounth = сделка.второй_месяц == null
+                                    ? false
+                                    : сделка.второй_месяц == 1 ? true : false;
 
-                    //            newDb.CommissionTransactions.Add(commission);
-                    //            break;
-                    //    }
-                    //}
+                                newDb.CommissionTransactions.Add(commission);
+                                break;
+                        }
+                    }
 
                     newDb.SaveChanges();
                 }

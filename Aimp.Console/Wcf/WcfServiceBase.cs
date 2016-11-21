@@ -40,8 +40,7 @@ namespace Aimp.Console.Wcf
 
         protected void EventLog(string action)
         {
-            Logger.Log($"User: {CurrentUser.Login}");
-            Logger.Log(action);
+            Logger.Log($"[{CurrentUser.Login}]: {action}");
         }
     }
 }
