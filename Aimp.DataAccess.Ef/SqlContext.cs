@@ -5,6 +5,7 @@ using System.Linq;
 using Aimp.DataAccess.Ef.Interfaces;
 using Aimp.Entities;
 using Entities;
+using System;
 
 namespace Aimp.DataAccess.EF
 {
@@ -14,7 +15,7 @@ namespace Aimp.DataAccess.EF
             base("aimpConnectionString")
         {
             Configuration.ProxyCreationEnabled = false;
-            ////Database.Log = Console.WriteLine;
+            Database.Log = Console.WriteLine;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
