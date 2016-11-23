@@ -7,7 +7,7 @@ namespace Aimp.Model.CardTrancports
     {
         public int Number {get;set;}
         public DateTime DateStart { get; set; }
-        public string NumberT { get; set; }
+        public int? NumberT { get; set; }
         public string MakeModelTrancport { get; set; }
         public string YearTrancport { get; set; }
         public string ColorTrancport { get; set; }

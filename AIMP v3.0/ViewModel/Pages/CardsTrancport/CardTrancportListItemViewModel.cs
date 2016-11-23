@@ -10,7 +10,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
     {
         public int Number { get; set; }
         public DateTime DateStart { get; set; }
-        public string NumberT { get; set; }
+        public int NumberT { get; set; }
         public string MakeModelTrancport { get; set; }
         public string YearTrancport { get; set; }
         public string ColorTrancport { get; set; }

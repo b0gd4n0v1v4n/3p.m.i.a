@@ -32,7 +32,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         MakeModelTrancport = x.MakeModelTrancport,
                         Manager = x.Manager,
                         Number = x.Number,
-                        NumberT = x.NumberT,
+                        NumberT = x.NumberT.HasValue ? x.NumberT.Value : 0,
                         Price = x.Price,
                         Status = x.Status,
                         Source = x.Source,

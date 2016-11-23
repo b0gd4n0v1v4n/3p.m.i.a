@@ -38,6 +38,7 @@ namespace Aimp.Console
                     logger.Log("service ready!");
                     logger.Log("---------------------------");
 
+                    System.Console.WriteLine("Service ready!");
                     System.Console.ReadLine();
                 }
             }

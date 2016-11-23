@@ -33,7 +33,7 @@ namespace Aimp.Console.Wcf
                     DateStart = x.CommissionTransaction.Date,
                     Status = x.StatusCardTrancport.Name,
                     Number = x.Number.HasValue ? x.Number.Value : 0,
-                    NumberT = x.NumberT.ToString(),
+                    NumberT = x.NumberT.HasValue ? x.NumberT.Value : 0,
                     MakeModelTrancport = x.CommissionTransaction.Trancport.Make.Name + ", " + x.CommissionTransaction.Trancport.Model.Name,
                     ColorTrancport = x.CommissionTransaction.Trancport.Color,
                     Price = x.CommissionTransaction.Price.ToString(),

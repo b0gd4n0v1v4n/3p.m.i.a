@@ -121,6 +121,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateForViewConverter.cs" />
+    <Compile Include="Converters\ZeroNotVisibilityConverter.cs" />
     <Compile Include="Helpers\LoadingViewHalper.cs" />
     <Compile Include="User Control\PerfectListView\ColumnDataType.cs" />
     <Compile Include="User Control\PerfectListView\IFilterRow.cs" />
