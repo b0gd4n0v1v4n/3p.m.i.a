@@ -47,7 +47,7 @@ namespace AIMP_v3._0.ViewModel.PrintedDocument
                                 dialg.Filter = "(*.doc ; *.docs ; *.docx) | *.doc; *.docs; *.docx";
                                 if (dialg.ShowDialog() == DialogResult.OK)
                                 {
-                                    Template.FileName = dialg.FileName;
+                                    Template.FileName = dialg.SafeFileName;
                                     Template.File = File.ReadAllBytes(dialg.FileName);
                                     OnPropertyChanged("Template.FileName");
                                 }

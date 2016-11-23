@@ -56,7 +56,7 @@ namespace Aimp.Reports.Templates
             _labelValues.Add("дата_мен", transaction.User.Date.ToString("dd.MM.yyyy"));
             _labelValues.Add("номер", transaction.Number.ToString());
 
-            _labelValues.Add("дата_да", transaction.DateAgent?.ToString("dd.MM.yyyy"));
+            _labelValues.Add("дата_ад", transaction.DateAgent?.ToString("dd.MM.yyyy"));
             _labelValues.Add("дата", transaction.Date.ToString("dd.MM.yyyy"));
             _labelValues.Add("дата_доверенность", transaction.DateProxy?.ToString("dd.MM.yyyy"));
             _labelValues.Add("номер_доверенность", transaction.NumberProxy);
