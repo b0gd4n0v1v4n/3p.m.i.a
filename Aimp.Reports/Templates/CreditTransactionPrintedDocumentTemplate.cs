@@ -8,8 +8,8 @@ namespace Aimp.Reports.Templates
     public class CreditTransactionPrintedDocumentTemplate : IPrintedDocumentTemplate
     {
         private Dictionary<string, string> _labelValues;
-        public const string DKP_REPORT_NAME = "Документ купли продажи";
-        public const string AKT_REPORT_NAME = "Акт к купле продажи";
+        public const string DKP_REPORT_NAME = "ДКП Банк";
+        //public const string AKT_REPORT_NAME = "Акт к купле продажи";
         public CreditTransactionPrintedDocumentTemplate(CreditTransaction transaction, byte[] templateFile, string fileName)
         {
             FileName = fileName;

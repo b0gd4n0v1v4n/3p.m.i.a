@@ -144,10 +144,10 @@ namespace Aimp.Logic.Services
                     Id = x.Id,
                     Name = x.Name
                 }).ToList();
-                result.Add(new EntityName()
-                {
-                    Name = CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME
-                });
+                //result.Add(new EntityName()
+                //{
+                //    Name = CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME
+                //});
                 result.Add(new EntityName()
                 {
                     Name = CreditTransactionPrintedDocumentTemplate.DKP_REPORT_NAME
@@ -181,25 +181,27 @@ namespace Aimp.Logic.Services
                 if (transaction == null)
                     throw new SqlNullValueException("Документ не найден");
                 PrintedDocumentTemplate template = null;
-                if (name == CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME || name == CreditTransactionPrintedDocumentTemplate.DKP_REPORT_NAME)
+                if (
+                   //name == CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME || 
+                    name == CreditTransactionPrintedDocumentTemplate.DKP_REPORT_NAME)
                 {
                     var creditorName = transaction.Creditor.Name;
-                    if (name == CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME)
-                    {
+                    //if (name == CreditTransactionPrintedDocumentTemplate.AKT_REPORT_NAME)
+                    //{
 
-                        string typeAkt = PrintedDocumentTemplateType.Акт.ToString();
-                        template = context.PrintedDocumentTemplates
-                            .All()
-                            .FirstOrDefault(x => x.Name == creditorName && x.Type == typeAkt);
+                    //    string typeAkt = PrintedDocumentTemplateType.Акт.ToString();
+                    //    template = context.PrintedDocumentTemplates
+                    //        .All()
+                    //        .FirstOrDefault(x => x.Name == creditorName && x.Type == typeAkt);
 
-                    }
-                    else
-                    {
+                    //}
+                    //else
+                    //{
                         string typeDkp = PrintedDocumentTemplateType.Дкп.ToString();
                         template = context.PrintedDocumentTemplates
                             .All()
                             .FirstOrDefault(x => x.Name == creditorName && x.Type == typeDkp);
-                    }
+                    //}
                 }
                 else
                 {
