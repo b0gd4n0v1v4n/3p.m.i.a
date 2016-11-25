@@ -62,9 +62,9 @@
         <CheckBox IsTabStop="True" IsChecked="{Binding AsVinShassi}" Command="{Binding AsVinShassiCommand}" Content="КАК VIN" HorizontalAlignment="Left" Margin="338,152,0,0" VerticalAlignment="Top"/>
         <CheckBox IsTabStop="True" IsChecked="{Binding EmptyShassiNumber}" Command="{Binding EmptyShassiNumberCommand}" Content="ОТСУТСТВУЕТ" HorizontalAlignment="Left" Margin="413,153,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label3" Content="МАССА БЕЗ НАГРУЗКИ" HorizontalAlignment="Left" Margin="655,119,0,0" VerticalAlignment="Top"/>
-        <User_Control:NumberTextBox Text="{Binding EditableTrancport.Mass}" TabIndex="12" HorizontalAlignment="Left" Height="22" Margin="800,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+        <TextBox Text="{Binding EditableTrancport.Mass}" TabIndex="12" HorizontalAlignment="Left" Height="22" Margin="800,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
         <Label x:Name="label3_Copy" Content="РАЗРЕШЕННАЯ МАКСИМАЛЬНАЯ МАССА" HorizontalAlignment="Left" Margin="556,146,0,0" VerticalAlignment="Top"/>
-        <User_Control:NumberTextBox Text="{Binding EditableTrancport.MaxMass}" TabIndex="13" HorizontalAlignment="Left" Height="22" Margin="800,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+        <TextBox Text="{Binding EditableTrancport.MaxMass}" TabIndex="13" HorizontalAlignment="Left" Height="22" Margin="800,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
         <Label x:Name="label2_Copy3" Content="СЕРИЯ ПТС" HorizontalAlignment="Left" Margin="4,177,0,0" VerticalAlignment="Top"/>
         <TextBox TabIndex="14" Text="{Binding EditableTrancport.SerialPts}" HorizontalAlignment="Left" Height="22" Margin="94,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106"/>
         <Label x:Name="label2_Copy4" Content="НОМЕР ПТС" HorizontalAlignment="Left" Margin="206,177,0,0" VerticalAlignment="Top"/>
@@ -90,11 +90,11 @@
             </controls:AutoCompleteBox.TextBoxStyle>
         </controls:AutoCompleteBox>
         <Label x:Name="label2_Copy10" Content="МОЩНОСТЬ" HorizontalAlignment="Left" Margin="530,316,0,0" VerticalAlignment="Top"/>
-        <User_Control:NumberTextBox Text="{Binding EditableTrancport.Strong}" TabIndex="25" HorizontalAlignment="Left" Height="22" Margin="623,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+        <TextBox Text="{Binding EditableTrancport.Strong}" TabIndex="25" HorizontalAlignment="Left" Height="22" Margin="623,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
         <Label x:Name="label2_Copy11" Content="кВт ДВИГАТЕЛЯ" HorizontalAlignment="Left" Margin="700,317,0,0" VerticalAlignment="Top"/>
-        <User_Control:NumberTextBox Text="{Binding EditableTrancport.Pa}" TabIndex="26" HorizontalAlignment="Left" Height="22" Margin="800,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
+        <TextBox Text="{Binding EditableTrancport.Pa}" TabIndex="26" HorizontalAlignment="Left" Height="22" Margin="800,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
         <Label x:Name="label2_Copy12" Content="РАБОЧИЙ ОБЪЕМ ДВИГАТЕЛЯ                " HorizontalAlignment="Left" Margin="616,289,0,0" VerticalAlignment="Top" Width="179"/>
-        <User_Control:NumberTextBox Text="{Binding EditableTrancport.Volume}" TabIndex="24" HorizontalAlignment="Left" Height="22" Margin="800,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.486,-0.391"/>
+        <TextBox Text="{Binding EditableTrancport.Volume}" TabIndex="24" HorizontalAlignment="Left" Height="22" Margin="800,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.486,-0.391"/>
         <Button x:Name="button" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=Window}" Content="ЗАКРЫТЬ" HorizontalAlignment="Left" Margin="797,361,0,0" VerticalAlignment="Top" Width="75"/>
         <Button TabIndex="27" Command="{Binding SaveChanges}" Visibility="{Binding VisibleSave}"  CommandParameter="{Binding ElementName=Window}" Content="СОХРАНИТЬ" HorizontalAlignment="Left" Margin="707,361,0,0" VerticalAlignment="Top" Width="85"/>
         <User_Control:DateControl Date="{Binding EditableTrancport.DatePts,Mode=TwoWay}" TabIndex="16" HorizontalAlignment="Left" Margin="530,179,0,0" VerticalAlignment="Top"/>
