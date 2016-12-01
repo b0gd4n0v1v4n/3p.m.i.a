@@ -24,8 +24,12 @@ namespace Aimp.Logic.Services
                         {"Name",contractor.Region.Name }
                     };
                     contractor.RegionId = context.Regions.GetOrAdd(values).Id;
-                    contractor.Region = null;
                 }
+                else
+                {
+                    contractor.RegionId = contractor.Region.Id;
+                }
+                contractor.Region = null;
                 if (contractor.City.Id == 0)
                 {
                     var values = new Dictionary<string, string>() {
@@ -54,16 +58,16 @@ namespace Aimp.Logic.Services
         {
             using (var context = IoC.Resolve<IDataContext>())
             {
-                if (trancport.Category?.Id == 0)
+                if (trancport.Category.Id == 0)
                 {
                     trancport.Category = context.TrancportCategories.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.Category.Name } });
                 }
-                if (trancport.EngineType?.Id == 0)
+                if (trancport.EngineType.Id == 0)
                 {
                     trancport.EngineType = context.EngineTypes.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.EngineType.Name } });
                 }
 
-                if (trancport.Type?.Id == 0)
+                if (trancport.Type.Id == 0)
                 {
                     trancport.Type = context.TrancportTypes.GetOrAdd(new Dictionary<string, string>() { { "Name", trancport.Type.Name } });
                 }
@@ -73,8 +77,12 @@ namespace Aimp.Logic.Services
                         {"Name",trancport.Make.Name }
                     };
                     trancport.MakeId = context.MakesTrancport.GetOrAdd(values, "MakeTrancports").Id;
-                    trancport.Make = null;
                 }
+                else
+                {
+                    trancport.MakeId = trancport.Make.Id;
+                }
+                trancport.Make = null;
                 if (trancport.Model.Id == 0)
                 {
                     var values = new Dictionary<string, string>() {
