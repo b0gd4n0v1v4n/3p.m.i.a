@@ -34,6 +34,15 @@ namespace AIMP_v3._0.DataAccess
         {
             _SetHeaderRequestLoginAndPassword();
         }
+        public AimpService(Uri uri,string login,string password)
+            : base(uri)
+        {
+            var headers = WebOperationContext.Current.OutgoingRequest.Headers;
+
+            headers.Add("login", login);
+
+            headers.Add("password", password);
+        }
         public AimpUserDto Auth()
         {
             return Proxy.Auth();
