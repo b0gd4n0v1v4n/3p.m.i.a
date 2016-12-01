@@ -73,6 +73,7 @@ namespace AIMP_v3._0.PerfectListView
         {
             _originalSource = itemSource;
             RefreshItemSource();
+            IsFiltering = false;
         }
 
         private void RefreshItemSource()

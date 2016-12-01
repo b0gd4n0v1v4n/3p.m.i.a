@@ -1,20 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Controls;
 
 namespace AIMP_v3._0.PerfectListView
 {
-    public class PerfectListView : System.Windows.Controls.ListView
+    public class PerfectListView : ListView
     {
         private Collection<PerfectGridViewColumnHeaderViewModel> _headers;
         public PerfectListView()
         {
             _headers = new Collection<PerfectGridViewColumnHeaderViewModel>();
-            //SizeChanged += (sender, args) => ColumnsSetWidth();
-            
-            Loaded += (sender, args) => { ColumnsSetWidth(); SubscribeForPerfectHeader(); };
-        }
 
+            Initialized += (sender, args) => SubscribeForPerfectHeader();
+
+            Loaded += (sender, args) => ColumnsSetWidth();
+        }
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            foreach (var iHeader in _headers)
+                iHeader.SetItemSource(GetSource());
+            base.OnItemsChanged(e);
+        }
         private void ColumnsSetWidth()
         {
             var gridView = View as GridView;
@@ -32,12 +39,17 @@ namespace AIMP_v3._0.PerfectListView
             }
         }
 
-        private void SubscribeForPerfectHeader()
+        private IEnumerable<IFilterRow> GetSource()
         {
             var source = ItemsSource as IEnumerable<IFilterRow>;
             if (source == null)
                 throw new System.Exception("ItemsSource is not IEnumerable<IFilterRow>");
 
+            return source;
+        }
+
+        private void SubscribeForPerfectHeader()
+        {
             var gridView = View as GridView;
 
             if (gridView != null)
@@ -60,7 +72,6 @@ namespace AIMP_v3._0.PerfectListView
                                 foreach (var iHeader in _headers)
                                     iHeader.IsFiltering = false;
                             };
-                            perfectHeader.SetItemSource(source);
                         }
                     }
                 }
