@@ -13,7 +13,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
     {
         private void _FillListCards()
         {
-            try
+            LoadingViewHalper.ShowDialog("Загрузка...", () =>
+            {
+                try
             {
                 using (AimpService service = new AimpService())
                 {
@@ -45,10 +47,18 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
             {
                 MessageBox.Show(ex.Message, @"Не удалось получить список а\м");
             }
+            });
         }
         public CardsTrancportPageViewModel()
         {
-            _FillListCards();
+            OnSelected += ()=> 
+            {
+                if (IsOneSelected)
+                {
+                    IsOneSelected = false;
+                    _FillListCards();
+                }
+            };
         }
         public  string Name
         {
@@ -124,10 +134,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
             {
                 return new Command(x =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
-                    {
-                        _FillListCards();
-                    });
+                    _FillListCards();
                 });
             }
         }

@@ -54,7 +54,7 @@ namespace AIMP_v3._0.PerfectListView
                 return _isFiltering;
             } set { _isFiltering = value; OnPropertyChanged(); } }
 
-        public event Action<IEnumerable<IFilterRow>> ItemSourceChanged;
+        public event Action<IEnumerable<IFilterRow>> OrderingEvent;
         public event Action FilterClearCahnged;
 
         public PerfectGridViewColumnHeaderViewModel(string columnName,ColumnDataType type)
@@ -142,8 +142,8 @@ namespace AIMP_v3._0.PerfectListView
                             orderingRows.Add(iG);
                 }
 
-                if (ItemSourceChanged != null)
-                    ItemSourceChanged(orderingRows);
+                if (OrderingEvent != null)
+                    OrderingEvent(orderingRows);
             }
             catch (Exception ex)
             {

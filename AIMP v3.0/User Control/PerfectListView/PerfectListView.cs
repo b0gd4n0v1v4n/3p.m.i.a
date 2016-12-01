@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace AIMP_v3._0.PerfectListView
 {
     public class PerfectListView : ListView
     {
+        private bool _isOrderingChangedItemsSoruce;
+
         private Collection<PerfectGridViewColumnHeaderViewModel> _headers;
         public PerfectListView()
         {
@@ -18,8 +21,11 @@ namespace AIMP_v3._0.PerfectListView
         }
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
         {
-            foreach (var iHeader in _headers)
-                iHeader.SetItemSource(GetSource());
+            if (!_isOrderingChangedItemsSoruce)
+            {
+                foreach (var iHeader in _headers)
+                    iHeader.SetItemSource(GetSource());
+            }
             base.OnItemsChanged(e);
         }
         private void ColumnsSetWidth()
@@ -66,7 +72,12 @@ namespace AIMP_v3._0.PerfectListView
                         {
                             _headers.Add(perfectHeader);
 
-                            perfectHeader.ItemSourceChanged += (s) => ItemsSource = s;
+                            perfectHeader.OrderingEvent += (s) => 
+                            {
+                                _isOrderingChangedItemsSoruce = true;
+                                ItemsSource = s;
+                                _isOrderingChangedItemsSoruce = false;
+                            };
                             perfectHeader.FilterClearCahnged += () => 
                             {
                                 foreach (var iHeader in _headers)

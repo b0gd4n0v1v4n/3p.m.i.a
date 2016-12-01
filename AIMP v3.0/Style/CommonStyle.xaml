@@ -247,7 +247,7 @@
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal">
                                                                 <CheckBox IsChecked="{Binding IsSelected}"/>
-                                                                <TextBlock Text="{Binding Text,Converter={StaticResource ResourceKey=DateForViewConverter}}" />
+                                                                <TextBlock Text="{Binding Value,Converter={StaticResource ResourceKey=DateForViewConverter}}" />
                                                             </StackPanel>
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
@@ -340,6 +340,7 @@
     </Style>
 
     <Style x:Key="TabItemPagesStyle" TargetType="TabItem">
+        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=Type}" Value="{x:Type cashTransaction:CashTransactionPageViewModel}">
                 <Setter Property="Header" Value="{Binding Path=Name}"></Setter>

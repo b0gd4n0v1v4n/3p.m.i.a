@@ -22,7 +22,9 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
         }
         private void _FillListCommission()
         {
-            try
+            LoadingViewHalper.ShowDialog("Загрузка...", () =>
+            {
+                try
             {
                 using (AimpService service = new AimpService())
                 {
@@ -53,6 +55,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
             {
                 MessageBox.Show(ex.Message, "Не удалось получить список");
             }
+            });
         }
 
         public string Name { get { return "ДОГОВОРА КОМИССИИ"; } }
@@ -61,7 +64,14 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
 
         public CommissionPageViewModel()
         {
-            _FillListCommission();
+            OnSelected += () =>
+            {
+                if (IsOneSelected)
+                {
+                    IsOneSelected = false;
+                    _FillListCommission();
+                }
+            };
         }
 
         public Command New
@@ -105,10 +115,7 @@ namespace AIMP_v3._0.ViewModel.Pages.Commission
             {
                 return new Command(x =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
-                    {
-                        _FillListCommission();
-                    });
+                    _FillListCommission();
                 });
             }
         }

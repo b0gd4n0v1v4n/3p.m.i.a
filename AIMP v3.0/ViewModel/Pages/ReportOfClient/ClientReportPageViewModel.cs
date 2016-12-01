@@ -76,7 +76,14 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
 
         public ClientReportPageViewModel()
         {
-            _FillListReportOfClient();
+            OnSelected += () =>
+            {
+                if (IsOneSelected)
+                {
+                    IsOneSelected = false;
+                    _FillListReportOfClient();
+                }
+            };
         }
         public ObservableCollection<string> BanksColumnName
         {

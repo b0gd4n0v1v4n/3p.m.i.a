@@ -17,6 +17,8 @@ namespace AIMP_v3._0.ViewModel.Pages
     public abstract class BasePageViewModel<TList> : BaseViewModel
         where TList : Identity,IFilterRow
     {
+        protected bool IsOneSelected = true; //первый раз выбираем страницу
+
         public abstract Visibility AddButtonVisible { get; }
 
         public abstract Command PrintList { get; }
@@ -32,6 +34,10 @@ namespace AIMP_v3._0.ViewModel.Pages
                 OnPropertyChanged("List");
             }
         }
+
+        private bool _isSelected;
+        public bool IsSelected { get { return _isSelected; } set { _isSelected = value; if (OnSelected != null) OnSelected(); } }
+        protected event Action OnSelected;
 
         public TList CurrentItem { get; set; }
         public Type Type

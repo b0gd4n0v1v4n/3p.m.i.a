@@ -24,7 +24,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
         }
         private void _FillListCreditTransaction()
         {
-            try
+            LoadingViewHalper.ShowDialog("Загрузка...", () =>
+            {
+                try
             {
                 using (AimpService service = new AimpService())
                 {
@@ -58,11 +60,19 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 MessageBox.Show(ex.Message, "Не удалось получить список");
             }
+            });
         }
 
         public CreditTransactionPageViewModel()
         {
-            _FillListCreditTransaction();
+            OnSelected += () =>
+            {
+                if (IsOneSelected)
+                {
+                    IsOneSelected = false;
+                    _FillListCreditTransaction();
+                }
+            };
             _openListItem = new Command(x =>
                 {
                     LoadingViewHalper.ShowDialog("Загрузка...", () =>
@@ -139,10 +149,7 @@ namespace AIMP_v3._0.ViewModel.Pages.CreditDocument
             {
                 return new Command(x =>
                 {
-                    LoadingViewHalper.ShowDialog("Загрузка...", () =>
-                    {
-                        _FillListCreditTransaction();
-                    });
+                    _FillListCreditTransaction();
                 });
             }
         }

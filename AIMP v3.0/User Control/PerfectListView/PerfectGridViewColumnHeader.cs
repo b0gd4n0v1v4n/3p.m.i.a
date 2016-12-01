@@ -6,6 +6,8 @@ namespace AIMP_v3._0.PerfectListView
 {
     public class PerfectGridViewColumnHeader : System.Windows.Controls.GridViewColumnHeader
     {
+        private bool _isOneLoaded;
+
         private PerfectGridViewColumnHeaderViewModel _perfectColumnHeaderViewModel;
         public PerfectGridViewColumnHeader()
         {
@@ -14,10 +16,13 @@ namespace AIMP_v3._0.PerfectListView
                 if (!string.IsNullOrEmpty(StartFilterItem))
                 {
 #warning не биндится поле, ход конем
-                    if (StartFilterItem == "manager")
-                        _perfectColumnHeaderViewModel.StartFilterApply(CurrentUser.LastName);
-                    else
-                        _perfectColumnHeaderViewModel.StartFilterApply(StartFilterItem);
+                    if (!_isOneLoaded) {
+                        _isOneLoaded = true;
+                        if (StartFilterItem == "manager")
+                            _perfectColumnHeaderViewModel.StartFilterApply(CurrentUser.LastName);
+                        else
+                            _perfectColumnHeaderViewModel.StartFilterApply(StartFilterItem);
+                    }
                 }
             };
             Initialized += (sender, args) => 
