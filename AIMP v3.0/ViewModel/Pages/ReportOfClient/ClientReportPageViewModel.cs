@@ -157,7 +157,24 @@ namespace AIMP_v3._0.ViewModel.Pages.ReportOfClient
                     {
                         using (var aimp = new AimpService())
                         {
-                            var result = aimp.GetClientReportList(_banks, List.Where(item => item.IsVisible));
+                            var reports = List
+                                           .Where(item => item.IsVisible)
+                                           .Select(n => new ClientReportListItem()
+                                           {
+                                               Id = n.Id,
+                                               BankStatusesReportClient = n.BankStatusesReportClient,
+                                               ClientStatusReportClient = n.ClientStatusReportClient,
+                                               DateReportClient = n.DateReportClient,
+                                               FullNameReportClient = n.FullNameReportClient,
+                                               ManagerReportClient = n.ManagerReportClient,
+                                               PriceTrancportReportClient = n.PriceTrancportReportClient,
+                                               ProgrammCreditReportClient = n.ProgrammCreditReportClient,
+                                               SourceInfoReportClient = n.SourceInfoReportClient,
+                                               TelefonReportClient = n.TelefonReportClient,
+                                               TotalContributionReportClient = n.TotalContributionReportClient,
+                                               TrancportNameReportClient = n.TrancportNameReportClient
+                                           });
+                            var result = aimp.GetClientReportList(_banks, reports);
 
                             OpenUserFile.Open(result.FileName, result.File);
                         }
