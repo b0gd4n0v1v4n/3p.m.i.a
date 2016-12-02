@@ -7,7 +7,7 @@
         xmlns:pages="clr-namespace:AIMP_v3._0.ViewModel.Pages"
         xmlns:viewModel="clr-namespace:AIMP_v3._0.ViewModel"
         mc:Ignorable="d"
-        Title="MainView" Height="500" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="AIMP" Height="500" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized"  Icon="/AIMP;component/Style/Image/icon.png">
     <Window.Resources>
         <ResourceDictionary Source="../Style/CommonStyle.xaml"/>
     </Window.Resources>
