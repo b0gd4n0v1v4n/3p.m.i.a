@@ -825,7 +825,7 @@
                                                 <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПОСТ." SourceColumn="DateStart" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
-                                        <perfectListView:PerfectGridViewColumn PercentageWidth="10" DisplayMemberBinding="{Binding NumberT,Converter={StaticResource ResourceKey=ZeroNotVisibilityConverter}}">
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="5" DisplayMemberBinding="{Binding NumberT,Converter={StaticResource ResourceKey=ZeroNotVisibilityConverter}}">
                                             <GridViewColumn.Header>
                                                 <perfectListView:PerfectGridViewColumnHeader Content="№TC" SourceColumn="NumberT" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
@@ -835,7 +835,7 @@
                                                 <perfectListView:PerfectGridViewColumnHeader Content="МАРКА, МОДЕЛЬ ТС" SourceColumn="MakeModelTrancport" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
-                                        <perfectListView:PerfectGridViewColumn PercentageWidth="6" DisplayMemberBinding="{Binding YearTrancport}">
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="4" DisplayMemberBinding="{Binding YearTrancport}">
                                             <GridViewColumn.Header>
                                                 <perfectListView:PerfectGridViewColumnHeader Content="ГОД" SourceColumn="YearTrancport" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
@@ -865,9 +865,19 @@
                                                 <perfectListView:PerfectGridViewColumnHeader Content="ДАТА ПРОД." SourceColumn="DateSale" DataType="Date" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
-                                        <perfectListView:PerfectGridViewColumn PercentageWidth="10" DisplayMemberBinding="{Binding User}">
+                                        <!--<perfectListView:PerfectGridViewColumn PercentageWidth="10" DisplayMemberBinding="{Binding User}">
                                             <GridViewColumn.Header>
                                                 <perfectListView:PerfectGridViewColumnHeader Content="ПОЛЬЗОВАТЕЛЬ" SourceColumn="User" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>-->
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding CommissionNumber}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="№ ДОГОВОРА" SourceColumn="CommissionNumber" Style="{StaticResource GridViewColumnHeaderStyle}"/>
+                                            </GridViewColumn.Header>
+                                        </perfectListView:PerfectGridViewColumn>
+                                        <perfectListView:PerfectGridViewColumn PercentageWidth="8" DisplayMemberBinding="{Binding Documents}">
+                                            <GridViewColumn.Header>
+                                                <perfectListView:PerfectGridViewColumnHeader Content="ДОКУМЕНТЫ" SourceColumn="Documents" Style="{StaticResource GridViewColumnHeaderStyle}"/>
                                             </GridViewColumn.Header>
                                         </perfectListView:PerfectGridViewColumn>
                                     </GridView>

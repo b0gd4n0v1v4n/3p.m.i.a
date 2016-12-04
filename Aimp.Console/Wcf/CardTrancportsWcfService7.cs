@@ -40,7 +40,9 @@ namespace Aimp.Console.Wcf
                     YearTrancport = x.CommissionTransaction.Trancport.Year.ToString(),
                     Source = x.CommissionTransaction.SourceTrancport.Name,
                     Manager = x.ManagerSeller,
-                    User = x.CommissionTransaction.User.LastName
+                    User = x.CommissionTransaction.User.LastName,
+                    CommissionNumber = x.CommissionTransaction.Number,
+                    Documents = x.CommissionTransaction.ComplectDoc
                 });
 
             return new CardTrancportsDto()

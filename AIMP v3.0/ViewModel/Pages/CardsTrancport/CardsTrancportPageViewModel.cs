@@ -39,7 +39,9 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                         Status = x.Status,
                         Source = x.Source,
                         User = x.User,
-                        YearTrancport = x.YearTrancport
+                        YearTrancport = x.YearTrancport,
+                        Documents = x.Documents,
+                        CommissionNumber = x.CommissionNumber
                     }).ToList();
                 }
             }

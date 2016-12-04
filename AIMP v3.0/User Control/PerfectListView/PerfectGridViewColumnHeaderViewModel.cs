@@ -20,6 +20,7 @@ namespace AIMP_v3._0.PerfectListView
                
         private bool _isSelected;
         public bool IsSelected { get { return _isSelected; } set { _isSelected = value; OnPropertyChanged(); } }
+
         public dynamic Value { get; set; }
         public string Text { get; set; }
     }

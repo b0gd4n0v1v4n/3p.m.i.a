@@ -17,5 +17,7 @@ namespace Aimp.Model.CardTrancports
         public DateTime? DateSale {get;set;}
         public string Manager {get;set;}
         public string User {get;set;}
+        public int CommissionNumber { get; set; }
+        public string Documents { get; set; }
     }
 }

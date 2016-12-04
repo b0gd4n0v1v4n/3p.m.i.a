@@ -30,7 +30,8 @@ namespace AIMP_v3._0.ViewModel.Pages.CardsTrancport
                 OnPropertyChanged();
             }
         }
-
+        public int CommissionNumber { get; set; }
+        public string Documents { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
