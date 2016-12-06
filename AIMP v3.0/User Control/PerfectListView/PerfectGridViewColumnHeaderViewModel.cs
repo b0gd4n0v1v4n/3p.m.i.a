@@ -17,7 +17,10 @@ namespace AIMP_v3._0.PerfectListView
     public class GroupingFilterRow : BaseViewModel
     {
         public IEnumerable<IFilterRow> OriginalRows { get; set; }
-               
+
+        private bool _isVisible;
+        public bool IsVisible { get { return _isVisible; } set { _isVisible = value; OnPropertyChanged(); } }
+
         private bool _isSelected;
         public bool IsSelected { get { return _isSelected; } set { _isSelected = value; OnPropertyChanged(); } }
 
@@ -77,26 +80,32 @@ namespace AIMP_v3._0.PerfectListView
             IsFiltering = false;
         }
 
-        private void RefreshItemSource()
+        public void RefreshItemSource()
         {
             try
             {
                 Rows = new ObservableCollection<GroupingFilterRow>();
-                foreach (dynamic iGroupColumn in _originalSource.GroupBy(ColumnName, "it").Select("new (it.Key as Text,it as GroupingRows)"))
-                {
-                    var filterRow = new GroupingFilterRow()
-                    {
-                        OriginalRows = iGroupColumn.GroupingRows,
-                        Value = iGroupColumn.Text,
-                        Text = iGroupColumn.Text?.ToString()
-                    };
 
-                    Rows.Add(filterRow);
+                foreach (dynamic iGroupColumnName in _originalSource.GroupBy(ColumnName, "it").Select("new (it.Key as Text,it as GroupingRows)"))
+                {
+                    IEnumerable<IFilterRow> groupRows = iGroupColumnName.GroupingRows;
+
+                    foreach (dynamic iGroupVisible in groupRows.GroupBy("IsVisible", "it").Select("new (it.Key as IsVisible,it as GroupingRows)"))
+                    {
+                        var filterRow = new GroupingFilterRow()
+                        {
+                            OriginalRows = iGroupVisible.GroupingRows,
+                            Value = iGroupColumnName.Text,
+                            Text = iGroupColumnName.Text?.ToString(),
+                            IsVisible = iGroupVisible.IsVisible
+                        };
+                        Rows.Add(filterRow);
+                    }
                 }
 
                 OnPropertyChanged("Rows");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -121,7 +130,8 @@ namespace AIMP_v3._0.PerfectListView
         private void SelectedAllItem()
         {
             foreach (var iRow in Rows)
-                iRow.IsSelected = IsSelectedAll;
+                if (iRow.IsVisible)
+                    iRow.IsSelected = IsSelectedAll;
         }
 
         private void Ordering(bool asc)

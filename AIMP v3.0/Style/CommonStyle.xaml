@@ -243,6 +243,11 @@
                                                 </Grid.RowDefinitions>
                                                 <CheckBox Grid.Row="0" Content="выбрать все" FontWeight="Bold" Command="{Binding SelectedAllItemCommand}" IsChecked="{Binding IsSelectedAll}"></CheckBox>
                                                 <ListBox Grid.Row="1" ItemsSource="{Binding Path=Rows}">
+                                                    <ListBox.ItemContainerStyle>
+                                                        <Style TargetType="ListBoxItem">
+                                                            <Setter Property="Visibility" Value="{Binding IsVisible,Converter={StaticResource BoolToVisibilityConverter}}"></Setter>
+                                                        </Style>
+                                                    </ListBox.ItemContainerStyle>
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal">

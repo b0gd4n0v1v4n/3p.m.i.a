@@ -36,8 +36,8 @@ namespace AIMP_v3._0.PerfectListView
         {
             _perfectColumnHeaderViewModel.IsOpenMenu = !_perfectColumnHeaderViewModel.IsOpenMenu;
 
-            //if (_perfectColumnHeaderViewModel.IsOpenMenu)
-            //    _perfectColumnHeaderViewModel.RefreshItemSource();
+            if (_perfectColumnHeaderViewModel.IsOpenMenu)
+                _perfectColumnHeaderViewModel.RefreshItemSource();
 
             base.OnClick();
         }
