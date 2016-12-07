@@ -17,7 +17,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\Strh-srvpk\\AimpFiles\Install\x86\</PublishUrl>
+    <PublishUrl>\\Strh-srvpk\\AimpFiles\Install\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,9 +27,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\Strh-srvpk\\AimpFiles\Install\x86\</InstallUrl>
-    <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>3.0.86.13</ApplicationVersion>
+    <InstallUrl>\\Strh-srvpk\\AimpFiles\Install\</InstallUrl>
+    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
