@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entities;
+using Aimp.Model;
+using System.Text;
 
 namespace Aimp.Reports.Helpers
 {
@@ -54,10 +56,10 @@ namespace Aimp.Reports.Helpers
             else
             {
                 string result = $"{GetFullName(contractor)}^p" +
-                       $"Дата рождения: {contractor.DateBirth.ToString("dd.MM.yyyy")}^p" +
+                       $"Дата рождения: {contractor.DateBirth.ToString(DataFormats.DateFormat)}^p" +
                        $"Паспорт: {contractor.SerialDocument} № {contractor.NumberDocument}^p" +
                        $"Выдан: {contractor.ByDocument}^p" +
-                       $"Дата выдачи: {contractor.DateDocument.Value.ToString("dd.MM.yyyy")}^p" +
+                       $"Дата выдачи: {contractor.DateDocument.Value.ToString(DataFormats.DateFormat)}^p" +
                        $"Зарегистрирован: {contractor.Region?.Name}";
 
                 result += !string.IsNullOrEmpty(contractor.Raion) ? $", {contractor.Raion}" : String.Empty;
@@ -119,6 +121,44 @@ namespace Aimp.Reports.Helpers
         public static string GetShortName(User user)
         {
             return _ShortName(user.FirstName, user.LastName, user.MiddleName);
+        }
+
+        public static string GetOwnerData(Contractor owner)
+        {
+            if(owner.LegalPerson == null)
+            {
+                StringBuilder result = new StringBuilder();
+
+                result.Append(GetFullNameGenitive(owner));
+                result.Append($" (дата рождения: {owner.DateBirth.ToString(DataFormats.DateFormat)}");
+                result.Append($" паспорт {owner.SerialDocument} № {owner.NumberDocument}, выдан: {owner.ByDocument}, {owner.DateDocument.Value.ToString(DataFormats.DateFormat)}");
+                result.Append($", адрес регистрации: {owner.Region.Name}");
+
+                if (!string.IsNullOrEmpty(owner.Raion))
+                    result.Append($", {owner.Raion}");
+
+                if (owner.City.Name != owner.Region.Name)
+                    result.Append($", {owner.City.Name}");
+
+                result.Append($", {owner.Street}");
+
+                if (!string.IsNullOrEmpty(owner.House))
+                    result.Append($", {owner.House}");
+
+                if (!string.IsNullOrEmpty(owner.Housing))
+                    result.Append($"-{owner.Housing}");
+
+                if (!string.IsNullOrEmpty(owner.Apartment))
+                    result.Append($"-{owner.Apartment}");
+
+                result.Append(")");
+
+                return result.ToString();
+            }
+            else
+            {
+                return $"{owner.LegalPerson.Name} в лице {GetFullNameGenitive(owner)}";
+            }
         }
     }
 }

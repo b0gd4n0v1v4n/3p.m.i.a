@@ -8,7 +8,7 @@ using Aimp.Model.Documents;
 using Aimp.Model.PrintedDocument;
 using Aimp.Model.PrintedDocument.Templates;
 using Aimp.Reports.Interfaces;
-using Aimp.Reports.PrintedDocument.Templates;
+using Aimp.Reports.Templates;
 using Entities;
 using Nelibur.ObjectMapper;
 using System;

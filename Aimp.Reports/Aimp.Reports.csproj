@@ -63,11 +63,13 @@
     <Compile Include="Services\Word\WordDocument.cs" />
     <Compile Include="Services\Word\WordPrintedService.cs" />
     <Compile Include="Services\Word\WordSelection.cs" />
-    <Compile Include="Templates\AktTransactionPrintedDocumentTemplate.cs" />
     <Compile Include="Templates\CashTransactionPrintedDocumentTemplate.cs" />
     <Compile Include="Templates\CommissionTransactionPrintedDocumentTemplate.cs" />
     <Compile Include="Templates\CreditTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\CreditTransactionPrintedDocumentTemplateBase.cs" />
     <Compile Include="Templates\DkpTransactionPrintedDocumentTemplate.cs" />
+    <Compile Include="Templates\ProxyTransactionPrintedDocumentTemplateBase.cs" />
+    <Compile Include="Templates\TransactionPrintedDocumentTemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aimp.Entities\Aimp.Entities.csproj">
